@@ -3,3 +3,5 @@
 .DS_Store
 fixtures/cache/*.json
 !fixtures/cache/.gitkeep
+fixtures/snapshots/*.json
+!fixtures/snapshots/.gitkeep
