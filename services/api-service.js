@@ -9,6 +9,14 @@ import {
   buildNormalizedMatchBundle,
   buildProviderCoverageReport,
 } from "../data-hub.js";
+import { sanitizeDashboardBundle } from "../app/data-guard.js";
+import { REFRESH_TIERS, formatRefreshPolicySummary } from "../app/refresh-policy.js";
+
+async function buildSanitizedDashboardBundle() {
+  const dashboard = await getDashboardData();
+  const normalizedMatches = await buildNormalizedMatchBundle();
+  return sanitizeDashboardBundle({ dashboard, normalizedMatches });
+}
 
 export async function buildApiPayload() {
   return {
@@ -17,21 +25,55 @@ export async function buildApiPayload() {
       now: new Date().toISOString(),
       service: "guess-worldcup-2026",
     }),
-    "/api/dashboard": async () => getDashboardData(),
-    "/api/live-matches": async () => (await getDashboardData()).liveMatches,
-    "/api/tomorrow-predictions": async () => (await getDashboardData()).tomorrowPredictions,
+    "/api/dashboard": async () => {
+      const bundle = await buildSanitizedDashboardBundle();
+      return {
+        ...bundle.dashboard,
+        dataAudit: bundle.dataAudit,
+      };
+    },
+    "/api/live-matches": async () => {
+      const bundle = await buildSanitizedDashboardBundle();
+      return bundle.dashboard.liveMatches;
+    },
+    "/api/tomorrow-predictions": async () => {
+      const bundle = await buildSanitizedDashboardBundle();
+      return bundle.dashboard.tomorrowPredictions;
+    },
     "/api/market-sources": async () => (await getDashboardData()).marketSources,
-    "/api/post-match-review": async () => (await getDashboardData()).completedComparisons,
+    "/api/post-match-review": async () => {
+      const bundle = await buildSanitizedDashboardBundle();
+      return bundle.dashboard.completedComparisons;
+    },
     "/api/analysis-items": async () => (await getDashboardData()).analysisItems,
     "/api/modeling-steps": async () => (await getDashboardData()).modelingSteps,
-    "/api/expert-opinions": async () => (await getDashboardData()).expertOpinions,
+    "/api/expert-opinions": async () => {
+      const bundle = await buildSanitizedDashboardBundle();
+      return bundle.dashboard.expertOpinions;
+    },
     "/api/raw-market-board": async () => (await getPipelineData()).rawMarketBoard,
     "/api/prediction-pipeline": async () => getPipelineData(),
-    "/api/providers/status": async () => getProviderStatus(),
+    "/api/providers/status": async () => {
+      const status = await getProviderStatus();
+      return {
+        ...status,
+        refreshPolicy: {
+          tiers: REFRESH_TIERS,
+          summary: formatRefreshPolicySummary(),
+        },
+      };
+    },
     "/api/providers/catalog": async () => getSourceCatalog(),
     "/api/data/supplemental-signals": async () => getSupplementalSignals(),
-    "/api/data/normalized-matches": async () => buildNormalizedMatchBundle(),
+    "/api/data/normalized-matches": async () => {
+      const bundle = await buildSanitizedDashboardBundle();
+      return bundle.normalizedMatches;
+    },
     "/api/data/quality-report": async () => buildDataQualityReport(),
     "/api/data/provider-coverage": async () => buildProviderCoverageReport(),
+    "/api/data/refresh-policy": async () => ({
+      tiers: REFRESH_TIERS,
+      summary: formatRefreshPolicySummary(),
+    }),
   };
 }

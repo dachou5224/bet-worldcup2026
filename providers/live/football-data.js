@@ -1,6 +1,7 @@
 import { fetchJson } from "../../lib/fetch-json.js";
 import { getCachedJsonPayload } from "../../lib/local-json-cache.js";
 import { toDisplayTeamName } from "../../lib/team-names.js";
+import { formatOpeningDayNote, isOpeningDayMatch } from "./opening-day.js";
 
 let cachedMatchResponse = null;
 let cachedMatchResponseAt = 0;
@@ -169,8 +170,17 @@ export function createFootballDataLiveProviderAdapter(config) {
     async fetchNormalizedLiveMatches() {
       const body = await this.fetchRawMatches();
       const rows = Array.isArray(body.matches) ? body.matches : [];
+      const openingDayMatches = rows.filter((match) =>
+        isOpeningDayMatch(match.utcDate, config.worldCupOpeningDate),
+      );
 
-      return rows.map((match) => ({
+      if (!openingDayMatches.length) {
+        throw new Error(
+          `football-data.org 未返回 ${config.worldCupOpeningDate} 的世界杯开幕日场次`,
+        );
+      }
+
+      return openingDayMatches.map((match) => ({
         id: match.id,
         stage: mapStage(match),
         status: mapStatus(match.status),
@@ -180,7 +190,10 @@ export function createFootballDataLiveProviderAdapter(config) {
         away: toDisplayTeamName(match.awayTeam?.name || "Away TBD"),
         homeScore: getScore(match, "home"),
         awayScore: getScore(match, "away"),
-        note: "来自 football-data.org 实时比赛源。",
+        note: formatOpeningDayNote(
+          "来自 football-data.org 实时比赛源。",
+          config.worldCupOpeningDate,
+        ),
       }));
     },
   };

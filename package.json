@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "qa:providers": "node scripts/qa_real_providers.js"
+    "test": "node --test",
+    "qa:providers": "node scripts/qa_real_providers.js",
+    "snapshot:providers": "node scripts/refresh_provider_snapshots.js"
   }
 }
