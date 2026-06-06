@@ -6,6 +6,8 @@ import { allowsProviderFallback } from "./lib/app-mode.js";
 import { mergeMarketSources } from "./services/market-board-service.js";
 import { validateRawMarketBoard } from "./schemas/market-board.js";
 import { getMockProvider, getProviderAdapters } from "./providers/provider-registry.js";
+import { getJingcaiOfficialFeed as getMockJingcaiOfficialFeed } from "./providers/jingcai/official-feed.js";
+import { getBacktestRun as getMockBacktestRun } from "./providers/mock/index.js";
 import { validateLiveMatches } from "./schemas/live-matches.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -149,6 +151,14 @@ export async function getMarketDataBundle() {
 export function getSourceCatalog() {
   const config = getProviderConfig();
   return readJsonFixture(config.sourceCatalogFile);
+}
+
+export function getJingcaiOfficialFeed() {
+  return getMockJingcaiOfficialFeed();
+}
+
+export function getBacktestRun() {
+  return getMockBacktestRun();
 }
 
 export async function getSupplementalSignals() {

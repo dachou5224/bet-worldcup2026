@@ -33,6 +33,8 @@ export function renderSignalList(predictions) {
       const modelLean = summarizeLean(item, "model");
       const tier = getSignalTier(item);
       const fairOdd = computeFairOdd(modelLean.value);
+      const jingcai = item.jingcaiRecommendation?.primaryRecommendation || null;
+      const layeredText = item.layeredOutput?.textSummary || null;
       const rowKey = `prediction-${item.id}`;
 
       return `
@@ -46,12 +48,28 @@ export function renderSignalList(predictions) {
               <span class="conf-badge">${score}<small>/100</small></span>
               <span class="tier-badge tier-${tier.tone}">${tier.label}</span>
               <span class="source-badge source-badge-${getConfidenceTone(item.confidence)}">${escapeHtml(formatConfidence(item.confidence))}</span>
+              ${
+                jingcai
+                  ? `<span class="source-badge source-badge-good">竞彩 ${escapeHtml(jingcai.playType)} · ${escapeHtml(jingcai.selection)}</span>`
+                  : ""
+              }
             </div>
           </div>
-          <div class="signal-pick-line">
-            <span class="signal-pick">${escapeHtml(topOutcome.label)} · 市场 ${topOutcome.market}% → 模型 ${topOutcome.model}%</span>
-            <span class="edge-badge">+${(topOutcome.model - topOutcome.market).toFixed(1)} pp</span>
-          </div>
+          ${
+            jingcai
+              ? `
+            <div class="signal-pick-line">
+              <span class="signal-pick">竞彩建议 · ${escapeHtml(jingcai.playType)} · ${escapeHtml(jingcai.selection)} · 赔率 ${jingcai.officialOdds.toFixed(2)}</span>
+              <span class="edge-badge">${(jingcai.officialExpectedValue * 100).toFixed(1)}% EV</span>
+            </div>
+          `
+              : `
+            <div class="signal-pick-line">
+              <span class="signal-pick">${escapeHtml(topOutcome.label)} · 市场 ${topOutcome.market}% → 模型 ${topOutcome.model}%</span>
+              <span class="edge-badge">+${(topOutcome.model - topOutcome.market).toFixed(1)} pp</span>
+            </div>
+          `
+          }
           <div class="signal-metrics">
             <div class="metric-cell">
               <span class="metric-label">模型</span>
@@ -92,7 +110,7 @@ export function renderSignalList(predictions) {
               </div>
             </div>
           </div>
-          <p class="signal-explain">${escapeHtml(item.summary)}</p>
+          <p class="signal-explain">${escapeHtml(layeredText || (jingcai ? jingcai.recommendationText : item.summary))}</p>
           <button type="button" class="row-detail-btn" data-open-drawer="${escapeHtml(rowKey)}">查看详情</button>
         </article>
       `;
@@ -246,6 +264,40 @@ export function renderProviderPanel(data) {
 }
 
 export function renderReviewSections(data) {
+  const portfolioReview = data.portfolioReview || null;
+  const backtestReview = data.backtestReview || null;
+
+  document.querySelector("#portfolio-review-list").innerHTML = portfolioReview
+    ? `
+      <article class="analysis-card">
+        <div class="meta-line">组合约束与暴露</div>
+        <h3 class="card-title">${escapeHtml(portfolioReview.portfolioId || "portfolio")}</h3>
+        <div class="comparison-grid">
+          <div class="comparison-box"><span class="comparison-label">候选</span><strong>${portfolioReview.candidateCount || 0}</strong></div>
+          <div class="comparison-box"><span class="comparison-label">已用风险</span><strong>${((portfolioReview.totalAllocatedRisk || 0) * 100).toFixed(2)}%</strong></div>
+          <div class="comparison-box"><span class="comparison-label">拒绝</span><strong>${portfolioReview.rejectedCount || 0}</strong></div>
+        </div>
+        <p class="body-text">${escapeHtml(portfolioReview.portfolioCommentary || "")}</p>
+      </article>
+    `
+    : `<p class="empty-note">暂无组合暴露摘要。</p>`;
+
+  document.querySelector("#backtest-review-list").innerHTML = backtestReview
+    ? `
+      <article class="analysis-card">
+        <div class="meta-line">离线回测</div>
+        <h3 class="card-title">回测样本 ${backtestReview.recordCount || 0}</h3>
+        <div class="comparison-grid">
+          <div class="comparison-box"><span class="comparison-label">Brier</span><strong>${backtestReview.meanBrier ?? "n/a"}</strong></div>
+          <div class="comparison-box"><span class="comparison-label">LogLoss</span><strong>${backtestReview.meanLogLoss ?? "n/a"}</strong></div>
+          <div class="comparison-box"><span class="comparison-label">CLV</span><strong>${backtestReview.meanClv ?? "n/a"}</strong></div>
+          <div class="comparison-box"><span class="comparison-label">officialReturn</span><strong>${backtestReview.officialReturn ?? 0}</strong></div>
+        </div>
+        <p class="body-text">竞彩结算样本已接入，适合继续扩展真实赛后复盘。</p>
+      </article>
+    `
+    : `<p class="empty-note">暂无回测摘要。</p>`;
+
   document.querySelector("#comparison-list").innerHTML = (data.completedComparisons || [])
     .map(
       (item) => `
