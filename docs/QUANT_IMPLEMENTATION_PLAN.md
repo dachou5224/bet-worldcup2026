@@ -8,12 +8,12 @@
 
 ## Pick-up 状态（接手从这里读）
 
-**当前阶段：** Phase 1 基本完成 → **下一步 Phase 2（MarketSnapshot 标准化）**
+**当前阶段：** Phase 1 基本完成，Phase 2（MarketSnapshot 标准化）尚未开始
 
 | Phase | 目标 | 状态 | 验证命令 |
 |-------|------|------|----------|
-| 0 | APP_MODE、research 护栏、snapshot 脚本 | ✅ 本地已有，待 commit | `npm run qa:research-guardrails` |
-| 1 | `quant/` devig / ev / kelly + 单元测试 | ✅ 本地已有，待 commit | `npm test` |
+| 0 | APP_MODE、research 护栏、snapshot 脚本 | ✅ 已落地 | `npm run qa:research-guardrails` |
+| 1 | `quant/` devig / ev / kelly + 单元测试 | ✅ 已落地 | `npm test` |
 | 2 | `MarketSnapshot` 标准化 | ⬜ **下一步** | （待建）`tests/market-snapshot.test.js` |
 | 3 | score-matrix + pricing + jingcai-rqspf | ⬜ | — |
 | 4 | decision-layer → `SignalCandidate` | ⬜ | — |
@@ -36,13 +36,19 @@ npm run qa:research-guardrails
 npm run snapshot:providers   # 可选；需 API key 时才跑
 ```
 
-**已有但未提交的 Phase 0/1 文件：**
+**已落地的 Phase 0/1 文件：**
 
 - `lib/app-mode.js`
 - `quant/odds/devig.js`, `quant/edge/ev.js`, `quant/portfolio/kelly.js`
 - `tests/quant-*.test.js`, `tests/app-mode.test.js`
 - `scripts/qa_research_guardrails.js`, `scripts/refresh_provider_snapshots.js`
 - `fixtures/snapshots/.gitkeep`
+
+**当前真实进度判断：**
+
+- Phase 0 和 Phase 1 已经在代码树中落地，可通过现有 `npm test` 与 `npm run qa:research-guardrails` 验证
+- Phase 2 仍然是第一个明确的未实现大项：`MarketSnapshot` 标准化、统一 snapshot 流、相关测试都还没有进入代码树
+- 现有 dashboard 仍主要依赖 `market-pipeline.js` 的启发式聚合输出，不是文档里定义的 `SignalCandidate` / `JingcaiRecommendation` 主链路
 
 **实现约定（与 spec 对齐）：**
 

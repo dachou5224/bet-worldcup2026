@@ -218,7 +218,7 @@ POLYMARKET_PUBLIC_ENABLED=true
 | [docs/QUANT_STRATEGY_SPEC.md](docs/QUANT_STRATEGY_SPEC.md) | 算法、体彩收敛、输出契约（WHAT） |
 | [docs/QUANT_IMPLEMENTATION_PLAN.md](docs/QUANT_IMPLEMENTATION_PLAN.md) | 分阶段实施、QA 门禁、**pick-up 状态**（HOW） |
 
-接手量化开发时：先读 plan 顶部 **Pick-up 状态**，当前下一步为 **Phase 2 — MarketSnapshot 标准化**。纯数学模块在 `quant/`，验证用 `npm test`（无需 API）。
+接手量化开发时：先读 plan 顶部 **Pick-up 状态**，当前下一步为 **Phase 2 — MarketSnapshot 标准化**。Phase 0 / Phase 1 已在代码树中落地并可通过 `npm test` 与 `npm run qa:research-guardrails` 验证；当前主链路仍停留在启发式 `market-pipeline.js`，还没接到 `SignalCandidate` / `JingcaiRecommendation`。纯数学模块在 `quant/`，验证用 `npm test`（无需 API）。
 
 ## QA
 
@@ -239,7 +239,7 @@ npm run qa:providers
 
 ## 推荐的下一步
 
-**量化 / 体彩建议主线**（优先）：见 [docs/QUANT_IMPLEMENTATION_PLAN.md](docs/QUANT_IMPLEMENTATION_PLAN.md) — Phase 2 起。
+**量化 / 体彩建议主线**（优先）：见 [docs/QUANT_IMPLEMENTATION_PLAN.md](docs/QUANT_IMPLEMENTATION_PLAN.md) — 当前从 Phase 2 起继续推进；现有实现只覆盖 Phase 0/1 的基础数学与研究护栏。
 
 **Dashboard / Provider 维护**（并行）：
 
