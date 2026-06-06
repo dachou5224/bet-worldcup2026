@@ -8,25 +8,26 @@
 
 ## Pick-up 状态（接手从这里读）
 
-**当前阶段：** Phase 1 基本完成，Phase 2（MarketSnapshot 标准化）尚未开始
+**当前阶段：** Phase 7（portfolio / backtest）已完成；本实施计划中的 Phase 0-7 已全部落地
 
 | Phase | 目标 | 状态 | 验证命令 |
 |-------|------|------|----------|
 | 0 | APP_MODE、research 护栏、snapshot 脚本 | ✅ 已落地 | `npm run qa:research-guardrails` |
 | 1 | `quant/` devig / ev / kelly + 单元测试 | ✅ 已落地 | `npm test` |
-| 2 | `MarketSnapshot` 标准化 | ⬜ **下一步** | （待建）`tests/market-snapshot.test.js` |
-| 3 | score-matrix + pricing + jingcai-rqspf | ⬜ | — |
-| 4 | decision-layer → `SignalCandidate` | ⬜ | — |
-| 5 | Jingcai 收敛 Layer B/C | ⬜ | — |
-| 6 | API Layer A/B/C 输出 | ⬜ | — |
-| 7 | portfolio / backtest | ⬜ 在 MVP 之后 | — |
+| 2 | `MarketSnapshot` 标准化 | ✅ 已落地 | `npm test` |
+| 3 | score-matrix + pricing + jingcai-rqspf | ✅ 已落地 | `npm test` |
+| 4 | decision-layer → `SignalCandidate` | ✅ 已落地 | `npm test` |
+| 5 | Jingcai 收敛 Layer B/C | ✅ 已落地 | `node --test tests/jingcai-recommendation.test.js` |
+| 6 | API Layer A/B/C 输出 | ✅ 已落地 | `npm test` |
+| 7 | portfolio / backtest | ✅ 已落地 | `npm test` |
 
-**Phase 2 首批任务（可直接开工）：**
+**Phase 7 已完成内容：**
 
-1. 新建 `quant/normalization/market-snapshot.js`（或 `schemas/market-snapshot.js`）— 对齐 spec §2.2 字段
-2. 从 `fixtures/raw-market-board.json` / provider 输出写 normalizer，产出 `h2h` / `spread` / `total` 快照流
-3. 扩展 `data-hub.js` 质量报告：bookmaker 多样性、必备盘口、快照是否可用于 Layer A
-4. 添加 fixture 驱动测试，**零 API 调用**
+1. 做 `portfolio` 暴露聚合与 factor tagging
+2. 新建 `quant/backtest/settlement.js`
+3. 新建 `quant/backtest/jingcai-settlement.js`
+4. 新建 `quant/backtest/metrics.js`
+5. 补齐 CLV / Brier / LogLoss / `officialReturn` / `jingcaiSettlement`
 
 **本地验证（接手后先跑）：**
 
@@ -40,15 +41,24 @@ npm run snapshot:providers   # 可选；需 API key 时才跑
 
 - `lib/app-mode.js`
 - `quant/odds/devig.js`, `quant/edge/ev.js`, `quant/portfolio/kelly.js`
+- `quant/normalization/market-snapshot.js`, `schemas/market-snapshot.js`
+- `quant/models/poisson.js`, `quant/models/score-matrix.js`
+- `quant/models/market-baseline.js`
+- `quant/pricing/h2h.js`, `quant/pricing/spread.js`, `quant/pricing/total.js`, `quant/pricing/markets.js`, `quant/pricing/jingcai-rqspf.js`
+- `quant/recommendation/decision-layer.js`
 - `tests/quant-*.test.js`, `tests/app-mode.test.js`
+- `tests/market-snapshot.test.js`
+- `tests/score-matrix.test.js`
+- `tests/market-baseline.test.js`
+- `tests/decision-layer.test.js`
 - `scripts/qa_research_guardrails.js`, `scripts/refresh_provider_snapshots.js`
 - `fixtures/snapshots/.gitkeep`
 
 **当前真实进度判断：**
 
-- Phase 0 和 Phase 1 已经在代码树中落地，可通过现有 `npm test` 与 `npm run qa:research-guardrails` 验证
-- Phase 2 仍然是第一个明确的未实现大项：`MarketSnapshot` 标准化、统一 snapshot 流、相关测试都还没有进入代码树
-- 现有 dashboard 仍主要依赖 `market-pipeline.js` 的启发式聚合输出，不是文档里定义的 `SignalCandidate` / `JingcaiRecommendation` 主链路
+- Phase 0、Phase 1、Phase 2、Phase 3、Phase 4、Phase 5、Phase 6、Phase 7 都已经在代码树中落地，可通过现有 `npm test` 与 `npm run qa:research-guardrails` 验证
+- 现有 dashboard 已经完成 quant baseline + decision layer + Jingcai 收敛输出 + portfolio/backtest review
+- 后续若继续扩展，应进入维护、真实 provider 联调或新产品能力，而不是本实施计划的 phase 推进
 
 **实现约定（与 spec 对齐）：**
 
@@ -249,9 +259,9 @@ QA gate:
 
 ### Phase 5 — Jingcai convergence (Layer B / Layer C MVP)
 
-Goal: implement the spec's MVP loop from overseas research signals to compliant single-match Jingcai recommendations.
+Status: completed. The items below record what shipped in this phase.
 
-Work:
+Implemented:
 
 - Add `providers/jingcai/official-feed.js` as a read-only `JingcaiOfficialFeed` adapter or fixture-backed stub if real official data is not yet available.
 - Create:
@@ -281,6 +291,8 @@ QA gate:
 
 ### Phase 6 — Output contracts and research-quality reporting
 
+Status: completed. The items below record what shipped in this phase.
+
 Goal: align API/dashboard outputs to the spec's Layer A / B / C model and add research-grade quality controls.
 
 Work:
@@ -308,6 +320,8 @@ QA gate:
 - Layer C is the default main card payload when available.
 
 ### Phase 7 — Portfolio and backtest foundation
+
+Status: completed. The items below record what shipped in this phase.
 
 Goal: move from single-signal recommendation into constrained portfolio logic and Jingcai-aware review metrics.
 
@@ -360,7 +374,7 @@ QA gate:
 4. Phase 3 (score-matrix pricing)
 5. Phase 4 (SignalCandidate decision layer)
 6. Phase 5 (Jingcai convergence MVP)
-7. Phase 6 (Layered outputs)
+7. Phase 7 (Portfolio and backtest foundation)
 
 This matches the spec's MVP target: **overseas research -> official repricing -> Jingcai single-match recommendation** before portfolio/backtest work expands.
 

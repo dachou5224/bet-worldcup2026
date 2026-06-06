@@ -41,7 +41,13 @@ export const REFRESH_TIERS = {
     key: "signals",
     intervalMs: 8 * MINUTE,
     label: "价值信号与盘口",
-    endpoints: ["/api/dashboard", "/api/data/normalized-matches"],
+    endpoints: [
+      "/api/dashboard",
+      "/api/data/normalized-matches",
+      "/api/data/market-snapshots",
+      "/api/data/signal-candidates",
+      "/api/data/jingcai-recommendations",
+    ],
     rationale: "去水概率、EV 分歧、让分/大小球；对齐 Polymarket 15 分钟缓存的一半",
   },
   metadata: {
@@ -51,6 +57,8 @@ export const REFRESH_TIERS = {
     endpoints: [
       "/api/data/quality-report",
       "/api/data/provider-coverage",
+      "/api/data/portfolio-review",
+      "/api/data/backtest-review",
       "/api/post-match-review",
     ],
     rationale: "质量告警、provider 覆盖、赛后复盘；对齐赔率/Bzzoiro 30 分钟缓存",
