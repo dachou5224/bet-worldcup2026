@@ -190,7 +190,10 @@ export function createFootballDataLiveProviderAdapter(config) {
         away: toDisplayTeamName(match.awayTeam?.name || "Away TBD"),
         homeScore: getScore(match, "home"),
         awayScore: getScore(match, "away"),
-        note: formatOpeningDayNote("来自 football-data.org 实时比赛源。"),
+        note: formatOpeningDayNote(
+          "来自 football-data.org 实时比赛源。",
+          config.worldCupOpeningDate,
+        ),
       }));
     },
   };
