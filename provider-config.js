@@ -1,9 +1,11 @@
 import { loadLocalEnv } from "./lib/load-env.js";
+import { normalizeAppMode } from "./lib/app-mode.js";
 
 loadLocalEnv();
 
 export function getProviderConfig() {
   return {
+    appMode: normalizeAppMode(process.env.APP_MODE),
     marketDataMode: process.env.MARKET_DATA_MODE || "real",
     liveDataMode: process.env.LIVE_DATA_MODE || "real",
     providerCacheEnabled: (process.env.PROVIDER_CACHE_ENABLED || "true") !== "false",
@@ -35,6 +37,7 @@ export function getProviderConfig() {
     sportmonksApiBaseUrl:
       process.env.SPORTMONKS_API_BASE_URL || "https://api.sportmonks.com/v3/football",
     sportmonksApiToken: process.env.SPORTMONKS_API_TOKEN || "",
+    worldCupOpeningDate: process.env.WORLD_CUP_OPENING_DATE || "2026-06-11",
     sportmonksStartDate: process.env.SPORTMONKS_START_DATE || "2026-06-11",
     sportmonksEndDate: process.env.SPORTMONKS_END_DATE || "2026-07-19",
     footballDataApiBaseUrl:

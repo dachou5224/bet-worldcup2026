@@ -2,6 +2,7 @@ import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { getProviderConfig } from "./provider-config.js";
+import { allowsProviderFallback } from "./lib/app-mode.js";
 import { mergeMarketSources } from "./services/market-board-service.js";
 import { validateRawMarketBoard } from "./schemas/market-board.js";
 import { getMockProvider, getProviderAdapters } from "./providers/provider-registry.js";
@@ -28,6 +29,10 @@ function validateOrThrowRawMarketBoard(rawMarketBoard, errorPrefix) {
   }
 
   return rawMarketBoard;
+}
+
+function shouldFallbackToMock(config) {
+  return allowsProviderFallback(config.appMode);
 }
 
 async function getRealMarketDataBundle() {
@@ -114,6 +119,10 @@ export async function getMarketDataBundle() {
     try {
       return await getRealMarketDataBundle();
     } catch (error) {
+      if (!shouldFallbackToMock(config)) {
+        throw new Error(`research 模式下市场数据请求失败: ${error.message}`);
+      }
+
       const mockProvider = getMockProvider();
       return {
         mode: "real_fallback_mock",
@@ -212,6 +221,10 @@ export async function getStaticPageData() {
   try {
     const liveMatches = await getRealLiveMatches();
     if (!liveMatches) {
+      if (!shouldFallbackToMock(config)) {
+        throw new Error("research 模式下 live provider 未配置");
+      }
+
       return {
         ...mockData,
         liveMode: "real_unconfigured_fallback_mock",
@@ -224,6 +237,10 @@ export async function getStaticPageData() {
       liveMode: "real",
     };
   } catch (error) {
+    if (!shouldFallbackToMock(config)) {
+      throw new Error(`research 模式下 live provider 请求失败: ${error.message}`);
+    }
+
     return {
       ...mockData,
       liveMode: "real_fallback_mock",
@@ -239,6 +256,7 @@ export async function getProviderStatus() {
   const adapters = getProviderAdapters();
 
   return {
+    appMode: config.appMode,
     marketDataMode: bundle.mode,
     requestedMarketDataMode: config.marketDataMode,
     requestedLiveDataMode: config.liveDataMode,
