@@ -5,17 +5,14 @@
 ## 当前内容
 
 - 零依赖本地 Node 服务
-- 首页包含 4 个区域：
-  - 实时赛况
-  - 下一天预测
-  - 盘口与 Polymarket 汇总
-  - LLM 分析建议
-- 当前已额外加入：
-  - 预测与实际复盘区
-  - 首版模型流水线说明
-  - 市场聚合 vs 模型输出的双栏对照
-- 前端现在通过本地 API 读取数据
-- 所有数据暂时来自 `dashboard-data.js` 中的 mock 数据，后续可以替换成真实抓取/模型结果
+- 研究面板首页结构：
+  - **KPI Hero**：已扫描 / 推荐 / 强信号 / 观察区概览，以及数据源状态条
+  - **赛程 Spotlight**：未来三天重点比赛，按信号强度排序
+  - **Tab 主视图**：价值信号 · 比赛盘面 · 复盘与解释
+  - **Match Drawer**：点击任意比赛行查看模型 vs 市场详情
+- 前端通过 `app/` 模块化脚本分 tier 刷新（赛程 5 分钟 · 信号 8 分钟 · 质量 30 分钟）
+- 服务端 `data-guard` 在 demo/research 模式下过滤 mock 混入的数据
+- 默认优先走真实 `The Odds API` 与 `football-data.org`；`Polymarket` 默认关闭
 
 ## 本地打开
 
@@ -72,6 +69,7 @@ npm run dev
 - `/api/data/normalized-matches`
 - `/api/data/quality-report`
 - `/api/data/provider-coverage`
+- `/api/data/refresh-policy`
 
 ## 数据分层
 

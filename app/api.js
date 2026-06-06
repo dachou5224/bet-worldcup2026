@@ -23,13 +23,22 @@ export async function fetchLiveSchedule() {
   return fetchJson("/api/live-matches");
 }
 
+/** 信号层：只拉预测/盘口/标准化比赛，不含 liveMatches */
 export async function fetchSignalSlice() {
-  const [dashboard, normalizedMatches] = await Promise.all([
-    fetchJson("/api/dashboard"),
-    fetchJson("/api/data/normalized-matches").catch(() => []),
-  ]);
+  const [tomorrowPredictions, marketSources, normalizedMatches, expertOpinions] =
+    await Promise.all([
+      fetchJson("/api/tomorrow-predictions"),
+      fetchJson("/api/market-sources"),
+      fetchJson("/api/data/normalized-matches").catch(() => []),
+      fetchJson("/api/expert-opinions").catch(() => []),
+    ]);
 
-  return { dashboard, normalizedMatches };
+  return {
+    tomorrowPredictions,
+    marketSources,
+    normalizedMatches,
+    expertOpinions,
+  };
 }
 
 export async function fetchMetadataSlice() {
@@ -46,18 +55,33 @@ export async function fetchMetadataSlice() {
   };
 }
 
+function mergeSignalFields(currentDashboard, signalSlice) {
+  return {
+    ...currentDashboard,
+    tomorrowPredictions: signalSlice.tomorrowPredictions,
+    marketSources: signalSlice.marketSources,
+    expertOpinions: signalSlice.expertOpinions,
+  };
+}
+
 export async function fetchDashboardBundle() {
-  const [signalSlice, metadataSlice] = await Promise.all([
+  const [signalSlice, metadataSlice, liveMatches, dashboardShell] = await Promise.all([
     fetchSignalSlice(),
     fetchMetadataSlice(),
+    fetchLiveSchedule(),
+    fetchJson("/api/dashboard"),
   ]);
 
-  const dashboard = {
-    ...signalSlice.dashboard,
-    ...(metadataSlice.completedComparisons != null
-      ? { completedComparisons: metadataSlice.completedComparisons }
-      : {}),
-  };
+  const dashboard = mergeSignalFields(
+    {
+      ...dashboardShell,
+      liveMatches,
+      ...(metadataSlice.completedComparisons != null
+        ? { completedComparisons: metadataSlice.completedComparisons }
+        : {}),
+    },
+    signalSlice,
+  );
 
   return sanitizeBundle({
     dashboard,
@@ -67,4 +91,4 @@ export async function fetchDashboardBundle() {
   });
 }
 
-export { sanitizeBundle, fetchJson };
+export { sanitizeBundle, fetchJson, mergeSignalFields };

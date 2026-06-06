@@ -4,6 +4,7 @@ import {
   fetchSignalSlice,
   fetchMetadataSlice,
   sanitizeBundle,
+  mergeSignalFields,
 } from "./api.js";
 import { REFRESH_TIERS, isTierStale } from "./refresh-policy.js";
 import {
@@ -64,15 +65,15 @@ async function refreshScheduleTier({ background = true } = {}) {
 }
 
 async function refreshSignalsTier({ background = true } = {}) {
+  if (!state.dashboard) {
+    return;
+  }
+
   try {
-    const { dashboard, normalizedMatches } = await fetchSignalSlice();
+    const signalSlice = await fetchSignalSlice();
     const bundle = buildBundleFromState({
-      dashboard: {
-        ...dashboard,
-        completedComparisons:
-          state.dashboard?.completedComparisons ?? dashboard.completedComparisons,
-      },
-      normalizedMatches,
+      dashboard: mergeSignalFields(state.dashboard, signalSlice),
+      normalizedMatches: signalSlice.normalizedMatches,
     });
     applyBundle(bundle);
     state.lastSignalsRefreshAt = Date.now();

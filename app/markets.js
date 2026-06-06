@@ -1,3 +1,5 @@
+import { escapeHtml } from "./format.js";
+
 function pickPrimarySpread(markets) {
   const spreads = (markets || []).filter((market) => market.key === "spreads");
   if (!spreads.length) {
@@ -80,7 +82,7 @@ export function renderMarketPills(marketTab, prediction, marketLines) {
         ${marketLines.spread.outcomes
           .map(
             (outcome) =>
-              `<span class="price-pill">${outcome.label} ${outcome.price}</span>`,
+              `<span class="price-pill">${escapeHtml(outcome.label)} ${escapeHtml(outcome.price)}</span>`,
           )
           .join("")}
       </div>
@@ -96,7 +98,7 @@ export function renderMarketPills(marketTab, prediction, marketLines) {
         ${marketLines.total.outcomes
           .map(
             (outcome) =>
-              `<span class="price-pill">${outcome.label} ${outcome.price}</span>`,
+              `<span class="price-pill">${escapeHtml(outcome.label)} ${escapeHtml(outcome.price)}</span>`,
           )
           .join("")}
       </div>
