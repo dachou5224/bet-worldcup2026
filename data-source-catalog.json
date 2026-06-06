@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-05",
+  "notes": [
+    "优先接入结构化 API，再考虑网页抓取。",
+    "官方数据优先用于赛程、比分和结果校验。",
+    "赔率和预测市场数据都要保留来源名、更新时间和原始字段，避免后续无法追溯。"
+  ],
+  "sources": [
+    {
+      "id": "fifa_match_centre",
+      "name": "FIFA Match Centre / FIFA 官方赛事页",
+      "category": "official_results",
+      "providerType": "official",
+      "priority": "high",
+      "integrationStatus": "research",
+      "access": "public_web",
+      "auth": "none",
+      "recommendedUse": "官方赛程、比分、阶段、赛果校验",
+      "docsUrl": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/match-schedule-fixtures-results-teams-stadiums",
+      "apiBaseUrl": null,
+      "notes": [
+        "适合作为最终赛果和赛程校验源。",
+        "更像官方网页入口，不保证提供可直接调用的公开开发者 API。"
+      ]
+    },
+    {
+      "id": "fifa_football_data_platform",
+      "name": "FIFA Football Data Platform",
+      "category": "official_data_platform",
+      "providerType": "official",
+      "priority": "medium",
+      "integrationStatus": "research",
+      "access": "partner_or_enterprise",
+      "auth": "contact_required",
+      "recommendedUse": "官方赛事数据体系调研、企业级接入方向",
+      "docsUrl": "https://inside.fifa.com/innovation/innovating-the-game/football-data-platform",
+      "apiBaseUrl": null,
+      "notes": [
+        "FIFA 官方数据平台方向明确，但不等于公开即用 API。",
+        "更适合作为长期正式数据源的调研项。"
+      ]
+    },
+    {
+      "id": "sportmonks_football",
+      "name": "Sportmonks Football API",
+      "category": "live_scores_and_fixtures",
+      "providerType": "third_party_api",
+      "priority": "high",
+      "integrationStatus": "candidate",
+      "access": "paid_api",
+      "auth": "api_token",
+      "recommendedUse": "实时比分、赛程、事件、阵容、部分赔率与预测数据",
+      "docsUrl": "https://docs.sportmonks.com/v3/tutorials-and-guides/tutorials/introduction",
+      "apiBaseUrl": "https://api.sportmonks.com/v3/football",
+      "notes": [
+        "文档明确覆盖 livescores、fixtures、events、lineups。",
+        "很适合 MVP 阶段先接一个综合足球数据源。"
+      ]
+    },
+    {
+      "id": "the_odds_api",
+      "name": "The Odds API",
+      "category": "odds_aggregation",
+      "providerType": "third_party_api",
+      "priority": "high",
+      "integrationStatus": "candidate",
+      "access": "paid_api",
+      "auth": "x-api-key",
+      "recommendedUse": "多家博彩公司 1X2 / spreads / totals 汇总，适合做 market baseline",
+      "docsUrl": "https://the-odds-api.com/liveapi/guides/v4/index.html",
+      "apiBaseUrl": "https://api.the-odds-api.com/v4",
+      "notes": [
+        "统一 schema，适合减少不同博彩公司字段差异。",
+        "文档包含 upcoming odds、scores 和 historical odds。"
+      ]
+    },
+    {
+      "id": "polymarket_gamma_api",
+      "name": "Polymarket Gamma API",
+      "category": "prediction_market_discovery",
+      "providerType": "prediction_market_api",
+      "priority": "high",
+      "integrationStatus": "candidate",
+      "access": "public_api",
+      "auth": "none",
+      "recommendedUse": "市场发现、事件列表、sports 标签、市场元数据",
+      "docsUrl": "https://docs.polymarket.com/api-reference/introduction",
+      "apiBaseUrl": "https://gamma-api.polymarket.com",
+      "notes": [
+        "官方文档说明 Gamma API 用于 markets、events、sports、search 等发现能力。",
+        "非常适合先做比赛相关市场检索和映射。"
+      ]
+    },
+    {
+      "id": "polymarket_clob_api",
+      "name": "Polymarket CLOB API",
+      "category": "prediction_market_prices",
+      "providerType": "prediction_market_api",
+      "priority": "high",
+      "integrationStatus": "candidate",
+      "access": "public_plus_authenticated",
+      "auth": "public_for_market_data",
+      "recommendedUse": "订单簿、价格、中间价、价差、价格历史",
+      "docsUrl": "https://docs.polymarket.com/api-reference/introduction",
+      "apiBaseUrl": "https://clob.polymarket.com",
+      "notes": [
+        "官方文档说明公共端点可读 orderbook 和 prices。",
+        "如果只做看盘和概率聚合，初期不需要交易认证。"
+      ]
+    },
+    {
+      "id": "polymarket_data_api",
+      "name": "Polymarket Data API",
+      "category": "prediction_market_analytics",
+      "providerType": "prediction_market_api",
+      "priority": "medium",
+      "integrationStatus": "candidate",
+      "access": "public_api",
+      "auth": "none",
+      "recommendedUse": "成交、持仓、活跃度、open interest 等补充分析",
+      "docsUrl": "https://docs.polymarket.com/api-reference/introduction",
+      "apiBaseUrl": "https://data-api.polymarket.com",
+      "notes": [
+        "适合做市场情绪、活跃度和赛前变化解释。",
+        "不是首版必须，但很适合给 LLM 提供分析特征。"
+      ]
+    },
+    {
+      "id": "sportsbook_direct_scraping",
+      "name": "博彩公司网页直抓",
+      "category": "sportsbook_scraping",
+      "providerType": "web_scrape",
+      "priority": "low",
+      "integrationStatus": "deferred",
+      "access": "public_web",
+      "auth": "site_dependent",
+      "recommendedUse": "当结构化 odds API 不足时作为补充，而不是首选主路径",
+      "docsUrl": null,
+      "apiBaseUrl": null,
+      "notes": [
+        "优先级低于结构化 API，因为维护成本更高，且要逐站评估 ToS 和稳定性。",
+        "除非你明确锁定站点，否则不建议在 MVP 阶段先走抓取。"
+      ]
+    },
+    {
+      "id": "bzzoiro_sports_data",
+      "name": "Bzzoiro Sports Data / MCP",
+      "category": "football_context_and_predictions",
+      "providerType": "api_and_mcp",
+      "priority": "medium",
+      "integrationStatus": "candidate",
+      "access": "token_api",
+      "auth": "bearer_token",
+      "recommendedUse": "补充 match context、O/U 摘要、ML predictions、expected goals 和 most likely score",
+      "docsUrl": "https://sports.bzzoiro.com/mcp-info/",
+      "apiBaseUrl": "https://sports.bzzoiro.com/api",
+      "notes": [
+        "OpenAPI 暴露 /api/events、/api/predictions、/api/odds 和 /api/odds/polymarket。",
+        "当前项目先把它作为 token-backed 的补充源，不影响主 market pipeline。"
+      ]
+    },
+    {
+      "id": "cn_pundit_commentary",
+      "name": "中文足球评论员观点池",
+      "category": "expert_opinions",
+      "providerType": "editorial_signal",
+      "priority": "medium",
+      "integrationStatus": "candidate",
+      "access": "manual_or_platform_api",
+      "auth": "platform_dependent",
+      "recommendedUse": "收集赛前观点摘要、倾向判断和关键论据，供 LLM 解释层引用",
+      "docsUrl": null,
+      "apiBaseUrl": null,
+      "notes": [
+        "可先人工整理或半自动录入观点，不建议 MVP 阶段直接做复杂多平台抓取。",
+        "适合作为解释性特征，而不是直接替代概率模型。"
+      ],
+      "examples": ["詹俊", "张路"]
+    },
+    {
+      "id": "global_pundit_commentary",
+      "name": "海外足球媒体与评论员观点池",
+      "category": "expert_opinions",
+      "providerType": "editorial_signal",
+      "priority": "medium",
+      "integrationStatus": "candidate",
+      "access": "manual_or_platform_api",
+      "auth": "platform_dependent",
+      "recommendedUse": "补充海外战术分析、伤停判断和更衣室消息倾向",
+      "docsUrl": null,
+      "apiBaseUrl": null,
+      "notes": [
+        "更适合后续作为国际视角补充源。",
+        "建议先做人工摘要结构化，再交给 LLM 聚合。"
+      ]
+    }
+  ]
+}

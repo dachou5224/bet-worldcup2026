@@ -1,0 +1,26 @@
+export const mockLiveMatches = [
+  {
+    id: 1,
+    stage: "热身观察",
+    status: "赛前",
+    venue: "墨西哥城",
+    kickoff: "2026-06-10 20:00",
+    home: "墨西哥",
+    away: "日本",
+    homeScore: "-",
+    awayScore: "-",
+    note: "当前日期仍在世界杯正式开赛前，建议此区域在赛前展示赛程、阵容新闻和市场波动。",
+  },
+  {
+    id: 2,
+    stage: "资格追踪",
+    status: "数据准备",
+    venue: "纽约 / 数据室",
+    kickoff: "Rolling",
+    home: "赔率数据流",
+    away: "Polymarket 数据流",
+    homeScore: "7",
+    awayScore: "2",
+    note: "这里的比分位可替换成抓取进度、最新更新时间、数据质量评分等运营指标。",
+  },
+];

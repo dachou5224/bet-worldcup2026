@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "home": "墨西哥",
+    "away": "日本",
+    "kickoff": "2026-06-11 20:00 CST",
+    "updatedAtLabel": "2 min ago",
+    "oddsProviders": [
+      {
+        "provider": "Bet365",
+        "updatedAt": "2026-06-05T14:28:00+08:00",
+        "odds": { "home": 2.04, "draw": 3.45, "away": 3.75 }
+      },
+      {
+        "provider": "Pinnacle",
+        "updatedAt": "2026-06-05T14:27:30+08:00",
+        "odds": { "home": 2.08, "draw": 3.39, "away": 3.68 }
+      }
+    ],
+    "predictionMarkets": [
+      {
+        "provider": "Polymarket",
+        "updatedAt": "2026-06-05T14:27:00+08:00",
+        "probabilities": { "home": 0.44, "draw": 0.27, "away": 0.29 }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "home": "美国",
+    "away": "摩洛哥",
+    "kickoff": "2026-06-11 21:30 ET",
+    "updatedAtLabel": "6 min ago",
+    "oddsProviders": [
+      {
+        "provider": "Bet365",
+        "updatedAt": "2026-06-05T14:23:00+08:00",
+        "odds": { "home": 2.28, "draw": 3.15, "away": 3.18 }
+      },
+      {
+        "provider": "Pinnacle",
+        "updatedAt": "2026-06-05T14:22:15+08:00",
+        "odds": { "home": 2.35, "draw": 3.12, "away": 3.05 }
+      },
+      {
+        "provider": "MockSharpBook",
+        "updatedAt": "2026-06-05T14:21:10+08:00",
+        "odds": { "home": 2.31, "draw": 3.2, "away": 3.11 }
+      }
+    ],
+    "predictionMarkets": [
+      {
+        "provider": "Polymarket",
+        "updatedAt": "2026-06-05T14:20:00+08:00",
+        "probabilities": { "home": 0.37, "draw": 0.29, "away": 0.34 }
+      }
+    ]
+  }
+]

@@ -1,0 +1,18 @@
+export const mockPostMatchReview = [
+  {
+    fixture: "阿根廷 vs 丹麦",
+    predicted: "阿根廷胜",
+    actual: "阿根廷胜",
+    edge: "+6.2%",
+    takeaway: "模型和市场都识别到了强队优势，说明 baseline 在强弱分明的比赛里有可解释性。",
+    status: "hit",
+  },
+  {
+    fixture: "葡萄牙 vs 韩国",
+    predicted: "葡萄牙胜",
+    actual: "平局",
+    edge: "-9.4%",
+    takeaway: "这是很适合 LLM 做赛后解释的案例：盘口晚段回调、轮换、战意变化都可能是原因。",
+    status: "miss",
+  },
+];

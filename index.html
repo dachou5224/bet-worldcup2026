@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2026 世界杯赛况与预测面板</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">2026 世界杯赛况与预测面板</p>
+          <h1>像看赔率盘一样看世界杯赛程、分歧和次日预测。</h1>
+          <p class="hero-text">
+            参考赛事赔率页和当日赛程页的阅读习惯，把比赛列表、胜平负盘面、模型偏离和数据源状态放到一套更紧凑的版面里。
+          </p>
+          <div class="hero-meta">
+            <span id="tournament-status" class="pill"></span>
+            <span id="last-updated" class="pill pill-muted"></span>
+          </div>
+          <div id="source-status-bar" class="source-status-bar"></div>
+          <div id="market-pulse-bar" class="market-pulse-bar"></div>
+        </div>
+        <aside class="hero-panel">
+          <div class="hero-stat">
+            <span class="stat-label">赛程条目</span>
+            <strong id="today-match-count">0</strong>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-label">盘面预测</span>
+            <strong id="tomorrow-prediction-count">0</strong>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-label">状态卡</span>
+            <strong id="source-count">0</strong>
+          </div>
+        </aside>
+      </header>
+
+      <main class="dashboard">
+        <section class="panel section-live">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">实时追踪</p>
+              <h2>赛程流与比分流</h2>
+            </div>
+            <span class="section-note">按赛程页面节奏压缩展示</span>
+          </div>
+          <div class="toolbar">
+            <button class="filter-chip filter-chip-active" type="button">焦点赛程</button>
+            <button class="filter-chip" type="button">赛前列表</button>
+            <button class="filter-chip" type="button">已完赛复盘</button>
+          </div>
+          <div class="board-head live-board-head">
+            <span>场次</span>
+            <span>状态</span>
+            <span>赛程 / 备注</span>
+          </div>
+          <div id="live-match-list" class="card-list"></div>
+        </section>
+
+        <section class="panel section-predictions">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">预测面板</p>
+              <h2>胜平负盘面板</h2>
+            </div>
+            <span class="section-note">参考赔率站的横向盘面阅读方式</span>
+          </div>
+          <div id="prediction-summary-bar" class="summary-bar"></div>
+          <div id="matchday-strip" class="matchday-strip"></div>
+          <div id="prediction-focus-bar" class="focus-bar"></div>
+          <div class="board-head prediction-board-head">
+            <span>比赛</span>
+            <span>市场</span>
+            <span>模型</span>
+            <span>状态</span>
+          </div>
+          <div id="prediction-list" class="prediction-grid"></div>
+        </section>
+
+        <section class="panel section-market">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">市场聚合</p>
+              <h2>来源状态与盘面概览</h2>
+            </div>
+            <span class="section-note">把源状态和行情摘要放在同一块</span>
+          </div>
+          <div id="provider-indicator-grid" class="indicator-grid"></div>
+          <div id="market-source-list" class="source-grid"></div>
+        </section>
+
+        <section class="panel section-opinions">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">观点图层</p>
+              <h2>专家观点摘要</h2>
+            </div>
+            <span class="section-note">作为解释性特征，不直接替代概率</span>
+          </div>
+          <div id="opinion-list" class="opinion-list"></div>
+        </section>
+
+        <section class="panel section-compare">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">预测复盘</p>
+              <h2>预测与实际复盘</h2>
+            </div>
+            <span class="section-note">这是用户最容易留下来的模块</span>
+          </div>
+          <div id="comparison-list" class="comparison-list"></div>
+        </section>
+
+        <section class="panel section-analysis">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">分析栏</p>
+              <h2>LLM 分析建议</h2>
+            </div>
+            <span class="section-note">把结构化数据和文本解释拆开</span>
+          </div>
+          <div id="analysis-list" class="analysis-list"></div>
+        </section>
+
+        <section class="panel section-method">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">建模路径</p>
+              <h2>首版预测流水线</h2>
+            </div>
+            <span class="section-note">先做稳，再做复杂</span>
+          </div>
+          <ol id="method-list" class="method-list"></ol>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

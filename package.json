@@ -1,0 +1,11 @@
+{
+  "name": "guess-worldcup-2026",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "qa:providers": "node scripts/qa_real_providers.js"
+  }
+}
