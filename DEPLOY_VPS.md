@@ -53,7 +53,7 @@ curl http://127.0.0.1:3000/api/health
 
 参考：
 
-- [deploy/nginx.bet.nice-ai.dev.conf.example](/Users/liuzhen/Documents/guess_worldcup2026/deploy/nginx.bet.nice-ai.dev.conf.example)
+- [deploy/nginx.bet.nice-ai.dev.conf.example](deploy/nginx.bet.nice-ai.dev.conf.example)
 
 把 `bet.nice-ai.dev` 反代到 `127.0.0.1:3000`。
 

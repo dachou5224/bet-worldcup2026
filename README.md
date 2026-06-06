@@ -36,6 +36,16 @@ npm run dev
 - `.env` 已加入 [.gitignore](.gitignore)，不会被 Git 跟踪
 - provider 原始抓取结果会默认缓存在 `fixtures/cache/` 下的本地 JSON 文件中
 
+### 应用模式
+
+- `APP_MODE=demo`
+- `APP_MODE=research`
+
+模式差异：
+
+- `demo`：允许真实 provider 失败时回退到 mock，适合页面演示
+- `research`：禁止 silent fallback；真实 provider 失败会直接报错，避免把 mock 混进研究结果
+
 ### 本地缓存
 
 - `PROVIDER_CACHE_ENABLED=true`
@@ -49,6 +59,16 @@ npm run dev
 - `BZZOIRO_CACHE_TTL_SECONDS=1800`
 
 这层缓存的目标是减少免费 API 的重复读取，开发联调和页面重复刷新会优先复用本地 JSON 快照。
+
+### 本地快照
+
+可运行：
+
+```bash
+npm run snapshot:providers
+```
+
+它会把当前 provider 状态、pipeline、live 数据和 supplemental signals 落到 `fixtures/snapshots/`，后续做 quant/QA 时可以优先用这些本地快照而不是重复请求外部 API。
 
 ## API 端点
 
@@ -191,39 +211,44 @@ POLYMARKET_PUBLIC_ENABLED=true
 
 当前项目建议把 `BZZOIRO_LEAGUE` 设为 `27`，对应 `World Cup 2026`。
 
+## 量化模块文档
+
+| 文档 | 用途 |
+|------|------|
+| [docs/QUANT_STRATEGY_SPEC.md](docs/QUANT_STRATEGY_SPEC.md) | 算法、体彩收敛、输出契约（WHAT） |
+| [docs/QUANT_IMPLEMENTATION_PLAN.md](docs/QUANT_IMPLEMENTATION_PLAN.md) | 分阶段实施、QA 门禁、**pick-up 状态**（HOW） |
+
+接手量化开发时：先读 plan 顶部 **Pick-up 状态**，当前下一步为 **Phase 2 — MarketSnapshot 标准化**。纯数学模块在 `quant/`，验证用 `npm test`（无需 API）。
+
 ## QA
 
 可运行：
 
 ```bash
+npm test
+npm run qa:research-guardrails
 npm run qa:providers
 ```
 
 它会：
+- 验证纯函数/模块级测试
+- 验证 demo/research 模式下的 fallback 护栏
 - 检查已配置的真实 provider 是否可访问
 - 对未配置的 provider 标记为 skipped
 - 验证 mock 数据仍符合 schema
 
 ## 推荐的下一步
 
+**量化 / 体彩建议主线**（优先）：见 [docs/QUANT_IMPLEMENTATION_PLAN.md](docs/QUANT_IMPLEMENTATION_PLAN.md) — Phase 2 起。
+
+**Dashboard / Provider 维护**（并行）：
+
 1. 接入真实赛程/比分 API，把 `liveMatches` 替换成实时数据。
-2. 定义统一的数据模型，把赔率、Polymarket 和模型输出整理成相同概率结构。
-3. 第一版预测模型建议先做 market baseline：
-   - 赔率去水
-   - 多来源加权平均
-   - 再加一个轻量校准层
-4. 把 LLM 只用于解释和总结，不直接作为概率生成主引擎。
-5. 如果要开始接接口，建议优先抽成这 4 个 endpoint：
+2. 如果要开始接接口，建议优先抽成这 4 个 endpoint：
    - `/api/live-matches`
    - `/api/tomorrow-predictions`
    - `/api/market-sources`
    - `/api/post-match-review`
-6. 接真实数据时，优先只替换 `providers/` 或 `fixtures/` 里的 provider 输出，尽量不要先改聚合层。
-7. 如果要先做“半真实”演示，可以把抓取结果定时写入 `fixtures/raw-market-board.json`，服务端直接走 `file` 模式读取。
-8. 信源清单统一维护在 `data-source-catalog.json`，不要把供应商名字、文档地址和接入优先级散落到各个脚本里。
-9. 专家观点建议作为解释层输入，先保留 `summary / stance / signalTags` 结构，不要直接把名嘴观点硬映射成胜平负概率。
-10. 接真实 provider 时，优先先看 `/api/data/quality-report` 和 `/api/data/provider-coverage`，确认数据质量，再接页面和后续分析。
-11. 新接入的市场数据先通过 `schemas/market-board.js` 校验，再进入聚合层，避免脏数据直接污染预测结果。
-12. `live matches`、`expert opinions` 和 `normalized matches` 现在也有独立 schema，建议保持“每类数据一个 schema 文件”的做法继续扩展。
-13. 真实 provider 的网络联调目前受本地网络和密钥限制影响较大，所以我已经把适配器和 QA 脚本接好；你提供 key 后可以直接跑 `npm run qa:providers` 做实网验证。
-14. 当前推荐演示模式就是默认模式：真实赔率 + 真实 live，Polymarket 默认关闭。
+3. 接真实 provider 时，优先先看 `/api/data/quality-report` 和 `/api/data/provider-coverage`。
+4. 新接入的市场数据先通过 `schemas/market-board.js` 校验，再进入聚合层。
+5. 真实 provider 联调：`npm run qa:providers`（需 key）；本地重复开发用 `npm run snapshot:providers` 写 `fixtures/snapshots/`。
