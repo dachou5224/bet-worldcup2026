@@ -31,9 +31,9 @@ npm run dev
 
 ## 环境变量
 
-- 本地私密配置放在 [`.env`](/Users/liuzhen/Documents/guess_worldcup2026/.env)
-- 可共享模板放在 [.env.example](/Users/liuzhen/Documents/guess_worldcup2026/.env.example)
-- `.env` 已加入 [.gitignore](/Users/liuzhen/Documents/guess_worldcup2026/.gitignore)，不会被 Git 跟踪
+- 本地私密配置放在 [`.env`](.env)
+- 可共享模板放在 [.env.example](.env.example)
+- `.env` 已加入 [.gitignore](.gitignore)，不会被 Git 跟踪
 - provider 原始抓取结果会默认缓存在 `fixtures/cache/` 下的本地 JSON 文件中
 
 ### 本地缓存
@@ -73,34 +73,34 @@ npm run dev
 
 ## 数据分层
 
-- [data-source-catalog.json](/Users/liuzhen/Documents/guess_worldcup2026/data-source-catalog.json)
+- [data-source-catalog.json](data-source-catalog.json)
   项目内信源目录。新增、删减、调整优先级都改这里，不要在脚本里硬编码。
-- [providers/mock/index.js](/Users/liuzhen/Documents/guess_worldcup2026/providers/mock/index.js)
+- [providers/mock/index.js](providers/mock/index.js)
   负责聚合 mock provider 输出。
-- [fixtures/](/Users/liuzhen/Documents/guess_worldcup2026/fixtures)
+- [fixtures/](fixtures)
   按主题拆分 mock 数据，不再把所有样例堆在一个脚本里。
-- [data-sources.js](/Users/liuzhen/Documents/guess_worldcup2026/data-sources.js)
+- [data-sources.js](data-sources.js)
   负责切换 provider 模式，目前支持 `mock` 和 `file`。
-- [market-pipeline.js](/Users/liuzhen/Documents/guess_worldcup2026/market-pipeline.js)
+- [market-pipeline.js](market-pipeline.js)
   负责赔率去水、三方概率归一化、市场聚合和首版预测生成。
-- [dashboard-data.js](/Users/liuzhen/Documents/guess_worldcup2026/dashboard-data.js)
+- [dashboard-data.js](dashboard-data.js)
   负责组装首页需要的完整数据。
-- [data-hub.js](/Users/liuzhen/Documents/guess_worldcup2026/data-hub.js)
+- [data-hub.js](data-hub.js)
   提供标准化比赛数据、数据质量报告和 provider 覆盖报告。
-- [schemas/market-board.js](/Users/liuzhen/Documents/guess_worldcup2026/schemas/market-board.js)
+- [schemas/market-board.js](schemas/market-board.js)
   定义并校验原始市场数据 schema。
-- [schemas/live-matches.js](/Users/liuzhen/Documents/guess_worldcup2026/schemas/live-matches.js)
+- [schemas/live-matches.js](schemas/live-matches.js)
   校验实时比赛卡片数据。
-- [schemas/expert-opinions.js](/Users/liuzhen/Documents/guess_worldcup2026/schemas/expert-opinions.js)
+- [schemas/expert-opinions.js](schemas/expert-opinions.js)
   校验专家观点结构。
-- [schemas/normalized-matches.js](/Users/liuzhen/Documents/guess_worldcup2026/schemas/normalized-matches.js)
+- [schemas/normalized-matches.js](schemas/normalized-matches.js)
   校验标准化后的比赛输出。
-- [providers/provider-registry.js](/Users/liuzhen/Documents/guess_worldcup2026/providers/provider-registry.js)
+- [providers/provider-registry.js](providers/provider-registry.js)
   作为 provider 适配入口，后续可以在这里注册真实数据源。
-- [providers/odds/](/Users/liuzhen/Documents/guess_worldcup2026/providers/odds)
-- [providers/polymarket/](/Users/liuzhen/Documents/guess_worldcup2026/providers/polymarket)
-- [providers/live/](/Users/liuzhen/Documents/guess_worldcup2026/providers/live)
-- [providers/opinions/](/Users/liuzhen/Documents/guess_worldcup2026/providers/opinions)
+- [providers/odds/](providers/odds)
+- [providers/polymarket/](providers/polymarket)
+- [providers/live/](providers/live)
+- [providers/opinions/](providers/opinions)
   这三个目录已经建好适配器骨架，后续接真实源直接往里扩。
   现在 `odds`、`polymarket`、`live` 已经有真实适配器初版。
 
@@ -113,7 +113,7 @@ npm run dev
 
 文件模式下，服务会读取：
 
-- [fixtures/raw-market-board.json](/Users/liuzhen/Documents/guess_worldcup2026/fixtures/raw-market-board.json)
+- [fixtures/raw-market-board.json](fixtures/raw-market-board.json)
 
 也可以通过环境变量覆盖：
 
