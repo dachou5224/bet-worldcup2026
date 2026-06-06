@@ -189,6 +189,10 @@ function openDrawer(rowKey) {
   renderMatchDrawer(state.rowIndex.get(rowKey) || null);
 }
 
+function isDrawerActivationKey(key) {
+  return key === "Enter" || key === " ";
+}
+
 function bindEvents() {
   document.querySelector(".primary-tabs")?.addEventListener("click", (event) => {
     const tabButton = event.target.closest("[data-tab]");
@@ -283,7 +287,25 @@ function bindEvents() {
     if (event.key === "Escape" && state.drawerRowKey) {
       closeDrawer();
       renderMatchDrawer(null);
+      return;
     }
+
+    if (!isDrawerActivationKey(event.key)) {
+      return;
+    }
+
+    const drawerTrigger = event.target.closest("[data-open-drawer]");
+    if (!drawerTrigger) {
+      return;
+    }
+
+    // 真实 <button> 由浏览器合成 click，交给现有 click 监听即可
+    if (event.target instanceof HTMLButtonElement) {
+      return;
+    }
+
+    event.preventDefault();
+    openDrawer(drawerTrigger.dataset.openDrawer);
   });
 }
 
