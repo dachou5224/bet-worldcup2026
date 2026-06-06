@@ -1,3 +1,11 @@
+import { buildMarketSnapshotBundle } from "./quant/normalization/market-snapshot.js";
+import { buildMarketBaselineBundle } from "./quant/models/market-baseline.js";
+import { buildJingcaiRecommendationsByFixture } from "./quant/output/jingcai-recommendation.js";
+import {
+  buildSignalCandidatesFromBaseline,
+  pickPrimarySignalCandidate,
+} from "./quant/recommendation/decision-layer.js";
+
 function round(value, digits = 1) {
   const factor = 10 ** digits;
   return Math.round(value * factor) / factor;
@@ -15,28 +23,12 @@ function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
 
-export function convertDecimalOddsToProbabilities(odds) {
-  const implied = {
-    home: 1 / odds.home,
-    draw: 1 / odds.draw,
-    away: 1 / odds.away,
-  };
-
-  const total = implied.home + implied.draw + implied.away;
-
-  return {
-    home: implied.home / total,
-    draw: implied.draw / total,
-    away: implied.away / total,
-  };
+function buildFixtureIndex(rawMarketBoard) {
+  return new Map(rawMarketBoard.map((match) => [`${match.home} vs ${match.away}`, match]));
 }
 
-export function averageNormalizedProbabilities(records) {
-  return {
-    home: average(records.map((record) => record.probabilities.home)),
-    draw: average(records.map((record) => record.probabilities.draw)),
-    away: average(records.map((record) => record.probabilities.away)),
-  };
+function formatPercentBucket(probability) {
+  return round((probability ?? 0) * 100);
 }
 
 export function buildMarketSourceSummary(rawMarketBoard) {
@@ -79,44 +71,92 @@ export function buildMarketSourceSummary(rawMarketBoard) {
   ];
 }
 
-export function buildTomorrowPredictionsFromMarket(rawMarketBoard) {
-  return rawMarketBoard.map((match) => {
-    const normalizedOdds = match.oddsProviders.map((provider) => ({
-      ...provider,
-      probabilities: convertDecimalOddsToProbabilities(provider.odds),
-    }));
+export function buildSignalCandidatesFromMarket(rawMarketBoard, options = {}) {
+  const snapshotBundle = buildMarketSnapshotBundle(rawMarketBoard);
+  const baselineBundle = buildMarketBaselineBundle(snapshotBundle.marketSnapshots);
 
-    const oddsAverage = averageNormalizedProbabilities(normalizedOdds);
-    const marketAverage = averageNormalizedProbabilities(match.predictionMarkets);
+  return baselineBundle.baselines.flatMap((baseline) =>
+    buildSignalCandidatesFromBaseline(baseline, options),
+  );
+}
 
-    const modelHome = clamp(oddsAverage.home * 0.7 + marketAverage.home * 0.3 - 0.01, 0.05, 0.9);
-    const modelDraw = clamp(oddsAverage.draw * 0.75 + marketAverage.draw * 0.25, 0.05, 0.5);
-    const modelAway = clamp(1 - modelHome - modelDraw, 0.05, 0.9);
+export function buildSignalCandidateGroupsFromMarket(rawMarketBoard, options = {}) {
+  const snapshotBundle = buildMarketSnapshotBundle(rawMarketBoard);
+  const baselineBundle = buildMarketBaselineBundle(snapshotBundle.marketSnapshots);
+  const grouped = new Map();
 
-    const dispersion =
-      Math.abs(oddsAverage.home - marketAverage.home) +
-      Math.abs(oddsAverage.draw - marketAverage.draw) +
-      Math.abs(oddsAverage.away - marketAverage.away);
-
-    const confidence = dispersion > 0.12 ? "low" : dispersion > 0.07 ? "medium" : "high";
-
-    return {
-      id: match.id,
-      fixture: `${match.home} vs ${match.away}`,
-      kickoff: match.kickoff,
-      marketHome: round(oddsAverage.home * 100),
-      marketDraw: round(oddsAverage.draw * 100),
-      marketAway: round(oddsAverage.away * 100),
-      modelHome: round(modelHome * 100),
-      modelDraw: round(modelDraw * 100),
-      modelAway: round(modelAway * 100),
-      freshness: match.updatedAtLabel,
-      confidence,
-      summary:
-        confidence === "low"
-          ? "盘口和预测市场存在明显分歧，适合在前端高亮展示为“需要复盘”的比赛。"
-          : "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。",
-      llm: `LLM 可解释 ${match.home} vs ${match.away} 的概率变化来源，例如盘口漂移、交易市场成交变化和赛前新闻。`,
+  for (const baseline of baselineBundle.baselines) {
+    const current = grouped.get(baseline.fixtureId) || {
+      fixtureId: baseline.fixtureId,
+      fixture: baseline.fixture,
+      signalCandidates: [],
+      marketBaselines: [],
     };
+
+    const candidates = buildSignalCandidatesFromBaseline(baseline, options);
+    current.signalCandidates.push(...candidates);
+    current.marketBaselines.push(baseline);
+    grouped.set(baseline.fixtureId, current);
+  }
+
+  return Array.from(grouped.values());
+}
+
+export function buildJingcaiRecommendationsFromMarket(rawMarketBoard, officialFeed, options = {}) {
+  const groups = buildSignalCandidateGroupsFromMarket(rawMarketBoard, options);
+  return buildJingcaiRecommendationsByFixture(groups, officialFeed, options);
+}
+
+function buildPredictionSummaryFromBaseline(baseline, rawMatch, options = {}) {
+  const candidates = buildSignalCandidatesFromBaseline(baseline, options);
+  const primarySignalCandidate = pickPrimarySignalCandidate(candidates);
+  const marketHome = baseline.bookmakerConsensus.home ?? baseline.predictionConsensus.home ?? 0;
+  const marketDraw = baseline.bookmakerConsensus.draw ?? baseline.predictionConsensus.draw ?? 0;
+  const marketAway = baseline.bookmakerConsensus.away ?? baseline.predictionConsensus.away ?? 0;
+  const modelHome = baseline.modelConsensus.home ?? marketHome;
+  const modelDraw = baseline.modelConsensus.draw ?? marketDraw;
+  const modelAway = baseline.modelConsensus.away ?? marketAway;
+  const fixtureLabel = baseline.fixture || `${rawMatch.home} vs ${rawMatch.away}`;
+  const riskNotes = baseline.riskTags.length ? baseline.riskTags.join("、") : "市场和模型共识总体稳定";
+
+  return {
+    id: rawMatch.id,
+    fixture: fixtureLabel,
+    kickoff: rawMatch.kickoff,
+    marketHome: formatPercentBucket(marketHome),
+    marketDraw: formatPercentBucket(marketDraw),
+    marketAway: formatPercentBucket(marketAway),
+    modelHome: formatPercentBucket(modelHome),
+    modelDraw: formatPercentBucket(modelDraw),
+    modelAway: formatPercentBucket(modelAway),
+    freshness: rawMatch.updatedAtLabel,
+    confidence: baseline.confidence,
+    summary:
+      baseline.confidence === "low"
+        ? `盘口和预测市场存在明显分歧，适合在前端高亮展示为“需要复盘”的比赛。${riskNotes ? ` 风险标签：${riskNotes}` : ""}`
+        : `盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。${riskNotes ? ` 风险标签：${riskNotes}` : ""}`,
+    llm: `LLM 可解释 ${rawMatch.home} vs ${rawMatch.away} 的概率变化来源，例如盘口漂移、交易市场成交变化和赛前新闻。`,
+    signalCandidates: candidates,
+    signalCandidate: primarySignalCandidate,
+    marketBaseline: baseline,
+  };
+}
+
+export function buildTomorrowPredictionsFromMarket(rawMarketBoard, options = {}) {
+  const snapshotBundle = buildMarketSnapshotBundle(rawMarketBoard);
+  const baselineBundle = buildMarketBaselineBundle(snapshotBundle.marketSnapshots);
+  const fixtureIndex = buildFixtureIndex(rawMarketBoard);
+  const h2hBaselines = baselineBundle.baselines.filter((baseline) => baseline.marketType === "h2h");
+
+  return h2hBaselines.map((baseline) => {
+    const rawMatch = fixtureIndex.get(baseline.fixture) || {
+      id: baseline.fixtureId,
+      home: baseline.fixture?.split(" vs ")?.[0] || baseline.fixtureId,
+      away: baseline.fixture?.split(" vs ")?.[1] || baseline.fixtureId,
+      kickoff: "",
+      updatedAtLabel: "实时",
+    };
+
+    return buildPredictionSummaryFromBaseline(baseline, rawMatch, options);
   });
 }

@@ -21,6 +21,8 @@ export function renderMatchDrawer(selection) {
   const tier = prediction ? getSignalTier(prediction) : null;
   const opinions = normalized?.expertOpinions || prediction?.expertOpinions || [];
   const llmText = prediction?.llm || analysisItems?.[0]?.text || "";
+  const jingcai = prediction?.jingcaiRecommendation?.primaryRecommendation || null;
+  const layeredText = prediction?.layeredOutput?.textSummary || prediction?.summary || "";
 
   drawer.innerHTML = `
     <div class="drawer-header">
@@ -60,10 +62,25 @@ export function renderMatchDrawer(selection) {
             </div>
           </div>
         </div>
-        <p class="body-text">${escapeHtml(prediction.summary || "")}</p>
+        <p class="body-text">${escapeHtml(layeredText)}</p>
       </div>
     `
         : `<p class="empty-note">该场次暂无预测信号。</p>`
+    }
+    ${
+      jingcai
+        ? `
+      <div class="drawer-section">
+        <h3>体彩建议</h3>
+        <div class="drawer-badges">
+          <span class="source-badge source-badge-good">${escapeHtml(jingcai.playType)} · ${escapeHtml(jingcai.selection)}</span>
+          <span class="edge-badge">官方 EV ${(jingcai.officialExpectedValue * 100).toFixed(1)}%</span>
+          <span class="source-badge">${escapeHtml(jingcai.recommendationLevel)}</span>
+        </div>
+        <p class="body-text">${escapeHtml(jingcai.recommendationText || "")}</p>
+      </div>
+    `
+        : ""
     }
     ${
       opinions.length
