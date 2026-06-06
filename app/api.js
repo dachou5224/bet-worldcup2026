@@ -42,16 +42,20 @@ export async function fetchSignalSlice() {
 }
 
 export async function fetchMetadataSlice() {
-  const [qualityReport, providerCoverage, completedComparisons] = await Promise.all([
+  const [qualityReport, providerCoverage, completedComparisons, portfolioReview, backtestReview] = await Promise.all([
     fetchJson("/api/data/quality-report").catch(() => null),
     fetchJson("/api/data/provider-coverage").catch(() => null),
     fetchJson("/api/post-match-review").catch(() => null),
+    fetchJson("/api/data/portfolio-review").catch(() => null),
+    fetchJson("/api/data/backtest-review").catch(() => null),
   ]);
 
   return {
     qualityReport,
     providerCoverage,
     completedComparisons: Array.isArray(completedComparisons) ? completedComparisons : null,
+    portfolioReview,
+    backtestReview,
   };
 }
 
@@ -79,6 +83,8 @@ export async function fetchDashboardBundle() {
       ...(metadataSlice.completedComparisons != null
         ? { completedComparisons: metadataSlice.completedComparisons }
         : {}),
+      ...(metadataSlice.portfolioReview != null ? { portfolioReview: metadataSlice.portfolioReview } : {}),
+      ...(metadataSlice.backtestReview != null ? { backtestReview: metadataSlice.backtestReview } : {}),
     },
     signalSlice,
   );

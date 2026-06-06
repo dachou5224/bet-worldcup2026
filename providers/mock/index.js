@@ -4,6 +4,7 @@ import { mockLiveMatches } from "../../fixtures/mock-live-matches.js";
 import { mockMarketBoard } from "../../fixtures/mock-market-board.js";
 import { mockModelingSteps } from "../../fixtures/mock-modeling-steps.js";
 import { mockPostMatchReview } from "../../fixtures/mock-post-match-review.js";
+import { mockBacktestRun } from "../../fixtures/mock-backtest-run.js";
 
 export function getLiveMatches() {
   return mockLiveMatches;
@@ -27,4 +28,8 @@ export function getRawMarketBoard() {
 
 export function getExpertOpinions() {
   return mockExpertOpinions;
+}
+
+export function getBacktestRun() {
+  return mockBacktestRun;
 }

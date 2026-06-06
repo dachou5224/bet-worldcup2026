@@ -1,9 +1,15 @@
 import { getDashboardData, getPipelineData } from "./dashboard-data.js";
-import { getProviderStatus } from "./data-sources.js";
+import { getBacktestRun, getProviderStatus } from "./data-sources.js";
 import { validateExpertOpinions } from "./schemas/expert-opinions.js";
 import { validateLiveMatches } from "./schemas/live-matches.js";
 import { validateRawMarketBoard } from "./schemas/market-board.js";
 import { validateNormalizedMatches } from "./schemas/normalized-matches.js";
+import { buildMarketSnapshotBundle } from "./quant/normalization/market-snapshot.js";
+import { validateMarketSnapshots } from "./schemas/market-snapshot.js";
+import { buildPortfolioExposure } from "./quant/portfolio/exposure.js";
+import { computeBrier, computeClosingLineValue, computeLogLoss, summarizeBacktestRecords } from "./quant/backtest/metrics.js";
+import { settleMarketBet } from "./quant/backtest/settlement.js";
+import { settleJingcaiRecommendation } from "./quant/backtest/jingcai-settlement.js";
 
 function toIsoOrNull(value) {
   if (!value) {
@@ -59,6 +65,195 @@ function hasPolymarketLiquidityMetrics(predictionMarkets) {
   return predictionMarkets.some(
     (provider) => provider.liquidity != null || provider.volume != null || provider.openInterest != null,
   );
+}
+
+function toDate(value) {
+  if (!value) {
+    return null;
+  }
+
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+}
+
+function getSnapshotLine(marketSnapshots, fixtureId, marketType) {
+  const snapshot = (marketSnapshots || []).find(
+    (entry) => String(entry.fixtureId) === String(fixtureId) && entry.marketType === marketType,
+  );
+  return snapshot?.line ?? null;
+}
+
+function summarizeProviderConflictLevel(prediction) {
+  if (prediction?.confidence === "low") {
+    return "high";
+  }
+
+  if (prediction?.confidence === "medium") {
+    return "medium";
+  }
+
+  return "low";
+}
+
+function isStaleSourceUpdate(latestSourceUpdate, generatedAt, thresholdHours = 6) {
+  const latest = toDate(latestSourceUpdate);
+  const generated = toDate(generatedAt);
+
+  if (!latest || !generated) {
+    return true;
+  }
+
+  const diffHours = (generated.getTime() - latest.getTime()) / (1000 * 60 * 60);
+  return diffHours > thresholdHours;
+}
+
+function hasClosingOrPreCloseSnapshot(marketSnapshots, fixtureId, kickoffLabel) {
+  const kickoff = toDate(kickoffLabel);
+  if (!kickoff) {
+    return false;
+  }
+
+  return (marketSnapshots || []).some((snapshot) => {
+    if (String(snapshot.fixtureId) !== String(fixtureId)) {
+      return false;
+    }
+
+    const capturedAt = toDate(snapshot.capturedAt);
+    if (!capturedAt) {
+      return false;
+    }
+
+    const diffHours = (kickoff.getTime() - capturedAt.getTime()) / (1000 * 60 * 60);
+    return diffHours >= 0 && diffHours <= 24;
+  });
+}
+
+function toProbabilityOutcome(actualOutcome) {
+  if (actualOutcome === "home") {
+    return { home: 1, draw: 0, away: 0 };
+  }
+
+  if (actualOutcome === "draw") {
+    return { home: 0, draw: 1, away: 0 };
+  }
+
+  if (actualOutcome === "away") {
+    return { home: 0, draw: 0, away: 1 };
+  }
+
+  return null;
+}
+
+function buildBacktestReviewFromRun(backtestRun) {
+  const reviewed = (backtestRun || []).map((record) => {
+    const settlement = settleMarketBet(record, {
+      finalScore: record.finalScore,
+      handicap: record.line,
+      line: record.line,
+      odds: record.officialOddsAtStopSale,
+      stakeUnits: record.stakeUnits,
+    });
+
+    const jingcaiSettlement = settleJingcaiRecommendation(
+      {
+        primaryRecommendation: {
+          playType: record.playType,
+          selection: record.selection,
+          selectionCode: record.selectionCode,
+          handicap: record.line,
+          officialOdds: record.officialOddsAtRecommendation,
+          suggestedStakeUnits: record.stakeUnits,
+        },
+      },
+      {
+        finalScore: record.finalScore,
+        officialOddsAtRecommendation: record.officialOddsAtRecommendation,
+        officialOddsAtStopSale: record.officialOddsAtStopSale,
+        stakeUnits: record.stakeUnits,
+      },
+    );
+
+    const brier = computeBrier(record.modelBeforeKickoff, record.actualOutcome);
+    const logLoss = computeLogLoss(record.modelBeforeKickoff, record.actualOutcome);
+    const clv = computeClosingLineValue(record.officialOddsAtRecommendation, record.officialOddsAtStopSale);
+    const calibrationError = (() => {
+      const probabilities = toProbabilityOutcome(record.actualOutcome);
+      if (!probabilities || !record.modelBeforeKickoff) {
+        return null;
+      }
+
+      return Math.abs((record.modelBeforeKickoff[record.actualOutcome] ?? 0) - 1);
+    })();
+
+    return {
+      fixtureId: record.fixtureId,
+      fixture: record.fixture,
+      actualOutcome: record.actualOutcome,
+      finalScore: record.finalScore,
+      marketClose: record.marketClose,
+      modelBeforeKickoff: record.modelBeforeKickoff,
+      officialOddsAtRecommendation: record.officialOddsAtRecommendation,
+      officialOddsAtStopSale: record.officialOddsAtStopSale,
+      stakeUnits: record.stakeUnits,
+      settlement,
+      realizedReturn: settlement.realizedReturn,
+      closingLineValue: clv,
+      calibrationError,
+      reviewText: record.observation,
+      jingcaiSettlement,
+      brier,
+      logLoss,
+    };
+  });
+
+  const aggregate = summarizeBacktestRecords(reviewed);
+
+  return {
+    generatedAt: new Date().toISOString(),
+    recordCount: reviewed.length,
+    records: reviewed,
+    ...aggregate,
+  };
+}
+
+function buildPortfolioReviewFromDashboard(dashboard, pipeline) {
+  const candidateSignals = (dashboard.jingcaiRecommendations || [])
+    .filter((recommendation) => recommendation?.primaryRecommendation)
+    .map((recommendation) => ({
+      fixtureId: recommendation.fixtureId,
+      fixture: `${recommendation.homeTeam} vs ${recommendation.awayTeam}`,
+      kickoffLocal: recommendation.kickoffLocal,
+      marketType: recommendation.primaryRecommendation.playType === "让球胜平负" ? "spread" : "h2h",
+      line: recommendation.primaryRecommendation.handicap,
+      outcome: recommendation.primaryRecommendation.selection,
+      selectionCode: recommendation.primaryRecommendation.selectionCode,
+      recommendationLevel: recommendation.primaryRecommendation.recommendationLevel,
+      officialExpectedValue: recommendation.primaryRecommendation.officialExpectedValue,
+      officialFinalStakeFraction: recommendation.primaryRecommendation.suggestedStakeUnits
+        ? recommendation.primaryRecommendation.suggestedStakeUnits * 0.01
+        : 0,
+      officialOdds: recommendation.primaryRecommendation.officialOdds,
+      stage: recommendation.matchLabel,
+    }));
+
+  return buildPortfolioExposure(candidateSignals, {
+    portfolioId: `portfolio-${dashboard.lastUpdated.slice(0, 10)}`,
+    generatedAt: dashboard.lastUpdated,
+    totalRiskBudget: 0.05,
+    singleMatchBudget: 0.02,
+    dayBudget: 0.03,
+    factorBudget: 0.02,
+  });
+}
+
+export async function buildPortfolioReview() {
+  const dashboard = await getDashboardData();
+  const pipeline = await getPipelineData();
+  return buildPortfolioReviewFromDashboard(dashboard, pipeline);
+}
+
+export async function buildBacktestReview() {
+  return buildBacktestReviewFromRun(getBacktestRun());
 }
 
 export async function buildNormalizedMatchBundle() {
@@ -157,9 +352,21 @@ export async function buildDataQualityReport() {
   const liveValidation = validateLiveMatches(dashboard.liveMatches);
   const expertValidation = validateExpertOpinions(dashboard.expertOpinions);
   const schemaValidation = validateRawMarketBoard(pipeline.rawMarketBoard);
+  const marketSnapshotBundle = buildMarketSnapshotBundle(pipeline.rawMarketBoard);
+  const marketSnapshotValidation = validateMarketSnapshots(marketSnapshotBundle.marketSnapshots);
   const normalizedMatches = await buildNormalizedMatchBundle();
   const normalizedValidation = validateNormalizedMatches(normalizedMatches);
   const issues = [];
+  const snapshotTypeCounts = marketSnapshotBundle.summary.marketTypeCounts;
+  const layeredOutputs = dashboard.layeredOutputs || [];
+  const portfolioReview = buildPortfolioReviewFromDashboard(dashboard, pipeline);
+  const backtestReview = buildBacktestReviewFromRun(getBacktestRun());
+  const predictionLookup = new Map(
+    dashboard.tomorrowPredictions.map((prediction) => [prediction.fixture, prediction]),
+  );
+  const jingcaiLookup = new Map(
+    (dashboard.jingcaiRecommendations || []).map((recommendation) => [recommendation.fixtureId, recommendation]),
+  );
 
   const matches = pipeline.rawMarketBoard.map((match) => {
     const hasOdds = match.oddsProviders.length > 0;
@@ -170,6 +377,32 @@ export async function buildDataQualityReport() {
       ...match.oddsProviders.map((provider) => provider.updatedAt),
       ...match.predictionMarkets.map((provider) => provider.updatedAt),
     ];
+    const prediction = predictionLookup.get(`${match.home} vs ${match.away}`) || null;
+    const jingcaiRecommendation = jingcaiLookup.get(match.id) || jingcaiLookup.get(String(match.id)) || null;
+    const fixtureSnapshots = marketSnapshotBundle.marketSnapshots.filter((snapshot) => {
+      return String(snapshot.fixtureId) === String(match.id);
+    });
+    const marketSnapshotCount = marketSnapshotBundle.marketSnapshots.filter((snapshot) => {
+      return snapshot.fixtureId === match.id || snapshot.fixtureId === String(match.id);
+    }).length;
+    const latestSourceUpdate = timestamps.sort().slice(-1)[0] || null;
+    const hasTimestampedSnapshots = fixtureSnapshots.some((snapshot) => Boolean(snapshot.capturedAt));
+    const hasSettlementResult = dashboard.completedComparisons.some(
+      (comparison) => comparison.fixture === `${match.home} vs ${match.away}`,
+    );
+    const spreadLine = getSnapshotLine(fixtureSnapshots, match.id, "spread");
+    const totalLine = getSnapshotLine(fixtureSnapshots, match.id, "total");
+    const officialScheduleAvailable = Boolean(
+      jingcaiRecommendation && jingcaiRecommendation.noJingcaiReason !== "skip_not_in_schedule",
+    );
+    const mappingConfidence = jingcaiRecommendation?.primaryRecommendation?.mappingConfidence || null;
+    const staleOdds = isStaleSourceUpdate(latestSourceUpdate, dashboard.lastUpdated);
+    const providerConflictLevel = summarizeProviderConflictLevel(prediction);
+    const hasClosingSnapshot = hasClosingOrPreCloseSnapshot(
+      fixtureSnapshots,
+      match.id,
+      match.kickoff,
+    );
 
     if (!hasOdds) {
       issues.push({
@@ -196,11 +429,41 @@ export async function buildDataQualityReport() {
       spreadsCount,
       totalsCount,
       hasLiquidityMetrics: hasPolymarketLiquidityMetrics(match.predictionMarkets),
-      latestSourceUpdate: timestamps.sort().slice(-1)[0] || null,
+      latestSourceUpdate,
       hasOdds,
       hasPredictionMarket,
+      marketSnapshotCount,
+      qualitySignals: {
+        hasTimestampedSnapshots,
+        hasClosingOrPreCloseSnapshot: hasClosingSnapshot,
+        hasSettlementResult,
+        spreadLine,
+        totalLine,
+        staleOdds,
+        providerConflictLevel,
+        mappingConfidence,
+        officialScheduleAvailable,
+      },
     };
   });
+
+  if (!marketSnapshotBundle.marketSnapshots.length) {
+    issues.push({
+      severity: "high",
+      fixture: "all",
+      code: "missing_market_snapshots",
+      message: "市场快照流为空，无法进入 Layer A 研究。",
+    });
+  }
+
+  if (!snapshotTypeCounts.h2h) {
+    issues.push({
+      severity: "high",
+      fixture: "all",
+      code: "missing_h2h_snapshots",
+      message: "市场快照中缺少 h2h 类型，无法做基础胜平负研究。",
+    });
+  }
 
   return {
     generatedAt: new Date().toISOString(),
@@ -214,6 +477,16 @@ export async function buildDataQualityReport() {
     expertSchemaErrors: expertValidation.errors,
     normalizedSchemaOk: normalizedValidation.ok,
     normalizedSchemaErrors: normalizedValidation.errors,
+    marketSnapshotSchemaOk: marketSnapshotValidation.ok,
+    marketSnapshotSchemaErrors: marketSnapshotValidation.errors,
+    marketSnapshotSummary: marketSnapshotBundle.summary,
+    layerCoverage: {
+      layerA: layeredOutputs.filter((output) => Boolean(output.layerA?.signalCandidate)).length,
+      layerB: layeredOutputs.filter((output) => Boolean(output.layerB?.mappingConfidence)).length,
+      layerC: layeredOutputs.filter((output) => Boolean(output.layerC?.primaryRecommendation)).length,
+    },
+    portfolioReview,
+    backtestReview,
     issueCount: issues.length,
     issues,
     matches,

@@ -8,6 +8,8 @@ import {
   buildDataQualityReport,
   buildNormalizedMatchBundle,
   buildProviderCoverageReport,
+  buildBacktestReview,
+  buildPortfolioReview,
 } from "../data-hub.js";
 import { sanitizeDashboardBundle } from "../app/data-guard.js";
 import { REFRESH_TIERS, formatRefreshPolicySummary } from "../app/refresh-policy.js";
@@ -53,6 +55,9 @@ export async function buildApiPayload() {
     },
     "/api/raw-market-board": async () => (await getPipelineData()).rawMarketBoard,
     "/api/prediction-pipeline": async () => getPipelineData(),
+    "/api/data/market-snapshots": async () => (await getPipelineData()).marketSnapshots,
+    "/api/data/signal-candidates": async () => (await getPipelineData()).signalCandidates,
+    "/api/data/jingcai-recommendations": async () => (await getPipelineData()).jingcaiRecommendations,
     "/api/providers/status": async () => {
       const status = await getProviderStatus();
       return {
@@ -71,6 +76,8 @@ export async function buildApiPayload() {
     },
     "/api/data/quality-report": async () => buildDataQualityReport(),
     "/api/data/provider-coverage": async () => buildProviderCoverageReport(),
+    "/api/data/portfolio-review": async () => buildPortfolioReview(),
+    "/api/data/backtest-review": async () => buildBacktestReview(),
     "/api/data/refresh-policy": async () => ({
       tiers: REFRESH_TIERS,
       summary: formatRefreshPolicySummary(),
