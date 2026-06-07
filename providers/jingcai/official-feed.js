@@ -1,21 +1,42 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { validateJingcaiOfficialFeed } from "../../schemas/jingcai-official-feed.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-function readJsonFixture(relativePath) {
-  const absolutePath = path.resolve(__dirname, "../../", relativePath);
+function resolveFeedPath(feedFile) {
+  return path.isAbsolute(feedFile) ? feedFile : path.resolve(__dirname, "../../", feedFile);
+}
+
+function readJsonFeed(feedFile) {
+  const absolutePath = resolveFeedPath(feedFile);
+
+  if (!existsSync(absolutePath)) {
+    throw new Error(`Jingcai 官方盘文件不存在: ${absolutePath}`);
+  }
+
   return JSON.parse(readFileSync(absolutePath, "utf-8"));
 }
 
 export function getMockJingcaiOfficialFeed() {
-  return readJsonFixture("fixtures/jingcai-official-feed.json");
+  return loadJingcaiOfficialFeed("fixtures/jingcai-official-feed.json");
 }
 
-export function getJingcaiOfficialFeed() {
-  return getMockJingcaiOfficialFeed();
+export function loadJingcaiOfficialFeed(feedFile) {
+  const feed = readJsonFeed(feedFile);
+  const validation = validateJingcaiOfficialFeed(feed);
+
+  if (!validation.ok) {
+    throw new Error(`Jingcai 官方盘文件不合法: ${validation.errors.join("; ")}`);
+  }
+
+  return feed;
+}
+
+export function getJingcaiOfficialFeed(feedFile = "fixtures/jingcai-official-feed.json") {
+  return loadJingcaiOfficialFeed(feedFile);
 }
 
 export function findJingcaiOfficialMatch(feed, fixtureId) {

@@ -1,8 +1,6 @@
 import { fetchJson } from "../../lib/fetch-json.js";
 import { getCachedJsonPayload } from "../../lib/local-json-cache.js";
 import { toDisplayTeamName } from "../../lib/team-names.js";
-import { formatOpeningDayNote, isOpeningDayMatch } from "./opening-day.js";
-
 let cachedMatchResponse = null;
 let cachedMatchResponseAt = 0;
 let cachedMatchKey = "";
@@ -90,7 +88,8 @@ async function fetchMatchesWindow(config, window, attemptsRemaining = 1) {
     dateTo: window.dateTo,
   });
 
-  const url = `${config.footballDataApiBaseUrl}/matches?${params.toString()}`;
+  const competitionCode = config.footballDataCompetitionCode || "WC";
+  const url = `${config.footballDataApiBaseUrl}/competitions/${competitionCode}/matches?${params.toString()}`;
 
   try {
     return await fetchJson(url, {
@@ -113,6 +112,7 @@ async function fetchMatchesWindow(config, window, attemptsRemaining = 1) {
 function buildCacheKey(config) {
   return [
     config.footballDataApiBaseUrl,
+    config.footballDataCompetitionCode || "WC",
     config.footballDataDateFrom,
     config.footballDataDateTo,
   ].join("|");
@@ -170,17 +170,14 @@ export function createFootballDataLiveProviderAdapter(config) {
     async fetchNormalizedLiveMatches() {
       const body = await this.fetchRawMatches();
       const rows = Array.isArray(body.matches) ? body.matches : [];
-      const openingDayMatches = rows.filter((match) =>
-        isOpeningDayMatch(match.utcDate, config.worldCupOpeningDate),
-      );
 
-      if (!openingDayMatches.length) {
+      if (!rows.length) {
         throw new Error(
-          `football-data.org 未返回 ${config.worldCupOpeningDate} 的世界杯开幕日场次`,
+          `football-data.org 未返回 ${config.footballDataCompetitionCode || "WC"} 在 ${config.footballDataDateFrom} ~ ${config.footballDataDateTo} 的赛程`,
         );
       }
 
-      return openingDayMatches.map((match) => ({
+      return rows.map((match) => ({
         id: match.id,
         stage: mapStage(match),
         status: mapStatus(match.status),
@@ -190,10 +187,7 @@ export function createFootballDataLiveProviderAdapter(config) {
         away: toDisplayTeamName(match.awayTeam?.name || "Away TBD"),
         homeScore: getScore(match, "home"),
         awayScore: getScore(match, "away"),
-        note: formatOpeningDayNote(
-          "来自 football-data.org 实时比赛源。",
-          config.worldCupOpeningDate,
-        ),
+        note: "来自 football-data.org 实时比赛源，按赛事窗口输出完整赛程。",
       }));
     },
   };

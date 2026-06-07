@@ -8,7 +8,7 @@
 
 ## 结论摘要
 
-当前判断是：**算法骨架已成型，真实 provider 骨架也已接好，但 mock -> real 还没有完成。**
+当前判断是：**量化 Phase 已落地，真实 provider 骨架也已接好，但 mock -> real 还没有完成。**
 
 - **真实优先、允许回退**：赔率/盘口、实时赛况、补充信号
 - **始终是样本/fixture**：专家观点、analysis items、modeling steps、赛后复盘、Jingcai 官方盘样本、回测样本
@@ -131,7 +131,8 @@
 
 基于你给出的远端仓库状态，下一步真正要补的是：
 
-1. Phase 2 的 `MarketSnapshot` 标准化
-2. 用统一快照流把 `h2h / spread / total` 打通
-3. 让质量报告从“有没有数据”升级为“能不能进入 Layer A”
-4. 再往后才是 `score-matrix / pricing / decision-layer / Jingcai`
+1. provider hardening
+2. 用真实官方 feed 替换 `Jingcai` fixture
+3. 提高 `The Odds API` / `football-data.org` 的稳定命中率
+4. 继续扩大真实回测和赛后样本
+5. 逐步收紧 mock 兜底的覆盖面

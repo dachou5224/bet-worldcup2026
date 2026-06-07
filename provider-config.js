@@ -14,6 +14,8 @@ export function getProviderConfig() {
       process.env.SOURCE_CATALOG_FILE || "./data-source-catalog.json",
     rawMarketBoardFile:
       process.env.RAW_MARKET_BOARD_FILE || "./fixtures/raw-market-board.json",
+    jingcaiOfficialFeedFile:
+      process.env.JINGCAI_OFFICIAL_FEED_FILE || "./fixtures/jingcai-official-feed.json",
     oddsApiBaseUrl: process.env.ODDS_API_BASE_URL || "https://api.the-odds-api.com/v4",
     oddsApiKey: process.env.ODDS_API_KEY || "",
     oddsSportKey: process.env.ODDS_SPORT_KEY || "soccer_fifa_world_cup",
@@ -22,6 +24,8 @@ export function getProviderConfig() {
       .split(",")
       .map((market) => market.trim())
       .filter(Boolean),
+    oddsCommenceTimeFrom: process.env.ODDS_COMMENCE_TIME_FROM || "2026-06-11T00:00:00Z",
+    oddsCommenceTimeTo: process.env.ODDS_COMMENCE_TIME_TO || "2026-07-19T23:59:59Z",
     oddsCacheTtlSeconds: Number(process.env.ODDS_CACHE_TTL_SECONDS || 1800),
     polymarketGammaApiBaseUrl:
       process.env.POLYMARKET_GAMMA_API_BASE_URL || "https://gamma-api.polymarket.com",
@@ -43,6 +47,7 @@ export function getProviderConfig() {
     footballDataApiBaseUrl:
       process.env.FOOTBALL_DATA_API_BASE_URL || "https://api.football-data.org/v4",
     footballDataApiKey: process.env.FOOTBALL_DATA_API_KEY || "",
+    footballDataCompetitionCode: process.env.FOOTBALL_DATA_COMPETITION_CODE || "WC",
     footballDataDateFrom: process.env.FOOTBALL_DATA_DATE_FROM || "2026-06-11",
     footballDataDateTo: process.env.FOOTBALL_DATA_DATE_TO || "2026-07-19",
     footballDataCacheTtlSeconds: Number(process.env.FOOTBALL_DATA_CACHE_TTL_SECONDS || 300),

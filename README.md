@@ -33,6 +33,7 @@ npm run qa:frontend
 ```
 
 其中 `qa:frontend` 需要本地已有 `npm run dev` 服务在 `http://127.0.0.1:3000` 提供页面与 API；如需覆盖地址，可设置 `FRONTEND_QA_BASE_URL`。
+如果 `3000` 端口已被其他进程占用，可改用例如 `PORT=3301 npm run dev`，然后执行 `FRONTEND_QA_BASE_URL=http://127.0.0.1:3301 npm run qa:frontend`。
 
 当前默认行为：
 - 市场预测优先走真实 `The Odds API`
@@ -186,8 +187,10 @@ POLYMARKET_PUBLIC_ENABLED=true
 - `ODDS_SPORT_KEY`
 - `ODDS_REGIONS`
 - `ODDS_MARKETS`
+- `ODDS_COMMENCE_TIME_FROM`
+- `ODDS_COMMENCE_TIME_TO`
 
-默认会拉 `h2h,spreads,totals` 三类盘口，保留 1X2 主盘的同时，把让球和大小球线也一起留在 `rawMarketBoard` / `normalized-matches` 输出里。
+默认实现支持 `h2h,spreads,totals` 三类盘口；`.env.example` 里为了先跑通最小真实链路，默认只开 `h2h`，需要更完整覆盖时再把 `spreads,totals` 加回去。`commenceTimeFrom/To` 用来限定比赛窗口，减少无关赛事和 quota 消耗。
 
 默认 sport key 是 `soccer_fifa_world_cup`，接口参考 The Odds API v4 文档。
 
@@ -202,10 +205,17 @@ POLYMARKET_PUBLIC_ENABLED=true
 ### football-data.org
 
 - `FOOTBALL_DATA_API_KEY`
+- `FOOTBALL_DATA_COMPETITION_CODE`
 - `FOOTBALL_DATA_DATE_FROM`
 - `FOOTBALL_DATA_DATE_TO`
 
-当前 live provider 会优先使用 `football-data.org`，如果未配置，再退回到 `Sportmonks` 适配器。
+当前 live provider 会优先使用 `football-data.org`，按赛事 code 和日期窗口请求完整赛程；如果未配置，再退回到 `Sportmonks` 适配器。
+
+### 竞彩足球官方盘
+
+- `JINGCAI_OFFICIAL_FEED_FILE`
+
+当前默认仍是 fixture-backed，文件路径默认指向 `fixtures/jingcai-official-feed.json`。后续若有稳定官方源或回放文件，可通过该配置切换，不需要改下游 `JingcaiRecommendation` / `jingcai-gates` / `play-mapping` 接口。
 
 ### Bzzoiro Sports Data（可选补充源）
 

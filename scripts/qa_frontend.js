@@ -1,4 +1,5 @@
-const BASE_URL = process.env.FRONTEND_QA_BASE_URL || "http://127.0.0.1:3000";
+const DEFAULT_PORT = process.env.PORT || "3000";
+const BASE_URL = process.env.FRONTEND_QA_BASE_URL || `http://127.0.0.1:${DEFAULT_PORT}`;
 
 async function fetchText(path) {
   const response = await fetch(`${BASE_URL}${path}`);
@@ -23,6 +24,10 @@ function assert(condition, message) {
 }
 
 async function main() {
+  const health = await fetchJson("/api/health");
+  assert(health.ok === true, "/api/health 未返回 ok");
+  assert(health.service === "guess-worldcup-2026", `qa 指向了错误服务: ${health.service || "unknown"}`);
+
   const html = await fetchText("/");
   assert(html.includes('id="view-signals"'), "首页缺少价值信号视图");
   assert(html.includes('id="schedule-spotlight"'), "首页缺少未来三天赛程区块");
@@ -42,9 +47,6 @@ async function main() {
     const source = await fetchText(path);
     assert(source.length > 20, `${path} 内容异常`);
   }
-
-  const health = await fetchJson("/api/health");
-  assert(health.ok === true, "/api/health 未返回 ok");
 
   const dashboard = await fetchJson("/api/dashboard");
   assert(Array.isArray(dashboard.liveMatches), "dashboard.liveMatches 不是数组");
@@ -69,6 +71,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error(`frontend QA failed: ${error.message}`);
+  console.error(`frontend QA failed: ${error.message}. 可先启动本项目服务，再设置 FRONTEND_QA_BASE_URL 覆盖目标地址。`);
   process.exit(1);
 });

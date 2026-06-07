@@ -415,6 +415,15 @@ export async function buildDataQualityReport() {
   const jingcaiLookup = new Map(
     (dashboard.jingcaiRecommendations || []).map((recommendation) => [recommendation.fixtureId, recommendation]),
   );
+  const marketFallbackUsed = providerStatus.marketDataMode === "real_fallback_mock";
+  const liveFallbackUsed =
+    dashboard.liveDataMode === "real_fallback_mock" || dashboard.liveDataMode === "real_unconfigured_fallback_mock";
+  const fallbackUsed = marketFallbackUsed || liveFallbackUsed;
+  const researchSafe =
+    providerStatus.appMode === "research" &&
+    providerStatus.marketDataMode === "real" &&
+    dashboard.liveDataMode === "real" &&
+    !fallbackUsed;
 
   const matches = pipeline.rawMarketBoard.map((match) => {
     const hasOdds = match.oddsProviders.length > 0;
@@ -529,7 +538,18 @@ export async function buildDataQualityReport() {
 
   return {
     generatedAt: new Date().toISOString(),
+    appMode: providerStatus.appMode,
     providerMode: providerStatus.marketDataMode,
+    sourceMode: {
+      market: providerStatus.marketDataMode,
+      live: dashboard.liveDataMode,
+    },
+    fallbackUsed: {
+      market: marketFallbackUsed,
+      live: liveFallbackUsed,
+      any: fallbackUsed,
+    },
+    researchSafe,
     matchCount: matches.length,
     schemaOk: schemaValidation.ok,
     schemaErrors: schemaValidation.errors,

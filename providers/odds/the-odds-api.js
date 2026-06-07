@@ -69,6 +69,8 @@ export function createTheOddsApiProviderAdapter(config) {
           sportKey: config.oddsSportKey,
           regions: config.oddsRegions,
           markets: requestedMarkets,
+          commenceTimeFrom: config.oddsCommenceTimeFrom || null,
+          commenceTimeTo: config.oddsCommenceTimeTo || null,
         }),
         ttlSeconds: config.oddsCacheTtlSeconds,
         enabled: config.providerCacheEnabled,
@@ -80,6 +82,14 @@ export function createTheOddsApiProviderAdapter(config) {
             markets: requestedMarkets.join(","),
             oddsFormat: "decimal",
           });
+
+          if (config.oddsCommenceTimeFrom) {
+            params.set("commenceTimeFrom", config.oddsCommenceTimeFrom);
+          }
+
+          if (config.oddsCommenceTimeTo) {
+            params.set("commenceTimeTo", config.oddsCommenceTimeTo);
+          }
 
           const url = `${config.oddsApiBaseUrl}/sports/${config.oddsSportKey}/odds?${params.toString()}`;
           const response = await fetchJson(url, { timeoutMs: 20000 });
