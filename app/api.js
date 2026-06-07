@@ -25,12 +25,13 @@ export async function fetchLiveSchedule() {
 
 /** 信号层：只拉预测/盘口/标准化比赛，不含 liveMatches */
 export async function fetchSignalSlice() {
-  const [tomorrowPredictions, marketSources, normalizedMatches, expertOpinions] =
+  const [tomorrowPredictions, marketSources, normalizedMatches, expertOpinions, jingcaiRecommendations] =
     await Promise.all([
       fetchJson("/api/tomorrow-predictions"),
       fetchJson("/api/market-sources"),
       fetchJson("/api/data/normalized-matches").catch(() => []),
       fetchJson("/api/expert-opinions").catch(() => []),
+      fetchJson("/api/data/jingcai-recommendations").catch(() => []),
     ]);
 
   return {
@@ -38,6 +39,8 @@ export async function fetchSignalSlice() {
     marketSources,
     normalizedMatches,
     expertOpinions,
+    jingcaiRecommendations,
+    layeredOutputs: tomorrowPredictions.map((prediction) => prediction.layeredOutput).filter(Boolean),
   };
 }
 
@@ -65,6 +68,8 @@ function mergeSignalFields(currentDashboard, signalSlice) {
     tomorrowPredictions: signalSlice.tomorrowPredictions,
     marketSources: signalSlice.marketSources,
     expertOpinions: signalSlice.expertOpinions,
+    jingcaiRecommendations: signalSlice.jingcaiRecommendations,
+    layeredOutputs: signalSlice.layeredOutputs,
   };
 }
 

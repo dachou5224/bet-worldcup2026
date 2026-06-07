@@ -24,6 +24,16 @@ npm run dev
 
 然后访问 `http://127.0.0.1:3000`。
 
+如需做完整本地 QA，可运行：
+
+```bash
+npm test
+npm run qa:research-guardrails
+npm run qa:frontend
+```
+
+其中 `qa:frontend` 需要本地已有 `npm run dev` 服务在 `http://127.0.0.1:3000` 提供页面与 API；如需覆盖地址，可设置 `FRONTEND_QA_BASE_URL`。
+
 当前默认行为：
 - 市场预测优先走真实 `The Odds API`
 - 实时比赛优先走真实 `football-data.org`
@@ -87,8 +97,13 @@ npm run snapshot:providers
 - `/api/providers/catalog`
 - `/api/data/supplemental-signals`
 - `/api/data/normalized-matches`
+- `/api/data/market-snapshots`
+- `/api/data/signal-candidates`
+- `/api/data/jingcai-recommendations`
 - `/api/data/quality-report`
 - `/api/data/provider-coverage`
+- `/api/data/portfolio-review`
+- `/api/data/backtest-review`
 - `/api/data/refresh-policy`
 
 ## 数据分层
@@ -102,11 +117,11 @@ npm run snapshot:providers
 - [data-sources.js](data-sources.js)
   负责切换 provider 模式，目前支持 `mock` 和 `file`。
 - [market-pipeline.js](market-pipeline.js)
-  负责赔率去水、三方概率归一化、市场聚合和首版预测生成。
+  负责市场快照归一化、baseline / signal candidate / 竞彩建议与分层输出生成。
 - [dashboard-data.js](dashboard-data.js)
-  负责组装首页需要的完整数据。
+  负责组装首页需要的完整数据，并把竞彩建议、layered output、组合/回测摘要挂到 dashboard。
 - [data-hub.js](data-hub.js)
-  提供标准化比赛数据、数据质量报告和 provider 覆盖报告。
+  提供标准化比赛数据、数据质量报告、provider 覆盖、组合复盘与回测摘要。
 - [schemas/market-board.js](schemas/market-board.js)
   定义并校验原始市场数据 schema。
 - [schemas/live-matches.js](schemas/live-matches.js)

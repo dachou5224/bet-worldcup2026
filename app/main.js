@@ -98,6 +98,8 @@ async function refreshMetadataTier({ background = true } = {}) {
         ...(metadata.completedComparisons != null
           ? { completedComparisons: metadata.completedComparisons }
           : {}),
+        ...(metadata.portfolioReview != null ? { portfolioReview: metadata.portfolioReview } : {}),
+        ...(metadata.backtestReview != null ? { backtestReview: metadata.backtestReview } : {}),
       },
       qualityReport: metadata.qualityReport,
       providerCoverage: metadata.providerCoverage,
