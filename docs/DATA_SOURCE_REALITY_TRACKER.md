@@ -1,18 +1,21 @@
 # 数据源真实度与替换跟踪
 
-> 目的：把当前项目里哪些输入是 `real`、哪些还是 `mock/fixture`、哪些是 `derived` 记录清楚，并持续跟踪真实数据替换进度。
+> 目的：把**远端 GitHub 仓库状态快照**里哪些输入是 `real`、哪些还是 `mock/fixture`、哪些是 `derived` 记录清楚，并持续跟踪真实数据替换进度。
 >
 > 更新时间：2026-06-07
+>
+> 说明：本文件记录的是你提供的远端仓库 review 口径，不等同于后续本地分支可能推进出来的更高版本实现。
 
 ## 结论摘要
 
-当前算法链路已经跑通，但输入侧并不是全真实数据驱动。
+当前判断是：**算法骨架已成型，真实 provider 骨架也已接好，但 mock -> real 还没有完成。**
 
 - **真实优先、允许回退**：赔率/盘口、实时赛况、补充信号
 - **始终是样本/fixture**：专家观点、analysis items、modeling steps、赛后复盘、Jingcai 官方盘样本、回测样本
 - **算法派生结果**：`marketSnapshots`、`SignalCandidate`、`JingcaiRecommendation`、`layeredOutputs`、`portfolioReview`、`backtestReview`
 
-当前默认运行模式是 `APP_MODE=demo`，所以即便真实 provider 已配置，真实源失败时也会回退到 mock。
+当前默认运行模式是 `APP_MODE=demo`，所以即便真实 provider 已配置，真实源失败时也会回退到 mock。  
+这对演示有用，但对研究验证来说，`research` 模式才是判断真实数据是否接通的准绳。
 
 ## 当前配置快照
 
@@ -79,7 +82,7 @@
 
 - `Jingcai` 官方盘：当前仍是 fixture-backed 样本
 - 回测样本：当前仍是 mock fixture
-- 专家观点/analysis/modeling/post-match review：当前仍是 mock 数据，适合保留为展示与测试样本
+- 专家观点 / analysis / modeling / post-match review：当前仍是 mock 数据，适合保留为展示和测试素材
 
 ### C. 当前模式限制
 
@@ -118,8 +121,17 @@
 
 如果后续要继续推进真实数据替换，优先顺序建议是：
 
-1. 稳定赔率/盘口真实源命中率
+1. 稳定赔率 / 盘口真实源命中率
 2. 稳定 live matches 真实源命中率
 3. 用稳定官方接口替换 Jingcai fixture
 4. 扩充回测样本和赛后样本
 5. 再考虑把更多展示层 mock 逐步收敛
+
+## 远端快照的下一步
+
+基于你给出的远端仓库状态，下一步真正要补的是：
+
+1. Phase 2 的 `MarketSnapshot` 标准化
+2. 用统一快照流把 `h2h / spread / total` 打通
+3. 让质量报告从“有没有数据”升级为“能不能进入 Layer A”
+4. 再往后才是 `score-matrix / pricing / decision-layer / Jingcai`
