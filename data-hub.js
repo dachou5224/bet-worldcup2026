@@ -128,6 +128,54 @@ function hasClosingOrPreCloseSnapshot(marketSnapshots, fixtureId, kickoffLabel) 
   });
 }
 
+function buildLayerAReadiness({
+  hasOdds,
+  hasPredictionMarket,
+  marketSnapshotCount,
+  hasTimestampedSnapshots,
+  hasClosingOrPreCloseSnapshot,
+  staleOdds,
+  spreadLine,
+  totalLine,
+  bookmakerDiversity,
+}) {
+  const blockReasons = [];
+
+  if (!hasOdds) {
+    blockReasons.push("missing_odds");
+  }
+
+  if (!marketSnapshotCount) {
+    blockReasons.push("missing_market_snapshots");
+  }
+
+  if (!hasTimestampedSnapshots) {
+    blockReasons.push("missing_timestamped_snapshot");
+  }
+
+  if (!hasClosingOrPreCloseSnapshot) {
+    blockReasons.push("missing_closing_snapshot");
+  }
+
+  if (staleOdds) {
+    blockReasons.push("stale_odds");
+  }
+
+  if (!Number.isFinite(bookmakerDiversity) || bookmakerDiversity <= 0) {
+    blockReasons.push("missing_bookmaker_diversity");
+  }
+
+  if (!Number.isFinite(spreadLine) && !Number.isFinite(totalLine)) {
+    blockReasons.push("missing_spread_total");
+  }
+
+  return {
+    canEnterLayerA: blockReasons.length === 0,
+    blockReasons,
+    hasPredictionMarket,
+  };
+}
+
 function toProbabilityOutcome(actualOutcome) {
   if (actualOutcome === "home") {
     return { home: 1, draw: 0, away: 0 };
@@ -392,6 +440,7 @@ export async function buildDataQualityReport() {
     );
     const spreadLine = getSnapshotLine(fixtureSnapshots, match.id, "spread");
     const totalLine = getSnapshotLine(fixtureSnapshots, match.id, "total");
+    const bookmakerDiversity = new Set(match.oddsProviders.map((provider) => provider.provider)).size;
     const officialScheduleAvailable = Boolean(
       jingcaiRecommendation && jingcaiRecommendation.noJingcaiReason !== "skip_not_in_schedule",
     );
@@ -403,6 +452,17 @@ export async function buildDataQualityReport() {
       match.id,
       match.kickoff,
     );
+    const layerAReadiness = buildLayerAReadiness({
+      hasOdds,
+      hasPredictionMarket,
+      marketSnapshotCount,
+      hasTimestampedSnapshots,
+      hasClosingOrPreCloseSnapshot: hasClosingSnapshot,
+      staleOdds,
+      spreadLine,
+      totalLine,
+      bookmakerDiversity,
+    });
 
     if (!hasOdds) {
       issues.push({
@@ -433,6 +493,8 @@ export async function buildDataQualityReport() {
       hasOdds,
       hasPredictionMarket,
       marketSnapshotCount,
+      bookmakerDiversity,
+      layerAReadiness,
       qualitySignals: {
         hasTimestampedSnapshots,
         hasClosingOrPreCloseSnapshot: hasClosingSnapshot,
@@ -485,6 +547,7 @@ export async function buildDataQualityReport() {
       layerB: layeredOutputs.filter((output) => Boolean(output.layerB?.mappingConfidence)).length,
       layerC: layeredOutputs.filter((output) => Boolean(output.layerC?.primaryRecommendation)).length,
     },
+    layerAReadyCount: matches.filter((match) => match.layerAReadiness?.canEnterLayerA).length,
     portfolioReview,
     backtestReview,
     issueCount: issues.length,

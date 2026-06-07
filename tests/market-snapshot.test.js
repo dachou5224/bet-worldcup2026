@@ -116,9 +116,20 @@ test("buildDataQualityReport includes market snapshot checks", async () => {
   assert.ok(report.layerCoverage.layerA >= 0);
   assert.ok(report.layerCoverage.layerB >= 0);
   assert.ok(report.layerCoverage.layerC >= 0);
+  assert.ok(Number.isInteger(report.layerAReadyCount));
   assert.ok(report.portfolioReview);
   assert.ok(report.backtestReview);
   assert.ok(report.matches.every((match) => typeof match.marketSnapshotCount === "number"));
+  assert.ok(report.matches.every((match) => typeof match.bookmakerDiversity === "number"));
+  assert.ok(report.matches.every((match) => match.layerAReadiness && typeof match.layerAReadiness === "object"));
+  assert.ok(
+    report.matches.every(
+      (match) =>
+        typeof match.layerAReadiness.canEnterLayerA === "boolean" &&
+        Array.isArray(match.layerAReadiness.blockReasons) &&
+        typeof match.layerAReadiness.hasPredictionMarket === "boolean",
+    ),
+  );
   assert.ok(report.matches.every((match) => match.qualitySignals && typeof match.qualitySignals === "object"));
   assert.ok(
     report.matches.every(
