@@ -4,6 +4,7 @@ import { buildScoreMatrix, sumMatrix } from "../quant/models/score-matrix.js";
 import { priceH2H } from "../quant/pricing/h2h.js";
 import { priceSpread } from "../quant/pricing/spread.js";
 import { priceTotal } from "../quant/pricing/total.js";
+import { priceCorrectScore } from "../quant/pricing/correct-score.js";
 import { priceMarkets } from "../quant/pricing/markets.js";
 import { priceJingcaiRqspf } from "../quant/pricing/jingcai-rqspf.js";
 
@@ -66,14 +67,25 @@ test("priceTotal handles push and quarter lines", () => {
 });
 
 test("priceMarkets and Jingcai projection reuse the same score matrix", () => {
-  const markets = priceMarkets(scoreMatrix, { spreadLine: -0.25, totalLine: 2.75 });
+  const markets = priceMarkets(scoreMatrix, {
+    spreadLine: -0.25,
+    totalLine: 2.75,
+    correctScores: [
+      { homeGoals: 1, awayGoals: 0 },
+      { home: 2, away: 1 },
+    ],
+  });
   const jingcai = priceJingcaiRqspf(scoreMatrix, -1);
+  const correctScore = priceCorrectScore(scoreMatrix, { homeGoals: 1, awayGoals: 0 });
 
   assert.equal(markets.h2h.marketType, "h2h");
   assert.equal(markets.spread.marketType, "spread");
   assert.equal(markets.total.marketType, "total");
+  assert.equal(markets.correctScore.marketType, "correct_score");
   assert.equal(jingcai.marketType, "jingcai_rqspf");
   assert.equal(jingcai.outcomes.length, 3);
   assert.ok(Math.abs(jingcai.probabilitySum - 1) < 1e-12);
   assert.ok(jingcai.outcomes[0].fairOdds > 1);
+  assert.equal(correctScore.outcomes.length, 1);
+  assert.ok(correctScore.probabilitySum > 0);
 });
