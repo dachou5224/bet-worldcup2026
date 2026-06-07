@@ -217,8 +217,11 @@ POLYMARKET_PUBLIC_ENABLED=true
 |------|------|
 | [docs/QUANT_STRATEGY_SPEC.md](docs/QUANT_STRATEGY_SPEC.md) | 算法、体彩收敛、输出契约（WHAT） |
 | [docs/QUANT_IMPLEMENTATION_PLAN.md](docs/QUANT_IMPLEMENTATION_PLAN.md) | 分阶段实施、QA 门禁、**pick-up 状态**（HOW） |
+| [docs/DATA_SOURCE_REALITY_TRACKER.md](docs/DATA_SOURCE_REALITY_TRACKER.md) | 输入数据真实度、mock/fixture 替换进度（REALITY） |
 
 接手量化开发时：先读 plan 顶部 **Pick-up 状态**，本实施计划的 Phase 0-7 已全部完成。Phase 0 / Phase 1 / Phase 2 / Phase 3 / Phase 4 / Phase 5 / Phase 6 / Phase 7 都已在代码树中落地并可通过 `npm test` 与 `npm run qa:research-guardrails` 验证；当前主链路已经迁移到 quant baseline + decision layer + Jingcai 收敛输出 + portfolio/backtest review。纯数学模块在 `quant/`，验证用 `npm test`（无需 API）。
+
+如果你关心当前到底有多少输入是真实数据、哪些还是 `mock/fixture`，先看 [docs/DATA_SOURCE_REALITY_TRACKER.md](docs/DATA_SOURCE_REALITY_TRACKER.md)。
 
 ## QA
 
