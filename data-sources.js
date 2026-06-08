@@ -265,12 +265,18 @@ export async function getProviderStatus() {
   const bundle = await getMarketDataBundle();
   const catalog = getSourceCatalog();
   const adapters = getProviderAdapters();
+  const jingcaiOfficialFeedMode =
+    config.jingcaiOfficialFeedFile === "./fixtures/jingcai-official-feed.json"
+      ? "fixture"
+      : "file";
 
   return {
     appMode: config.appMode,
     marketDataMode: bundle.mode,
     requestedMarketDataMode: config.marketDataMode,
     requestedLiveDataMode: config.liveDataMode,
+    jingcaiOfficialFeedMode,
+    jingcaiOfficialFeedFile: config.jingcaiOfficialFeedFile,
     configuredSourceCatalogFile: config.sourceCatalogFile,
     configuredRawMarketBoardFile: config.rawMarketBoardFile,
     marketMatchCount: bundle.rawMarketBoard.length,

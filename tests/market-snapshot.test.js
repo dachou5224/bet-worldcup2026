@@ -123,8 +123,10 @@ test("buildDataQualityReport includes market snapshot checks", async () => {
   assert.ok(report.sourceMode && typeof report.sourceMode === "object");
   assert.equal(typeof report.sourceMode.market, "string");
   assert.equal(typeof report.sourceMode.live, "string");
+  assert.equal(typeof report.sourceMode.jingcai, "string");
   assert.ok(report.fallbackUsed && typeof report.fallbackUsed === "object");
   assert.equal(typeof report.fallbackUsed.any, "boolean");
+  assert.equal(typeof report.fallbackUsed.jingcai, "boolean");
   assert.equal(typeof report.researchSafe, "boolean");
   assert.ok(report.matches.every((match) => typeof match.marketSnapshotCount === "number"));
   assert.ok(report.matches.every((match) => typeof match.bookmakerDiversity === "number"));
