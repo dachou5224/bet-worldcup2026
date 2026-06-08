@@ -51,18 +51,26 @@ function mapStatus(status) {
   return statusMap[status] || status || "未知状态";
 }
 
-function mapStage(match) {
-  const stageMap = {
-    GROUP_STAGE: "小组赛",
-    LAST_32: "三十二强",
-    LAST_16: "十六强",
-    QUARTER_FINALS: "四分之一决赛",
-    SEMI_FINALS: "半决赛",
-    THIRD_PLACE: "三四名决赛",
-    FINAL: "决赛",
-  };
+const STAGE_LABELS = {
+  GROUP_STAGE: "小组赛",
+  LAST_32: "三十二强",
+  LAST_16: "十六强",
+  QUARTER_FINALS: "四分之一决赛",
+  SEMI_FINALS: "半决赛",
+  THIRD_PLACE: "三四名决赛",
+  FINAL: "决赛",
+};
 
-  return stageMap[match.stage] || match.stage || match.competition?.name || "世界杯赛程";
+function mapStage(match) {
+  return STAGE_LABELS[match.stage] || match.stage || match.competition?.name || "世界杯赛程";
+}
+
+function mapGroupLetter(group) {
+  if (!group) {
+    return null;
+  }
+  const match = String(group).match(/GROUP_([A-L])/i);
+  return match ? match[1].toUpperCase() : null;
 }
 
 function getScore(match, side) {
@@ -179,6 +187,11 @@ export function createFootballDataLiveProviderAdapter(config) {
 
       return rows.map((match) => ({
         id: match.id,
+        externalMatchId: match.id,
+        stageCode: match.stage || null,
+        groupCode: match.group || null,
+        groupLetter: mapGroupLetter(match.group),
+        matchday: match.matchday ?? null,
         stage: mapStage(match),
         status: mapStatus(match.status),
         venue: match.venue || match.competition?.name || "场地待定",

@@ -1,5 +1,6 @@
 import { computeDisagreement, computeConfidenceScore } from "./metrics.js";
 import { formatMatchdayKey } from "./format.js";
+import { addCalendarDays, beijingDateKey, isSameBeijingDay, parseInstant } from "../lib/beijing-time.js";
 
 const PREMATCH_STATUSES = new Set(["赛前", "已定时", "数据准备", "scheduled", "timed"]);
 const FINISHED_STATUSES = new Set(["完场", "已结束", "finished", "已完赛"]);
@@ -22,17 +23,16 @@ export function filterPredictions(predictions, filters, now = new Date()) {
   }
 
   if (filters.when === "today") {
-    items = items.filter((item) => isSameDay(item.kickoff, now));
+    items = items.filter((item) => isSameBeijingDay(item.kickoff, now));
   } else if (filters.when === "tomorrow") {
-    const tomorrow = new Date(now);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    items = items.filter((item) => isSameDay(item.kickoff, tomorrow));
+    const tomorrowKey = addCalendarDays(beijingDateKey(now), 1);
+    items = items.filter((item) => beijingDateKey(item.kickoff) === tomorrowKey);
   } else if (filters.when === "48h") {
     const end = new Date(now);
     end.setHours(end.getHours() + 48);
     items = items.filter((item) => {
-      const kickoff = new Date(item.kickoff);
-      return !Number.isNaN(kickoff.getTime()) && kickoff >= now && kickoff <= end;
+      const kickoff = parseInstant(item.kickoff);
+      return kickoff && kickoff >= now && kickoff <= end;
     });
   }
 
@@ -51,18 +51,6 @@ export function filterPredictions(predictions, filters, now = new Date()) {
   }
 
   return items;
-}
-
-function isSameDay(value, date) {
-  const kickoff = new Date(value);
-  if (Number.isNaN(kickoff.getTime())) {
-    return false;
-  }
-  return (
-    kickoff.getFullYear() === date.getFullYear() &&
-    kickoff.getMonth() === date.getMonth() &&
-    kickoff.getDate() === date.getDate()
-  );
 }
 
 export function buildMatchdayBuckets(predictions) {

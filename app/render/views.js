@@ -8,9 +8,15 @@ import {
   getSignalTier,
   getConfidenceTone,
 } from "../metrics.js";
-
+import { HOW_COMPUTED_GUIDE } from "../content/how-computed-guide.js";
 import { extractMarketLines, renderMarketPills } from "../markets.js";
 import { findNormalizedForMatch } from "../fixture-match.js";
+import { renderFixtureLabelWithFlags } from "./team-flag.js";
+import {
+  renderMatchFixture,
+  renderMatchStageChips,
+  renderMatchStatusLine,
+} from "./match-stage.js";
 
 function getRowKey(match) {
   return `${match.kind}-${match.id}`;
@@ -41,7 +47,7 @@ export function renderSignalList(predictions) {
         <article class="signal-row" data-open-drawer="${escapeHtml(rowKey)}" role="button" tabindex="0">
           <div class="signal-row-head">
             <div class="signal-row-title">
-              <strong>${escapeHtml(item.fixture)}</strong>
+              <strong>${renderFixtureLabelWithFlags(item.fixture, { width: 40 })}</strong>
               <span class="signal-row-meta">${escapeHtml(formatKickoff(item.kickoff))} · ${escapeHtml(item.freshness || "")}</span>
             </div>
             <div class="signal-row-badges">
@@ -154,12 +160,12 @@ export function renderMatchDayGroups(unifiedMatches, normalizedLookup, marketTab
             <article class="match-row" data-open-drawer="${escapeHtml(rowKey)}" data-row-key="${escapeHtml(rowKey)}">
               <div class="match-row-time">
                 <strong>${escapeHtml(formatKickoff(match.kickoff))}</strong>
-                <span>${escapeHtml(match.stage)} ${kindBadge}</span>
+                <span>${escapeHtml(renderMatchStatusLine(match))} ${kindBadge}</span>
               </div>
               <div class="match-row-teams">
-                <strong>${escapeHtml(match.home)}</strong>
+                ${renderMatchFixture(match, { width: 40 })}
+                ${renderMatchStageChips(match)}
                 <span class="match-score-inline">${escapeHtml(match.homeScore)} : ${escapeHtml(match.awayScore)}</span>
-                <strong>${escapeHtml(match.away)}</strong>
               </div>
               <div class="match-row-markets">
                 <div class="market-tabs" data-row-key="${escapeHtml(rowKey)}">
@@ -370,16 +376,19 @@ export function renderReviewSections(data) {
     .join("");
 }
 
-export function renderHowComputed(steps) {
+export function renderHowComputed() {
   const container = document.querySelector("#how-computed-body");
-  container.innerHTML = (steps || [])
-    .map(
-      (item) => `
-      <li>
-        <strong>${escapeHtml(item.title)}</strong>
-        <span>${escapeHtml(item.text)}</span>
-      </li>
-    `,
-    )
+  if (!container) {
+    return;
+  }
+
+  const { paragraphs, footer } = HOW_COMPUTED_GUIDE;
+  const bodyHtml = (paragraphs || [])
+    .map((paragraph) => `<p class="how-computed-p">${escapeHtml(paragraph)}</p>`)
     .join("");
+
+  container.innerHTML = `
+    ${bodyHtml}
+    <p class="how-computed-footer">${escapeHtml(footer || "")}</p>
+  `;
 }

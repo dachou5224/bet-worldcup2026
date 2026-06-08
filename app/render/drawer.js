@@ -5,6 +5,12 @@ import {
   getSignalTier,
   getConfidenceTone,
 } from "../metrics.js";
+import {
+  renderMatchFixture,
+  renderMatchStageChips,
+  renderMatchStatusLine,
+  renderStageBadge,
+} from "./match-stage.js";
 
 export function renderMatchDrawer(selection) {
   const drawer = document.querySelector("#match-drawer");
@@ -27,9 +33,10 @@ export function renderMatchDrawer(selection) {
   drawer.innerHTML = `
     <div class="drawer-header">
       <div>
-        <p class="section-kicker">比赛详情</p>
-        <h2>${escapeHtml(match.fixture || `${match.home} vs ${match.away}`)}</h2>
-        <p class="meta-line">${escapeHtml(formatKickoff(match.kickoff))} · ${escapeHtml(match.stage || "")} · ${escapeHtml(match.status || "")}</p>
+        <p class="section-kicker">比赛详情 ${renderStageBadge(match)}</p>
+        <h2 class="drawer-fixture-title">${renderMatchFixture(match, { width: 48 })}</h2>
+        ${renderMatchStageChips(match)}
+        <p class="meta-line">${escapeHtml(formatKickoff(match.kickoff))} · ${escapeHtml(renderMatchStatusLine(match))}</p>
       </div>
       <button type="button" class="drawer-close" id="drawer-close" aria-label="关闭">×</button>
     </div>

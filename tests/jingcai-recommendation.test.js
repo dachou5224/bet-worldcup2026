@@ -58,8 +58,8 @@ const rawMarketBoard = [
   },
 ];
 
-test("buildJingcaiRecommendationsFromMarket maps a qualified spread signal to Layer C", () => {
-  const recommendations = buildJingcaiRecommendationsFromMarket(rawMarketBoard, getJingcaiOfficialFeed(), {
+test("buildJingcaiRecommendationsFromMarket maps a qualified spread signal to Layer C", async () => {
+  const recommendations = buildJingcaiRecommendationsFromMarket(rawMarketBoard, await getJingcaiOfficialFeed(), {
     now: "2026-06-06T12:00:00+08:00",
     kellyFraction: 1,
   });
@@ -80,8 +80,8 @@ test("buildJingcaiRecommendationsFromMarket maps a qualified spread signal to La
   assert.match(argentina.primaryRecommendation.recommendationText, /阿根廷 vs 波兰/);
 });
 
-test("buildJingcaiRecommendationsFromMarket degrades cleanly when the match is not listed", () => {
-  const recommendations = buildJingcaiRecommendationsFromMarket(rawMarketBoard, getJingcaiOfficialFeed(), {
+test("buildJingcaiRecommendationsFromMarket degrades cleanly when the match is not listed", async () => {
+  const recommendations = buildJingcaiRecommendationsFromMarket(rawMarketBoard, await getJingcaiOfficialFeed(), {
     now: "2026-06-06T12:00:00+08:00",
     kellyFraction: 1,
   });

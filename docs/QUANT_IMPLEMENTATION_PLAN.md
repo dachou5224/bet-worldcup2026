@@ -214,7 +214,7 @@ QA gate:
 
 - Deterministic tests confirm pricing functions produce probabilities summing correctly and matching simple known cases.
 - Dummy score matrices can fully drive pricing without real provider access.
-- A fixture-backed end-to-end smoke test prices overseas `h2h/spread/total` and can also project one official Jingcai handicap case from the same matrix.
+- A fixture/file-backed end-to-end smoke test prices overseas `h2h/spread/total` and can also project one official Jingcai handicap case from the same matrix.
 
 ### Phase 4 — Decision layer and Layer A research outputs
 
@@ -255,7 +255,7 @@ QA gate:
 - Existing dashboard endpoints still return valid payloads.
 - Fixture tests prove that `SignalCandidate` generation follows the spec's gate ordering and level mapping (`NO_ACTION`, `WATCH`, `CANDIDATE`, `SMALL_POSITION`).
 - Comparison tests show the new quant baseline produces sensible output on cached real data and dummy fixtures.
-- Real provider QA is run only once after the fixture-backed flow passes.
+- Real provider QA is run only once after the fixture/file-backed flow passes.
 
 ### Phase 5 — Jingcai convergence (Layer B / Layer C MVP)
 
@@ -263,7 +263,7 @@ Status: completed. The items below record what shipped in this phase.
 
 Implemented:
 
-- Add `providers/jingcai/official-feed.js` as a read-only `JingcaiOfficialFeed` adapter or fixture-backed stub if real official data is not yet available.
+- Add `providers/jingcai/official-feed.js` as a read-only `JingcaiOfficialFeed` adapter with `fixture` / `file` / `real` modes.
 - Create:
   - `quant/recommendation/play-mapping.js`
   - `quant/recommendation/jingcai-gates.js`
@@ -359,7 +359,7 @@ QA gate:
 - Provider integration: run targeted smoke checks only after fixture tests pass.
 - Reuse `fixtures/cache/` as the default replay source during local development.
 - Only refresh provider caches intentionally, not on every QA run.
-- `JingcaiOfficialFeed` should start fixture-backed. Do not block Layer B/C development on a live official feed.
+- `JingcaiOfficialFeed` can start fixture-backed, but the adapter should already accept `file` and `real` modes. Do not block Layer B/C development on a live official feed.
 - When official data is absent, run Layer B/C with dummy official fixtures that cover:
   - listed vs not listed
   - on sale vs stopped

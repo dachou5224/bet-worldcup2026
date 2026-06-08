@@ -1,5 +1,6 @@
 import { proportionalDevig } from "../odds/devig.js";
 import { buildScoreMatrix } from "./score-matrix.js";
+import { calibrateScoreModel } from "./calibration.js";
 import { priceH2H } from "../pricing/h2h.js";
 import { priceSpread } from "../pricing/spread.js";
 import { priceTotal } from "../pricing/total.js";
@@ -177,7 +178,16 @@ function buildDummyScoreMatrix() {
   return buildScoreMatrix({ homeLambda: 1.35, awayLambda: 1.08, maxGoals: 10 });
 }
 
-export function buildMarketBaseline(marketSnapshots, { fixtureId, marketType = "h2h", line = null, period = "full_time" } = {}) {
+export function buildMarketBaseline(
+  marketSnapshots,
+  {
+    fixtureId,
+    marketType = "h2h",
+    line = null,
+    period = "full_time",
+    contextSnapshots = marketSnapshots,
+  } = {},
+) {
   const relevantSnapshots = (marketSnapshots || []).filter((snapshot) => {
     if (fixtureId != null && snapshot.fixtureId !== fixtureId) {
       return false;
@@ -212,7 +222,20 @@ export function buildMarketBaseline(marketSnapshots, { fixtureId, marketType = "
   const hasPredictionMarket = predictionSnapshots.length > 0;
   const dataOk = Boolean(primarySnapshot && outcomeNames.length > 0 && hasBookmaker);
 
-  const scoreMatrix = buildDummyScoreMatrix();
+  const calibration = calibrateScoreModel(
+    {
+      fixtureId: primarySnapshot?.fixtureId ?? fixtureId ?? null,
+      fixture: primarySnapshot?.fixture ?? null,
+      marketType,
+      line,
+      period,
+    },
+    {
+      contextSnapshots,
+    },
+  );
+
+  const scoreMatrix = calibration.scoreMatrix || buildDummyScoreMatrix();
   const pricing = buildMarketTypePricing(scoreMatrix, marketType, line);
 
   let modelConsensus = normalizeDistributionMap(blendProbabilities(bookmakerConsensus, predictionConsensus));
@@ -269,13 +292,22 @@ export function buildMarketBaseline(marketSnapshots, { fixtureId, marketType = "
     riskTags,
     pricing,
     scoreMatrix,
+    calibration,
+    calibrationMode: calibration.mode,
+    calibrationConfidence: calibration.confidence,
   };
 }
 
 export function buildMarketBaselineBundle(marketSnapshots) {
   const groups = new Map();
+  const fixtureGroups = new Map();
 
   for (const snapshot of marketSnapshots || []) {
+    const fixtureKey = String(snapshot.fixtureId);
+    const currentFixture = fixtureGroups.get(fixtureKey) || [];
+    currentFixture.push(snapshot);
+    fixtureGroups.set(fixtureKey, currentFixture);
+
     const key = [snapshot.fixtureId, snapshot.marketType, snapshot.period, snapshot.line ?? "*"].join("::");
     const current = groups.get(key) || [];
     current.push(snapshot);
@@ -287,11 +319,13 @@ export function buildMarketBaselineBundle(marketSnapshots) {
     const parsedFixtureId = Number(fixtureId);
     const normalizedFixtureId = Number.isFinite(parsedFixtureId) ? parsedFixtureId : fixtureId;
     const parsedLine = lineToken === "*" ? null : Number(lineToken);
+    const contextSnapshots = fixtureGroups.get(String(normalizedFixtureId)) || snapshots;
     return buildMarketBaseline(snapshots, {
       fixtureId: normalizedFixtureId,
       marketType,
       line: lineToken === "*" ? null : Number.isFinite(parsedLine) ? parsedLine : lineToken,
       period,
+      contextSnapshots,
     });
   });
 
@@ -304,6 +338,10 @@ export function buildMarketBaselineBundle(marketSnapshots) {
         return acc;
       }, {}),
       hasPricingCount: baselines.filter((baseline) => baseline.pricing != null).length,
+      calibrationModeCounts: baselines.reduce((acc, baseline) => {
+        acc[baseline.calibrationMode] = (acc[baseline.calibrationMode] || 0) + 1;
+        return acc;
+      }, {}),
     },
   };
 }

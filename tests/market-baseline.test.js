@@ -29,6 +29,7 @@ test("market-baseline groups fixtures and produces consensus maps", () => {
   assert.equal(baselineBundle.baselines.length, 2);
   assert.equal(baselineBundle.summary.baselineCount, 2);
   assert.ok(baselineBundle.summary.confidenceBuckets.high >= 1);
+  assert.ok(typeof baselineBundle.summary.calibrationModeCounts === "object");
 
   const h2hBaseline = baselineBundle.baselines.find((baseline) => baseline.marketType === "h2h");
   assert.ok(h2hBaseline);
@@ -36,6 +37,10 @@ test("market-baseline groups fixtures and produces consensus maps", () => {
   assert.ok(h2hBaseline.bookmakerConsensus.home > 0);
   assert.ok(h2hBaseline.modelConsensus.home > 0);
   assert.equal(getBaselineOutcomePrice(h2hBaseline, "home"), 2.04);
+  assert.equal(typeof h2hBaseline.calibrationMode, "string");
+  assert.equal(typeof h2hBaseline.calibrationConfidence, "string");
+  assert.equal(h2hBaseline.scoreMatrix.rawMass > 0, true);
+  assert.ok(Math.abs(h2hBaseline.scoreMatrix.matrix.flat().reduce((sum, value) => sum + value, 0) - 1) < 1e-9);
 });
 
 test("market-baseline feeds SignalCandidate generation", () => {

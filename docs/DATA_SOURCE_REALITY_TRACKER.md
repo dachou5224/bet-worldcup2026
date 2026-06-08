@@ -49,8 +49,9 @@
 | modeling steps | `providers/mock/index.js -> mockModelingSteps` | `mock` | 固定样本 | **保留 mock** |
 | 赛后复盘样本 | `providers/mock/index.js -> mockPostMatchReview` | `mock` | 固定样本 | **保留 mock** |
 | 原始 market board mock | `providers/mock/index.js -> mockMarketBoard` | `mock` | 真实源失败或显式 mock 模式时使用 | **保留 mock / 兜底** |
-| Jingcai 官方盘样本 | `providers/jingcai/official-feed.js` | `fixture-backed` | 当前不是实时官方接口 | **待替换为真实 feed** |
+| Jingcai 官方盘样本 | `providers/jingcai/official-feed.js` | `fixture` / `file` / `real` | 默认仍是 fixture；`real` 需要配置合规授权 URL | **三态已通，继续提高 real 覆盖** |
 | 回测样本 | `fixtures/mock-backtest-run.js` | `fixture` | 离线回测样本 | **待扩充真实回测样本** |
+| Backtest run artifact | `BACKTEST_RUN_FILE` / `fixtures/snapshots/backtest-run.json` | `live_derived` 优先；无真实赛后条目时保留现有 artifact，不覆盖为 mock | 后端赛后结算与复盘输入 | **进行中** |
 
 ### 3. 文件型输入
 
@@ -66,6 +67,8 @@
 - `marketSnapshots`
 - `SignalCandidate`
 - `JingcaiRecommendation`
+- `recommendationSnapshots`（后端 artifact，接口：`/api/data/recommendation-snapshots`）
+- `recommendationSettlements`（后端 artifact，接口：`/api/data/recommendation-settlements`）
 - `layeredOutputs`
 - `portfolioReview`
 - `backtestReview`
@@ -77,12 +80,16 @@
 - 赔率/盘口：已接 `The Odds API`
 - live：已接 `football-data.org`，并保留备用 live provider
 - 补充信号：已接 `Bzzoiro`
+- 官方盘 `Jingcai`：已支持 `fixture / file / real` 三态，`npm run qa:providers` 会在 `real` 模式且配置 URL 时额外做一次 URL smoke check
 
 ### B. 仍需真实化的内容
 
-- `Jingcai` 官方盘：当前仍是 fixture-backed 样本
+- `Jingcai` 官方盘：已支持 `fixture` / `file` / `real` 三态，`real` 需要配置合规授权的官方源 URL
 - 回测样本：当前仍是 mock fixture
-- 专家观点 / analysis / modeling / post-match review：当前仍是 mock 数据，适合保留为展示和测试素材
+- 专家观点 / analysis / modeling：当前仍是 mock 数据，适合保留为展示和测试素材
+- post-match review：已支持真实 live 赛果 + 赛前预测派生，并输出 finished/matched/live-derived 覆盖率；没有可用已完场对齐数据时回退 artifact/mock
+- recommendation settlements：已支持真实 live 赛果 + 官方盘 stop-sale 派生，并输出 liveMatch / officialMatch / officialSettlement 覆盖率，artifact 作为 fallback
+- Backtest run：已支持 `live_derived` artifact 优先读取；无真实赛后条目时不覆盖现有样本，避免 mock 反写
 
 ### C. 当前模式限制
 
@@ -97,8 +104,10 @@
 | 赔率 / 盘口 | `real-ready` | 配置已到位，仍需按 provider 健康状态观察真实命中率 |
 | live matches | `real-ready` | 配置已到位，仍需跟踪是否经常回退 mock |
 | 补充信号 | `real-ready` | 配置已到位，可继续观察返回完整度 |
-| Jingcai 官方盘 | `fixture` | 后续需要真实 feed 或稳定适配器 |
-| 回测样本 | `fixture` | 后续需要更多真实赛后样本 |
+| Jingcai 官方盘 | `fixture` / `file` / `real` | 已支持三态；`real` 需要配置官方源 URL，当前仍以 fixture 为默认 |
+| 赛后复盘 / post-match review | `live-derived` 优先，artifact/mock fallback | 现在可用真实 live 赛果 + 赛前预测生成，并输出覆盖率；未命中时回退文件或 mock |
+| 推荐结算 / recommendation settlements | `live-derived` 优先，artifact/mock fallback | 已接真实 live 赛果 + 官方盘 stop-sale 赔率，并输出 liveMatch / officialMatch / officialSettlement 覆盖率 |
+| 回测样本 / backtest run artifact | `live_derived` 优先；无真实条目时保留现有 artifact | 后续可继续扩充真实样本 |
 | 专家观点 / analysis / modeling | `mock` | 目前保留为演示和测试素材 |
 
 ## 建议的后续跟踪方式
@@ -106,7 +115,8 @@
 1. 每次接入或替换一个真实 provider，就在本文件对应表格中更新状态。
 2. 如果某个输入仍依赖 mock 回退，明确写出回退原因。
 3. 若新增真实数据源，优先写 fixture 再接 API，避免把调试流量打到线上 provider。
-4. 对外展示前，先看：
+4. `npm run qa:providers` 会在 `JINGCAI_OFFICIAL_FEED_MODE=real` 且配置 `JINGCAI_OFFICIAL_FEED_URL` 时，额外做一次官方盘 URL smoke check。
+5. 对外展示前，先看：
    - `/api/data/quality-report`
    - `/api/data/provider-coverage`
    - `/api/data/portfolio-review`
@@ -123,8 +133,8 @@
 
 1. 稳定赔率 / 盘口真实源命中率
 2. 稳定 live matches 真实源命中率
-3. 用稳定官方接口替换 Jingcai fixture
-4. 扩充回测样本和赛后样本
+3. 将 `Jingcai` 官方盘从 `fixture`/`file` 逐步切到 `real`
+4. 扩充 post-match review 派生规则和 recommendation settlements 覆盖率
 5. 再考虑把更多展示层 mock 逐步收敛
 
 ## 远端快照的下一步
@@ -132,7 +142,7 @@
 基于你给出的远端仓库状态，下一步真正要补的是：
 
 1. provider hardening
-2. 用真实官方 feed 替换 `Jingcai` fixture
+2. 将 `Jingcai` 官方盘从 `fixture`/`file` 逐步切到 `real`
 3. 提高 `The Odds API` / `football-data.org` 的稳定命中率
-4. 继续扩大真实回测和赛后样本
+4. 继续扩大 post-match review 派生规则和 recommendation settlements 覆盖率
 5. 逐步收紧 mock 兜底的覆盖面

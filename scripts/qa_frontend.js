@@ -30,7 +30,9 @@ async function main() {
 
   const html = await fetchText("/");
   assert(html.includes('id="view-signals"'), "首页缺少价值信号视图");
-  assert(html.includes('id="schedule-spotlight"'), "首页缺少未来三天赛程区块");
+  assert(html.includes('id="schedule-spotlight"'), "首页缺少赛程 spotlight 区块");
+  assert(html.includes('id="schedule-week-rail"'), "首页缺少按周切换");
+  assert(html.includes('id="schedule-full-list"'), "首页缺少完整赛程下拉");
   assert(html.includes('src="./app.js"'), "首页未挂载 app.js");
 
   const modulePaths = [

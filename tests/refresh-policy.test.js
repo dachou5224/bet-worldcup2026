@@ -33,4 +33,9 @@ describe("refresh-policy", () => {
     assert.match(formatRefreshPolicySummary(), /信号 8 分钟/);
     assert.match(formatRefreshPolicySummary(), /质量 30 分钟/);
   });
+
+  it("routes recommendation snapshots and settlements to the expected tiers", () => {
+    assert.ok(REFRESH_TIERS.signals.endpoints.includes("/api/data/recommendation-snapshots"));
+    assert.ok(REFRESH_TIERS.metadata.endpoints.includes("/api/data/recommendation-settlements"));
+  });
 });

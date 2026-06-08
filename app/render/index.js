@@ -17,12 +17,14 @@ import {
   renderReviewSections,
   renderHowComputed,
 } from "./views.js";
-import { pickSpotlightMatches, buildSpotlightDayBuckets } from "../schedule.js";
+import { pickWeeklySpotlightMatches, buildSpotlightDayBuckets, buildFullScheduleGroups } from "../schedule.js";
 import {
   renderScheduleSpotlight,
   renderScheduleDayRail,
+  renderScheduleWeekRail,
+  renderScheduleFullDropdown,
 } from "./schedule-spotlight.js";
-import { renderDataQualityPanel, setLoading } from "./drawer.js";
+import { renderDataQualityPanel, renderMatchDrawer, setLoading } from "./drawer.js";
 
 function buildRowIndex(unifiedMatches, normalizedLookup, analysisItems) {
   const index = new Map();
@@ -88,16 +90,25 @@ export function renderDashboard(bundle) {
   renderMatchdayStrip(matchdayBuckets, state.signalFilters.matchday);
   renderTopEdgeStrip(filteredPredictions);
   renderSignalList(filteredPredictions);
-  renderHowComputed(data.modelingSteps);
+  renderHowComputed();
+
+  const calendar = data.scheduleCalendar || { openingDate: "2026-06-11", endDate: "2026-07-19" };
+  const allUnifiedMatches = buildUnifiedMatches(data.liveMatches || [], allPredictions);
+  const spotlight = pickWeeklySpotlightMatches(allUnifiedMatches, {
+    openingDate: calendar.openingDate,
+    endDate: calendar.endDate,
+    weekIndex: state.spotlightWeekIndex,
+  });
+
+  renderScheduleWeekRail(spotlight.weeks, spotlight.meta.weekIndex, spotlight.meta.defaultWeekIndex);
+  renderScheduleFullDropdown(buildFullScheduleGroups(allUnifiedMatches));
+  renderScheduleSpotlight(spotlight);
+  renderScheduleDayRail(buildSpotlightDayBuckets(spotlight.matches));
 
   const liveMatches = filterLiveMatches(data.liveMatches || [], state.liveFilter);
   const unifiedMatches = buildUnifiedMatches(data.liveMatches || [], allPredictions);
   const normalizedLookup = buildNormalizedLookup(state.normalizedMatches);
   state.rowIndex = buildRowIndex(unifiedMatches, normalizedLookup, data.analysisItems || []);
-
-  const spotlight = pickSpotlightMatches(unifiedMatches);
-  renderScheduleSpotlight(spotlight);
-  renderScheduleDayRail(buildSpotlightDayBuckets(spotlight.matches));
 
   renderLiveToolbar(state.liveFilter);
   const filteredLiveMatches = filterLiveMatches(data.liveMatches || [], state.liveFilter);

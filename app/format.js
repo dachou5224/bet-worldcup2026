@@ -1,3 +1,11 @@
+import {
+  BEIJING_TIME_ZONE,
+  createBeijingFormatter,
+  parseInstant,
+} from "../lib/beijing-time.js";
+
+export { BEIJING_TIME_ZONE };
+
 export function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -7,7 +15,7 @@ export function escapeHtml(value) {
 }
 
 export function formatTimestamp(date) {
-  return new Intl.DateTimeFormat("zh-CN", {
+  return createBeijingFormatter({
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -38,12 +46,12 @@ export function formatMode(mode) {
 }
 
 export function formatKickoff(value) {
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) {
+  const parsed = parseInstant(value);
+  if (!parsed) {
     return value;
   }
 
-  return new Intl.DateTimeFormat("zh-CN", {
+  return createBeijingFormatter({
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
@@ -53,12 +61,12 @@ export function formatKickoff(value) {
 }
 
 export function formatMatchdayKey(value) {
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) {
+  const parsed = parseInstant(value);
+  if (!parsed) {
     return "时间待定";
   }
 
-  return new Intl.DateTimeFormat("zh-CN", {
+  return createBeijingFormatter({
     month: "2-digit",
     day: "2-digit",
     weekday: "short",
@@ -66,12 +74,12 @@ export function formatMatchdayKey(value) {
 }
 
 export function formatDateGroupHeader(value) {
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) {
+  const parsed = parseInstant(value);
+  if (!parsed) {
     return "时间待定";
   }
 
-  return new Intl.DateTimeFormat("zh-CN", {
+  return createBeijingFormatter({
     weekday: "short",
     month: "long",
     day: "numeric",

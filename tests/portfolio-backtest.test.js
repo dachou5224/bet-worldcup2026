@@ -4,7 +4,7 @@ import { buildPortfolioExposure } from "../quant/portfolio/exposure.js";
 import { settleMarketBet } from "../quant/backtest/settlement.js";
 import { settleJingcaiRecommendation } from "../quant/backtest/jingcai-settlement.js";
 import { computeBrier, computeClosingLineValue, computeLogLoss } from "../quant/backtest/metrics.js";
-import { buildBacktestReview, buildPortfolioReview } from "../data-hub.js";
+import { buildBacktestReview, buildDataQualityReport, buildPortfolioReview } from "../data-hub.js";
 import { buildApiPayload } from "../services/api-service.js";
 
 test("portfolio exposure aggregates accepted signals and rejects negative EV", () => {
@@ -148,4 +148,18 @@ test("api exposes portfolio and backtest review endpoints", async () => {
   assert.ok(portfolioReview.portfolioId);
   assert.ok(backtestReview.recordCount > 0);
   assert.ok(Array.isArray(backtestReview.records));
+});
+
+test("data quality report exposes backtest source mode", async () => {
+  const report = await buildDataQualityReport();
+
+  assert.equal(typeof report.backtestSourceMode, "string");
+  assert.ok(report.backtestSourceMode.length > 0);
+  assert.equal(typeof report.backtestSourceFile, "string");
+  assert.equal(typeof report.jingcaiOfficialFeedMode, "string");
+  assert.ok(report.jingcaiOfficialFeedMode.length > 0);
+  assert.equal(typeof report.jingcaiOfficialFeedSource, "string");
+  assert.equal(typeof report.postMatchReviewSourceMode, "string");
+  assert.ok(report.postMatchReviewSourceMode.length > 0);
+  assert.equal(typeof report.postMatchReviewSourceFile, "string");
 });

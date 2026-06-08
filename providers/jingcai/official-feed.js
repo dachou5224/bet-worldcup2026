@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { fetchJson } from "../../lib/fetch-json.js";
 import { validateJingcaiOfficialFeed } from "../../schemas/jingcai-official-feed.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -20,23 +21,65 @@ function readJsonFeed(feedFile) {
   return JSON.parse(readFileSync(absolutePath, "utf-8"));
 }
 
-export function getMockJingcaiOfficialFeed() {
-  return loadJingcaiOfficialFeed("fixtures/jingcai-official-feed.json");
+async function readJsonFeedFromUrl(feedUrl) {
+  if (!feedUrl) {
+    throw new Error("Jingcai 官方盘 URL 未配置");
+  }
+
+  const response = await fetchJson(feedUrl, { timeoutMs: 20000 });
+  return response.body;
 }
 
-export function loadJingcaiOfficialFeed(feedFile) {
-  const feed = readJsonFeed(feedFile);
+function resolveSourceType(mode, feedFile, feedUrl) {
+  if (mode === "real") {
+    return feedUrl ? "url" : "file";
+  }
+
+  if (mode === "file") {
+    return "file";
+  }
+
+  return "fixture";
+}
+
+export async function getMockJingcaiOfficialFeed() {
+  const loaded = await loadJingcaiOfficialFeed("fixtures/jingcai-official-feed.json");
+  return loaded.feed;
+}
+
+export async function loadJingcaiOfficialFeed(source, options = {}) {
+  const normalizedSource =
+    typeof source === "string"
+      ? { feedFile: source, ...options }
+      : source && typeof source === "object"
+        ? source
+        : {};
+  const mode = normalizedSource.mode || "fixture";
+  const feedFile = normalizedSource.feedFile || "fixtures/jingcai-official-feed.json";
+  const feedUrl = normalizedSource.feedUrl || "";
+  const sourceType = resolveSourceType(mode, feedFile, feedUrl);
+  const feed =
+    mode === "real" && feedUrl
+      ? await readJsonFeedFromUrl(feedUrl)
+      : readJsonFeed(feedFile);
   const validation = validateJingcaiOfficialFeed(feed);
 
   if (!validation.ok) {
     throw new Error(`Jingcai 官方盘文件不合法: ${validation.errors.join("; ")}`);
   }
 
-  return feed;
+  return {
+    mode,
+    sourceType,
+    feedFile,
+    feedUrl: feedUrl || null,
+    feed,
+  };
 }
 
-export function getJingcaiOfficialFeed(feedFile = "fixtures/jingcai-official-feed.json") {
-  return loadJingcaiOfficialFeed(feedFile);
+export async function getJingcaiOfficialFeed(source = "fixtures/jingcai-official-feed.json") {
+  const loaded = await loadJingcaiOfficialFeed(source);
+  return loaded.feed;
 }
 
 export function findJingcaiOfficialMatch(feed, fixtureId) {

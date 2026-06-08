@@ -14,8 +14,14 @@ export function getProviderConfig() {
       process.env.SOURCE_CATALOG_FILE || "./data-source-catalog.json",
     rawMarketBoardFile:
       process.env.RAW_MARKET_BOARD_FILE || "./fixtures/raw-market-board.json",
+    jingcaiOfficialFeedMode: process.env.JINGCAI_OFFICIAL_FEED_MODE || "fixture",
     jingcaiOfficialFeedFile:
       process.env.JINGCAI_OFFICIAL_FEED_FILE || "./fixtures/jingcai-official-feed.json",
+    jingcaiOfficialFeedUrl: process.env.JINGCAI_OFFICIAL_FEED_URL || "",
+    postMatchReviewFile:
+      process.env.POST_MATCH_REVIEW_FILE || "./fixtures/snapshots/post-match-review.json",
+    backtestRunFile:
+      process.env.BACKTEST_RUN_FILE || "./fixtures/snapshots/backtest-run.json",
     oddsApiBaseUrl: process.env.ODDS_API_BASE_URL || "https://api.the-odds-api.com/v4",
     oddsApiKey: process.env.ODDS_API_KEY || "",
     oddsSportKey: process.env.ODDS_SPORT_KEY || "soccer_fifa_world_cup",

@@ -20,6 +20,7 @@ export const state = {
   lastScheduleRefreshAt: 0,
   lastSignalsRefreshAt: 0,
   lastMetadataRefreshAt: 0,
+  spotlightWeekIndex: null,
 };
 
 export function setActiveTab(tab) {
@@ -44,4 +45,8 @@ export function setDrawerRowKey(rowKey) {
 
 export function closeDrawer() {
   state.drawerRowKey = null;
+}
+
+export function setSpotlightWeekIndex(weekIndex) {
+  state.spotlightWeekIndex = weekIndex == null ? null : Number(weekIndex);
 }

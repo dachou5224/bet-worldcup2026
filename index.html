@@ -50,14 +50,18 @@
 
       <div id="source-status-bar" class="status-bar"></div>
 
-      <section class="panel schedule-spotlight-panel" aria-label="未来三天重点赛程">
-        <div class="section-heading">
-          <div>
-            <p class="section-kicker">世界杯赛程</p>
-            <h2>未来三天重点比赛</h2>
+      <section class="panel schedule-spotlight-panel" aria-label="世界杯按周重点赛程">
+        <div class="section-heading schedule-heading">
+          <div class="schedule-heading-main">
+            <details class="schedule-full-dropdown" id="schedule-full-dropdown">
+              <summary class="section-kicker schedule-kicker-dropdown">世界杯赛程</summary>
+              <div id="schedule-full-list" class="schedule-full-list"></div>
+            </details>
+            <h2 id="schedule-week-title">本周重点比赛</h2>
           </div>
-          <span class="section-note">从今天起 3 天 · 按信号强度排序</span>
+          <span id="schedule-week-note" class="section-note">自开幕日起按周浏览</span>
         </div>
+        <div id="schedule-week-rail" class="schedule-week-rail"></div>
         <p id="schedule-spotlight-summary" class="schedule-spotlight-summary"></p>
         <div id="schedule-day-rail" class="schedule-day-rail"></div>
         <div id="schedule-spotlight" class="schedule-spotlight"></div>
@@ -85,8 +89,8 @@
           <div id="matchday-strip" class="matchday-strip"></div>
           <div id="signal-list" class="signal-list"></div>
           <details class="how-computed" id="how-computed">
-            <summary>计算说明</summary>
-            <ul id="how-computed-body" class="how-computed-body"></ul>
+            <summary>这些数字是怎么来的？</summary>
+            <div id="how-computed-body" class="how-computed-body"></div>
           </details>
         </div>
       </section>

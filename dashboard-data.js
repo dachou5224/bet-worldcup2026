@@ -1,5 +1,6 @@
 import {
   getMarketDataBundle,
+  getBacktestRun,
   getStaticPageData,
   getJingcaiOfficialFeed,
 } from "./data-sources.js";
@@ -11,6 +12,9 @@ import {
 } from "./market-pipeline.js";
 import { buildMarketSnapshotBundle } from "./quant/normalization/market-snapshot.js";
 import { buildLayeredOutputs } from "./quant/output/layered-output.js";
+import { buildRecommendationSnapshotBundle } from "./quant/output/recommendation-snapshot.js";
+import { buildRecommendationSettlementBundle } from "./quant/output/recommendation-settlement.js";
+import { buildPostMatchReviewBundle } from "./lib/post-match-review.js";
 
 const tournamentStart = "2026-06-11T13:00:00-05:00";
 const tournamentEnd = "2026-07-19T15:00:00-04:00";
@@ -34,7 +38,7 @@ function getTournamentPhase(now = new Date()) {
 export async function getDashboardData(now = new Date()) {
   const { rawMarketBoard, mode: marketDataMode, providerHealth } = await getMarketDataBundle();
   const staticData = await getStaticPageData();
-  const officialFeed = getJingcaiOfficialFeed();
+  const officialFeed = await getJingcaiOfficialFeed();
   const expertOpinionMap = new Map(
     staticData.expertOpinions.map((entry) => [entry.fixture, entry.opinions]),
   );
@@ -58,6 +62,14 @@ export async function getDashboardData(now = new Date()) {
     ...item,
     layeredOutput: layeredOutputMap.get(item.id) || layeredOutputMap.get(Number(item.id)) || null,
   }));
+  const postMatchReviewBundle = buildPostMatchReviewBundle(
+    staticData.liveMatches,
+    enrichedTomorrowPredictions,
+    staticData.completedComparisons,
+    {
+      liveMode: staticData.liveMode,
+    },
+  );
 
   return {
     tournamentStatus: getTournamentPhase(now),
@@ -69,21 +81,28 @@ export async function getDashboardData(now = new Date()) {
     tomorrowPredictions: enrichedTomorrowPredictions,
     marketSources: buildMarketSourceSummary(rawMarketBoard),
     analysisItems: staticData.analysisItems,
-    completedComparisons: staticData.completedComparisons,
+    completedComparisons: postMatchReviewBundle.completedComparisons,
+    postMatchReviewSummary: postMatchReviewBundle.summary,
     modelingSteps: staticData.modelingSteps,
     expertOpinions: staticData.expertOpinions,
     jingcaiRecommendations,
     layeredOutputs,
+    scheduleCalendar: {
+      openingDate: tournamentStart.slice(0, 10),
+      endDate: tournamentEnd.slice(0, 10),
+    },
   };
 }
 
 export async function getPipelineData() {
   const { rawMarketBoard, mode, providerHealth } = await getMarketDataBundle();
+  const staticData = await getStaticPageData();
+  const officialFeed = await getJingcaiOfficialFeed();
   const marketSnapshotBundle = buildMarketSnapshotBundle(rawMarketBoard);
   const signalCandidates = buildSignalCandidatesFromMarket(rawMarketBoard);
   const jingcaiRecommendations = buildJingcaiRecommendationsFromMarket(
     rawMarketBoard,
-    getJingcaiOfficialFeed(),
+    officialFeed,
   );
   const jingcaiRecommendationMap = new Map(
     jingcaiRecommendations.map((item) => [item.fixtureId, item]),
@@ -99,6 +118,17 @@ export async function getPipelineData() {
     ...item,
     layeredOutput: layeredOutputMap.get(item.id) || layeredOutputMap.get(Number(item.id)) || null,
   }));
+  const recommendationSnapshots = buildRecommendationSnapshotBundle(enrichedTomorrowPredictions, {
+    capturedAt: new Date().toISOString(),
+  });
+  const recommendationSettlements = buildRecommendationSettlementBundle(
+    recommendationSnapshots.snapshots,
+    {
+      liveMatches: staticData.liveMatches,
+      officialFeed,
+      backtestRun: getBacktestRun(),
+    },
+  );
 
   return {
     mode,
@@ -110,6 +140,10 @@ export async function getPipelineData() {
     marketSnapshotSummary: marketSnapshotBundle.summary,
     signalCandidates,
     jingcaiRecommendations,
+    recommendationSnapshots: recommendationSnapshots.snapshots,
+    recommendationSnapshotSummary: recommendationSnapshots.summary,
+    recommendationSettlements: recommendationSettlements.entries,
+    recommendationSettlementSummary: recommendationSettlements.summary,
     layeredOutputs,
   };
 }

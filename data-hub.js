@@ -5,6 +5,7 @@ import { validateLiveMatches } from "./schemas/live-matches.js";
 import { validateRawMarketBoard } from "./schemas/market-board.js";
 import { validateNormalizedMatches } from "./schemas/normalized-matches.js";
 import { buildMarketSnapshotBundle } from "./quant/normalization/market-snapshot.js";
+import { buildRecommendationSnapshotBundle } from "./quant/output/recommendation-snapshot.js";
 import { validateMarketSnapshots } from "./schemas/market-snapshot.js";
 import { buildPortfolioExposure } from "./quant/portfolio/exposure.js";
 import { computeBrier, computeClosingLineValue, computeLogLoss, summarizeBacktestRecords } from "./quant/backtest/metrics.js";
@@ -409,6 +410,62 @@ export async function buildDataQualityReport() {
   const layeredOutputs = dashboard.layeredOutputs || [];
   const portfolioReview = buildPortfolioReviewFromDashboard(dashboard, pipeline);
   const backtestReview = buildBacktestReviewFromRun(getBacktestRun());
+  const recommendationSnapshotBundle = buildRecommendationSnapshotBundle(dashboard.tomorrowPredictions, {
+    capturedAt: dashboard.lastUpdated,
+    sourceModes: {
+      market: providerStatus.marketDataMode,
+      live: dashboard.liveDataMode,
+      jingcai: providerStatus.jingcaiOfficialFeedMode,
+    },
+  });
+  const backtestSourceMode = providerStatus.backtestRunMode || "mock";
+  const backtestSourceFile = providerStatus.backtestRunFile || null;
+  const backtestRunSourceMode = providerStatus.backtestRunSourceMode || null;
+  const backtestRunSummary = providerStatus.backtestRunSummary || null;
+  const postMatchReviewSourceMode = providerStatus.postMatchReviewMode || "mock";
+  const postMatchReviewSourceFile = providerStatus.postMatchReviewFile || null;
+  const jingcaiOfficialFeedMode = providerStatus.jingcaiOfficialFeedMode || "fixture";
+  const jingcaiOfficialFeedSource = providerStatus.jingcaiOfficialFeedSource || null;
+  const recommendationSettlementBundle = pipeline.recommendationSettlements
+    ? {
+        entries: pipeline.recommendationSettlements,
+        summary: pipeline.recommendationSettlementSummary || {
+          snapshotCount: pipeline.recommendationSettlements.length,
+          settledCount: pipeline.recommendationSettlements.filter((entry) => entry.settlementStatus === "settled").length,
+          pendingCount: pipeline.recommendationSettlements.filter((entry) => entry.settlementStatus === "pending").length,
+          noRecommendationCount: pipeline.recommendationSettlements.filter((entry) => entry.settlementStatus === "no_recommendation").length,
+          liveDerivedCount: pipeline.recommendationSettlements.filter((entry) => entry.settlementSourceMode === "live_official").length,
+          artifactBackedCount: pipeline.recommendationSettlements.filter((entry) => entry.settlementSourceMode === "artifact").length,
+          liveMatchAlignedCount: pipeline.recommendationSettlements.filter((entry) => entry.liveMatchAligned).length,
+          officialMatchAlignedCount: pipeline.recommendationSettlements.filter((entry) => entry.officialMatchAligned).length,
+          officialSettlementCompleteCount: pipeline.recommendationSettlements.filter((entry) => entry.officialSettlementComplete).length,
+          liveCoverageRate:
+            pipeline.recommendationSettlements.length > 0
+              ? pipeline.recommendationSettlements.filter((entry) => entry.settlementSourceMode === "live_official").length /
+                pipeline.recommendationSettlements.length
+              : 0,
+          liveMatchCoverageRate:
+            pipeline.recommendationSettlements.length > 0
+              ? pipeline.recommendationSettlements.filter((entry) => entry.liveMatchAligned).length /
+                pipeline.recommendationSettlements.length
+              : 0,
+          officialMatchCoverageRate:
+            pipeline.recommendationSettlements.length > 0
+              ? pipeline.recommendationSettlements.filter((entry) => entry.officialMatchAligned).length /
+                pipeline.recommendationSettlements.length
+              : 0,
+          officialSettlementCoverageRate:
+            pipeline.recommendationSettlements.length > 0
+              ? pipeline.recommendationSettlements.filter((entry) => entry.officialSettlementComplete).length /
+                pipeline.recommendationSettlements.length
+              : 0,
+          totalRealizedReturnOfficial: 0,
+          meanBrier: null,
+          meanLogLoss: null,
+          meanClv: null,
+        },
+      }
+    : null;
   const predictionLookup = new Map(
     dashboard.tomorrowPredictions.map((prediction) => [prediction.fixture, prediction]),
   );
@@ -571,6 +628,28 @@ export async function buildDataQualityReport() {
       layerB: layeredOutputs.filter((output) => Boolean(output.layerB?.mappingConfidence)).length,
       layerC: layeredOutputs.filter((output) => Boolean(output.layerC?.primaryRecommendation)).length,
     },
+    recommendationSnapshotSummary: recommendationSnapshotBundle.summary,
+    recommendationSnapshotCount: recommendationSnapshotBundle.snapshotCount,
+    recommendationSettlementSummary: recommendationSettlementBundle?.summary || null,
+    recommendationSettlementCount: recommendationSettlementBundle?.entries?.length || 0,
+    postMatchReviewSummary: dashboard.postMatchReviewSummary || null,
+    postMatchReviewCount: dashboard.completedComparisons.length,
+    postMatchReviewSourceMode: dashboard.postMatchReviewSummary?.sourceMode || providerStatus.postMatchReviewMode || "mock",
+    postMatchReviewSourceFile: providerStatus.postMatchReviewFile || null,
+    postMatchReviewFinishedMatchCount: dashboard.postMatchReviewSummary?.finishedMatchCount || 0,
+    postMatchReviewMatchedPredictionCount: dashboard.postMatchReviewSummary?.matchedPredictionCount || 0,
+    postMatchReviewLiveDerivedCount: dashboard.postMatchReviewSummary?.liveDerivedCount || 0,
+    postMatchReviewLiveCoverageRate: dashboard.postMatchReviewSummary?.liveCoverageRate || 0,
+    postMatchReviewPredictionCoverageRate: dashboard.postMatchReviewSummary?.predictionCoverageRate || 0,
+    postMatchReviewFallbackUsed: dashboard.postMatchReviewSummary?.fallbackUsed || false,
+    jingcaiOfficialFeedMode,
+    jingcaiOfficialFeedSource,
+    jingcaiOfficialFeedFile: providerStatus.jingcaiOfficialFeedFile || null,
+    jingcaiOfficialFeedUrl: providerStatus.jingcaiOfficialFeedUrl || null,
+    backtestSourceMode,
+    backtestSourceFile,
+    backtestRunSourceMode,
+    backtestRunSummary,
     layerAReadyCount: matches.filter((match) => match.layerAReadiness?.canEnterLayerA).length,
     portfolioReview,
     backtestReview,

@@ -1,3 +1,4 @@
+import { enrichUnifiedMatchStage } from "../lib/match-stage-label.js";
 import { toDisplayTeamName } from "../lib/team-names.js";
 
 const ENGLISH_ALIASES = {
@@ -114,21 +115,28 @@ export function buildUnifiedMatches(liveMatches, predictions) {
     if (prediction?.id != null) {
       matchedPredictionIds.add(prediction.id);
     }
-    unified.push({
-      kind: "live",
-      id: match.id,
-      home: match.home,
-      away: match.away,
-      kickoff: match.kickoff,
-      stage: match.stage,
-      status: match.status,
-      venue: match.venue,
-      note: match.note,
-      homeScore: match.homeScore,
-      awayScore: match.awayScore,
-      fixture: buildFixtureLabel(match.home, match.away),
-      prediction,
-    });
+    unified.push(
+      enrichUnifiedMatchStage({
+        kind: "live",
+        id: match.id,
+        externalMatchId: match.externalMatchId ?? match.id,
+        stageCode: match.stageCode ?? null,
+        groupCode: match.groupCode ?? null,
+        groupLetter: match.groupLetter ?? null,
+        matchday: match.matchday ?? null,
+        home: match.home,
+        away: match.away,
+        kickoff: match.kickoff,
+        stage: match.stage,
+        status: match.status,
+        venue: match.venue,
+        note: match.note,
+        homeScore: match.homeScore,
+        awayScore: match.awayScore,
+        fixture: buildFixtureLabel(match.home, match.away),
+        prediction,
+      }),
+    );
   }
 
   for (const prediction of predictions) {
@@ -136,21 +144,23 @@ export function buildUnifiedMatches(liveMatches, predictions) {
       continue;
     }
     const parsed = parseFixtureLabel(prediction.fixture);
-    unified.push({
-      kind: "prediction-only",
-      id: prediction.id,
-      home: parsed?.home || prediction.fixture,
-      away: parsed?.away || "",
-      kickoff: prediction.kickoff,
-      stage: "预测盘面",
-      status: "待开赛",
-      venue: "",
-      note: "仅预测数据，尚未与实时赛程对齐",
-      homeScore: "-",
-      awayScore: "-",
-      fixture: prediction.fixture,
-      prediction,
-    });
+    unified.push(
+      enrichUnifiedMatchStage({
+        kind: "prediction-only",
+        id: prediction.id,
+        home: parsed?.home || prediction.fixture,
+        away: parsed?.away || "",
+        kickoff: prediction.kickoff,
+        stage: prediction.stage || "预测盘面",
+        status: "待开赛",
+        venue: "",
+        note: "仅预测数据，尚未与实时赛程对齐",
+        homeScore: "-",
+        awayScore: "-",
+        fixture: prediction.fixture,
+        prediction,
+      }),
+    );
   }
 
   return unified.sort((a, b) => new Date(a.kickoff) - new Date(b.kickoff));

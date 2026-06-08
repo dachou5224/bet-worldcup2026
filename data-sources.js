@@ -9,6 +9,8 @@ import { getMockProvider, getProviderAdapters } from "./providers/provider-regis
 import { loadJingcaiOfficialFeed } from "./providers/jingcai/official-feed.js";
 import { getBacktestRun as getMockBacktestRun } from "./providers/mock/index.js";
 import { validateLiveMatches } from "./schemas/live-matches.js";
+import { readBacktestRunArtifactMeta } from "./lib/backtest-artifacts.js";
+import { readPostMatchReviewArtifact } from "./lib/post-match-artifacts.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -153,13 +155,34 @@ export function getSourceCatalog() {
   return readJsonFixture(config.sourceCatalogFile);
 }
 
-export function getJingcaiOfficialFeed() {
+export async function getJingcaiOfficialFeed() {
   const config = getProviderConfig();
-  return loadJingcaiOfficialFeed(config.jingcaiOfficialFeedFile);
+  const loaded = await loadJingcaiOfficialFeed({
+    mode: config.jingcaiOfficialFeedMode,
+    feedFile: config.jingcaiOfficialFeedFile,
+    feedUrl: config.jingcaiOfficialFeedUrl,
+  });
+  return loaded.feed;
 }
 
 export function getBacktestRun() {
+  const config = getProviderConfig();
+  const artifactMeta = readBacktestRunArtifactMeta(config.backtestRunFile);
+  if (artifactMeta?.backtestRun?.length && artifactMeta.sourceMode !== "artifact_or_mock") {
+    return artifactMeta.backtestRun;
+  }
+
   return getMockBacktestRun();
+}
+
+export function getCompletedComparisons() {
+  const config = getProviderConfig();
+  const artifact = readPostMatchReviewArtifact(config.postMatchReviewFile);
+  if (artifact && artifact.length) {
+    return artifact;
+  }
+
+  return getMockProvider().getStaticPageData().completedComparisons;
 }
 
 export async function getSupplementalSignals() {
@@ -221,10 +244,12 @@ async function getRealLiveMatches() {
 export async function getStaticPageData() {
   const config = getProviderConfig();
   const mockData = getMockProvider().getStaticPageData();
+  const completedComparisons = getCompletedComparisons();
 
   if (config.liveDataMode !== "real") {
     return {
       ...mockData,
+      completedComparisons,
       liveMode: "mock",
     };
   }
@@ -244,6 +269,7 @@ export async function getStaticPageData() {
 
     return {
       ...mockData,
+      completedComparisons,
       liveMatches,
       liveMode: "real",
     };
@@ -254,6 +280,7 @@ export async function getStaticPageData() {
 
     return {
       ...mockData,
+      completedComparisons,
       liveMode: "real_fallback_mock",
       liveFallbackReason: error.message,
     };
@@ -265,10 +292,22 @@ export async function getProviderStatus() {
   const bundle = await getMarketDataBundle();
   const catalog = getSourceCatalog();
   const adapters = getProviderAdapters();
-  const jingcaiOfficialFeedMode =
-    config.jingcaiOfficialFeedFile === "./fixtures/jingcai-official-feed.json"
-      ? "fixture"
-      : "file";
+  const backtestRunArtifactMeta = readBacktestRunArtifactMeta(config.backtestRunFile);
+  const backtestRunMode = backtestRunArtifactMeta
+    ? backtestRunArtifactMeta.sourceMode === "live_derived"
+      ? "derived"
+      : backtestRunArtifactMeta.sourceMode === "artifact_or_mock"
+        ? "mock"
+        : "artifact"
+    : "mock";
+  const postMatchReviewMode = readPostMatchReviewArtifact(config.postMatchReviewFile) ? "artifact" : "mock";
+  const jingcaiOfficialFeedMode = config.jingcaiOfficialFeedMode;
+  const jingcaiOfficialFeedSource =
+    jingcaiOfficialFeedMode === "real"
+      ? config.jingcaiOfficialFeedUrl
+        ? "url"
+        : "file"
+      : jingcaiOfficialFeedMode;
 
   return {
     appMode: config.appMode,
@@ -276,7 +315,15 @@ export async function getProviderStatus() {
     requestedMarketDataMode: config.marketDataMode,
     requestedLiveDataMode: config.liveDataMode,
     jingcaiOfficialFeedMode,
+    jingcaiOfficialFeedSource,
     jingcaiOfficialFeedFile: config.jingcaiOfficialFeedFile,
+    jingcaiOfficialFeedUrl: config.jingcaiOfficialFeedUrl || null,
+    backtestRunMode,
+    backtestRunFile: config.backtestRunFile,
+    backtestRunSourceMode: backtestRunArtifactMeta?.sourceMode || null,
+    backtestRunSummary: backtestRunArtifactMeta?.summary || null,
+    postMatchReviewMode,
+    postMatchReviewFile: config.postMatchReviewFile,
     configuredSourceCatalogFile: config.sourceCatalogFile,
     configuredRawMarketBoardFile: config.rawMarketBoardFile,
     marketMatchCount: bundle.rawMarketBoard.length,

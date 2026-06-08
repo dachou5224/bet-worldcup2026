@@ -15,9 +15,10 @@ import {
   setMarketTab,
   setDrawerRowKey,
   closeDrawer,
+  setSpotlightWeekIndex,
 } from "./state.js";
-import { renderDashboard, renderError, setActiveTabUi, setLoading } from "./render/index.js";
 import { renderMatchDrawer } from "./render/drawer.js";
+import { renderDashboard, renderError, setActiveTabUi, setLoading } from "./render/index.js";
 
 const refreshTimers = {
   schedule: null,
@@ -188,7 +189,8 @@ function bindVisibilityRefresh() {
 
 function openDrawer(rowKey) {
   setDrawerRowKey(rowKey);
-  renderMatchDrawer(state.rowIndex.get(rowKey) || null);
+  const selection = state.rowIndex.get(rowKey) || null;
+  renderMatchDrawer(selection);
 }
 
 function isDrawerActivationKey(key) {
@@ -276,6 +278,23 @@ function bindEvents() {
     if (drawerTrigger) {
       openDrawer(drawerTrigger.dataset.openDrawer);
     }
+  });
+
+  document.querySelector("#schedule-full-list")?.addEventListener("click", (event) => {
+    const drawerTrigger = event.target.closest("[data-open-drawer]");
+    if (drawerTrigger) {
+      openDrawer(drawerTrigger.dataset.openDrawer);
+      document.querySelector("#schedule-full-dropdown")?.removeAttribute("open");
+    }
+  });
+
+  document.querySelector("#schedule-week-rail")?.addEventListener("click", (event) => {
+    const chip = event.target.closest("[data-week-index]");
+    if (!chip || !state.dashboard) {
+      return;
+    }
+    setSpotlightWeekIndex(Number(chip.dataset.weekIndex));
+    renderDashboard(buildBundleFromState());
   });
 
   document.addEventListener("click", (event) => {

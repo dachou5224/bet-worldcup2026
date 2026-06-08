@@ -7,7 +7,7 @@
 - 零依赖本地 Node 服务
 - 研究面板首页结构：
   - **KPI Hero**：已扫描 / 推荐 / 强信号 / 观察区概览，以及数据源状态条
-  - **赛程 Spotlight**：未来三天重点比赛，按信号强度排序
+  - **赛程 Spotlight**：自开幕日起按周浏览重点比赛，可展开完整赛程
   - **Tab 主视图**：价值信号 · 比赛盘面 · 复盘与解释
   - **Match Drawer**：点击任意比赛行查看模型 vs 市场详情
 - 前端通过 `app/` 模块化脚本分 tier 刷新（赛程 5 分钟 · 信号 8 分钟 · 质量 30 分钟）
@@ -79,7 +79,15 @@ npm run qa:frontend
 npm run snapshot:providers
 ```
 
-它会把当前 provider 状态、pipeline、live 数据和 supplemental signals 落到 `fixtures/snapshots/`，后续做 quant/QA 时可以优先用这些本地快照而不是重复请求外部 API。
+它会把当前 provider 状态、pipeline、recommendation snapshots、recommendation settlements、post-match review、backtest run、live 数据和 supplemental signals 落到 `fixtures/snapshots/`，后续做 quant/QA 时可以优先用这些本地快照而不是重复请求外部 API。
+其中 `post-match review` 会优先尝试用真实 live 赛果和赛前预测派生，并在质量报告里输出 finished/matched/live-derived 覆盖率；`recommendation settlements` 会优先用真实 live 赛果 + 官方盘 stop-sale 赔率，并在质量报告里输出 liveMatch / officialMatch / officialSettlement 覆盖率；`backtest run` 只有在存在真实赛后结算条目时才会刷新，避免用 mock 覆盖真实样本；如果没有可用的真实对齐数据，再回退到 artifact 或 mock。
+
+前端现有接口不需要改，仍然直接消费：
+
+- `/api/data/recommendation-snapshots`
+- `/api/data/recommendation-settlements`
+
+后端会优先读取 `fixtures/snapshots/` 下的 artifact，文件不存在时再退回到实时 pipeline 计算。
 
 ## API 端点
 
@@ -101,6 +109,8 @@ npm run snapshot:providers
 - `/api/data/market-snapshots`
 - `/api/data/signal-candidates`
 - `/api/data/jingcai-recommendations`
+- `/api/data/recommendation-snapshots`
+- `/api/data/recommendation-settlements`
 - `/api/data/quality-report`
 - `/api/data/provider-coverage`
 - `/api/data/portfolio-review`
@@ -213,9 +223,19 @@ POLYMARKET_PUBLIC_ENABLED=true
 
 ### 竞彩足球官方盘
 
+- `JINGCAI_OFFICIAL_FEED_MODE`
 - `JINGCAI_OFFICIAL_FEED_FILE`
+- `JINGCAI_OFFICIAL_FEED_URL`
 
-当前默认仍是 fixture-backed，文件路径默认指向 `fixtures/jingcai-official-feed.json`。后续若有稳定官方源或回放文件，可通过该配置切换，不需要改下游 `JingcaiRecommendation` / `jingcai-gates` / `play-mapping` 接口。
+当前默认仍是 fixture-backed。若切换到 `file` 模式，可直接读取本地回放文件；若切换到 `real` 模式，可通过 `JINGCAI_OFFICIAL_FEED_URL` 指向合规授权的实时官方源。下游 `JingcaiRecommendation` / `jingcai-gates` / `play-mapping` 接口保持不变。
+
+QA 验证：
+
+```bash
+npm run qa:providers
+```
+
+当 `JINGCAI_OFFICIAL_FEED_MODE=real` 且已配置 `JINGCAI_OFFICIAL_FEED_URL` 时，这个命令会额外加载一次官方盘 URL，并在输出里写出 `status / sourceType / rows`，用于确认 real 模式是否真正生效。
 
 ### Bzzoiro Sports Data（可选补充源）
 

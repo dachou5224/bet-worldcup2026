@@ -1,4 +1,5 @@
 import { buildFixtureKeys, parseFixtureLabel } from "./fixture-match.js";
+import { beijingDateKey } from "../lib/beijing-time.js";
 
 export const TEMPORARY_MARKET_MODES = new Set([
   "mock",
@@ -59,16 +60,7 @@ function fixtureInAllowedSet(fixture, allowedFixtureKeys) {
 }
 
 function kickoffDayKey(value) {
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) {
-    return null;
-  }
-
-  return new Intl.DateTimeFormat("en-CA", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(parsed);
+  return beijingDateKey(value);
 }
 
 export function detectTeamDayConflicts(liveMatches, predictions) {

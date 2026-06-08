@@ -3,6 +3,8 @@ import { getProviderAdapters, getMockProvider } from "../providers/provider-regi
 import { mergeMarketSources } from "../services/market-board-service.js";
 import { validateRawMarketBoard } from "../schemas/market-board.js";
 import { getMarketDataBundle, getProviderStatus, getStaticPageData } from "../data-sources.js";
+import { getProviderConfig } from "../provider-config.js";
+import { loadJingcaiOfficialFeed } from "../providers/jingcai/official-feed.js";
 
 loadLocalEnv();
 
@@ -53,12 +55,66 @@ async function run() {
   const marketBundle = await getMarketDataBundle();
   const staticPageData = await getStaticPageData();
   const providerStatus = await getProviderStatus();
+  const providerConfig = getProviderConfig();
+  const jingcaiFeedCheck = {
+    status: "skipped",
+    mode: providerConfig.jingcaiOfficialFeedMode,
+    sourceType: providerStatus.jingcaiOfficialFeedSource || null,
+    feedFile: providerConfig.jingcaiOfficialFeedFile,
+    feedUrl: providerConfig.jingcaiOfficialFeedUrl || null,
+  };
+
+  if (providerConfig.jingcaiOfficialFeedMode === "real" && providerConfig.jingcaiOfficialFeedUrl) {
+    try {
+      const loaded = await loadJingcaiOfficialFeed({
+        mode: providerConfig.jingcaiOfficialFeedMode,
+        feedFile: providerConfig.jingcaiOfficialFeedFile,
+        feedUrl: providerConfig.jingcaiOfficialFeedUrl,
+      });
+      jingcaiFeedCheck.status = "ok";
+      jingcaiFeedCheck.sourceType = loaded.sourceType;
+      jingcaiFeedCheck.rows = loaded.feed.length;
+    } catch (error) {
+      jingcaiFeedCheck.status = "error";
+      jingcaiFeedCheck.message = error.message;
+    }
+  } else if (providerConfig.jingcaiOfficialFeedMode === "real") {
+    jingcaiFeedCheck.status = "skipped";
+    jingcaiFeedCheck.reason = "JINGCAI_OFFICIAL_FEED_URL not configured";
+  } else if (providerConfig.jingcaiOfficialFeedMode === "file") {
+    try {
+      const loaded = await loadJingcaiOfficialFeed({
+        mode: providerConfig.jingcaiOfficialFeedMode,
+        feedFile: providerConfig.jingcaiOfficialFeedFile,
+      });
+      jingcaiFeedCheck.status = "ok";
+      jingcaiFeedCheck.sourceType = loaded.sourceType;
+      jingcaiFeedCheck.rows = loaded.feed.length;
+    } catch (error) {
+      jingcaiFeedCheck.status = "error";
+      jingcaiFeedCheck.message = error.message;
+    }
+  } else {
+    try {
+      const loaded = await loadJingcaiOfficialFeed({
+        mode: providerConfig.jingcaiOfficialFeedMode,
+        feedFile: providerConfig.jingcaiOfficialFeedFile,
+      });
+      jingcaiFeedCheck.status = "ok";
+      jingcaiFeedCheck.sourceType = loaded.sourceType;
+      jingcaiFeedCheck.rows = loaded.feed.length;
+    } catch (error) {
+      jingcaiFeedCheck.status = "error";
+      jingcaiFeedCheck.message = error.message;
+    }
+  }
   result.mockValidation = validateRawMarketBoard(mockBoard);
   result.currentModes = {
     market: marketBundle.mode,
     live: staticPageData.liveMode,
   };
   result.providerStatus = providerStatus;
+  result.jingcaiOfficialFeed = jingcaiFeedCheck;
   result.mockMergeCount = mergeMarketSources({
     oddsBoard: [],
     predictionBoard: [],

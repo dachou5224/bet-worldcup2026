@@ -56,7 +56,7 @@ export function evaluateJingcaiGates(signalCandidate, mapping, options = {}) {
     });
   }
 
-  if (signalCandidate.recommendationLevel === "WATCH") {
+  if (signalCandidate.recommendationLevel === "WATCH" && signalCandidate.decisionCode !== "candidate_positive_ev") {
     return buildNoJingcaiResult("watch_overseas_signal_only", {
       mappingConfidence: mapping.mappingConfidence,
     });
@@ -141,7 +141,7 @@ export function evaluateJingcaiGates(signalCandidate, mapping, options = {}) {
   const recommendationLevel =
     decisionCode.startsWith("skip")
       ? "NO_ACTION"
-      : decisionCode.startsWith("watch") || signalCandidate.confidence === "low"
+      : decisionCode.startsWith("watch")
         ? "WATCH"
         : officialFinalStakeFraction <= 0
           ? "NO_ACTION"
