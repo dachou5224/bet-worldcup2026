@@ -11,6 +11,7 @@ import { getBacktestRun as getMockBacktestRun } from "./providers/mock/index.js"
 import { validateLiveMatches } from "./schemas/live-matches.js";
 import { readBacktestRunArtifactMeta } from "./lib/backtest-artifacts.js";
 import { readPostMatchReviewArtifact } from "./lib/post-match-artifacts.js";
+import { isOddsQuotaError, mergeReplayedMarketBundle, tryReplayOddsFromSnapshot } from "./lib/snapshot-replay.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -84,8 +85,19 @@ async function getRealMarketDataBundle() {
   const rawMarketBoard = mergeMarketSources({ oddsBoard, predictionBoard });
 
   if (!rawMarketBoard.length) {
+    const replayReason = providerHealth.oddsError || "live odds unavailable";
+    const replay = await tryReplayOddsFromSnapshot(getProviderConfig(), {
+      reason: replayReason,
+    });
+
+    if (replay?.oddsBoard?.length) {
+      const replayedBundle = mergeReplayedMarketBundle(replay, predictionBoard);
+      validateOrThrowRawMarketBoard(replayedBundle.rawMarketBoard, "快照回放市场数据不合法");
+      return replayedBundle;
+    }
+
     throw new Error(
-      `真实市场模式返回了 0 场可用比赛; odds=${providerHealth.oddsStatus}; polymarket=${providerHealth.polymarketStatus}`,
+      `真实市场模式返回了 0 场可用比赛; odds=${providerHealth.oddsStatus}; polymarket=${providerHealth.polymarketStatus}${isOddsQuotaError({ message: providerHealth.oddsError || "" }) ? "; odds_quota_exhausted" : ""}`,
     );
   }
 
@@ -170,6 +182,10 @@ export function getBacktestRun() {
   const artifactMeta = readBacktestRunArtifactMeta(config.backtestRunFile);
   if (artifactMeta?.backtestRun?.length && artifactMeta.sourceMode !== "artifact_or_mock") {
     return artifactMeta.backtestRun;
+  }
+
+  if (config.appMode === "research") {
+    return [];
   }
 
   return getMockBacktestRun();
@@ -299,7 +315,9 @@ export async function getProviderStatus() {
       : backtestRunArtifactMeta.sourceMode === "artifact_or_mock"
         ? "mock"
         : "artifact"
-    : "mock";
+    : config.appMode === "research"
+      ? "unavailable"
+      : "mock";
   const postMatchReviewMode = readPostMatchReviewArtifact(config.postMatchReviewFile) ? "artifact" : "mock";
   const jingcaiOfficialFeedMode = config.jingcaiOfficialFeedMode;
   const jingcaiOfficialFeedSource =

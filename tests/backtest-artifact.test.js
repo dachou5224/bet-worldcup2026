@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { mkdtempSync, rmSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { getBacktestRun } from "../data-sources.js";
 import { buildBacktestReview } from "../data-hub.js";
 import {
   buildBacktestRunFromSettlements,
@@ -102,6 +103,34 @@ test("backtest run can be derived from live settlement entries", () => {
   assert.equal(derived.backtestRun.length, 1);
   assert.equal(derived.backtestRun[0].fixtureId, 1);
   assert.equal(derived.backtestRun[0].modelBeforeKickoff.home, 0.46);
+});
+
+test("backtest run stays empty in research mode when no real artifact exists", () => {
+  const tempDir = mkdtempSync(path.join(os.tmpdir(), "guess-worldcup-backtest-research-"));
+  const previousAppMode = process.env.APP_MODE;
+  const previousBacktestRunFile = process.env.BACKTEST_RUN_FILE;
+
+  try {
+    process.env.APP_MODE = "research";
+    process.env.BACKTEST_RUN_FILE = path.join(tempDir, "missing-backtest-run.json");
+
+    const run = getBacktestRun();
+
+    assert.deepEqual(run, []);
+  } finally {
+    if (previousAppMode == null) {
+      delete process.env.APP_MODE;
+    } else {
+      process.env.APP_MODE = previousAppMode;
+    }
+
+    if (previousBacktestRunFile == null) {
+      delete process.env.BACKTEST_RUN_FILE;
+    } else {
+      process.env.BACKTEST_RUN_FILE = previousBacktestRunFile;
+    }
+    rmSync(tempDir, { recursive: true, force: true });
+  }
 });
 
 test("backtest artifact metadata is readable", () => {

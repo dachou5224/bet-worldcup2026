@@ -2,6 +2,8 @@ import https from "node:https";
 import { getCachedJsonPayload } from "../../lib/local-json-cache.js";
 import { buildFixtureKey } from "../../lib/match-key.js";
 
+let lastFetchMeta = null;
+
 function fetchPolymarketJson(url, timeoutMs = 20000) {
   return new Promise((resolve, reject) => {
     const request = https.get(
@@ -207,7 +209,22 @@ export function createPolymarketGammaProviderAdapter(config) {
     isConfigured() {
       return config.polymarketPublicEnabled;
     },
-    async fetchRawEvents() {
+    getLastFetchMeta() {
+      return lastFetchMeta;
+    },
+    async fetchRawEventsResponse(options = {}) {
+      const events = await this.fetchRawEvents(options);
+      return {
+        body: events,
+        meta: lastFetchMeta || {
+          capturedAt: new Date().toISOString(),
+          fromCache: true,
+          sentimentOnly: true,
+          directEVEligible: false,
+        },
+      };
+    },
+    async fetchRawEvents(options = {}) {
       return getCachedJsonPayload({
         namespace: "polymarket-gamma-events",
         cacheKey: JSON.stringify({
@@ -217,8 +234,8 @@ export function createPolymarketGammaProviderAdapter(config) {
           searchTerms: config.polymarketSearchTerms,
           limit: config.polymarketLimit,
         }),
-        ttlSeconds: config.polymarketCacheTtlSeconds,
-        enabled: config.providerCacheEnabled,
+        ttlSeconds: options.bypassCache ? 0 : config.polymarketCacheTtlSeconds,
+        enabled: options.bypassCache ? false : config.providerCacheEnabled,
         cacheDir: config.providerCacheDir,
         fetcher: async () => {
           const params = new URLSearchParams({
@@ -238,10 +255,21 @@ export function createPolymarketGammaProviderAdapter(config) {
           const url = `${config.polymarketGammaApiBaseUrl}/events?${params.toString()}`;
           const response = await fetchPolymarketJson(url, 20000);
           const events = Array.isArray(response) ? response : [];
-
-          return events.filter((event) =>
+          const filtered = events.filter((event) =>
             matchesSearchTerms(event, config.polymarketSearchTerms),
           );
+
+          lastFetchMeta = {
+            capturedAt: new Date().toISOString(),
+            fromCache: false,
+            sentimentOnly: true,
+            directEVEligible: false,
+            semanticMappingConfidence: "low",
+            eventCount: filtered.length,
+            searchTerms: config.polymarketSearchTerms,
+          };
+
+          return filtered;
         },
       });
     },

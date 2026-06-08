@@ -20,6 +20,19 @@ test("jingcai official feed is fixture-backed but contract-validated", async () 
   assert.equal(getPlayMarketOdds(argentina, "让球胜平负").handicap, -1);
 });
 
+test("jingcai official feed supports wrapped snapshot envelope", async () => {
+  const loaded = await loadJingcaiOfficialFeed({
+    mode: "file",
+    feedFile: "./fixtures/snapshots/latest/jingcai-official-feed.json",
+  });
+
+  assert.equal(loaded.sourceType, "file");
+  assert.ok(Array.isArray(loaded.feed));
+  assert.ok(loaded.feed.length > 0);
+  assert.equal(loaded.envelope?.manualReviewed, true);
+  assert.equal(loaded.envelope?.source, "manual_official_snapshot");
+});
+
 test("jingcai official feed supports real-mode file mirrors", async () => {
   const loaded = await loadJingcaiOfficialFeed({
     mode: "real",

@@ -1,18 +1,73 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
 import { loadLocalEnv } from "../lib/load-env.js";
+import { projectRoot } from "../lib/paths.js";
+import { allowsProviderFallback } from "../lib/app-mode.js";
 import { getProviderAdapters, getMockProvider } from "../providers/provider-registry.js";
 import { mergeMarketSources } from "../services/market-board-service.js";
 import { validateRawMarketBoard } from "../schemas/market-board.js";
 import { getMarketDataBundle, getProviderStatus, getStaticPageData } from "../data-sources.js";
 import { getProviderConfig } from "../provider-config.js";
 import { loadJingcaiOfficialFeed } from "../providers/jingcai/official-feed.js";
+import { summarizeOddsCoverage } from "../lib/snapshot-store.js";
 
 loadLocalEnv();
 
+const REQUIRED_LIVE_FIELDS = ["id", "utcDate", "status", "homeTeam", "awayTeam", "score", "stage", "group", "matchday"];
+
+function validateFootballDataFields(matches) {
+  const errors = [];
+  const sample = matches[0];
+
+  if (!sample) {
+    errors.push("football-data 返回 0 场比赛");
+    return errors;
+  }
+
+  for (const field of REQUIRED_LIVE_FIELDS) {
+    if (!(field in sample)) {
+      errors.push(`football-data 缺少字段: ${field}`);
+    }
+  }
+
+  return errors;
+}
+
+function buildResearchGuardrails(config, providerStatus, staticPageData) {
+  const issues = [];
+
+  if (config.appMode === "research") {
+    if (providerStatus.marketDataMode.includes("fallback")) {
+      issues.push(`research 模式下 market 发生 fallback: ${providerStatus.marketDataMode}`);
+    }
+
+    if (providerStatus.marketDataMode === "error") {
+      issues.push(`research 模式下 market 数据不可用: ${providerStatus.pipelineError || providerStatus.marketBundleError || "unknown"}`);
+    }
+
+    if (staticPageData.liveMode.includes("fallback")) {
+      issues.push(`research 模式下 live 发生 fallback: ${staticPageData.liveMode}`);
+    }
+
+    if (providerStatus.providerHealth?.source === "fallback_mock") {
+      issues.push("research 模式下 market providerHealth.source=fallback_mock");
+    }
+  }
+
+  return issues;
+}
+
 async function run() {
   const adapters = getProviderAdapters();
+  const providerConfig = getProviderConfig();
   const result = {
     checkedAt: new Date().toISOString(),
+    appMode: providerConfig.appMode,
+    researchMode: providerConfig.appMode === "research",
+    allowsFallback: allowsProviderFallback(providerConfig.appMode),
     adapters: {},
+    snapshotPaths: {},
+    researchGuardrails: [],
   };
 
   for (const [name, adapter] of Object.entries(adapters)) {
@@ -23,14 +78,38 @@ async function run() {
 
     try {
       if (name === "odds") {
+        const response = await adapter.fetchRawOddsResponse({ bypassCache: true });
         const rows = await adapter.fetchNormalizedOddsBoard();
-        result.adapters[name] = { status: "ok", rows: rows.length };
+        result.adapters[name] = {
+          status: "ok",
+          rows: rows.length,
+          quota: response.meta?.quota || adapter.getLastFetchMeta()?.quota || null,
+          coverage: summarizeOddsCoverage(response.body),
+          fromCache: response.meta?.fromCache ?? false,
+        };
       } else if (name === "polymarket") {
+        const response = await adapter.fetchRawEventsResponse({ bypassCache: true });
         const rows = await adapter.fetchNormalizedPredictionMarkets();
-        result.adapters[name] = { status: "ok", rows: rows.length };
+        result.adapters[name] = {
+          status: "ok",
+          rows: rows.length,
+          sentimentOnly: true,
+          directEVEligible: false,
+          fromCache: response.meta?.fromCache ?? false,
+        };
       } else if (name === "live") {
+        const response = await adapter.fetchRawMatchesResponse({ bypassCache: true });
+        const rawMatches = response.body?.matches || [];
+        const fieldErrors = validateFootballDataFields(rawMatches);
         const rows = await adapter.fetchNormalizedLiveMatches();
-        result.adapters[name] = { status: "ok", rows: rows.length };
+        result.adapters[name] = {
+          status: fieldErrors.length ? "error" : "ok",
+          rows: rows.length,
+          rawMatchCount: rawMatches.length,
+          fieldErrors,
+          providerId: adapter.id,
+          fromCache: response.meta?.fromCache ?? false,
+        };
       } else if (name === "bzzoiro") {
         const payload = await adapter.fetchSupplementalSignals();
         result.adapters[name] = {
@@ -52,10 +131,30 @@ async function run() {
 
   const mockProvider = getMockProvider();
   const mockBoard = mockProvider.getRawMarketBoard();
-  const marketBundle = await getMarketDataBundle();
-  const staticPageData = await getStaticPageData();
-  const providerStatus = await getProviderStatus();
-  const providerConfig = getProviderConfig();
+  let marketBundle = { mode: "error" };
+  let staticPageData = { liveMode: "error" };
+  let providerStatus = null;
+  let marketBundleError = null;
+
+  try {
+    marketBundle = await getMarketDataBundle();
+    staticPageData = await getStaticPageData();
+    providerStatus = await getProviderStatus();
+  } catch (error) {
+    marketBundleError = error.message;
+    try {
+      staticPageData = await getStaticPageData();
+    } catch {
+      staticPageData = { liveMode: "error" };
+    }
+    providerStatus = {
+      appMode: providerConfig.appMode,
+      marketDataMode: "error",
+      requestedMarketDataMode: providerConfig.marketDataMode,
+      requestedLiveDataMode: providerConfig.liveDataMode,
+      marketBundleError,
+    };
+  }
   const jingcaiFeedCheck = {
     status: "skipped",
     mode: providerConfig.jingcaiOfficialFeedMode,
@@ -74,6 +173,7 @@ async function run() {
       jingcaiFeedCheck.status = "ok";
       jingcaiFeedCheck.sourceType = loaded.sourceType;
       jingcaiFeedCheck.rows = loaded.feed.length;
+      jingcaiFeedCheck.envelope = loaded.envelope || null;
     } catch (error) {
       jingcaiFeedCheck.status = "error";
       jingcaiFeedCheck.message = error.message;
@@ -81,19 +181,6 @@ async function run() {
   } else if (providerConfig.jingcaiOfficialFeedMode === "real") {
     jingcaiFeedCheck.status = "skipped";
     jingcaiFeedCheck.reason = "JINGCAI_OFFICIAL_FEED_URL not configured";
-  } else if (providerConfig.jingcaiOfficialFeedMode === "file") {
-    try {
-      const loaded = await loadJingcaiOfficialFeed({
-        mode: providerConfig.jingcaiOfficialFeedMode,
-        feedFile: providerConfig.jingcaiOfficialFeedFile,
-      });
-      jingcaiFeedCheck.status = "ok";
-      jingcaiFeedCheck.sourceType = loaded.sourceType;
-      jingcaiFeedCheck.rows = loaded.feed.length;
-    } catch (error) {
-      jingcaiFeedCheck.status = "error";
-      jingcaiFeedCheck.message = error.message;
-    }
   } else {
     try {
       const loaded = await loadJingcaiOfficialFeed({
@@ -103,24 +190,67 @@ async function run() {
       jingcaiFeedCheck.status = "ok";
       jingcaiFeedCheck.sourceType = loaded.sourceType;
       jingcaiFeedCheck.rows = loaded.feed.length;
+      jingcaiFeedCheck.envelope = loaded.envelope || null;
     } catch (error) {
       jingcaiFeedCheck.status = "error";
       jingcaiFeedCheck.message = error.message;
     }
   }
+
+  const latestDir = path.join(projectRoot, "fixtures", "snapshots", "latest");
+  const expectedSnapshotFiles = [
+    "live-data.json",
+    "provider-status.json",
+    "jingcai-official-feed.json",
+    "raw/football-data-matches.json",
+    "raw/the-odds-api-h2h.json",
+  ];
+
+  for (const fileName of expectedSnapshotFiles) {
+    const absolutePath = path.join(latestDir, fileName);
+    result.snapshotPaths[fileName] = existsSync(absolutePath) ? "present" : "missing";
+  }
+
   result.mockValidation = validateRawMarketBoard(mockBoard);
   result.currentModes = {
     market: marketBundle.mode,
     live: staticPageData.liveMode,
   };
+  result.marketBundleError = marketBundleError;
   result.providerStatus = providerStatus;
   result.jingcaiOfficialFeed = jingcaiFeedCheck;
   result.mockMergeCount = mergeMarketSources({
     oddsBoard: [],
     predictionBoard: [],
   }).length;
+  result.researchGuardrails = buildResearchGuardrails(
+    providerConfig,
+    providerStatus,
+    staticPageData,
+  );
+  result.fallbackUsed = {
+    market: String(providerStatus?.marketDataMode || "").includes("fallback"),
+    live: String(staticPageData.liveMode || "").includes("fallback"),
+  };
+  result.snapshotReplayUsed = providerStatus?.marketDataMode === "real_snapshot_replay";
+
+  const adapterErrors = Object.values(result.adapters).filter((entry) => entry.status === "error");
+  const hasResearchViolations = result.researchGuardrails.length > 0;
+  const oddsReplayAvailable = result.snapshotPaths["raw/the-odds-api-h2h.json"] === "present";
+  const oddsQuotaExhausted = result.adapters.odds?.status === "error" &&
+    /OUT_OF_USAGE_CREDITS|Usage quota has been reached|HTTP 401/.test(result.adapters.odds?.message || "");
+
+  result.ok =
+    jingcaiFeedCheck.status === "ok" &&
+    !hasResearchViolations &&
+    (adapterErrors.length === 0 ||
+      (oddsQuotaExhausted && oddsReplayAvailable && result.snapshotReplayUsed));
 
   console.log(JSON.stringify(result, null, 2));
+
+  if (!result.ok) {
+    process.exitCode = 1;
+  }
 }
 
 run().catch((error) => {

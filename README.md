@@ -200,7 +200,7 @@ POLYMARKET_PUBLIC_ENABLED=true
 - `ODDS_COMMENCE_TIME_FROM`
 - `ODDS_COMMENCE_TIME_TO`
 
-默认实现支持 `h2h,spreads,totals` 三类盘口；`.env.example` 里为了先跑通最小真实链路，默认只开 `h2h`，需要更完整覆盖时再把 `spreads,totals` 加回去。`commenceTimeFrom/To` 用来限定比赛窗口，减少无关赛事和 quota 消耗。
+当前代码默认只开 `h2h`；需要更完整覆盖时再把 `spreads,totals` 加回去。`commenceTimeFrom/To` 用来限定比赛窗口，减少无关赛事和 quota 消耗。
 
 默认 sport key 是 `soccer_fifa_world_cup`，接口参考 The Odds API v4 文档。
 
@@ -297,6 +297,6 @@ npm run qa:providers
    - `/api/tomorrow-predictions`
    - `/api/market-sources`
    - `/api/post-match-review`
-3. 接真实 provider 时，优先先看 `/api/data/quality-report` 和 `/api/data/provider-coverage`。
+3. 接真实 provider 时，优先先看 `/api/data/quality-report` 和 `/api/data/provider-coverage`，其中 `quality-report` 现在会附带 `researchSafeBlockReasons`，方便判断为什么还不能进入 research 安全态。
 4. 新接入的市场数据先通过 `schemas/market-board.js` 校验，再进入聚合层。
 5. 真实 provider 联调：`npm run qa:providers`（需 key）；本地重复开发用 `npm run snapshot:providers` 写 `fixtures/snapshots/`。

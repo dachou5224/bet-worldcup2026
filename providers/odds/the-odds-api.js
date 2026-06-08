@@ -1,7 +1,10 @@
 import { fetchJson } from "../../lib/fetch-json.js";
 import { getCachedJsonPayload } from "../../lib/local-json-cache.js";
+import { extractOddsQuotaHeaders } from "../../lib/snapshot-store.js";
 import { buildFixtureKey } from "../../lib/match-key.js";
 import { toDisplayTeamName } from "../../lib/team-names.js";
+
+let lastFetchMeta = null;
 
 function extractOutcomeMap(outcomes) {
   const map = new Map();
@@ -50,11 +53,73 @@ function normalizeBookmaker(bookmaker, homeTeam, awayTeam) {
   };
 }
 
+async function fetchOddsResponseFromApi(config) {
+  const requestedMarkets = getRequestedMarkets(config);
+  const params = new URLSearchParams({
+    apiKey: config.oddsApiKey,
+    regions: config.oddsRegions,
+    markets: requestedMarkets.join(","),
+    oddsFormat: "decimal",
+  });
+
+  if (config.oddsCommenceTimeFrom) {
+    params.set("commenceTimeFrom", config.oddsCommenceTimeFrom);
+  }
+
+  if (config.oddsCommenceTimeTo) {
+    params.set("commenceTimeTo", config.oddsCommenceTimeTo);
+  }
+
+  const url = `${config.oddsApiBaseUrl}/sports/${config.oddsSportKey}/odds?${params.toString()}`;
+  const response = await fetchJson(url, { timeoutMs: 20000 });
+  const capturedAt = new Date().toISOString();
+  const quota = extractOddsQuotaHeaders(response.headers);
+
+  lastFetchMeta = {
+    capturedAt,
+    fromCache: false,
+    quota,
+    headers: response.headers,
+    requestedMarkets,
+    sportKey: config.oddsSportKey,
+    regions: config.oddsRegions,
+    commenceTimeFrom: config.oddsCommenceTimeFrom || null,
+    commenceTimeTo: config.oddsCommenceTimeTo || null,
+  };
+
+  return {
+    body: response.body,
+    meta: lastFetchMeta,
+  };
+}
+
 export function createTheOddsApiProviderAdapter(config) {
   return {
     id: "the_odds_api",
     isConfigured() {
       return Boolean(config.oddsApiKey);
+    },
+    getLastFetchMeta() {
+      return lastFetchMeta;
+    },
+    async fetchRawOddsResponse(options = {}) {
+      if (!this.isConfigured()) {
+        throw new Error("The Odds API key 未配置");
+      }
+
+      if (options.bypassCache) {
+        return fetchOddsResponseFromApi(config);
+      }
+
+      const body = await this.fetchRawOddsBoard();
+      return {
+        body,
+        meta: lastFetchMeta || {
+          capturedAt: new Date().toISOString(),
+          fromCache: true,
+          quota: null,
+        },
+      };
     },
     async fetchRawOddsBoard() {
       if (!this.isConfigured()) {
@@ -76,23 +141,7 @@ export function createTheOddsApiProviderAdapter(config) {
         enabled: config.providerCacheEnabled,
         cacheDir: config.providerCacheDir,
         fetcher: async () => {
-          const params = new URLSearchParams({
-            apiKey: config.oddsApiKey,
-            regions: config.oddsRegions,
-            markets: requestedMarkets.join(","),
-            oddsFormat: "decimal",
-          });
-
-          if (config.oddsCommenceTimeFrom) {
-            params.set("commenceTimeFrom", config.oddsCommenceTimeFrom);
-          }
-
-          if (config.oddsCommenceTimeTo) {
-            params.set("commenceTimeTo", config.oddsCommenceTimeTo);
-          }
-
-          const url = `${config.oddsApiBaseUrl}/sports/${config.oddsSportKey}/odds?${params.toString()}`;
-          const response = await fetchJson(url, { timeoutMs: 20000 });
+          const response = await fetchOddsResponseFromApi(config);
           return response.body;
         },
       });

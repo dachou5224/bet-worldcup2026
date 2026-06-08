@@ -56,8 +56,7 @@ function inferFairProbability(outcome) {
   }
 
   if (isFiniteNumber(outcome.price)) {
-    const fair = proportionalDevig([{ name: "x", decimalOdds: outcome.price }])[0];
-    return fair?.fairProbability ?? null;
+    return 1 / outcome.price;
   }
 
   return null;

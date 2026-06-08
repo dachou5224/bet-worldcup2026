@@ -483,6 +483,22 @@ export async function buildDataQualityReport() {
     dashboard.liveDataMode === "real" &&
     providerStatus.jingcaiOfficialFeedMode === "real" &&
     !fallbackUsed;
+  const researchSafeBlockReasons = [];
+  if (providerStatus.appMode !== "research") {
+    researchSafeBlockReasons.push("app_mode_not_research");
+  }
+  if (providerStatus.marketDataMode !== "real") {
+    researchSafeBlockReasons.push("market_not_real");
+  }
+  if (dashboard.liveDataMode !== "real") {
+    researchSafeBlockReasons.push("live_not_real");
+  }
+  if (providerStatus.jingcaiOfficialFeedMode !== "real") {
+    researchSafeBlockReasons.push("jingcai_not_real");
+  }
+  if (marketFallbackUsed || liveFallbackUsed || jingcaiFallbackUsed) {
+    researchSafeBlockReasons.push("fallback_used");
+  }
 
   const matches = pipeline.rawMarketBoard.map((match) => {
     const hasOdds = match.oddsProviders.length > 0;
@@ -611,6 +627,7 @@ export async function buildDataQualityReport() {
       any: fallbackUsed,
     },
     researchSafe,
+    researchSafeBlockReasons,
     matchCount: matches.length,
     schemaOk: schemaValidation.ok,
     schemaErrors: schemaValidation.errors,

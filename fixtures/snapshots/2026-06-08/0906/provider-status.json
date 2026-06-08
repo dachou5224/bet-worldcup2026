@@ -1,0 +1,31 @@
+{
+  "capturedAt": "2026-06-08T09:06:05.131Z",
+  "appMode": "research",
+  "pipelineError": "research 模式下市场数据请求失败: 真实市场模式返回了 0 场可用比赛; odds=error; polymarket=skipped; odds_quota_exhausted",
+  "providerStatus": {
+    "appMode": "research",
+    "marketDataMode": "error",
+    "requestedMarketDataMode": "real",
+    "requestedLiveDataMode": "real",
+    "pipelineError": "research 模式下市场数据请求失败: 真实市场模式返回了 0 场可用比赛; odds=error; polymarket=skipped; odds_quota_exhausted",
+    "rawProviderErrors": {
+      "oddsApi": "HTTP 401 Unauthorized for https://api.the-odds-api.com/v4/sports/soccer_fifa_world_cup/odds?apiKey=b6fca843f5dee9f647f8ee844d85794d&regions=eu&markets=h2h&oddsFormat=decimal&commenceTimeFrom=2026-06-11T00%3A00%3A00Z&commenceTimeTo=2026-07-19T23%3A59%3A59Z: {\"message\":\"Usage quota has been reached. See usage plans at https://the-odds-api.com\",\"error_code\":\"OUT_OF_USAGE_CREDITS\",\"details_url\":\"https://the-odds-api.com/liveapi/guides/v4/api-error-codes.html#out-of-usage-credits\"}"
+    }
+  },
+  "rawProviderMeta": {
+    "footballData": {
+      "capturedAt": "2026-06-08T09:06:05.133Z",
+      "fromCache": false,
+      "competitionCode": "WC",
+      "dateFrom": "2026-06-11",
+      "dateTo": "2026-07-19",
+      "matchCount": 105
+    },
+    "oddsApi": null,
+    "polymarket": null
+  },
+  "rawProviderErrors": {
+    "oddsApi": "HTTP 401 Unauthorized for https://api.the-odds-api.com/v4/sports/soccer_fifa_world_cup/odds?apiKey=b6fca843f5dee9f647f8ee844d85794d&regions=eu&markets=h2h&oddsFormat=decimal&commenceTimeFrom=2026-06-11T00%3A00%3A00Z&commenceTimeTo=2026-07-19T23%3A59%3A59Z: {\"message\":\"Usage quota has been reached. See usage plans at https://the-odds-api.com\",\"error_code\":\"OUT_OF_USAGE_CREDITS\",\"details_url\":\"https://the-odds-api.com/liveapi/guides/v4/api-error-codes.html#out-of-usage-credits\"}"
+  },
+  "oddsCoverage": null
+}

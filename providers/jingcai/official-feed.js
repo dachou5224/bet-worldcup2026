@@ -11,6 +11,31 @@ function resolveFeedPath(feedFile) {
   return path.isAbsolute(feedFile) ? feedFile : path.resolve(__dirname, "../../", feedFile);
 }
 
+function normalizeFeedRecords(feed) {
+  if (Array.isArray(feed)) {
+    return feed;
+  }
+
+  if (feed && typeof feed === "object" && Array.isArray(feed.matches)) {
+    return feed.matches;
+  }
+
+  return feed;
+}
+
+function extractFeedEnvelope(feed) {
+  if (feed && typeof feed === "object" && !Array.isArray(feed) && Array.isArray(feed.matches)) {
+    return {
+      capturedAt: feed.capturedAt || null,
+      source: feed.source || null,
+      sourceUrl: feed.sourceUrl || null,
+      manualReviewed: feed.manualReviewed ?? null,
+    };
+  }
+
+  return null;
+}
+
 function readJsonFeed(feedFile) {
   const absolutePath = resolveFeedPath(feedFile);
 
@@ -62,7 +87,9 @@ export async function loadJingcaiOfficialFeed(source, options = {}) {
     mode === "real" && feedUrl
       ? await readJsonFeedFromUrl(feedUrl)
       : readJsonFeed(feedFile);
-  const validation = validateJingcaiOfficialFeed(feed);
+  const feedEnvelope = extractFeedEnvelope(feed);
+  const records = normalizeFeedRecords(feed);
+  const validation = validateJingcaiOfficialFeed(records);
 
   if (!validation.ok) {
     throw new Error(`Jingcai 官方盘文件不合法: ${validation.errors.join("; ")}`);
@@ -73,7 +100,8 @@ export async function loadJingcaiOfficialFeed(source, options = {}) {
     sourceType,
     feedFile,
     feedUrl: feedUrl || null,
-    feed,
+    feed: records,
+    envelope: feedEnvelope,
   };
 }
 

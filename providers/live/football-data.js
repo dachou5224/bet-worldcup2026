@@ -5,6 +5,8 @@ let cachedMatchResponse = null;
 let cachedMatchResponseAt = 0;
 let cachedMatchKey = "";
 
+let lastFetchMeta = null;
+
 function sleep(ms) {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
@@ -132,7 +134,23 @@ export function createFootballDataLiveProviderAdapter(config) {
     isConfigured() {
       return Boolean(config.footballDataApiKey);
     },
-    async fetchRawMatches() {
+    async fetchRawMatchesResponse(options = {}) {
+      const body = await this.fetchRawMatches(options);
+      return {
+        body,
+        meta: lastFetchMeta || {
+          capturedAt: new Date().toISOString(),
+          fromCache: true,
+          competitionCode: config.footballDataCompetitionCode || "WC",
+          dateFrom: config.footballDataDateFrom,
+          dateTo: config.footballDataDateTo,
+        },
+      };
+    },
+    getLastFetchMeta() {
+      return lastFetchMeta;
+    },
+    async fetchRawMatches(options = {}) {
       if (!this.isConfigured()) {
         throw new Error("football-data.org API key 未配置");
       }
@@ -154,11 +172,12 @@ export function createFootballDataLiveProviderAdapter(config) {
       cachedMatchResponse = await getCachedJsonPayload({
         namespace: "football-data-live",
         cacheKey,
-        ttlSeconds: config.footballDataCacheTtlSeconds,
-        enabled: config.providerCacheEnabled,
+        ttlSeconds: options.bypassCache ? 0 : config.footballDataCacheTtlSeconds,
+        enabled: options.bypassCache ? false : config.providerCacheEnabled,
         cacheDir: config.providerCacheDir,
         fetcher: async () => {
           const allMatches = [];
+          const capturedAt = new Date().toISOString();
 
           for (const window of windows) {
             const response = await fetchMatchesWindow(config, window);
@@ -166,6 +185,15 @@ export function createFootballDataLiveProviderAdapter(config) {
             const matches = Array.isArray(response.body.matches) ? response.body.matches : [];
             allMatches.push(...matches);
           }
+
+          lastFetchMeta = {
+            capturedAt,
+            fromCache: false,
+            competitionCode: config.footballDataCompetitionCode || "WC",
+            dateFrom: config.footballDataDateFrom,
+            dateTo: config.footballDataDateTo,
+            matchCount: allMatches.length,
+          };
 
           return { matches: allMatches };
         },

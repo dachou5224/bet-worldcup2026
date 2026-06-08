@@ -4,4 +4,5 @@
 fixtures/cache/*.json
 !fixtures/cache/.gitkeep
 fixtures/snapshots/*.json
+!fixtures/snapshots/latest/**
 !fixtures/snapshots/.gitkeep

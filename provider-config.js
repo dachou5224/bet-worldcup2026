@@ -26,7 +26,7 @@ export function getProviderConfig() {
     oddsApiKey: process.env.ODDS_API_KEY || "",
     oddsSportKey: process.env.ODDS_SPORT_KEY || "soccer_fifa_world_cup",
     oddsRegions: process.env.ODDS_REGIONS || "eu",
-    oddsMarkets: (process.env.ODDS_MARKETS || "h2h,spreads,totals")
+    oddsMarkets: (process.env.ODDS_MARKETS || "h2h")
       .split(",")
       .map((market) => market.trim())
       .filter(Boolean),

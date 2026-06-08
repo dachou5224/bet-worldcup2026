@@ -128,6 +128,8 @@ test("buildDataQualityReport includes market snapshot checks", async () => {
   assert.equal(typeof report.fallbackUsed.any, "boolean");
   assert.equal(typeof report.fallbackUsed.jingcai, "boolean");
   assert.equal(typeof report.researchSafe, "boolean");
+  assert.ok(Array.isArray(report.researchSafeBlockReasons));
+  assert.ok(report.researchSafeBlockReasons.every((reason) => typeof reason === "string"));
   assert.ok(report.matches.every((match) => typeof match.marketSnapshotCount === "number"));
   assert.ok(report.matches.every((match) => typeof match.bookmakerDiversity === "number"));
   assert.ok(report.matches.every((match) => match.layerAReadiness && typeof match.layerAReadiness === "object"));
