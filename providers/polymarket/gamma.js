@@ -253,7 +253,7 @@ export function createPolymarketGammaProviderAdapter(config) {
           }
 
           const url = `${config.polymarketGammaApiBaseUrl}/events?${params.toString()}`;
-          const response = await fetchPolymarketJson(url, 20000);
+        const response = await fetchPolymarketJson(url, options.timeoutMs || 45000);
           const events = Array.isArray(response) ? response : [];
           const filtered = events.filter((event) =>
             matchesSearchTerms(event, config.polymarketSearchTerms),

@@ -16,7 +16,7 @@ import { createPolymarketProviderAdapter } from "./polymarket/index.js";
 import { createBzzoiroSupplementalProviderAdapter } from "./context/bzzoiro.js";
 import { createFootballDataLiveProviderAdapter } from "./live/football-data.js";
 import { createSportmonksLiveProviderAdapter } from "./live/sportmonks.js";
-import { createTheOddsApiProviderAdapter } from "./odds/the-odds-api.js";
+import { createCompositeOddsProviderAdapter } from "./odds/composite.js";
 import { createPolymarketGammaProviderAdapter } from "./polymarket/gamma.js";
 
 export function getMockProvider() {
@@ -63,7 +63,7 @@ export function getProviderAdapters() {
   const sportmonksLive = createSportmonksLiveProviderAdapter(config);
 
   return {
-    odds: createTheOddsApiProviderAdapter(config),
+    odds: createCompositeOddsProviderAdapter(config),
     polymarket: createPolymarketGammaProviderAdapter(config),
     live: footballDataLive.isConfigured() ? footballDataLive : sportmonksLive,
     opinions: createOpinionProviderAdapter(),

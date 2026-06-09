@@ -20,6 +20,14 @@ import {
   writeJsonSnapshot,
   writeSnapshotToTargets,
 } from "../lib/snapshot-store.js";
+import { isOddsQuotaError } from "../lib/snapshot-replay.js";
+import { writeOddsSnapshotFromBzzoiro } from "../lib/bootstrap-odds-from-bzzoiro.js";
+import {
+  buildAbProviderStatusEnvelope,
+  withAbLiveDataEnvelope,
+  withAbOddsRawEnvelope,
+  withAbPolymarketRawEnvelope,
+} from "../lib/snapshot-ab-contract.js";
 
 async function captureRawProviderPayloads(adapters, config) {
   const rawCaptures = {
@@ -34,6 +42,12 @@ async function captureRawProviderPayloads(adapters, config) {
       rawCaptures.footballData = await adapters.live.fetchRawMatchesResponse({ bypassCache: true });
     } catch (error) {
       rawCaptures.errors.footballData = error.message;
+      try {
+        rawCaptures.footballData = await adapters.live.fetchRawMatchesResponse({ bypassCache: false });
+        rawCaptures.errors.footballDataFallback = "used_cache_after_live_fetch_failed";
+      } catch (cacheError) {
+        rawCaptures.errors.footballDataCache = cacheError.message;
+      }
     }
   }
 
@@ -54,6 +68,30 @@ async function captureRawProviderPayloads(adapters, config) {
   }
 
   return rawCaptures;
+}
+
+function maybeBootstrapOddsSnapshot(rawCaptures, config) {
+  if (rawCaptures.oddsApi?.body) {
+    return null;
+  }
+
+  const oddsError = rawCaptures.errors.oddsApi || "";
+  if (!isOddsQuotaError({ message: oddsError }) && !process.env.ODDS_BOOTSTRAP_FORCE) {
+    return null;
+  }
+
+  try {
+    return writeOddsSnapshotFromBzzoiro(
+      path.join(projectRoot, "fixtures", "snapshots", "latest", "raw", "the-odds-api-h2h.json"),
+      {
+        reason: oddsError || "forced bootstrap",
+        cacheDir: config.providerCacheDir,
+      },
+    );
+  } catch (error) {
+    rawCaptures.errors.oddsBootstrap = error.message;
+    return null;
+  }
 }
 
 function buildJingcaiSnapshotEnvelope(config, capturedAt) {
@@ -91,6 +129,7 @@ async function run() {
   const adapters = getProviderAdapters();
 
   const rawCaptures = await captureRawProviderPayloads(adapters, config);
+  const oddsBootstrap = maybeBootstrapOddsSnapshot(rawCaptures, config);
 
   let providerStatus = null;
   let pipelineData = null;
@@ -152,21 +191,22 @@ async function run() {
     },
   );
 
-  const providerStatusPayload = {
+  const providerStatusPayload = buildAbProviderStatusEnvelope({
     capturedAt,
-    appMode: config.appMode,
-    pipelineError,
     providerStatus,
+    providerConfig: config,
+    liveMode: liveData?.liveMode || "error",
     rawProviderMeta: {
       footballData: rawCaptures.footballData?.meta || null,
       oddsApi: rawCaptures.oddsApi?.meta || null,
       polymarket: rawCaptures.polymarket?.meta || null,
     },
     rawProviderErrors: rawCaptures.errors,
+    oddsBootstrap,
     oddsCoverage: rawCaptures.oddsApi?.body
       ? summarizeOddsCoverage(rawCaptures.oddsApi.body)
       : null,
-  };
+  });
 
   if (rawCaptures.footballData?.body) {
     const wrapped = wrapSnapshotPayload(rawCaptures.footballData.body, {
@@ -189,37 +229,96 @@ async function run() {
     );
   }
 
-  if (rawCaptures.oddsApi?.body) {
-    const wrapped = wrapSnapshotPayload(rawCaptures.oddsApi.body, {
-      capturedAt: rawCaptures.oddsApi.meta?.capturedAt || capturedAt,
-      source: "the-odds-api",
-      sourceMode: "real",
-      extra: {
-        provider: "the-odds-api",
-        quota: rawCaptures.oddsApi.meta?.quota || null,
-        requestedMarkets: rawCaptures.oddsApi.meta?.requestedMarkets || config.oddsMarkets,
-        coverage: summarizeOddsCoverage(rawCaptures.oddsApi.body),
-        fromCache: rawCaptures.oddsApi.meta?.fromCache ?? false,
-      },
-    });
+  if (rawCaptures.oddsApi?.body || oddsBootstrap) {
+    const oddsPayload = rawCaptures.oddsApi?.body
+      ? rawCaptures.oddsApi.body
+      : JSON.parse(
+          readFileSync(
+            path.join(projectRoot, "fixtures", "snapshots", "latest", "raw", "the-odds-api-h2h.json"),
+            "utf-8",
+          ),
+        ).payload;
+
+    const wrapped = rawCaptures.oddsApi?.body
+      ? withAbOddsRawEnvelope(
+          wrapSnapshotPayload(rawCaptures.oddsApi.body, {
+            capturedAt: rawCaptures.oddsApi.meta?.capturedAt || capturedAt,
+            source: "the-odds-api",
+            sourceMode: rawCaptures.oddsApi.meta?.sourceMode || "real",
+            extra: {
+              provider: "the-odds-api",
+              quota: rawCaptures.oddsApi.meta?.quota || null,
+              requestedMarkets: rawCaptures.oddsApi.meta?.requestedMarkets || config.oddsMarkets,
+              coverage: summarizeOddsCoverage(rawCaptures.oddsApi.body),
+              fromCache: rawCaptures.oddsApi.meta?.fromCache ?? false,
+            },
+          }),
+          {
+            sportKey: config.oddsSportKey,
+            regions: config.oddsRegions,
+            markets: rawCaptures.oddsApi.meta?.requestedMarkets || config.oddsMarkets,
+            commenceTimeFrom: config.oddsCommenceTimeFrom,
+            commenceTimeTo: config.oddsCommenceTimeTo,
+            quota: rawCaptures.oddsApi.meta?.quota || null,
+          },
+        )
+      : JSON.parse(
+          readFileSync(
+            path.join(projectRoot, "fixtures", "snapshots", "latest", "raw", "the-odds-api-h2h.json"),
+            "utf-8",
+          ),
+        );
+
     writeJsonSnapshot(path.join(dirs.rawDir, "the-odds-api-h2h.json"), wrapped);
     writeJsonSnapshot(path.join(dirs.versionedDir, "raw", "the-odds-api-h2h.json"), wrapped);
+    if (!rawCaptures.oddsApi?.body) {
+      rawCaptures.oddsApi = {
+        body: oddsPayload,
+        meta: {
+          capturedAt: wrapped.capturedAt,
+          fromCache: true,
+          sourceMode: wrapped.sourceMode,
+          bootstrap: true,
+        },
+      };
+    }
   }
 
   if (rawCaptures.polymarket?.body) {
-    const wrapped = wrapSnapshotPayload(rawCaptures.polymarket.body, {
-      capturedAt: rawCaptures.polymarket.meta?.capturedAt || capturedAt,
-      source: "polymarket-gamma",
-      sourceMode: "real",
-      extra: {
-        provider: "polymarket-gamma",
-        sentimentOnly: true,
-        directEVEligible: false,
-        semanticMappingConfidence: rawCaptures.polymarket.meta?.semanticMappingConfidence || "low",
-        eventCount: rawCaptures.polymarket.meta?.eventCount || rawCaptures.polymarket.body.length,
-        fromCache: rawCaptures.polymarket.meta?.fromCache ?? false,
-      },
-    });
+    const wrapped = withAbPolymarketRawEnvelope(
+      wrapSnapshotPayload(rawCaptures.polymarket.body, {
+        capturedAt: rawCaptures.polymarket.meta?.capturedAt || capturedAt,
+        source: "polymarket-gamma",
+        sourceMode: "real",
+        extra: {
+          provider: "polymarket-gamma",
+          sentimentOnly: true,
+          directEVEligible: false,
+          semanticMappingConfidence: rawCaptures.polymarket.meta?.semanticMappingConfidence || "low",
+          eventCount: rawCaptures.polymarket.meta?.eventCount || rawCaptures.polymarket.body.length,
+          fromCache: rawCaptures.polymarket.meta?.fromCache ?? false,
+        },
+      }),
+    );
+    writeJsonSnapshot(path.join(dirs.rawDir, "polymarket-worldcup.json"), wrapped);
+    writeJsonSnapshot(path.join(dirs.versionedDir, "raw", "polymarket-worldcup.json"), wrapped);
+  } else if (rawCaptures.errors.polymarket || config.polymarketPublicEnabled) {
+    const wrapped = withAbPolymarketRawEnvelope(
+      wrapSnapshotPayload([], {
+        capturedAt,
+        source: "polymarket-gamma",
+        sourceMode: "unavailable",
+        extra: {
+          provider: "polymarket-gamma",
+          sentimentOnly: true,
+          directEVEligible: false,
+          semanticMappingConfidence: "low",
+          eventCount: 0,
+          fetchError: rawCaptures.errors.polymarket || "polymarket not configured",
+          note: "Gamma API 不可达时写入空 body；Agent A 跳过 sentiment 特征，不进 direct EV。",
+        },
+      }),
+    );
     writeJsonSnapshot(path.join(dirs.rawDir, "polymarket-worldcup.json"), wrapped);
     writeJsonSnapshot(path.join(dirs.versionedDir, "raw", "polymarket-worldcup.json"), wrapped);
   }
@@ -304,15 +403,17 @@ async function run() {
 
   writeSnapshotToTargets({
     fileName: "live-data.json",
-    payload: wrapSnapshotPayload(liveData, {
-      capturedAt,
-      source: liveData.liveMode === "real" ? "football-data.org" : liveData.liveMode,
-      sourceMode: liveData.liveMode === "real" ? "real" : liveData.liveMode,
-      extra: {
-        liveMode: liveData.liveMode,
-        liveMatchCount: liveData.liveMatches?.length || 0,
-      },
-    }),
+    payload: withAbLiveDataEnvelope(
+      wrapSnapshotPayload(liveData, {
+        capturedAt,
+        source: liveData.liveMode === "real" ? "football-data.org" : liveData.liveMode,
+        sourceMode: liveData.liveMode === "real" ? "real" : liveData.liveMode,
+        extra: {
+          liveMode: liveData.liveMode,
+          liveMatchCount: liveData.liveMatches?.length || 0,
+        },
+      }),
+    ),
     capturedAt,
     dirs,
   });
@@ -369,7 +470,9 @@ async function run() {
     ...(backtestRunArtifact.backtestRun.length > 0 ? ["backtest-run.json"] : []),
     ...(rawCaptures.footballData ? ["raw/football-data-matches.json"] : []),
     ...(rawCaptures.oddsApi ? ["raw/the-odds-api-h2h.json"] : []),
-    ...(rawCaptures.polymarket ? ["raw/polymarket-worldcup.json"] : []),
+    ...(rawCaptures.polymarket || rawCaptures.errors.polymarket || config.polymarketPublicEnabled
+      ? ["raw/polymarket-worldcup.json"]
+      : []),
   ];
 
   console.log(

@@ -1,0 +1,16 @@
+{
+  "capturedAt": "2026-06-09T02:49:38.360Z",
+  "source": "polymarket-gamma",
+  "sourceMode": "unavailable",
+  "rawPayloadHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+  "parserVersion": "2026.06.08-agent-b",
+  "provider": "polymarket-gamma",
+  "sentimentOnly": true,
+  "directEVEligible": false,
+  "semanticMappingConfidence": "low",
+  "eventCount": 0,
+  "fetchError": "Polymarket request timed out after 45000ms",
+  "note": "Gamma API 不可达时写入空 body；Agent A 跳过 sentiment 特征，不进 direct EV。",
+  "payload": [],
+  "body": []
+}

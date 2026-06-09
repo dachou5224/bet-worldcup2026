@@ -1,0 +1,5503 @@
+{
+  "capturedAt": "2026-06-09T02:46:40.828Z",
+  "supplementalSignals": {
+    "source": "bzzoiro",
+    "status": "ok",
+    "checkedAt": "2026-06-09T02:24:08.140Z",
+    "events": [
+      {
+        "id": 8287,
+        "fixture": "墨西哥 vs 南非",
+        "kickoff": "2026-06-11T19:00:00Z",
+        "stage": "Group A",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 55,
+          "windSpeed": 5,
+          "temperatureC": 21,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 128,
+            "name": "Javier Aguirre",
+            "shortName": "J. Aguirre",
+            "country": "Mexico",
+            "profile": "balanced",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.4037435271380367,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "tiki_taka"
+            ]
+          },
+          "away": {
+            "id": 87,
+            "name": "Hugo Broos",
+            "shortName": "H. Broos",
+            "country": "Belgium",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.6622129174701875,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "positional",
+              "tiki_taka"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8288,
+        "fixture": "韩国 vs 捷克",
+        "kickoff": "2026-06-12T02:00:00Z",
+        "stage": "Group A",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 51,
+          "windSpeed": 7.8,
+          "temperatureC": 20,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 105,
+            "name": "Myung Bo Hong",
+            "shortName": "M. B. Hong",
+            "country": "South Korea",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 579,
+            "name": "Miroslav Koubek",
+            "shortName": "M. Koubek",
+            "country": "Czechia",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 428,
+          "name": "Seoul World Cup Stadium",
+          "city": "Seoul",
+          "country": "South Korea",
+          "capacity": 68806
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8289,
+        "fixture": "加拿大 vs 波黑",
+        "kickoff": "2026-06-12T19:00:00Z",
+        "stage": "Group B",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 2,
+          "windSpeed": 11.4,
+          "temperatureC": 26,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 130,
+            "name": "Jesse Marsch",
+            "shortName": "J. Marsch",
+            "country": "USA",
+            "profile": "defensive",
+            "preferredFormation": "4-4-2",
+            "pressingIntensity": 0.7268826628162659,
+            "defensiveLine": "high",
+            "topStyles": [
+              "gegenpressing",
+              "high_press"
+            ]
+          },
+          "away": {
+            "id": 580,
+            "name": "Sergej Barbarez",
+            "shortName": "S. Barbarez",
+            "country": "Bosnia & Herzegovina",
+            "profile": "balanced",
+            "preferredFormation": "4-4-2",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8290,
+        "fixture": "美国 vs 巴拉圭",
+        "kickoff": "2026-06-13T01:00:00Z",
+        "stage": "Group D",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 20.7,
+          "temperatureC": 22,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 122,
+            "name": "Mauricio Pochettino",
+            "shortName": "M. Pochettino",
+            "country": "Argentina",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 90,
+            "name": "Gustavo Alfaro",
+            "shortName": "G. Alfaro",
+            "country": "Argentina",
+            "profile": "defensive",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8292,
+        "fixture": "卡塔尔 vs 瑞士",
+        "kickoff": "2026-06-13T19:00:00Z",
+        "stage": "Group B",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 9.4,
+          "temperatureC": 33,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 570,
+            "name": "Julen Lopetegui",
+            "shortName": "J. Lopetegui",
+            "country": "Spain",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 78,
+            "name": "Murat Yakin",
+            "shortName": "M. Yakin",
+            "country": "Switzerland",
+            "profile": "attacking",
+            "preferredFormation": "3-4-3",
+            "pressingIntensity": 0.3918040881866116,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "tiki_taka"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8293,
+        "fixture": "巴西 vs 摩洛哥",
+        "kickoff": "2026-06-13T22:00:00Z",
+        "stage": "Group C",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 3,
+          "windSpeed": 14.5,
+          "temperatureC": 24,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 127,
+            "name": "Carlo Ancelotti",
+            "shortName": "C. Ancelotti",
+            "country": "Italy",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 89,
+            "name": "Mohamed Ouahbi",
+            "shortName": "M. Ouahbi",
+            "country": "Morocco",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.6856022898013546,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "tiki_taka",
+              "positional"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8294,
+        "fixture": "海地 vs 苏格兰",
+        "kickoff": "2026-06-14T01:00:00Z",
+        "stage": "Group C",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 0.8,
+          "temperatureC": 12,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 83,
+            "name": "Sébastien Migné",
+            "shortName": "S. Migné",
+            "country": "France",
+            "profile": "attacking",
+            "preferredFormation": "4-4-2",
+            "pressingIntensity": 0.21972155247925734,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "chaos_ball",
+              "terrorist_fb"
+            ]
+          },
+          "away": {
+            "id": 95,
+            "name": "Steve Clarke",
+            "shortName": "S. Clarke",
+            "country": "Scotland",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.3732111802142982,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "chaos_ball",
+              "counter"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8291,
+        "fixture": "澳大利亚 vs Türkiye",
+        "kickoff": "2026-06-14T04:00:00Z",
+        "stage": "Group D",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 3,
+          "windSpeed": 1.5,
+          "temperatureC": 16,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 571,
+            "name": "Tony Popovic",
+            "shortName": "T. Popovic",
+            "country": "Australia",
+            "profile": "attacking",
+            "preferredFormation": "3-4-2-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 581,
+            "name": "Vincenzo Montella",
+            "shortName": "V. Montella",
+            "country": "Italy",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.5771871213187022,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "total_football"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8295,
+        "fixture": "德国 vs 库拉索",
+        "kickoff": "2026-06-14T17:00:00Z",
+        "stage": "Group E",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 51,
+          "windSpeed": 12.2,
+          "temperatureC": 30,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 51,
+            "name": "Julian Nagelsmann",
+            "shortName": "J. Nagelsmann",
+            "country": "Germany",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.41197416110652285,
+            "defensiveLine": "high",
+            "topStyles": [
+              "positional",
+              "ball_dominant"
+            ]
+          },
+          "away": {
+            "id": 1562,
+            "name": "Dick Advocaat",
+            "shortName": "D. Advocaat",
+            "country": "Netherlands",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8296,
+        "fixture": "荷兰 vs 日本",
+        "kickoff": "2026-06-14T20:00:00Z",
+        "stage": "Group F",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 18,
+          "temperatureC": 35,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 102,
+            "name": "Ronald Koeman",
+            "shortName": "R. Koeman",
+            "country": "Netherlands",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.27509591827536084,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "positional",
+              "inverted_fb"
+            ]
+          },
+          "away": {
+            "id": 109,
+            "name": "Hajime Moriyasu",
+            "shortName": "H. Moriyasu",
+            "country": "Japan",
+            "profile": "attacking",
+            "preferredFormation": "3-4-2-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8297,
+        "fixture": "科特迪瓦 vs 厄瓜多尔",
+        "kickoff": "2026-06-14T23:00:00Z",
+        "stage": "Group E",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 2,
+          "windSpeed": 9.4,
+          "temperatureC": 25,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 96,
+            "name": "Emerse Faé",
+            "shortName": "E. Faé",
+            "country": "Côte d'Ivoire",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.41627215321083294,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "tiki_taka",
+              "false_9"
+            ]
+          },
+          "away": {
+            "id": 103,
+            "name": "Sebastian Beccacece",
+            "shortName": "S. Beccacece",
+            "country": "Argentina",
+            "profile": "defensive",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8298,
+        "fixture": "瑞典 vs 突尼斯",
+        "kickoff": "2026-06-15T02:00:00Z",
+        "stage": "Group F",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 3,
+          "windSpeed": 21.3,
+          "temperatureC": 30,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 574,
+            "name": "Graham Potter",
+            "shortName": "G. Potter",
+            "country": "England",
+            "profile": "attacking",
+            "preferredFormation": "3-4-1-2",
+            "pressingIntensity": 0.11278212649691605,
+            "defensiveLine": "high",
+            "topStyles": [
+              "moments_fc",
+              "inverted_fb"
+            ]
+          },
+          "away": {
+            "id": 131,
+            "name": "Sabri Lamouchi",
+            "shortName": "S. Lamouchi",
+            "country": "France",
+            "profile": "defensive",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.4095750270945502,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "low_block",
+              "park_the_bus"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8299,
+        "fixture": "西班牙 vs Cabo Verde",
+        "kickoff": "2026-06-15T16:00:00Z",
+        "stage": "Group H",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 3,
+          "windSpeed": 4.8,
+          "temperatureC": 31,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 116,
+            "name": "Luis De La Fuente",
+            "shortName": "L. D. L. Fuente",
+            "country": "Spain",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 1445,
+            "name": "Bubista",
+            "shortName": "Bubista",
+            "country": "Cape Verde",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8300,
+        "fixture": "比利时 vs 埃及",
+        "kickoff": "2026-06-15T19:00:00Z",
+        "stage": "Group G",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 3,
+          "windSpeed": 9.6,
+          "temperatureC": 20,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 129,
+            "name": "Rudi Garcia",
+            "shortName": "R. Garcia",
+            "country": "France",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.7112170404495669,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "chaos_ball",
+              "chaos_football"
+            ]
+          },
+          "away": {
+            "id": 117,
+            "name": "Hossam Hassan",
+            "shortName": "H. Hassan",
+            "country": "Egypt",
+            "profile": "balanced",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.541751812675686,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "low_block",
+              "moments_fc"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 435,
+          "name": "Stade Roi Baudouin",
+          "city": "Brussels",
+          "country": "Belgium",
+          "capacity": 50000
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8301,
+        "fixture": "沙特阿拉伯 vs 乌拉圭",
+        "kickoff": "2026-06-15T22:00:00Z",
+        "stage": "Group H",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 2,
+          "windSpeed": 19.9,
+          "temperatureC": 32,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 188,
+            "name": "Georgios Donis",
+            "shortName": "G. Donis",
+            "country": "Greece",
+            "profile": "balanced",
+            "preferredFormation": "3-5-2",
+            "pressingIntensity": 0.5416918204808029,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "set_piece",
+              "chaos_ball"
+            ]
+          },
+          "away": {
+            "id": 98,
+            "name": "Marcelo Bielsa",
+            "shortName": "M. Bielsa",
+            "country": "Argentina",
+            "profile": "defensive",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 437,
+          "name": "Al-Shabab Club Stadium",
+          "city": "Riyadh",
+          "country": "Saudi Arabia",
+          "capacity": 15000
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8302,
+        "fixture": "伊朗 vs 新西兰",
+        "kickoff": "2026-06-16T01:00:00Z",
+        "stage": "Group G",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 16.3,
+          "temperatureC": 21,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 63,
+            "name": "Amir Ghalenoei",
+            "shortName": "A. Ghalenoei",
+            "country": "Iran",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 578,
+            "name": "Darren Bazeley",
+            "shortName": "D. Bazeley",
+            "country": "England",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 439,
+          "name": "Azadi Stadium",
+          "city": "Tehran",
+          "country": "Iran",
+          "capacity": 78116
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8304,
+        "fixture": "法国 vs 塞内加尔",
+        "kickoff": "2026-06-16T19:00:00Z",
+        "stage": "Group I",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 3,
+          "windSpeed": 21.9,
+          "temperatureC": 26,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 32,
+            "name": "Didier Deschamps",
+            "shortName": "D. Deschamps",
+            "country": "France",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.8463156403568457,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "tiki_taka",
+              "positional"
+            ]
+          },
+          "away": {
+            "id": 112,
+            "name": "Pape Thiaw",
+            "shortName": "P. Thiaw",
+            "country": "Senegal",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.6340538686573383,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "total_football"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 442,
+          "name": "Stade de France",
+          "city": "Paris",
+          "country": "France",
+          "capacity": 81338
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8305,
+        "fixture": "伊拉克 vs 挪威",
+        "kickoff": "2026-06-16T22:00:00Z",
+        "stage": "Group I",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 1,
+          "windSpeed": 16.9,
+          "temperatureC": 33,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 582,
+            "name": "Graham Arnold",
+            "shortName": "G. Arnold",
+            "country": "Australia",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 77,
+            "name": "Ståle Solbakken",
+            "shortName": "S. Solbakken",
+            "country": "Norway",
+            "profile": "attacking",
+            "preferredFormation": "4-4-2",
+            "pressingIntensity": 0.3142761407859157,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "total_football"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8306,
+        "fixture": "阿根廷 vs 阿尔及利亚",
+        "kickoff": "2026-06-17T01:00:00Z",
+        "stage": "Group J",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 1,
+          "windSpeed": 26.3,
+          "temperatureC": 21,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 124,
+            "name": "Lionel Scaloni",
+            "shortName": "L. Scaloni",
+            "country": "Argentina",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 97,
+            "name": "Vladimir Petković",
+            "shortName": "V. Petković",
+            "country": "Switzerland",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.6135339764967019,
+            "defensiveLine": "high",
+            "topStyles": [
+              "chaos_ball",
+              "ball_dominant"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 445,
+          "name": "Estadio Mâs Monumental",
+          "city": "Buenos Aires",
+          "country": "Argentina",
+          "capacity": 85018
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8303,
+        "fixture": "奥地利 vs 约旦",
+        "kickoff": "2026-06-17T04:00:00Z",
+        "stage": "Group J",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 11.8,
+          "temperatureC": 24,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 104,
+            "name": "Ralf Rangnick",
+            "shortName": "R. Rangnick",
+            "country": "Germany",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 85,
+            "name": "Jamal Sellami",
+            "shortName": "J. Sellami",
+            "country": "Morocco",
+            "profile": "attacking",
+            "preferredFormation": "3-4-3",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 440,
+          "name": "Ernst Happel Stadion",
+          "city": "Vienna",
+          "country": "Austria",
+          "capacity": 50865
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8307,
+        "fixture": "葡萄牙 vs 刚果（金）",
+        "kickoff": "2026-06-17T17:00:00Z",
+        "stage": "Group K",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 2,
+          "windSpeed": 13.2,
+          "temperatureC": 31,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 123,
+            "name": "Roberto Martínez",
+            "shortName": "R. Martínez",
+            "country": "Spain",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 583,
+            "name": "Sebastien Desabre",
+            "shortName": "S. Desabre",
+            "country": "France",
+            "profile": "defensive",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.21857136906446123,
+            "defensiveLine": "high",
+            "topStyles": [
+              "terrorist_fb",
+              "low_block"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8308,
+        "fixture": "英格兰 vs 克罗地亚",
+        "kickoff": "2026-06-17T20:00:00Z",
+        "stage": "Group L",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 1,
+          "windSpeed": 29.1,
+          "temperatureC": 35,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 108,
+            "name": "Thomas Tuchel",
+            "shortName": "T. Tuchel",
+            "country": "Germany",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 126,
+            "name": "Zlatko Dalić",
+            "shortName": "Z. Dalić",
+            "country": "Croatia",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.37464113995212533,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "tiki_taka"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 447,
+          "name": "Wembley Stadium",
+          "city": "London",
+          "country": "England",
+          "capacity": 90000
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8309,
+        "fixture": "加纳 vs 巴拿马",
+        "kickoff": "2026-06-17T23:00:00Z",
+        "stage": "Group L",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 51,
+          "windSpeed": 14,
+          "temperatureC": 14,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 838,
+            "name": "Carlos Queiroz",
+            "shortName": "C. Queiroz",
+            "country": "Portugal",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 88,
+            "name": "Thomas Christiansen",
+            "shortName": "T. Christiansen",
+            "country": "Spain",
+            "profile": "attacking",
+            "preferredFormation": "5-4-1",
+            "pressingIntensity": 0.26356336281085124,
+            "defensiveLine": "high",
+            "topStyles": [
+              "chaos_ball",
+              "moments_fc"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 448,
+          "name": "Accra Sports Stadium",
+          "city": "Accra",
+          "country": "Ghana",
+          "capacity": 40000
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8310,
+        "fixture": "乌兹别克斯坦 vs 哥伦比亚",
+        "kickoff": "2026-06-18T02:00:00Z",
+        "stage": "Group K",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 55,
+          "windSpeed": 4.1,
+          "temperatureC": 17,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 575,
+            "name": "Fabio Cannavaro",
+            "shortName": "F. Cannavaro",
+            "country": "Italy",
+            "profile": "balanced",
+            "preferredFormation": "3-4-2-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 31,
+            "name": "Nestor Lorenzo",
+            "shortName": "N. Lorenzo",
+            "country": "Argentina",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8311,
+        "fixture": "捷克 vs 南非",
+        "kickoff": "2026-06-18T16:00:00Z",
+        "stage": "Group A",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 2,
+          "windSpeed": 12,
+          "temperatureC": 34,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 579,
+            "name": "Miroslav Koubek",
+            "shortName": "M. Koubek",
+            "country": "Czechia",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 87,
+            "name": "Hugo Broos",
+            "shortName": "H. Broos",
+            "country": "Belgium",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.6622129174701875,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "positional",
+              "tiki_taka"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8312,
+        "fixture": "瑞士 vs 波黑",
+        "kickoff": "2026-06-18T19:00:00Z",
+        "stage": "Group B",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 1,
+          "windSpeed": 16.3,
+          "temperatureC": 21,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 78,
+            "name": "Murat Yakin",
+            "shortName": "M. Yakin",
+            "country": "Switzerland",
+            "profile": "attacking",
+            "preferredFormation": "3-4-3",
+            "pressingIntensity": 0.3918040881866116,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "tiki_taka"
+            ]
+          },
+          "away": {
+            "id": 580,
+            "name": "Sergej Barbarez",
+            "shortName": "S. Barbarez",
+            "country": "Bosnia & Herzegovina",
+            "profile": "balanced",
+            "preferredFormation": "4-4-2",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8313,
+        "fixture": "加拿大 vs 卡塔尔",
+        "kickoff": "2026-06-18T22:00:00Z",
+        "stage": "Group B",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 3,
+          "windSpeed": 13,
+          "temperatureC": 18,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 130,
+            "name": "Jesse Marsch",
+            "shortName": "J. Marsch",
+            "country": "USA",
+            "profile": "defensive",
+            "preferredFormation": "4-4-2",
+            "pressingIntensity": 0.7268826628162659,
+            "defensiveLine": "high",
+            "topStyles": [
+              "gegenpressing",
+              "high_press"
+            ]
+          },
+          "away": {
+            "id": 570,
+            "name": "Julen Lopetegui",
+            "shortName": "J. Lopetegui",
+            "country": "Spain",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8314,
+        "fixture": "墨西哥 vs 韩国",
+        "kickoff": "2026-06-19T01:00:00Z",
+        "stage": "Group A",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 80,
+          "windSpeed": 2.3,
+          "temperatureC": 24,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 128,
+            "name": "Javier Aguirre",
+            "shortName": "J. Aguirre",
+            "country": "Mexico",
+            "profile": "balanced",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.4037435271380367,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "tiki_taka"
+            ]
+          },
+          "away": {
+            "id": 105,
+            "name": "Myung Bo Hong",
+            "shortName": "M. B. Hong",
+            "country": "South Korea",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8316,
+        "fixture": "美国 vs 澳大利亚",
+        "kickoff": "2026-06-19T19:00:00Z",
+        "stage": "Group D",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 13.1,
+          "temperatureC": 25,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 122,
+            "name": "Mauricio Pochettino",
+            "shortName": "M. Pochettino",
+            "country": "Argentina",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 571,
+            "name": "Tony Popovic",
+            "shortName": "T. Popovic",
+            "country": "Australia",
+            "profile": "attacking",
+            "preferredFormation": "3-4-2-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8317,
+        "fixture": "苏格兰 vs 摩洛哥",
+        "kickoff": "2026-06-19T22:00:00Z",
+        "stage": "Group C",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 2,
+          "windSpeed": 9.2,
+          "temperatureC": 25,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 95,
+            "name": "Steve Clarke",
+            "shortName": "S. Clarke",
+            "country": "Scotland",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.3732111802142982,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "chaos_ball",
+              "counter"
+            ]
+          },
+          "away": {
+            "id": 89,
+            "name": "Mohamed Ouahbi",
+            "shortName": "M. Ouahbi",
+            "country": "Morocco",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.6856022898013546,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "tiki_taka",
+              "positional"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8318,
+        "fixture": "巴西 vs 海地",
+        "kickoff": "2026-06-20T00:30:00Z",
+        "stage": "Group C",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 3,
+          "windSpeed": 13.6,
+          "temperatureC": 25,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 127,
+            "name": "Carlo Ancelotti",
+            "shortName": "C. Ancelotti",
+            "country": "Italy",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 83,
+            "name": "Sébastien Migné",
+            "shortName": "S. Migné",
+            "country": "France",
+            "profile": "attacking",
+            "preferredFormation": "4-4-2",
+            "pressingIntensity": 0.21972155247925734,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "chaos_ball",
+              "terrorist_fb"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8315,
+        "fixture": "Türkiye vs 巴拉圭",
+        "kickoff": "2026-06-20T03:00:00Z",
+        "stage": "Group D",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 6.2,
+          "temperatureC": 22,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 581,
+            "name": "Vincenzo Montella",
+            "shortName": "V. Montella",
+            "country": "Italy",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.5771871213187022,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "total_football"
+            ]
+          },
+          "away": {
+            "id": 90,
+            "name": "Gustavo Alfaro",
+            "shortName": "G. Alfaro",
+            "country": "Argentina",
+            "profile": "defensive",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8320,
+        "fixture": "荷兰 vs 瑞典",
+        "kickoff": "2026-06-20T17:00:00Z",
+        "stage": "Group F",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 51,
+          "windSpeed": 20.2,
+          "temperatureC": 32,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 102,
+            "name": "Ronald Koeman",
+            "shortName": "R. Koeman",
+            "country": "Netherlands",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.27509591827536084,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "positional",
+              "inverted_fb"
+            ]
+          },
+          "away": {
+            "id": 574,
+            "name": "Graham Potter",
+            "shortName": "G. Potter",
+            "country": "England",
+            "profile": "attacking",
+            "preferredFormation": "3-4-1-2",
+            "pressingIntensity": 0.11278212649691605,
+            "defensiveLine": "high",
+            "topStyles": [
+              "moments_fc",
+              "inverted_fb"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8321,
+        "fixture": "德国 vs 科特迪瓦",
+        "kickoff": "2026-06-20T20:00:00Z",
+        "stage": "Group E",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 1,
+          "windSpeed": 21.3,
+          "temperatureC": 24,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 51,
+            "name": "Julian Nagelsmann",
+            "shortName": "J. Nagelsmann",
+            "country": "Germany",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.41197416110652285,
+            "defensiveLine": "high",
+            "topStyles": [
+              "positional",
+              "ball_dominant"
+            ]
+          },
+          "away": {
+            "id": 96,
+            "name": "Emerse Faé",
+            "shortName": "E. Faé",
+            "country": "Côte d'Ivoire",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.41627215321083294,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "tiki_taka",
+              "false_9"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8322,
+        "fixture": "厄瓜多尔 vs 库拉索",
+        "kickoff": "2026-06-21T00:00:00Z",
+        "stage": "Group E",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 51,
+          "windSpeed": 2.2,
+          "temperatureC": 22,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 103,
+            "name": "Sebastian Beccacece",
+            "shortName": "S. Beccacece",
+            "country": "Argentina",
+            "profile": "defensive",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 1562,
+            "name": "Dick Advocaat",
+            "shortName": "D. Advocaat",
+            "country": "Netherlands",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 432,
+          "name": "Estadio Rodrigo Paz Delgado",
+          "city": "Quito",
+          "country": "Ecuador",
+          "capacity": 41575
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8319,
+        "fixture": "突尼斯 vs 日本",
+        "kickoff": "2026-06-21T04:00:00Z",
+        "stage": "Group F",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 18.2,
+          "temperatureC": 29,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 131,
+            "name": "Sabri Lamouchi",
+            "shortName": "S. Lamouchi",
+            "country": "France",
+            "profile": "defensive",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.4095750270945502,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "low_block",
+              "park_the_bus"
+            ]
+          },
+          "away": {
+            "id": 109,
+            "name": "Hajime Moriyasu",
+            "shortName": "H. Moriyasu",
+            "country": "Japan",
+            "profile": "attacking",
+            "preferredFormation": "3-4-2-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 433,
+          "name": "Stade Hammadi Agrebi",
+          "city": "Rades",
+          "country": "Tunisia",
+          "capacity": 65000
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8323,
+        "fixture": "西班牙 vs 沙特阿拉伯",
+        "kickoff": "2026-06-21T16:00:00Z",
+        "stage": "Group H",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 2,
+          "windSpeed": 16.8,
+          "temperatureC": 30,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 116,
+            "name": "Luis De La Fuente",
+            "shortName": "L. D. L. Fuente",
+            "country": "Spain",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 188,
+            "name": "Georgios Donis",
+            "shortName": "G. Donis",
+            "country": "Greece",
+            "profile": "balanced",
+            "preferredFormation": "3-5-2",
+            "pressingIntensity": 0.5416918204808029,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "set_piece",
+              "chaos_ball"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8324,
+        "fixture": "比利时 vs 伊朗",
+        "kickoff": "2026-06-21T19:00:00Z",
+        "stage": "Group G",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 1,
+          "windSpeed": 16.4,
+          "temperatureC": 20,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 129,
+            "name": "Rudi Garcia",
+            "shortName": "R. Garcia",
+            "country": "France",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.7112170404495669,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "chaos_ball",
+              "chaos_football"
+            ]
+          },
+          "away": {
+            "id": 63,
+            "name": "Amir Ghalenoei",
+            "shortName": "A. Ghalenoei",
+            "country": "Iran",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 435,
+          "name": "Stade Roi Baudouin",
+          "city": "Brussels",
+          "country": "Belgium",
+          "capacity": 50000
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8325,
+        "fixture": "乌拉圭 vs Cabo Verde",
+        "kickoff": "2026-06-21T22:00:00Z",
+        "stage": "Group H",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 2,
+          "windSpeed": 18.2,
+          "temperatureC": 31,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 98,
+            "name": "Marcelo Bielsa",
+            "shortName": "M. Bielsa",
+            "country": "Argentina",
+            "profile": "defensive",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 1445,
+            "name": "Bubista",
+            "shortName": "Bubista",
+            "country": "Cape Verde",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 438,
+          "name": "Estadio Centenario",
+          "city": "Montevideo",
+          "country": "Uruguay",
+          "capacity": 60235
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8326,
+        "fixture": "新西兰 vs 埃及",
+        "kickoff": "2026-06-22T01:00:00Z",
+        "stage": "Group G",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 7.5,
+          "temperatureC": 19,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 578,
+            "name": "Darren Bazeley",
+            "shortName": "D. Bazeley",
+            "country": "England",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 117,
+            "name": "Hossam Hassan",
+            "shortName": "H. Hassan",
+            "country": "Egypt",
+            "profile": "balanced",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.541751812675686,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "low_block",
+              "moments_fc"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8327,
+        "fixture": "阿根廷 vs 奥地利",
+        "kickoff": "2026-06-22T17:00:00Z",
+        "stage": "Group J",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 22.1,
+          "temperatureC": 33,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 124,
+            "name": "Lionel Scaloni",
+            "shortName": "L. Scaloni",
+            "country": "Argentina",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 104,
+            "name": "Ralf Rangnick",
+            "shortName": "R. Rangnick",
+            "country": "Germany",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 445,
+          "name": "Estadio Mâs Monumental",
+          "city": "Buenos Aires",
+          "country": "Argentina",
+          "capacity": 85018
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8328,
+        "fixture": "法国 vs 伊拉克",
+        "kickoff": "2026-06-22T21:00:00Z",
+        "stage": "Group I",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 1,
+          "windSpeed": 10.3,
+          "temperatureC": 34,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 32,
+            "name": "Didier Deschamps",
+            "shortName": "D. Deschamps",
+            "country": "France",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.8463156403568457,
+            "defensiveLine": "mid",
+            "topStyles": [
+              "tiki_taka",
+              "positional"
+            ]
+          },
+          "away": {
+            "id": 582,
+            "name": "Graham Arnold",
+            "shortName": "G. Arnold",
+            "country": "Australia",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 442,
+          "name": "Stade de France",
+          "city": "Paris",
+          "country": "France",
+          "capacity": 81338
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8329,
+        "fixture": "挪威 vs 塞内加尔",
+        "kickoff": "2026-06-23T00:00:00Z",
+        "stage": "Group I",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 1,
+          "windSpeed": 12.9,
+          "temperatureC": 28,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 77,
+            "name": "Ståle Solbakken",
+            "shortName": "S. Solbakken",
+            "country": "Norway",
+            "profile": "attacking",
+            "preferredFormation": "4-4-2",
+            "pressingIntensity": 0.3142761407859157,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "total_football"
+            ]
+          },
+          "away": {
+            "id": 112,
+            "name": "Pape Thiaw",
+            "shortName": "P. Thiaw",
+            "country": "Senegal",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.6340538686573383,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "total_football"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 444,
+          "name": "Ullevaal",
+          "city": "Oslo",
+          "country": "Norway",
+          "capacity": 28000
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8330,
+        "fixture": "约旦 vs 阿尔及利亚",
+        "kickoff": "2026-06-23T03:00:00Z",
+        "stage": "Group J",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 14.9,
+          "temperatureC": 20,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 85,
+            "name": "Jamal Sellami",
+            "shortName": "J. Sellami",
+            "country": "Morocco",
+            "profile": "attacking",
+            "preferredFormation": "3-4-3",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 97,
+            "name": "Vladimir Petković",
+            "shortName": "V. Petković",
+            "country": "Switzerland",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": 0.6135339764967019,
+            "defensiveLine": "high",
+            "topStyles": [
+              "chaos_ball",
+              "ball_dominant"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 441,
+          "name": "Amman International Stadium",
+          "city": "Amman",
+          "country": "Jordan",
+          "capacity": 17619
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8331,
+        "fixture": "葡萄牙 vs 乌兹别克斯坦",
+        "kickoff": "2026-06-23T17:00:00Z",
+        "stage": "Group K",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 0,
+          "windSpeed": 6.6,
+          "temperatureC": 34,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 123,
+            "name": "Roberto Martínez",
+            "shortName": "R. Martínez",
+            "country": "Spain",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 575,
+            "name": "Fabio Cannavaro",
+            "shortName": "F. Cannavaro",
+            "country": "Italy",
+            "profile": "balanced",
+            "preferredFormation": "3-4-2-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8332,
+        "fixture": "英格兰 vs 加纳",
+        "kickoff": "2026-06-23T20:00:00Z",
+        "stage": "Group L",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 3,
+          "windSpeed": 10.7,
+          "temperatureC": 23,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 108,
+            "name": "Thomas Tuchel",
+            "shortName": "T. Tuchel",
+            "country": "Germany",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 838,
+            "name": "Carlos Queiroz",
+            "shortName": "C. Queiroz",
+            "country": "Portugal",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 447,
+          "name": "Wembley Stadium",
+          "city": "London",
+          "country": "England",
+          "capacity": 90000
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8333,
+        "fixture": "巴拿马 vs 克罗地亚",
+        "kickoff": "2026-06-23T23:00:00Z",
+        "stage": "Group L",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 3,
+          "windSpeed": 4.7,
+          "temperatureC": 20,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 88,
+            "name": "Thomas Christiansen",
+            "shortName": "T. Christiansen",
+            "country": "Spain",
+            "profile": "attacking",
+            "preferredFormation": "5-4-1",
+            "pressingIntensity": 0.26356336281085124,
+            "defensiveLine": "high",
+            "topStyles": [
+              "chaos_ball",
+              "moments_fc"
+            ]
+          },
+          "away": {
+            "id": 126,
+            "name": "Zlatko Dalić",
+            "shortName": "Z. Dalić",
+            "country": "Croatia",
+            "profile": "attacking",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.37464113995212533,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "tiki_taka"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8334,
+        "fixture": "哥伦比亚 vs 刚果（金）",
+        "kickoff": "2026-06-24T02:00:00Z",
+        "stage": "Group K",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": 3,
+          "windSpeed": 8.7,
+          "temperatureC": 21,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 31,
+            "name": "Nestor Lorenzo",
+            "shortName": "N. Lorenzo",
+            "country": "Argentina",
+            "profile": "balanced",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 583,
+            "name": "Sebastien Desabre",
+            "shortName": "S. Desabre",
+            "country": "France",
+            "profile": "defensive",
+            "preferredFormation": "4-2-3-1",
+            "pressingIntensity": 0.21857136906446123,
+            "defensiveLine": "high",
+            "topStyles": [
+              "terrorist_fb",
+              "low_block"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8336,
+        "fixture": "波黑 vs 卡塔尔",
+        "kickoff": "2026-06-24T19:00:00Z",
+        "stage": "Group B",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": null,
+          "windSpeed": null,
+          "temperatureC": null,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 580,
+            "name": "Sergej Barbarez",
+            "shortName": "S. Barbarez",
+            "country": "Bosnia & Herzegovina",
+            "profile": "balanced",
+            "preferredFormation": "4-4-2",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          },
+          "away": {
+            "id": 570,
+            "name": "Julen Lopetegui",
+            "shortName": "J. Lopetegui",
+            "country": "Spain",
+            "profile": "attacking",
+            "preferredFormation": "4-3-3",
+            "pressingIntensity": null,
+            "defensiveLine": null,
+            "topStyles": []
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": {
+          "id": 710,
+          "name": "Bilino Polje",
+          "city": "Zenica",
+          "country": "Bosnia & Herzegovina",
+          "capacity": 15600
+        },
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      },
+      {
+        "id": 8335,
+        "fixture": "瑞士 vs 加拿大",
+        "kickoff": "2026-06-24T19:00:00Z",
+        "stage": "Group B",
+        "status": "notstarted",
+        "currentMinute": null,
+        "period": null,
+        "score": {
+          "home": null,
+          "away": null,
+          "homeHalfTime": null,
+          "awayHalfTime": null
+        },
+        "odds": {
+          "home": null,
+          "draw": null,
+          "away": null,
+          "over15": null,
+          "over25": null,
+          "over35": null,
+          "under15": null,
+          "under25": null,
+          "under35": null,
+          "bttsYes": null,
+          "bttsNo": null
+        },
+        "xg": {
+          "actualHome": null,
+          "actualAway": null,
+          "liveHome": null,
+          "liveAway": null
+        },
+        "environment": {
+          "weatherCode": null,
+          "windSpeed": null,
+          "temperatureC": null,
+          "pitchCondition": null,
+          "attendance": null,
+          "referee": null,
+          "isLocalDerby": false,
+          "isNeutralGround": null,
+          "travelDistanceKm": null
+        },
+        "coaches": {
+          "home": {
+            "id": 78,
+            "name": "Murat Yakin",
+            "shortName": "M. Yakin",
+            "country": "Switzerland",
+            "profile": "attacking",
+            "preferredFormation": "3-4-3",
+            "pressingIntensity": 0.3918040881866116,
+            "defensiveLine": "high",
+            "topStyles": [
+              "ball_dominant",
+              "tiki_taka"
+            ]
+          },
+          "away": {
+            "id": 130,
+            "name": "Jesse Marsch",
+            "shortName": "J. Marsch",
+            "country": "USA",
+            "profile": "defensive",
+            "preferredFormation": "4-4-2",
+            "pressingIntensity": 0.7268826628162659,
+            "defensiveLine": "high",
+            "topStyles": [
+              "gegenpressing",
+              "high_press"
+            ]
+          }
+        },
+        "unavailablePlayers": {
+          "home": [],
+          "away": []
+        },
+        "venue": null,
+        "league": {
+          "id": 27,
+          "name": "World Cup 2026",
+          "country": "International"
+        }
+      }
+    ],
+    "predictions": [
+      {
+        "id": 4750,
+        "eventId": 8287,
+        "fixture": "墨西哥 vs 南非",
+        "kickoff": "2026-06-11T19:00:00Z",
+        "createdAt": "2026-06-02T10:52:38.073874Z",
+        "probabilities": {
+          "home": 48.5046594407387,
+          "draw": 24.170403419515285,
+          "away": 27.32493713974601,
+          "over15": 70.81850838082804,
+          "over25": 33.053087154208725,
+          "over35": 18.285873955670834,
+          "bttsYes": 38.02072465990084
+        },
+        "expectedGoals": {
+          "home": 1.05,
+          "away": 1.15
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 48.5046594407387
+      },
+      {
+        "id": 4751,
+        "eventId": 8288,
+        "fixture": "韩国 vs 捷克",
+        "kickoff": "2026-06-12T02:00:00Z",
+        "createdAt": "2026-06-02T10:52:38.498736Z",
+        "probabilities": {
+          "home": 42.99980565050066,
+          "draw": 28.31256114950597,
+          "away": 28.68763319999336,
+          "over15": 73.97015815848725,
+          "over25": 49.75793567649975,
+          "over35": 26.97952979691386,
+          "bttsYes": 47.99572251485901
+        },
+        "expectedGoals": {
+          "home": 1.35,
+          "away": 1.35
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 42.99980565050066
+      },
+      {
+        "id": 4752,
+        "eventId": 8289,
+        "fixture": "加拿大 vs 波黑",
+        "kickoff": "2026-06-12T19:00:00Z",
+        "createdAt": "2026-06-02T10:52:38.842354Z",
+        "probabilities": {
+          "home": 38.889935863940025,
+          "draw": 25.976572777479312,
+          "away": 35.133491358580656,
+          "over15": 80.4404107547618,
+          "over25": 45.72289462642233,
+          "over35": 24.078993487471838,
+          "bttsYes": 63.529085301800635
+        },
+        "expectedGoals": {
+          "home": 1.0833333333333333,
+          "away": 1.6666666666666665
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 38.889935863940025
+      },
+      {
+        "id": 4754,
+        "eventId": 8290,
+        "fixture": "美国 vs 巴拉圭",
+        "kickoff": "2026-06-13T01:00:00Z",
+        "createdAt": "2026-06-02T10:52:39.651251Z",
+        "probabilities": {
+          "home": 33.45278772592012,
+          "draw": 35.119514735997946,
+          "away": 31.427697538081944,
+          "over15": 70.77690408180098,
+          "over25": 42.95003032617068,
+          "over35": 19.67762998232832,
+          "bttsYes": 48.144646787636525
+        },
+        "expectedGoals": {
+          "home": 1.05,
+          "away": 1.3166666666666667
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 35.119514735997946
+      },
+      {
+        "id": 4761,
+        "eventId": 8292,
+        "fixture": "卡塔尔 vs 瑞士",
+        "kickoff": "2026-06-13T19:00:00Z",
+        "createdAt": "2026-06-02T10:52:41.932385Z",
+        "probabilities": {
+          "home": 21.46329092881418,
+          "draw": 19.67616054064278,
+          "away": 58.86054853054304,
+          "over15": 83.00894569674907,
+          "over25": 55.96193703872674,
+          "over35": 28.637035163603446,
+          "bttsYes": 50.84663295597388
+        },
+        "expectedGoals": {
+          "home": 0.6666666666666666,
+          "away": 2.05
+        },
+        "mostLikelyScore": "0-2",
+        "modelVersion": "v5.0",
+        "confidence": 58.86054853054304
+      },
+      {
+        "id": 4763,
+        "eventId": 8293,
+        "fixture": "巴西 vs 摩洛哥",
+        "kickoff": "2026-06-13T22:00:00Z",
+        "createdAt": "2026-06-02T10:52:42.503694Z",
+        "probabilities": {
+          "home": 51.63850872414362,
+          "draw": 26.490324069779795,
+          "away": 21.871167206076585,
+          "over15": 60.672771580139006,
+          "over25": 27.161084230352454,
+          "over35": 16.503459750123206,
+          "bttsYes": 31.411284865833455
+        },
+        "expectedGoals": {
+          "home": 1.2,
+          "away": 0.7
+        },
+        "mostLikelyScore": "1-0",
+        "modelVersion": "v5.0",
+        "confidence": 51.63850872414362
+      },
+      {
+        "id": 4773,
+        "eventId": 8294,
+        "fixture": "海地 vs 苏格兰",
+        "kickoff": "2026-06-14T01:00:00Z",
+        "createdAt": "2026-06-02T10:52:45.817069Z",
+        "probabilities": {
+          "home": 35.780998701526926,
+          "draw": 27.298115040636244,
+          "away": 36.92088625783684,
+          "over15": 50.09629139437462,
+          "over25": 30.994406082777115,
+          "over35": 14.088655064662056,
+          "bttsYes": 21.262581029951306
+        },
+        "expectedGoals": {
+          "home": 1.3,
+          "away": 0.95
+        },
+        "mostLikelyScore": "1-0",
+        "modelVersion": "v5.0",
+        "confidence": 36.92088625783684
+      },
+      {
+        "id": 4776,
+        "eventId": 8291,
+        "fixture": "澳大利亚 vs Türkiye",
+        "kickoff": "2026-06-14T04:00:00Z",
+        "createdAt": "2026-06-02T10:52:46.730202Z",
+        "probabilities": {
+          "home": 38.889935863940025,
+          "draw": 25.976572777479312,
+          "away": 35.133491358580656,
+          "over15": 78.99190430646735,
+          "over25": 47.70365451400863,
+          "over35": 24.845334948045412,
+          "bttsYes": 48.333638250944105
+        },
+        "expectedGoals": {
+          "home": 1.05,
+          "away": 1.65
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 38.889935863940025
+      },
+      {
+        "id": 4779,
+        "eventId": 8295,
+        "fixture": "德国 vs 库拉索",
+        "kickoff": "2026-06-14T17:00:00Z",
+        "createdAt": "2026-06-02T10:52:47.781404Z",
+        "probabilities": {
+          "home": 44.34212977503055,
+          "draw": 26.07469571874304,
+          "away": 29.583174506226396,
+          "over15": 82.03554008425417,
+          "over25": 59.72732891348412,
+          "over35": 29.290618505575683,
+          "bttsYes": 65.06024657379385
+        },
+        "expectedGoals": {
+          "home": 1.4500000000000002,
+          "away": 1.25
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 44.34212977503055
+      },
+      {
+        "id": 4782,
+        "eventId": 8296,
+        "fixture": "荷兰 vs 日本",
+        "kickoff": "2026-06-14T20:00:00Z",
+        "createdAt": "2026-06-02T10:52:48.818421Z",
+        "probabilities": {
+          "home": 59.08807260779311,
+          "draw": 21.809081917246477,
+          "away": 19.102845474960418,
+          "over15": 83.25518117890182,
+          "over25": 50.25308370950554,
+          "over35": 22.74391452079006,
+          "bttsYes": 46.05845600558983
+        },
+        "expectedGoals": {
+          "home": 1.6666666666666665,
+          "away": 0.7666666666666666
+        },
+        "mostLikelyScore": "1-0",
+        "modelVersion": "v5.0",
+        "confidence": 59.08807260779311
+      },
+      {
+        "id": 4785,
+        "eventId": 8297,
+        "fixture": "科特迪瓦 vs 厄瓜多尔",
+        "kickoff": "2026-06-14T23:00:00Z",
+        "createdAt": "2026-06-02T10:52:49.829803Z",
+        "probabilities": {
+          "home": 49.23336765019127,
+          "draw": 22.111748716804815,
+          "away": 28.654883633003926,
+          "over15": 75.39474175839139,
+          "over25": 50.29289774875453,
+          "over35": 23.595759220216266,
+          "bttsYes": 62.146657355681036
+        },
+        "expectedGoals": {
+          "home": 1.1666666666666665,
+          "away": 1.1
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 49.23336765019127
+      },
+      {
+        "id": 4786,
+        "eventId": 8298,
+        "fixture": "瑞典 vs 突尼斯",
+        "kickoff": "2026-06-15T02:00:00Z",
+        "createdAt": "2026-06-02T10:52:50.165809Z",
+        "probabilities": {
+          "home": 69.37974986334612,
+          "draw": 18.392556421964144,
+          "away": 12.22769371468974,
+          "over15": 79.13815605618046,
+          "over25": 44.28898883954056,
+          "over35": 19.12125226812369,
+          "bttsYes": 33.934089503875455
+        },
+        "expectedGoals": {
+          "home": 1.8333333333333335,
+          "away": 1.15
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 69.37974986334612
+      },
+      {
+        "id": 4787,
+        "eventId": 8299,
+        "fixture": "西班牙 vs Cabo Verde",
+        "kickoff": "2026-06-15T16:00:00Z",
+        "createdAt": "2026-06-02T10:52:50.446056Z",
+        "probabilities": {
+          "home": 43.12154595595503,
+          "draw": 29.032688949476153,
+          "away": 27.845765094568815,
+          "over15": 83.32955791533041,
+          "over25": 63.93607834515602,
+          "over35": 49.20399191504497,
+          "bttsYes": 61.97597665953558
+        },
+        "expectedGoals": {
+          "home": 1.85,
+          "away": 1.65
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 43.12154595595503
+      },
+      {
+        "id": 4788,
+        "eventId": 8300,
+        "fixture": "比利时 vs 埃及",
+        "kickoff": "2026-06-15T19:00:00Z",
+        "createdAt": "2026-06-02T10:52:50.775449Z",
+        "probabilities": {
+          "home": 79.5998783913698,
+          "draw": 11.595136385174337,
+          "away": 8.804985223455857,
+          "over15": 87.35875061885346,
+          "over25": 72.98012839494167,
+          "over35": 24.625688553204565,
+          "bttsYes": 52.843238684425195
+        },
+        "expectedGoals": {
+          "home": 1.95,
+          "away": 0.7333333333333334
+        },
+        "mostLikelyScore": "1-0",
+        "modelVersion": "v5.0",
+        "confidence": 79.5998783913698
+      },
+      {
+        "id": 4789,
+        "eventId": 8301,
+        "fixture": "沙特阿拉伯 vs 乌拉圭",
+        "kickoff": "2026-06-15T22:00:00Z",
+        "createdAt": "2026-06-02T10:52:51.120391Z",
+        "probabilities": {
+          "home": 22.473777569671622,
+          "draw": 20.60250950714697,
+          "away": 56.923712923181405,
+          "over15": 67.02870918415888,
+          "over25": 38.79628516164011,
+          "over35": 17.632899631255476,
+          "bttsYes": 30.72880697727446
+        },
+        "expectedGoals": {
+          "home": 0.75,
+          "away": 1.35
+        },
+        "mostLikelyScore": "0-1",
+        "modelVersion": "v5.0",
+        "confidence": 56.923712923181405
+      },
+      {
+        "id": 4792,
+        "eventId": 8302,
+        "fixture": "伊朗 vs 新西兰",
+        "kickoff": "2026-06-16T01:00:00Z",
+        "createdAt": "2026-06-02T10:52:52.089739Z",
+        "probabilities": {
+          "home": 31.00158802926923,
+          "draw": 28.2584230024771,
+          "away": 40.73998896825366,
+          "over15": 65.11269485792607,
+          "over25": 29.695221784431396,
+          "over35": 18.70367680241172,
+          "bttsYes": 35.209809362594434
+        },
+        "expectedGoals": {
+          "home": 1.15,
+          "away": 1.025
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 40.73998896825366
+      },
+      {
+        "id": 4793,
+        "eventId": 8304,
+        "fixture": "法国 vs 塞内加尔",
+        "kickoff": "2026-06-16T19:00:00Z",
+        "createdAt": "2026-06-02T10:52:52.404609Z",
+        "probabilities": {
+          "home": 65.26841723935465,
+          "draw": 17.3026430480306,
+          "away": 17.428939712614767,
+          "over15": 81.99614749069444,
+          "over25": 53.75941327555947,
+          "over35": 27.967594085564766,
+          "bttsYes": 61.48067439550044
+        },
+        "expectedGoals": {
+          "home": 1.325,
+          "away": 1
+        },
+        "mostLikelyScore": "1-0",
+        "modelVersion": "v5.0",
+        "confidence": 65.26841723935465
+      },
+      {
+        "id": 4794,
+        "eventId": 8305,
+        "fixture": "伊拉克 vs 挪威",
+        "kickoff": "2026-06-16T22:00:00Z",
+        "createdAt": "2026-06-02T10:52:52.814440Z",
+        "probabilities": {
+          "home": 43.82209203223167,
+          "draw": 25.768895659644876,
+          "away": 30.40901230812344,
+          "over15": 76.32046574273684,
+          "over25": 52.047229744676805,
+          "over35": 26.63302345999593,
+          "bttsYes": 49.6073113794369
+        },
+        "expectedGoals": {
+          "home": 1.3,
+          "away": 1.3
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 43.82209203223167
+      },
+      {
+        "id": 4796,
+        "eventId": 8306,
+        "fixture": "阿根廷 vs 阿尔及利亚",
+        "kickoff": "2026-06-17T01:00:00Z",
+        "createdAt": "2026-06-02T10:52:53.592237Z",
+        "probabilities": {
+          "home": 63.593221027257265,
+          "draw": 19.64730400858552,
+          "away": 16.759474964157203,
+          "over15": 77.5633565618944,
+          "over25": 52.41452337216303,
+          "over35": 24.26030951233261,
+          "bttsYes": 48.11466863405468
+        },
+        "expectedGoals": {
+          "home": 1.45,
+          "away": 1.2
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 63.593221027257265
+      },
+      {
+        "id": 4797,
+        "eventId": 8303,
+        "fixture": "奥地利 vs 约旦",
+        "kickoff": "2026-06-17T04:00:00Z",
+        "createdAt": "2026-06-02T10:52:53.946005Z",
+        "probabilities": {
+          "home": 50.469165628396226,
+          "draw": 25.890456290472198,
+          "away": 23.640378081131576,
+          "over15": 75.5597557562843,
+          "over25": 52.007980215508496,
+          "over35": 27.513023855644153,
+          "bttsYes": 49.19711720202402
+        },
+        "expectedGoals": {
+          "home": 1.3,
+          "away": 1.3
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 50.469165628396226
+      },
+      {
+        "id": 4801,
+        "eventId": 8307,
+        "fixture": "葡萄牙 vs 刚果（金）",
+        "kickoff": "2026-06-17T17:00:00Z",
+        "createdAt": "2026-06-02T10:52:55.136503Z",
+        "probabilities": {
+          "home": 65.4175564748206,
+          "draw": 17.34217982653497,
+          "away": 17.240263698644437,
+          "over15": 80.45630352573919,
+          "over25": 57.38765780348813,
+          "over35": 28.409449724395042,
+          "bttsYes": 57.71333274617941
+        },
+        "expectedGoals": {
+          "home": 1.4500000000000002,
+          "away": 1.25
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 65.4175564748206
+      },
+      {
+        "id": 4805,
+        "eventId": 8308,
+        "fixture": "英格兰 vs 克罗地亚",
+        "kickoff": "2026-06-17T20:00:00Z",
+        "createdAt": "2026-06-02T10:52:56.325939Z",
+        "probabilities": {
+          "home": 27.489235363082663,
+          "draw": 26.90225632036325,
+          "away": 45.60850831655409,
+          "over15": 76.21627255534406,
+          "over25": 54.22287329561178,
+          "over35": 31.572768405628626,
+          "bttsYes": 59.389924552893255
+        },
+        "expectedGoals": {
+          "home": 1.4,
+          "away": 1.5
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 45.60850831655409
+      },
+      {
+        "id": 4806,
+        "eventId": 8309,
+        "fixture": "加纳 vs 巴拿马",
+        "kickoff": "2026-06-17T23:00:00Z",
+        "createdAt": "2026-06-02T10:52:56.646563Z",
+        "probabilities": {
+          "home": 55.53424273318819,
+          "draw": 22.884515135299445,
+          "away": 21.581242131512365,
+          "over15": 78.03823234333443,
+          "over25": 63.06492851598565,
+          "over35": 38.865896891206994,
+          "bttsYes": 66.06706050475339
+        },
+        "expectedGoals": {
+          "home": 3.05,
+          "away": 1.3333333333333333
+        },
+        "mostLikelyScore": "3-1",
+        "modelVersion": "v5.0",
+        "confidence": 55.53424273318819
+      },
+      {
+        "id": 4809,
+        "eventId": 8310,
+        "fixture": "乌兹别克斯坦 vs 哥伦比亚",
+        "kickoff": "2026-06-18T02:00:00Z",
+        "createdAt": "2026-06-02T10:52:57.660519Z",
+        "probabilities": {
+          "home": 28.472594556429776,
+          "draw": 21.30653459273478,
+          "away": 50.22087085083544,
+          "over15": 78.81435718773353,
+          "over25": 59.00054614164569,
+          "over35": 27.64412011175236,
+          "bttsYes": 45.679884827000386
+        },
+        "expectedGoals": {
+          "home": 0.8166666666666667,
+          "away": 1.75
+        },
+        "mostLikelyScore": "0-1",
+        "modelVersion": "v5.0",
+        "confidence": 50.22087085083544
+      },
+      {
+        "id": 4811,
+        "eventId": 8311,
+        "fixture": "捷克 vs 南非",
+        "kickoff": "2026-06-18T16:00:00Z",
+        "createdAt": "2026-06-02T10:52:58.337444Z",
+        "probabilities": {
+          "home": 44.85344987904572,
+          "draw": 26.283401627249948,
+          "away": 28.863148493704333,
+          "over15": 73.04872971388754,
+          "over25": 49.86470272265482,
+          "over35": 25.31751797621648,
+          "bttsYes": 48.65357882915058
+        },
+        "expectedGoals": {
+          "home": 1.3,
+          "away": 1.3
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 44.85344987904572
+      },
+      {
+        "id": 4812,
+        "eventId": 8312,
+        "fixture": "瑞士 vs 波黑",
+        "kickoff": "2026-06-18T19:00:00Z",
+        "createdAt": "2026-06-02T10:52:58.669980Z",
+        "probabilities": {
+          "home": 65.26841723935465,
+          "draw": 17.3026430480306,
+          "away": 17.428939712614767,
+          "over15": 84.6196499295823,
+          "over25": 58.63916075498265,
+          "over35": 27.601748543981557,
+          "bttsYes": 57.939806391129025
+        },
+        "expectedGoals": {
+          "home": 1.55,
+          "away": 1.6666666666666665
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 65.26841723935465
+      },
+      {
+        "id": 4813,
+        "eventId": 8313,
+        "fixture": "加拿大 vs 卡塔尔",
+        "kickoff": "2026-06-18T22:00:00Z",
+        "createdAt": "2026-06-02T10:52:59.004798Z",
+        "probabilities": {
+          "home": 43.82209203223167,
+          "draw": 25.768895659644876,
+          "away": 30.40901230812344,
+          "over15": 66.48917337187747,
+          "over25": 40.02523003447524,
+          "over35": 20.407965685228675,
+          "bttsYes": 47.07924880353261
+        },
+        "expectedGoals": {
+          "home": 1.3333333333333333,
+          "away": 1.1666666666666667
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 43.82209203223167
+      },
+      {
+        "id": 4816,
+        "eventId": 8314,
+        "fixture": "墨西哥 vs 韩国",
+        "kickoff": "2026-06-19T01:00:00Z",
+        "createdAt": "2026-06-02T10:52:59.977703Z",
+        "probabilities": {
+          "home": 55.53424273318819,
+          "draw": 22.884515135299445,
+          "away": 21.581242131512365,
+          "over15": 19.605246386026177,
+          "over25": 23.04962347084016,
+          "over35": 14.781851932016757,
+          "bttsYes": 28.655931328643742
+        },
+        "expectedGoals": {
+          "home": 0.7333333333333334,
+          "away": 1.2
+        },
+        "mostLikelyScore": "0-1",
+        "modelVersion": "v5.0",
+        "confidence": 55.53424273318819
+      },
+      {
+        "id": 4817,
+        "eventId": 8316,
+        "fixture": "美国 vs 澳大利亚",
+        "kickoff": "2026-06-19T19:00:00Z",
+        "createdAt": "2026-06-02T10:53:00.564125Z",
+        "probabilities": {
+          "home": 33.03930340559288,
+          "draw": 32.34084279548106,
+          "away": 34.61985379892605,
+          "over15": 74.54285231411589,
+          "over25": 38.359857353667685,
+          "over35": 17.608478341379268,
+          "bttsYes": 51.10058262077381
+        },
+        "expectedGoals": {
+          "home": 1.4,
+          "away": 1.0666666666666667
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 34.61985379892605
+      },
+      {
+        "id": 4818,
+        "eventId": 8317,
+        "fixture": "苏格兰 vs 摩洛哥",
+        "kickoff": "2026-06-19T22:00:00Z",
+        "createdAt": "2026-06-02T10:53:01.094416Z",
+        "probabilities": {
+          "home": 28.458536238199184,
+          "draw": 24.324748944044238,
+          "away": 47.21671481775658,
+          "over15": 73.43894466614938,
+          "over25": 39.59386452162834,
+          "over35": 20.499234698712947,
+          "bttsYes": 43.29302808132382
+        },
+        "expectedGoals": {
+          "home": 0.8,
+          "away": 1.475
+        },
+        "mostLikelyScore": "0-1",
+        "modelVersion": "v5.0",
+        "confidence": 47.21671481775658
+      },
+      {
+        "id": 4819,
+        "eventId": 8318,
+        "fixture": "巴西 vs 海地",
+        "kickoff": "2026-06-20T00:30:00Z",
+        "createdAt": "2026-06-02T10:53:01.866712Z",
+        "probabilities": {
+          "home": 58.91577517142851,
+          "draw": 22.037082157194668,
+          "away": 19.047142671376825,
+          "over15": 66.6797061234609,
+          "over25": 29.025763922891922,
+          "over35": 17.025654197508675,
+          "bttsYes": 29.745839616999596
+        },
+        "expectedGoals": {
+          "home": 1.35,
+          "away": 0.75
+        },
+        "mostLikelyScore": "1-0",
+        "modelVersion": "v5.0",
+        "confidence": 58.91577517142851
+      },
+      {
+        "id": 4820,
+        "eventId": 8315,
+        "fixture": "Türkiye vs 巴拉圭",
+        "kickoff": "2026-06-20T03:00:00Z",
+        "createdAt": "2026-06-02T10:53:02.434783Z",
+        "probabilities": {
+          "home": 51.63850872414362,
+          "draw": 26.490324069779795,
+          "away": 21.871167206076585,
+          "over15": 77.64395029273943,
+          "over25": 53.226598192009035,
+          "over35": 28.124719768811246,
+          "bttsYes": 47.91591156206953
+        },
+        "expectedGoals": {
+          "home": 1.3,
+          "away": 1.3
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 51.63850872414362
+      },
+      {
+        "id": 4822,
+        "eventId": 8320,
+        "fixture": "荷兰 vs 瑞典",
+        "kickoff": "2026-06-20T17:00:00Z",
+        "createdAt": "2026-06-02T10:53:03.748943Z",
+        "probabilities": {
+          "home": 58.91577517142851,
+          "draw": 22.037082157194668,
+          "away": 19.047142671376825,
+          "over15": 69.46831396023941,
+          "over25": 44.48855229456489,
+          "over35": 20.765349459221063,
+          "bttsYes": 38.00113102447952
+        },
+        "expectedGoals": {
+          "home": 1.5,
+          "away": 1
+        },
+        "mostLikelyScore": "1-0",
+        "modelVersion": "v5.0",
+        "confidence": 58.91577517142851
+      },
+      {
+        "id": 4823,
+        "eventId": 8321,
+        "fixture": "德国 vs 科特迪瓦",
+        "kickoff": "2026-06-20T20:00:00Z",
+        "createdAt": "2026-06-02T10:53:04.331441Z",
+        "probabilities": {
+          "home": 56.25914885221081,
+          "draw": 21.877902204276072,
+          "away": 21.862948943513114,
+          "over15": 87.81078439788558,
+          "over25": 66.4467952101477,
+          "over35": 31.97693200982858,
+          "bttsYes": 75.5725004824693
+        },
+        "expectedGoals": {
+          "home": 1.8,
+          "away": 1.2666666666666666
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 56.25914885221081
+      },
+      {
+        "id": 4829,
+        "eventId": 8322,
+        "fixture": "厄瓜多尔 vs 库拉索",
+        "kickoff": "2026-06-21T00:00:00Z",
+        "createdAt": "2026-06-02T10:53:07.986307Z",
+        "probabilities": {
+          "home": 34.859187013819756,
+          "draw": 30.450027841992476,
+          "away": 34.69078514418777,
+          "over15": 68.74880227915449,
+          "over25": 33.962821147741316,
+          "over35": 17.304830802206688,
+          "bttsYes": 45.595523163694054
+        },
+        "expectedGoals": {
+          "home": 1.25,
+          "away": 1.15
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 34.859187013819756
+      },
+      {
+        "id": 4836,
+        "eventId": 8319,
+        "fixture": "突尼斯 vs 日本",
+        "kickoff": "2026-06-21T04:00:00Z",
+        "createdAt": "2026-06-02T10:53:10.956450Z",
+        "probabilities": {
+          "home": 30.842159500772887,
+          "draw": 21.496536325642644,
+          "away": 47.661304173584476,
+          "over15": 76.50957438820333,
+          "over25": 44.11151455458427,
+          "over35": 19.484960482902302,
+          "bttsYes": 50.90845664853493
+        },
+        "expectedGoals": {
+          "home": 1.1666666666666665,
+          "away": 1.1
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 47.661304173584476
+      },
+      {
+        "id": 4839,
+        "eventId": 8323,
+        "fixture": "西班牙 vs 沙特阿拉伯",
+        "kickoff": "2026-06-21T16:00:00Z",
+        "createdAt": "2026-06-02T10:53:11.972697Z",
+        "probabilities": {
+          "home": 56.25914885221081,
+          "draw": 21.877902204276072,
+          "away": 21.862948943513114,
+          "over15": 88.09332386626821,
+          "over25": 70.05447416730932,
+          "over35": 43.18787318430122,
+          "bttsYes": 45.824535960836506
+        },
+        "expectedGoals": {
+          "home": 2.325,
+          "away": 1.5
+        },
+        "mostLikelyScore": "2-1",
+        "modelVersion": "v5.0",
+        "confidence": 56.25914885221081
+      },
+      {
+        "id": 4840,
+        "eventId": 8324,
+        "fixture": "比利时 vs 伊朗",
+        "kickoff": "2026-06-21T19:00:00Z",
+        "createdAt": "2026-06-02T10:53:12.313977Z",
+        "probabilities": {
+          "home": 71.6854621320449,
+          "draw": 19.003800237031022,
+          "away": 9.310737630924077,
+          "over15": 85.74686029369877,
+          "over25": 65.58954815362975,
+          "over35": 25.999431117327415,
+          "bttsYes": 53.098610154519385
+        },
+        "expectedGoals": {
+          "home": 1.7,
+          "away": 0.9
+        },
+        "mostLikelyScore": "1-0",
+        "modelVersion": "v5.0",
+        "confidence": 71.6854621320449
+      },
+      {
+        "id": 4842,
+        "eventId": 8325,
+        "fixture": "乌拉圭 vs Cabo Verde",
+        "kickoff": "2026-06-21T22:00:00Z",
+        "createdAt": "2026-06-02T10:53:12.975178Z",
+        "probabilities": {
+          "home": 55.53424273318819,
+          "draw": 22.884515135299445,
+          "away": 21.581242131512365,
+          "over15": 69.58455702314876,
+          "over25": 30.23271534654382,
+          "over35": 18.85047992371942,
+          "bttsYes": 40.61276911236074
+        },
+        "expectedGoals": {
+          "home": 1.25,
+          "away": 1.05
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 55.53424273318819
+      },
+      {
+        "id": 4843,
+        "eventId": 8326,
+        "fixture": "新西兰 vs 埃及",
+        "kickoff": "2026-06-22T01:00:00Z",
+        "createdAt": "2026-06-02T10:53:13.308620Z",
+        "probabilities": {
+          "home": 58.91577517142851,
+          "draw": 22.037082157194668,
+          "away": 19.047142671376825,
+          "over15": 85.74613487909633,
+          "over25": 68.43880741715313,
+          "over35": 25.217514278483076,
+          "bttsYes": 62.36764945697747
+        },
+        "expectedGoals": {
+          "home": 1.9,
+          "away": 0.9833333333333334
+        },
+        "mostLikelyScore": "1-0",
+        "modelVersion": "v5.0",
+        "confidence": 58.91577517142851
+      },
+      {
+        "id": 4844,
+        "eventId": 8327,
+        "fixture": "阿根廷 vs 奥地利",
+        "kickoff": "2026-06-22T17:00:00Z",
+        "createdAt": "2026-06-02T10:53:13.651116Z",
+        "probabilities": {
+          "home": 49.23336765019127,
+          "draw": 22.111748716804815,
+          "away": 28.654883633003926,
+          "over15": 73.69691419775634,
+          "over25": 48.565683544266065,
+          "over35": 21.817244305352347,
+          "bttsYes": 43.82286278125396
+        },
+        "expectedGoals": {
+          "home": 1.35,
+          "away": 1.25
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 49.23336765019127
+      },
+      {
+        "id": 4845,
+        "eventId": 8328,
+        "fixture": "法国 vs 伊拉克",
+        "kickoff": "2026-06-22T21:00:00Z",
+        "createdAt": "2026-06-02T10:53:13.980348Z",
+        "probabilities": {
+          "home": 65.4175564748206,
+          "draw": 17.34217982653497,
+          "away": 17.240263698644437,
+          "over15": 78.1326869027959,
+          "over25": 51.528112871116136,
+          "over35": 26.81367115694658,
+          "bttsYes": 54.59900385412762
+        },
+        "expectedGoals": {
+          "home": 1.35,
+          "away": 0.95
+        },
+        "mostLikelyScore": "1-0",
+        "modelVersion": "v5.0",
+        "confidence": 65.4175564748206
+      },
+      {
+        "id": 4847,
+        "eventId": 8329,
+        "fixture": "挪威 vs 塞内加尔",
+        "kickoff": "2026-06-23T00:00:00Z",
+        "createdAt": "2026-06-02T10:53:14.821897Z",
+        "probabilities": {
+          "home": 33.08778503309927,
+          "draw": 25.24340278503298,
+          "away": 41.66881218186774,
+          "over15": 83.37089703955523,
+          "over25": 61.378474154459454,
+          "over35": 29.34580476952378,
+          "bttsYes": 65.70752799049802
+        },
+        "expectedGoals": {
+          "home": 1.275,
+          "away": 1.35
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 41.66881218186774
+      },
+      {
+        "id": 4848,
+        "eventId": 8330,
+        "fixture": "约旦 vs 阿尔及利亚",
+        "kickoff": "2026-06-23T03:00:00Z",
+        "createdAt": "2026-06-02T10:53:15.221068Z",
+        "probabilities": {
+          "home": 55.53424273318819,
+          "draw": 22.884515135299445,
+          "away": 21.581242131512365,
+          "over15": 78.30745452830186,
+          "over25": 52.860999317198306,
+          "over35": 24.762157393439235,
+          "bttsYes": 53.29326056874796
+        },
+        "expectedGoals": {
+          "home": 1.4,
+          "away": 1.25
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 55.53424273318819
+      },
+      {
+        "id": 4855,
+        "eventId": 8331,
+        "fixture": "葡萄牙 vs 乌兹别克斯坦",
+        "kickoff": "2026-06-23T17:00:00Z",
+        "createdAt": "2026-06-02T10:53:17.601276Z",
+        "probabilities": {
+          "home": 63.758977007588335,
+          "draw": 19.437864390947794,
+          "away": 16.803158601463874,
+          "over15": 79.82860718036181,
+          "over25": 57.216346900963885,
+          "over35": 28.62767815075821,
+          "bttsYes": 59.01226730789576
+        },
+        "expectedGoals": {
+          "home": 1.4500000000000002,
+          "away": 1.25
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 63.758977007588335
+      },
+      {
+        "id": 4856,
+        "eventId": 8332,
+        "fixture": "英格兰 vs 加纳",
+        "kickoff": "2026-06-23T20:00:00Z",
+        "createdAt": "2026-06-02T10:53:17.884312Z",
+        "probabilities": {
+          "home": 58.91577517142851,
+          "draw": 22.037082157194668,
+          "away": 19.047142671376825,
+          "over15": 88.31638211463483,
+          "over25": 76.28907245321675,
+          "over35": 58.275274505227856,
+          "bttsYes": 69.05762173892107
+        },
+        "expectedGoals": {
+          "home": 2.125,
+          "away": 1.4
+        },
+        "mostLikelyScore": "2-1",
+        "modelVersion": "v5.0",
+        "confidence": 58.91577517142851
+      },
+      {
+        "id": 4857,
+        "eventId": 8333,
+        "fixture": "巴拿马 vs 克罗地亚",
+        "kickoff": "2026-06-23T23:00:00Z",
+        "createdAt": "2026-06-02T10:53:18.217203Z",
+        "probabilities": {
+          "home": 17.720294326977164,
+          "draw": 26.857368121700976,
+          "away": 55.42233755132185,
+          "over15": 83.76652555373697,
+          "over25": 62.70262277550087,
+          "over35": 31.431797754832758,
+          "bttsYes": 44.48605703878234
+        },
+        "expectedGoals": {
+          "home": 0.7333333333333334,
+          "away": 1.9
+        },
+        "mostLikelyScore": "0-1",
+        "modelVersion": "v5.0",
+        "confidence": 55.42233755132185
+      },
+      {
+        "id": 4859,
+        "eventId": 8334,
+        "fixture": "哥伦比亚 vs 刚果（金）",
+        "kickoff": "2026-06-24T02:00:00Z",
+        "createdAt": "2026-06-02T10:53:18.860658Z",
+        "probabilities": {
+          "home": 56.25914885221081,
+          "draw": 21.877902204276072,
+          "away": 21.862948943513114,
+          "over15": 81.79107362292031,
+          "over25": 55.5860131280969,
+          "over35": 27.034767731854725,
+          "bttsYes": 54.8718071667866
+        },
+        "expectedGoals": {
+          "home": 1.75,
+          "away": 1.15
+        },
+        "mostLikelyScore": "1-1",
+        "modelVersion": "v5.0",
+        "confidence": 56.25914885221081
+      },
+      {
+        "id": 4861,
+        "eventId": 8335,
+        "fixture": "瑞士 vs 加拿大",
+        "kickoff": "2026-06-24T19:00:00Z",
+        "createdAt": "2026-06-02T10:53:19.598381Z",
+        "probabilities": {
+          "home": 69.37974986334612,
+          "draw": 18.392556421964144,
+          "away": 12.22769371468974,
+          "over15": 87.23774559226952,
+          "over25": 68.66763906306545,
+          "over35": 30.626541025696053,
+          "bttsYes": 61.82081644087164
+        },
+        "expectedGoals": {
+          "home": 2.05,
+          "away": 1.3333333333333333
+        },
+        "mostLikelyScore": "2-1",
+        "modelVersion": "v5.0",
+        "confidence": 69.37974986334612
+      },
+      {
+        "id": 4860,
+        "eventId": 8336,
+        "fixture": "波黑 vs 卡塔尔",
+        "kickoff": "2026-06-24T19:00:00Z",
+        "createdAt": "2026-06-02T10:53:19.265690Z",
+        "probabilities": {
+          "home": 82.71572632614962,
+          "draw": 10.664070738394482,
+          "away": 6.620202935455903,
+          "over15": 86.4026363007137,
+          "over25": 69.27436660902825,
+          "over35": 22.665849400760806,
+          "bttsYes": 50.2508712105273
+        },
+        "expectedGoals": {
+          "home": 1.6666666666666665,
+          "away": 0.6666666666666666
+        },
+        "mostLikelyScore": "1-0",
+        "modelVersion": "v5.0",
+        "confidence": 82.71572632614962
+      }
+    ],
+    "bookmakerOddsByEvent": [
+      {
+        "event": {
+          "id": 8287,
+          "home_team": "Mexico",
+          "away_team": "South Africa",
+          "event_date": "2026-06-11T19:00:00Z",
+          "league": "World Cup 2026"
+        },
+        "count": 0,
+        "odds": []
+      },
+      {
+        "event": {
+          "id": 8288,
+          "home_team": "South Korea",
+          "away_team": "Czechia",
+          "event_date": "2026-06-12T02:00:00Z",
+          "league": "World Cup 2026"
+        },
+        "count": 0,
+        "odds": []
+      },
+      {
+        "event": {
+          "id": 8289,
+          "home_team": "Canada",
+          "away_team": "Bosnia & Herzegovina",
+          "event_date": "2026-06-12T19:00:00Z",
+          "league": "World Cup 2026"
+        },
+        "count": 0,
+        "odds": []
+      },
+      {
+        "event": {
+          "id": 8290,
+          "home_team": "USA",
+          "away_team": "Paraguay",
+          "event_date": "2026-06-13T01:00:00Z",
+          "league": "World Cup 2026"
+        },
+        "count": 0,
+        "odds": []
+      },
+      {
+        "event": {
+          "id": 8292,
+          "home_team": "Qatar",
+          "away_team": "Switzerland",
+          "event_date": "2026-06-13T19:00:00Z",
+          "league": "World Cup 2026"
+        },
+        "count": 0,
+        "odds": []
+      },
+      {
+        "event": {
+          "id": 8293,
+          "home_team": "Brazil",
+          "away_team": "Morocco",
+          "event_date": "2026-06-13T22:00:00Z",
+          "league": "World Cup 2026"
+        },
+        "count": 0,
+        "odds": []
+      },
+      {
+        "event": {
+          "id": 8294,
+          "home_team": "Haiti",
+          "away_team": "Scotland",
+          "event_date": "2026-06-14T01:00:00Z",
+          "league": "World Cup 2026"
+        },
+        "count": 0,
+        "odds": []
+      },
+      {
+        "event": {
+          "id": 8291,
+          "home_team": "Australia",
+          "away_team": "Türkiye",
+          "event_date": "2026-06-14T04:00:00Z",
+          "league": "World Cup 2026"
+        },
+        "count": 0,
+        "odds": []
+      }
+    ],
+    "polymarketOddsByEvent": [
+      {
+        "eventId": 8287,
+        "count": 0,
+        "odds": []
+      },
+      {
+        "eventId": 8288,
+        "count": 0,
+        "odds": []
+      },
+      {
+        "eventId": 8289,
+        "count": 0,
+        "odds": []
+      },
+      {
+        "eventId": 8290,
+        "count": 0,
+        "odds": []
+      },
+      {
+        "eventId": 8292,
+        "count": 0,
+        "odds": []
+      },
+      {
+        "eventId": 8293,
+        "count": 0,
+        "odds": []
+      },
+      {
+        "eventId": 8294,
+        "count": 0,
+        "odds": []
+      },
+      {
+        "eventId": 8291,
+        "count": 0,
+        "odds": []
+      }
+    ],
+    "warnings": []
+  }
+}

@@ -6,6 +6,7 @@ import {
   summarizeOddsCoverage,
   wrapSnapshotPayload,
 } from "../lib/snapshot-store.js";
+import { validateAbSnapshotContract } from "../lib/snapshot-ab-contract.js";
 import { readOddsSnapshotPayload } from "../lib/snapshot-replay.js";
 
 test("wrapSnapshotPayload attaches metadata and hash", () => {
@@ -51,4 +52,14 @@ test("summarizeOddsCoverage counts fixtures and bookmakers", () => {
 test("readOddsSnapshotPayload reads wrapped snapshot envelope", () => {
   const snapshot = readOddsSnapshotPayload("./fixtures/snapshots/latest/jingcai-official-feed.json");
   assert.equal(snapshot, null);
+});
+
+test("validateAbSnapshotContract requires jingcai official feed snapshot", () => {
+  const issues = validateAbSnapshotContract({
+    "live-data.json": "present",
+    "provider-status.json": "present",
+    "raw/the-odds-api-h2h.json": "present",
+  });
+
+  assert.ok(issues.includes("jingcai-official-feed.json 缺失"));
 });

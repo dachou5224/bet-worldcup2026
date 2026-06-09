@@ -1,0 +1,160 @@
+{
+  "capturedAt": "2026-06-09T02:31:08.755Z",
+  "appMode": "research",
+  "pipelineError": null,
+  "providerStatus": {
+    "appMode": "research",
+    "marketDataMode": "real_snapshot_replay",
+    "requestedMarketDataMode": "real",
+    "requestedLiveDataMode": "real",
+    "jingcaiOfficialFeedMode": "file",
+    "jingcaiOfficialFeedSource": "file",
+    "jingcaiOfficialFeedFile": "fixtures/snapshots/latest/jingcai-official-feed.json",
+    "jingcaiOfficialFeedUrl": null,
+    "backtestRunMode": "mock",
+    "backtestRunFile": "./fixtures/snapshots/backtest-run.json",
+    "backtestRunSourceMode": "artifact_or_mock",
+    "backtestRunSummary": {
+      "recordCount": 0,
+      "liveDerivedCount": 0,
+      "artifactBackedCount": 0,
+      "officialSettlementCompleteCount": 0
+    },
+    "postMatchReviewMode": "artifact",
+    "postMatchReviewFile": "./fixtures/snapshots/post-match-review.json",
+    "configuredSourceCatalogFile": "./data-source-catalog.json",
+    "configuredRawMarketBoardFile": "./fixtures/raw-market-board.json",
+    "marketMatchCount": 5,
+    "providerHealth": {
+      "oddsStatus": "snapshot_replay",
+      "oddsRows": 5,
+      "oddsSnapshotFile": "/Users/liuzhen/AI-projects/guess_worldcup2026/fixtures/snapshots/latest/raw/the-odds-api-h2h.json",
+      "oddsSnapshotCapturedAt": "2026-06-08T09:06:05.131Z",
+      "oddsReplayReason": "HTTP 401 Unauthorized for https://api.the-odds-api.com/v4/sports/soccer_fifa_world_cup/odds?apiKey=b6fca843f5dee9f647f8ee844d85794d&regions=eu&markets=h2h&oddsFormat=decimal&commenceTimeFrom=2026-06-11T00%3A00%3A00Z&commenceTimeTo=2026-07-19T23%3A59%3A59Z: {\"message\":\"Usage quota has been reached. See usage plans at https://the-odds-api.com\",\"error_code\":\"OUT_OF_USAGE_CREDITS\",\"details_url\":\"https://the-odds-api.com/liveapi/guides/v4/api-error-codes.html#out-of-usage-credits\"}",
+      "polymarketStatus": "skipped",
+      "mergedFixtureCount": 5
+    },
+    "sourceCatalogVersion": 1,
+    "sourceCount": 11,
+    "adapterStatus": {
+      "odds": true,
+      "polymarket": false,
+      "live": true,
+      "opinions": false,
+      "bzzoiro": true
+    },
+    "sources": [
+      {
+        "id": "fifa_match_centre",
+        "name": "FIFA Match Centre / FIFA 官方赛事页",
+        "category": "official_results",
+        "priority": "high",
+        "integrationStatus": "research",
+        "access": "public_web"
+      },
+      {
+        "id": "fifa_football_data_platform",
+        "name": "FIFA Football Data Platform",
+        "category": "official_data_platform",
+        "priority": "medium",
+        "integrationStatus": "research",
+        "access": "partner_or_enterprise"
+      },
+      {
+        "id": "sportmonks_football",
+        "name": "Sportmonks Football API",
+        "category": "live_scores_and_fixtures",
+        "priority": "high",
+        "integrationStatus": "candidate",
+        "access": "paid_api"
+      },
+      {
+        "id": "the_odds_api",
+        "name": "The Odds API",
+        "category": "odds_aggregation",
+        "priority": "high",
+        "integrationStatus": "candidate",
+        "access": "paid_api"
+      },
+      {
+        "id": "polymarket_gamma_api",
+        "name": "Polymarket Gamma API",
+        "category": "prediction_market_discovery",
+        "priority": "high",
+        "integrationStatus": "candidate",
+        "access": "public_api"
+      },
+      {
+        "id": "polymarket_clob_api",
+        "name": "Polymarket CLOB API",
+        "category": "prediction_market_prices",
+        "priority": "high",
+        "integrationStatus": "candidate",
+        "access": "public_plus_authenticated"
+      },
+      {
+        "id": "polymarket_data_api",
+        "name": "Polymarket Data API",
+        "category": "prediction_market_analytics",
+        "priority": "medium",
+        "integrationStatus": "candidate",
+        "access": "public_api"
+      },
+      {
+        "id": "sportsbook_direct_scraping",
+        "name": "博彩公司网页直抓",
+        "category": "sportsbook_scraping",
+        "priority": "low",
+        "integrationStatus": "deferred",
+        "access": "public_web"
+      },
+      {
+        "id": "bzzoiro_sports_data",
+        "name": "Bzzoiro Sports Data / MCP",
+        "category": "football_context_and_predictions",
+        "priority": "medium",
+        "integrationStatus": "candidate",
+        "access": "token_api"
+      },
+      {
+        "id": "cn_pundit_commentary",
+        "name": "中文足球评论员观点池",
+        "category": "expert_opinions",
+        "priority": "medium",
+        "integrationStatus": "candidate",
+        "access": "manual_or_platform_api"
+      },
+      {
+        "id": "global_pundit_commentary",
+        "name": "海外足球媒体与评论员观点池",
+        "category": "expert_opinions",
+        "priority": "medium",
+        "integrationStatus": "candidate",
+        "access": "manual_or_platform_api"
+      }
+    ]
+  },
+  "rawProviderMeta": {
+    "footballData": {
+      "capturedAt": "2026-06-09T02:31:15.142Z",
+      "fromCache": true,
+      "competitionCode": "WC",
+      "dateFrom": "2026-06-11",
+      "dateTo": "2026-07-19"
+    },
+    "oddsApi": null,
+    "polymarket": null
+  },
+  "rawProviderErrors": {
+    "footballData": "fetch failed",
+    "footballDataFallback": "used_cache_after_live_fetch_failed",
+    "oddsApi": "HTTP 401 Unauthorized for https://api.the-odds-api.com/v4/sports/soccer_fifa_world_cup/odds?apiKey=b6fca843f5dee9f647f8ee844d85794d&regions=eu&markets=h2h&oddsFormat=decimal&commenceTimeFrom=2026-06-11T00%3A00%3A00Z&commenceTimeTo=2026-07-19T23%3A59%3A59Z: {\"message\":\"Usage quota has been reached. See usage plans at https://the-odds-api.com\",\"error_code\":\"OUT_OF_USAGE_CREDITS\",\"details_url\":\"https://the-odds-api.com/liveapi/guides/v4/api-error-codes.html#out-of-usage-credits\"}"
+  },
+  "oddsBootstrap": {
+    "outputFile": "/Users/liuzhen/AI-projects/guess_worldcup2026/fixtures/snapshots/latest/raw/the-odds-api-h2h.json",
+    "fixtureCount": 5,
+    "rawPayloadHash": "24fd00c3dd9dc869eb681ad65e1f045290dff505ac11a5d56fb9b37bcc2e1410",
+    "capturedAt": "2026-06-08T09:06:05.131Z"
+  },
+  "oddsCoverage": null
+}

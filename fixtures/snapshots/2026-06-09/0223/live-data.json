@@ -1,0 +1,13 @@
+{
+  "capturedAt": "2026-06-09T02:23:41.175Z",
+  "source": "error",
+  "sourceMode": "error",
+  "rawPayloadHash": "06006fb175230b920ad3ca42ce4a5058b3138785707deb93bce83a76eb59a9f8",
+  "parserVersion": "2026.06.08-agent-b",
+  "liveMode": "error",
+  "liveMatchCount": 0,
+  "payload": {
+    "liveMode": "error",
+    "liveMatches": []
+  }
+}

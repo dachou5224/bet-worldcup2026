@@ -107,7 +107,7 @@ npm run snapshot:providers
 3. `fixtures/snapshots/*.json`（扁平旧路径）仍保留兼容，新写入同时镜像到 `latest/`。
 4. football-data 免费 tier 有 rate limit；快照脚本会分窗请求并尊重 Wait 头。
 5. **The Odds API 配额耗尽时**，运行 `npm run bootstrap:odds-snapshot` 从 Bzzoiro cache 生成 `fixtures/snapshots/latest/raw/the-odds-api-h2h.json`，再走 `real_snapshot_replay` 回放，不算 mock fallback。
-6. 如需离线跑 research，可显式开启 `LIVE_SNAPSHOT_REPLAY_ENABLED=true`，让 A 侧优先消费 `fixtures/snapshots/latest/live-data.json`；默认仍然是 fail-fast。
+6. 如需离线跑 research，research 模式下默认开启 live 快照回放（可用 `LIVE_SNAPSHOT_REPLAY_ENABLED=false` 关闭）；A 侧消费 `fixtures/snapshots/latest/live-data.json`。
 
 ## 进度看板
 

@@ -64,15 +64,32 @@
       "category": "odds_aggregation",
       "providerType": "third_party_api",
       "priority": "high",
-      "integrationStatus": "candidate",
+      "integrationStatus": "integrated",
       "access": "paid_api",
       "auth": "x-api-key",
-      "recommendedUse": "多家博彩公司 1X2 / spreads / totals 汇总，适合做 market baseline",
+      "recommendedUse": "多家博彩公司 1X2 / spreads / totals 汇总，适合做 market baseline；配额耗尽时由 composite 回退 Bzzoiro",
       "docsUrl": "https://the-odds-api.com/liveapi/guides/v4/index.html",
       "apiBaseUrl": "https://api.the-odds-api.com/v4",
       "notes": [
         "统一 schema，适合减少不同博彩公司字段差异。",
         "文档包含 upcoming odds、scores 和 historical odds。"
+      ]
+    },
+    {
+      "id": "odds_api_io",
+      "name": "Odds-API.io",
+      "category": "odds_aggregation",
+      "providerType": "third_party_api",
+      "priority": "medium",
+      "integrationStatus": "candidate",
+      "access": "freemium_api",
+      "auth": "api_key_query",
+      "recommendedUse": "The Odds API 配额不足时的第二 live 源；按小时限流，含 Asian sharp book",
+      "docsUrl": "https://docs.odds-api.io/",
+      "apiBaseUrl": "https://api.odds-api.io/v3",
+      "notes": [
+        "免费 100 req/h、2 bookmakers；付费 £99+/月 5000 req/h。",
+        "schema 与 The Odds API v4 不同，需独立适配器 providers/odds/odds-api-io.js。"
       ]
     },
     {
@@ -149,15 +166,15 @@
       "category": "football_context_and_predictions",
       "providerType": "api_and_mcp",
       "priority": "medium",
-      "integrationStatus": "candidate",
+      "integrationStatus": "integrated",
       "access": "token_api",
       "auth": "bearer_token",
-      "recommendedUse": "补充 match context、O/U 摘要、ML predictions、expected goals 和 most likely score",
+      "recommendedUse": "补充 match context、O/U 摘要、ML predictions；ODDS_PROVIDER=auto 时作为 bookmaker 1x2 回退源",
       "docsUrl": "https://sports.bzzoiro.com/mcp-info/",
       "apiBaseUrl": "https://sports.bzzoiro.com/api",
       "notes": [
         "OpenAPI 暴露 /api/events、/api/predictions、/api/odds 和 /api/odds/polymarket。",
-        "当前项目先把它作为 token-backed 的补充源，不影响主 market pipeline。"
+        "composite odds 适配器在 The Odds API 失败时自动切换；live /odds 偶发空则读 supplemental 快照。"
       ]
     },
     {

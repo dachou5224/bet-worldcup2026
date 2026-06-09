@@ -1,0 +1,210 @@
+{
+  "capturedAt": "2026-06-09T02:46:40.828Z",
+  "sourceMode": {
+    "market": "real",
+    "live": "real_snapshot_replay",
+    "jingcai": "file"
+  },
+  "fallbackUsed": {
+    "market": false,
+    "live": false,
+    "jingcai": false
+  },
+  "appMode": "research",
+  "pipelineError": null,
+  "providerStatus": {
+    "appMode": "research",
+    "marketDataMode": "real",
+    "requestedMarketDataMode": "real",
+    "requestedLiveDataMode": "real",
+    "jingcaiOfficialFeedMode": "file",
+    "jingcaiOfficialFeedSource": "file",
+    "jingcaiOfficialFeedFile": "fixtures/snapshots/latest/jingcai-official-feed.json",
+    "jingcaiOfficialFeedUrl": null,
+    "backtestRunMode": "mock",
+    "backtestRunFile": "./fixtures/snapshots/backtest-run.json",
+    "backtestRunSourceMode": "artifact_or_mock",
+    "backtestRunSummary": {
+      "recordCount": 0,
+      "liveDerivedCount": 0,
+      "artifactBackedCount": 0,
+      "officialSettlementCompleteCount": 0
+    },
+    "postMatchReviewMode": "artifact",
+    "postMatchReviewFile": "./fixtures/snapshots/post-match-review.json",
+    "configuredSourceCatalogFile": "./data-source-catalog.json",
+    "configuredRawMarketBoardFile": "./fixtures/raw-market-board.json",
+    "marketMatchCount": 5,
+    "providerHealth": {
+      "oddsConfigured": true,
+      "polymarketConfigured": true,
+      "oddsStatus": "ok",
+      "oddsRows": 5,
+      "oddsProviderMeta": {
+        "capturedAt": "2026-06-08T09:06:05.131Z",
+        "fromCache": true,
+        "sourceMode": "file_snapshot",
+        "sourceFile": "/Users/liuzhen/AI-projects/guess_worldcup2026/fixtures/snapshots/2026-06-08/0906/supplemental-signals.json",
+        "eventCount": 5,
+        "fallbackFrom": "the-odds-api",
+        "fallbackReason": "HTTP 401 Unauthorized for https://api.the-odds-api.com/v4/sports/soccer_fifa_world_cup/odds?apiKey=b6fca843f5dee9f647f8ee844d85794d&regions=eu&markets=h2h&oddsFormat=decimal&commenceTimeFrom=2026-06-11T00%3A00%3A00Z&commenceTimeTo=2026-07-19T23%3A59%3A59Z: {\"message\":\"Usage quota has been reached. See usage plans at https://the-odds-api.com\",\"error_code\":\"OUT_OF_USAGE_CREDITS\",\"details_url\":\"https://the-odds-api.com/liveapi/guides/v4/api-error-codes.html#out-of-usage-credits\"}",
+        "oddsProvider": "bzzoiro_odds"
+      },
+      "oddsFallbackFrom": "the-odds-api",
+      "oddsSource": "bzzoiro_odds",
+      "polymarketStatus": "error",
+      "polymarketError": "Polymarket request timed out after 20000ms",
+      "mergedFixtureCount": 5
+    },
+    "sourceCatalogVersion": 1,
+    "sourceCount": 12,
+    "adapterStatus": {
+      "odds": true,
+      "polymarket": true,
+      "live": true,
+      "opinions": false,
+      "bzzoiro": true
+    },
+    "sources": [
+      {
+        "id": "fifa_match_centre",
+        "name": "FIFA Match Centre / FIFA 官方赛事页",
+        "category": "official_results",
+        "priority": "high",
+        "integrationStatus": "research",
+        "access": "public_web"
+      },
+      {
+        "id": "fifa_football_data_platform",
+        "name": "FIFA Football Data Platform",
+        "category": "official_data_platform",
+        "priority": "medium",
+        "integrationStatus": "research",
+        "access": "partner_or_enterprise"
+      },
+      {
+        "id": "sportmonks_football",
+        "name": "Sportmonks Football API",
+        "category": "live_scores_and_fixtures",
+        "priority": "high",
+        "integrationStatus": "candidate",
+        "access": "paid_api"
+      },
+      {
+        "id": "the_odds_api",
+        "name": "The Odds API",
+        "category": "odds_aggregation",
+        "priority": "high",
+        "integrationStatus": "integrated",
+        "access": "paid_api"
+      },
+      {
+        "id": "odds_api_io",
+        "name": "Odds-API.io",
+        "category": "odds_aggregation",
+        "priority": "medium",
+        "integrationStatus": "candidate",
+        "access": "freemium_api"
+      },
+      {
+        "id": "polymarket_gamma_api",
+        "name": "Polymarket Gamma API",
+        "category": "prediction_market_discovery",
+        "priority": "high",
+        "integrationStatus": "candidate",
+        "access": "public_api"
+      },
+      {
+        "id": "polymarket_clob_api",
+        "name": "Polymarket CLOB API",
+        "category": "prediction_market_prices",
+        "priority": "high",
+        "integrationStatus": "candidate",
+        "access": "public_plus_authenticated"
+      },
+      {
+        "id": "polymarket_data_api",
+        "name": "Polymarket Data API",
+        "category": "prediction_market_analytics",
+        "priority": "medium",
+        "integrationStatus": "candidate",
+        "access": "public_api"
+      },
+      {
+        "id": "sportsbook_direct_scraping",
+        "name": "博彩公司网页直抓",
+        "category": "sportsbook_scraping",
+        "priority": "low",
+        "integrationStatus": "deferred",
+        "access": "public_web"
+      },
+      {
+        "id": "bzzoiro_sports_data",
+        "name": "Bzzoiro Sports Data / MCP",
+        "category": "football_context_and_predictions",
+        "priority": "medium",
+        "integrationStatus": "integrated",
+        "access": "token_api"
+      },
+      {
+        "id": "cn_pundit_commentary",
+        "name": "中文足球评论员观点池",
+        "category": "expert_opinions",
+        "priority": "medium",
+        "integrationStatus": "candidate",
+        "access": "manual_or_platform_api"
+      },
+      {
+        "id": "global_pundit_commentary",
+        "name": "海外足球媒体与评论员观点池",
+        "category": "expert_opinions",
+        "priority": "medium",
+        "integrationStatus": "candidate",
+        "access": "manual_or_platform_api"
+      }
+    ]
+  },
+  "rawProviderMeta": {
+    "footballData": null,
+    "oddsApi": {
+      "capturedAt": "2026-06-08T09:06:05.131Z",
+      "fromCache": true,
+      "sourceMode": "file_snapshot",
+      "sourceFile": "/Users/liuzhen/AI-projects/guess_worldcup2026/fixtures/snapshots/2026-06-08/0906/supplemental-signals.json",
+      "eventCount": 5,
+      "fallbackFrom": "the-odds-api",
+      "fallbackReason": "HTTP 401 Unauthorized for https://api.the-odds-api.com/v4/sports/soccer_fifa_world_cup/odds?apiKey=b6fca843f5dee9f647f8ee844d85794d&regions=eu&markets=h2h&oddsFormat=decimal&commenceTimeFrom=2026-06-11T00%3A00%3A00Z&commenceTimeTo=2026-07-19T23%3A59%3A59Z: {\"message\":\"Usage quota has been reached. See usage plans at https://the-odds-api.com\",\"error_code\":\"OUT_OF_USAGE_CREDITS\",\"details_url\":\"https://the-odds-api.com/liveapi/guides/v4/api-error-codes.html#out-of-usage-credits\"}",
+      "oddsProvider": "bzzoiro_odds"
+    },
+    "polymarket": null
+  },
+  "rawProviderErrors": {
+    "footballData": "fetch failed",
+    "footballDataCache": "fetch failed",
+    "polymarket": "Polymarket request timed out after 20000ms"
+  },
+  "oddsBootstrap": null,
+  "oddsCoverage": {
+    "fixtureCount": 5,
+    "bookmakerDiversity": 15,
+    "bookmakers": [
+      "1xbet",
+      "888sport",
+      "bet365",
+      "betano",
+      "betsson",
+      "betway",
+      "bwin",
+      "interwetten",
+      "marathon",
+      "novibet",
+      "oddssafari-consensus",
+      "pinnacle",
+      "sportingbet",
+      "unibet",
+      "william-hill"
+    ],
+    "staleOddsCount": 74,
+    "staleThresholdMinutes": 120
+  }
+}

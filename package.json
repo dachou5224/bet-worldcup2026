@@ -10,6 +10,7 @@
     "qa:providers": "node scripts/qa_real_providers.js",
     "qa:research-guardrails": "node scripts/qa_research_guardrails.js",
     "qa:frontend": "node scripts/qa_frontend.js",
+    "bootstrap:odds-snapshot": "node scripts/bootstrap_odds_snapshot.js",
     "snapshot:providers": "node scripts/refresh_provider_snapshots.js"
   }
 }

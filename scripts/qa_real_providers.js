@@ -1,5 +1,10 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
+import {
+  validateAbLiveDataSnapshot,
+  validateAbOddsRawSnapshot,
+  validateAbProviderStatusSnapshot,
+} from "../lib/snapshot-ab-contract.js";
 import { loadLocalEnv } from "../lib/load-env.js";
 import { projectRoot } from "../lib/paths.js";
 import { allowsProviderFallback } from "../lib/app-mode.js";
@@ -49,6 +54,10 @@ function buildResearchGuardrails(config, providerStatus, staticPageData) {
       issues.push(`research 模式下 live 发生 fallback: ${staticPageData.liveMode}`);
     }
 
+    if (staticPageData.liveMode === "error") {
+      issues.push("research 模式下 live 数据不可用");
+    }
+
     if (providerStatus.providerHealth?.source === "fallback_mock") {
       issues.push("research 模式下 market providerHealth.source=fallback_mock");
     }
@@ -77,28 +86,14 @@ async function run() {
     }
 
     try {
-      if (name === "odds") {
-        const response = await adapter.fetchRawOddsResponse({ bypassCache: true });
-        const rows = await adapter.fetchNormalizedOddsBoard();
-        result.adapters[name] = {
-          status: "ok",
-          rows: rows.length,
-          quota: response.meta?.quota || adapter.getLastFetchMeta()?.quota || null,
-          coverage: summarizeOddsCoverage(response.body),
-          fromCache: response.meta?.fromCache ?? false,
-        };
-      } else if (name === "polymarket") {
-        const response = await adapter.fetchRawEventsResponse({ bypassCache: true });
-        const rows = await adapter.fetchNormalizedPredictionMarkets();
-        result.adapters[name] = {
-          status: "ok",
-          rows: rows.length,
-          sentimentOnly: true,
-          directEVEligible: false,
-          fromCache: response.meta?.fromCache ?? false,
-        };
-      } else if (name === "live") {
-        const response = await adapter.fetchRawMatchesResponse({ bypassCache: true });
+      if (name === "live") {
+        let response = null;
+        try {
+          response = await adapter.fetchRawMatchesResponse({ bypassCache: false });
+        } catch (error) {
+          result.adapters[name] = { status: "error", message: error.message, providerId: adapter.id };
+          continue;
+        }
         const rawMatches = response.body?.matches || [];
         const fieldErrors = validateFootballDataFields(rawMatches);
         const rows = await adapter.fetchNormalizedLiveMatches();
@@ -108,6 +103,36 @@ async function run() {
           rawMatchCount: rawMatches.length,
           fieldErrors,
           providerId: adapter.id,
+          fromCache: response.meta?.fromCache ?? false,
+        };
+      } else if (name === "odds") {
+        let response = null;
+        try {
+          response = await adapter.fetchRawOddsResponse({ bypassCache: false });
+        } catch (error) {
+          result.adapters[name] = {
+            status: "error",
+            message: error.message,
+            quota: adapter.getLastFetchMeta()?.quota || null,
+          };
+          continue;
+        }
+        const rows = await adapter.fetchNormalizedOddsBoard();
+        result.adapters[name] = {
+          status: "ok",
+          rows: rows.length,
+          quota: response.meta?.quota || adapter.getLastFetchMeta()?.quota || null,
+          coverage: summarizeOddsCoverage(response.body),
+          fromCache: response.meta?.fromCache ?? false,
+        };
+      } else if (name === "polymarket") {
+        const response = await adapter.fetchRawEventsResponse({ bypassCache: false });
+        const rows = await adapter.fetchNormalizedPredictionMarkets();
+        result.adapters[name] = {
+          status: "ok",
+          rows: rows.length,
+          sentimentOnly: true,
+          directEVEligible: false,
           fromCache: response.meta?.fromCache ?? false,
         };
       } else if (name === "bzzoiro") {
@@ -211,6 +236,72 @@ async function run() {
     result.snapshotPaths[fileName] = existsSync(absolutePath) ? "present" : "missing";
   }
 
+  result.abContract = {
+    liveData: [],
+    providerStatus: [],
+    oddsRaw: [],
+    jingcaiAlignment: [],
+  };
+
+  try {
+    if (result.snapshotPaths["live-data.json"] === "present") {
+      const liveSnapshot = JSON.parse(
+        readFileSync(path.join(latestDir, "live-data.json"), "utf-8"),
+      );
+      result.abContract.liveData = validateAbLiveDataSnapshot(liveSnapshot);
+    }
+    if (result.snapshotPaths["provider-status.json"] === "present") {
+      const providerSnapshot = JSON.parse(
+        readFileSync(path.join(latestDir, "provider-status.json"), "utf-8"),
+      );
+      result.abContract.providerStatus = validateAbProviderStatusSnapshot(providerSnapshot);
+      result.sourceMode = providerSnapshot.sourceMode || null;
+      if (providerSnapshot.fallbackUsed) {
+        result.fallbackUsed = providerSnapshot.fallbackUsed;
+      }
+    }
+    if (result.snapshotPaths["raw/the-odds-api-h2h.json"] === "present") {
+      const oddsSnapshot = JSON.parse(
+        readFileSync(path.join(latestDir, "raw/the-odds-api-h2h.json"), "utf-8"),
+      );
+      result.abContract.oddsRaw = validateAbOddsRawSnapshot(oddsSnapshot);
+      const oddsEventIds = new Set(
+        (oddsSnapshot.body || oddsSnapshot.payload || []).map((event) => String(event.id)),
+      );
+      if (jingcaiFeedCheck.rows && jingcaiFeedCheck.envelope?.matches) {
+        const jingcaiIds = jingcaiFeedCheck.envelope.matches.map((m) => String(m.fixtureId));
+        const unmatched = jingcaiIds.filter((id) => !oddsEventIds.has(id));
+        if (unmatched.length) {
+          result.abContract.jingcaiAlignment.push(
+            `竞彩 fixtureId 未在 odds 快照中找到: ${unmatched.join(", ")}`,
+          );
+        }
+      } else if (jingcaiFeedCheck.status === "ok" && jingcaiFeedCheck.rows) {
+        const loaded = await loadJingcaiOfficialFeed({
+          mode: providerConfig.jingcaiOfficialFeedMode,
+          feedFile: providerConfig.jingcaiOfficialFeedFile,
+        });
+        const jingcaiIds = loaded.feed.map((m) => String(m.fixtureId));
+        const unmatched = jingcaiIds.filter((id) => !oddsEventIds.has(id));
+        if (unmatched.length) {
+          result.abContract.jingcaiAlignment.push(
+            `竞彩 fixtureId 未在 odds 快照中找到: ${unmatched.join(", ")}`,
+          );
+        }
+      }
+    }
+  } catch (error) {
+    result.abContract.error = error.message;
+  }
+
+  const abContractIssues = [
+    ...result.abContract.liveData,
+    ...result.abContract.providerStatus,
+    ...result.abContract.oddsRaw,
+    ...result.abContract.jingcaiAlignment,
+  ];
+  result.abContract.ok = abContractIssues.length === 0 && !result.abContract.error;
+
   result.mockValidation = validateRawMarketBoard(mockBoard);
   result.currentModes = {
     market: marketBundle.mode,
@@ -228,11 +319,13 @@ async function run() {
     providerStatus,
     staticPageData,
   );
-  result.fallbackUsed = {
+  result.fallbackUsed = result.fallbackUsed || {
     market: String(providerStatus?.marketDataMode || "").includes("fallback"),
     live: String(staticPageData.liveMode || "").includes("fallback"),
   };
   result.snapshotReplayUsed = providerStatus?.marketDataMode === "real_snapshot_replay";
+  result.liveSnapshotReplayUsed = staticPageData.liveMode === "real_snapshot_replay";
+  result.marketMode = providerStatus?.marketDataMode || marketBundle.mode;
 
   const adapterErrors = Object.values(result.adapters).filter((entry) => entry.status === "error");
   const hasResearchViolations = result.researchGuardrails.length > 0;
@@ -240,11 +333,18 @@ async function run() {
   const oddsQuotaExhausted = result.adapters.odds?.status === "error" &&
     /OUT_OF_USAGE_CREDITS|Usage quota has been reached|HTTP 401/.test(result.adapters.odds?.message || "");
 
+  const liveReplayAvailable = result.snapshotPaths["raw/football-data-matches.json"] === "present";
+  const liveFetchFailed = result.adapters.live?.status === "error";
+
   result.ok =
     jingcaiFeedCheck.status === "ok" &&
     !hasResearchViolations &&
+    result.marketMode !== "error" &&
+    staticPageData.liveMode !== "error" &&
+    result.abContract.ok !== false &&
     (adapterErrors.length === 0 ||
-      (oddsQuotaExhausted && oddsReplayAvailable && result.snapshotReplayUsed));
+      (oddsQuotaExhausted && oddsReplayAvailable && (result.snapshotReplayUsed || result.marketMode === "real")) ||
+      (liveFetchFailed && liveReplayAvailable && result.liveSnapshotReplayUsed));
 
   console.log(JSON.stringify(result, null, 2));
 

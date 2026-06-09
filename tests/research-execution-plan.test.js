@@ -11,7 +11,7 @@ test("buildResearchExecutionPlan splits A/B tasks from a partial research report
     sourceMode: {
       market: "real",
       live: "real_fallback_mock",
-      jingcai: "fixture",
+      jingcai: "file",
     },
     layerAProfileCounts: {
       full: 0,
@@ -33,6 +33,10 @@ test("buildResearchExecutionPlan splits A/B tasks from a partial research report
   assert.ok(Array.isArray(plan.agentB.tasks));
   assert.ok(plan.agentB.tasks.some((task) => task.id === "B-LIVE-REAL"));
   assert.ok(plan.agentB.tasks.some((task) => task.id === "B-JINGCAI-REAL"));
+  assert.equal(
+    plan.agentB.tasks.find((task) => task.id === "B-JINGCAI-REAL")?.status,
+    "done",
+  );
   assert.ok(plan.interfaceContract.requiredSnapshots.some((item) => item.file.endsWith("live-data.json")));
   assert.ok(
     plan.interfaceContract.aConsumedFields.includes("quality-report.researchSafeBlockReasons"),

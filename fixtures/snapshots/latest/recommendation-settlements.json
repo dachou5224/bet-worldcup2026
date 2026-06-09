@@ -1,5 +1,483 @@
 {
-  "capturedAt": "2026-06-08T09:06:05.131Z",
-  "recommendationSettlements": [],
-  "recommendationSettlementSummary": null
+  "capturedAt": "2026-06-09T05:09:55.739Z",
+  "recommendationSettlements": [
+    {
+      "snapshotId": "8287::2026-06-09T05:10:01.989Z",
+      "fixtureId": 8287,
+      "fixture": "8287 vs 8287",
+      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "settlementStatus": "no_recommendation",
+      "preMatchSnapshot": {
+        "snapshotId": "8287::2026-06-09T05:10:01.989Z",
+        "snapshotVersion": 1,
+        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "sourceModes": {
+          "market": "real",
+          "live": "real",
+          "jingcai": "file"
+        },
+        "marketSourceMode": "real",
+        "liveSourceMode": "real",
+        "jingcaiSourceMode": "file",
+        "fixtureId": 8287,
+        "fixture": "8287 vs 8287",
+        "kickoff": "",
+        "confidence": "high",
+        "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "defaultDisplayLayer": "A",
+        "displayLabel": "8287 vs 8287",
+        "textSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "layerA": {
+          "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+          "signalCandidate": null,
+          "signalCandidates": []
+        },
+        "layerB": {
+          "mappingConfidence": null,
+          "officialSaleStatus": null,
+          "officialStopTime": null,
+          "officialOdds": null,
+          "officialExpectedValue": null,
+          "recommendationLevel": null,
+          "noJingcaiReason": "no_signal_candidate"
+        },
+        "layerC": {
+          "fixtureId": 8287,
+          "jingcaiMatchId": "JC-2026-8287",
+          "competition": "2026 FIFA World Cup",
+          "homeTeam": "墨西哥",
+          "awayTeam": "南非",
+          "kickoffLocal": "2026-06-12T03:00:00+08:00",
+          "matchLabel": null,
+          "noJingcaiReason": "no_signal_candidate",
+          "disclaimers": [
+            "研究建议，非代购",
+            "以终端官方赔率和停售时间为准"
+          ],
+          "overseasContext": null,
+          "primaryRecommendation": null
+        }
+      },
+      "settlement": null,
+      "metrics": null,
+      "reviewText": null,
+      "settlementSourceMode": "pending",
+      "officialSettlementComplete": false
+    },
+    {
+      "snapshotId": "8288::2026-06-09T05:10:01.989Z",
+      "fixtureId": 8288,
+      "fixture": "8288 vs 8288",
+      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "settlementStatus": "no_recommendation",
+      "preMatchSnapshot": {
+        "snapshotId": "8288::2026-06-09T05:10:01.989Z",
+        "snapshotVersion": 1,
+        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "sourceModes": {
+          "market": "real",
+          "live": "real",
+          "jingcai": "file"
+        },
+        "marketSourceMode": "real",
+        "liveSourceMode": "real",
+        "jingcaiSourceMode": "file",
+        "fixtureId": 8288,
+        "fixture": "8288 vs 8288",
+        "kickoff": "",
+        "confidence": "high",
+        "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "defaultDisplayLayer": "A",
+        "displayLabel": "8288 vs 8288",
+        "textSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "layerA": {
+          "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+          "signalCandidate": null,
+          "signalCandidates": []
+        },
+        "layerB": {
+          "mappingConfidence": null,
+          "officialSaleStatus": null,
+          "officialStopTime": null,
+          "officialOdds": null,
+          "officialExpectedValue": null,
+          "recommendationLevel": null,
+          "noJingcaiReason": null
+        },
+        "layerC": null
+      },
+      "settlement": null,
+      "metrics": null,
+      "reviewText": null,
+      "settlementSourceMode": "pending",
+      "officialSettlementComplete": false
+    },
+    {
+      "snapshotId": "8289::2026-06-09T05:10:01.989Z",
+      "fixtureId": 8289,
+      "fixture": "8289 vs 8289",
+      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "settlementStatus": "no_recommendation",
+      "preMatchSnapshot": {
+        "snapshotId": "8289::2026-06-09T05:10:01.989Z",
+        "snapshotVersion": 1,
+        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "sourceModes": {
+          "market": "real",
+          "live": "real",
+          "jingcai": "file"
+        },
+        "marketSourceMode": "real",
+        "liveSourceMode": "real",
+        "jingcaiSourceMode": "file",
+        "fixtureId": 8289,
+        "fixture": "8289 vs 8289",
+        "kickoff": "",
+        "confidence": "high",
+        "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "defaultDisplayLayer": "A",
+        "displayLabel": "8289 vs 8289",
+        "textSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "layerA": {
+          "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+          "signalCandidate": null,
+          "signalCandidates": []
+        },
+        "layerB": {
+          "mappingConfidence": null,
+          "officialSaleStatus": null,
+          "officialStopTime": null,
+          "officialOdds": null,
+          "officialExpectedValue": null,
+          "recommendationLevel": null,
+          "noJingcaiReason": "no_signal_candidate"
+        },
+        "layerC": {
+          "fixtureId": 8289,
+          "jingcaiMatchId": "JC-2026-8289",
+          "competition": "2026 FIFA World Cup",
+          "homeTeam": "加拿大",
+          "awayTeam": "波黑",
+          "kickoffLocal": "2026-06-13T03:00:00+08:00",
+          "matchLabel": null,
+          "noJingcaiReason": "no_signal_candidate",
+          "disclaimers": [
+            "研究建议，非代购",
+            "以终端官方赔率和停售时间为准"
+          ],
+          "overseasContext": null,
+          "primaryRecommendation": null
+        }
+      },
+      "settlement": null,
+      "metrics": null,
+      "reviewText": null,
+      "settlementSourceMode": "pending",
+      "officialSettlementComplete": false
+    },
+    {
+      "snapshotId": "8290::2026-06-09T05:10:01.989Z",
+      "fixtureId": 8290,
+      "fixture": "8290 vs 8290",
+      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "settlementStatus": "no_recommendation",
+      "preMatchSnapshot": {
+        "snapshotId": "8290::2026-06-09T05:10:01.989Z",
+        "snapshotVersion": 1,
+        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "sourceModes": {
+          "market": "real",
+          "live": "real",
+          "jingcai": "file"
+        },
+        "marketSourceMode": "real",
+        "liveSourceMode": "real",
+        "jingcaiSourceMode": "file",
+        "fixtureId": 8290,
+        "fixture": "8290 vs 8290",
+        "kickoff": "",
+        "confidence": "high",
+        "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "defaultDisplayLayer": "A",
+        "displayLabel": "8290 vs 8290",
+        "textSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "layerA": {
+          "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+          "signalCandidate": null,
+          "signalCandidates": []
+        },
+        "layerB": {
+          "mappingConfidence": null,
+          "officialSaleStatus": null,
+          "officialStopTime": null,
+          "officialOdds": null,
+          "officialExpectedValue": null,
+          "recommendationLevel": null,
+          "noJingcaiReason": "no_signal_candidate"
+        },
+        "layerC": {
+          "fixtureId": 8290,
+          "jingcaiMatchId": "JC-2026-8290",
+          "competition": "2026 FIFA World Cup",
+          "homeTeam": "美国",
+          "awayTeam": "巴拉圭",
+          "kickoffLocal": "2026-06-13T09:00:00+08:00",
+          "matchLabel": null,
+          "noJingcaiReason": "no_signal_candidate",
+          "disclaimers": [
+            "研究建议，非代购",
+            "以终端官方赔率和停售时间为准"
+          ],
+          "overseasContext": null,
+          "primaryRecommendation": null
+        }
+      },
+      "settlement": null,
+      "metrics": null,
+      "reviewText": null,
+      "settlementSourceMode": "pending",
+      "officialSettlementComplete": false
+    },
+    {
+      "snapshotId": "8292::2026-06-09T05:10:01.989Z",
+      "fixtureId": 8292,
+      "fixture": "8292 vs 8292",
+      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "settlementStatus": "no_recommendation",
+      "preMatchSnapshot": {
+        "snapshotId": "8292::2026-06-09T05:10:01.989Z",
+        "snapshotVersion": 1,
+        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "sourceModes": {
+          "market": "real",
+          "live": "real",
+          "jingcai": "file"
+        },
+        "marketSourceMode": "real",
+        "liveSourceMode": "real",
+        "jingcaiSourceMode": "file",
+        "fixtureId": 8292,
+        "fixture": "8292 vs 8292",
+        "kickoff": "",
+        "confidence": "high",
+        "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "defaultDisplayLayer": "A",
+        "displayLabel": "8292 vs 8292",
+        "textSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "layerA": {
+          "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+          "signalCandidate": null,
+          "signalCandidates": []
+        },
+        "layerB": {
+          "mappingConfidence": null,
+          "officialSaleStatus": null,
+          "officialStopTime": null,
+          "officialOdds": null,
+          "officialExpectedValue": null,
+          "recommendationLevel": null,
+          "noJingcaiReason": null
+        },
+        "layerC": null
+      },
+      "settlement": null,
+      "metrics": null,
+      "reviewText": null,
+      "settlementSourceMode": "pending",
+      "officialSettlementComplete": false
+    },
+    {
+      "snapshotId": "8293::2026-06-09T05:10:01.989Z",
+      "fixtureId": 8293,
+      "fixture": "8293 vs 8293",
+      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "settlementStatus": "no_recommendation",
+      "preMatchSnapshot": {
+        "snapshotId": "8293::2026-06-09T05:10:01.989Z",
+        "snapshotVersion": 1,
+        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "sourceModes": {
+          "market": "real",
+          "live": "real",
+          "jingcai": "file"
+        },
+        "marketSourceMode": "real",
+        "liveSourceMode": "real",
+        "jingcaiSourceMode": "file",
+        "fixtureId": 8293,
+        "fixture": "8293 vs 8293",
+        "kickoff": "",
+        "confidence": "high",
+        "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "defaultDisplayLayer": "A",
+        "displayLabel": "8293 vs 8293",
+        "textSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "layerA": {
+          "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+          "signalCandidate": null,
+          "signalCandidates": []
+        },
+        "layerB": {
+          "mappingConfidence": null,
+          "officialSaleStatus": null,
+          "officialStopTime": null,
+          "officialOdds": null,
+          "officialExpectedValue": null,
+          "recommendationLevel": null,
+          "noJingcaiReason": null
+        },
+        "layerC": null
+      },
+      "settlement": null,
+      "metrics": null,
+      "reviewText": null,
+      "settlementSourceMode": "pending",
+      "officialSettlementComplete": false
+    },
+    {
+      "snapshotId": "8294::2026-06-09T05:10:01.989Z",
+      "fixtureId": 8294,
+      "fixture": "8294 vs 8294",
+      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "settlementStatus": "no_recommendation",
+      "preMatchSnapshot": {
+        "snapshotId": "8294::2026-06-09T05:10:01.989Z",
+        "snapshotVersion": 1,
+        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "sourceModes": {
+          "market": "real",
+          "live": "real",
+          "jingcai": "file"
+        },
+        "marketSourceMode": "real",
+        "liveSourceMode": "real",
+        "jingcaiSourceMode": "file",
+        "fixtureId": 8294,
+        "fixture": "8294 vs 8294",
+        "kickoff": "",
+        "confidence": "high",
+        "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "defaultDisplayLayer": "A",
+        "displayLabel": "8294 vs 8294",
+        "textSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "layerA": {
+          "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+          "signalCandidate": null,
+          "signalCandidates": []
+        },
+        "layerB": {
+          "mappingConfidence": null,
+          "officialSaleStatus": null,
+          "officialStopTime": null,
+          "officialOdds": null,
+          "officialExpectedValue": null,
+          "recommendationLevel": null,
+          "noJingcaiReason": "no_signal_candidate"
+        },
+        "layerC": {
+          "fixtureId": 8294,
+          "jingcaiMatchId": "JC-2026-8294",
+          "competition": "2026 FIFA World Cup",
+          "homeTeam": "海地",
+          "awayTeam": "苏格兰",
+          "kickoffLocal": "2026-06-14T09:00:00+08:00",
+          "matchLabel": null,
+          "noJingcaiReason": "no_signal_candidate",
+          "disclaimers": [
+            "研究建议，非代购",
+            "以终端官方赔率和停售时间为准"
+          ],
+          "overseasContext": null,
+          "primaryRecommendation": null
+        }
+      },
+      "settlement": null,
+      "metrics": null,
+      "reviewText": null,
+      "settlementSourceMode": "pending",
+      "officialSettlementComplete": false
+    },
+    {
+      "snapshotId": "8291::2026-06-09T05:10:01.989Z",
+      "fixtureId": 8291,
+      "fixture": "8291 vs 8291",
+      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "settlementStatus": "no_recommendation",
+      "preMatchSnapshot": {
+        "snapshotId": "8291::2026-06-09T05:10:01.989Z",
+        "snapshotVersion": 1,
+        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "sourceModes": {
+          "market": "real",
+          "live": "real",
+          "jingcai": "file"
+        },
+        "marketSourceMode": "real",
+        "liveSourceMode": "real",
+        "jingcaiSourceMode": "file",
+        "fixtureId": 8291,
+        "fixture": "8291 vs 8291",
+        "kickoff": "",
+        "confidence": "high",
+        "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "defaultDisplayLayer": "A",
+        "displayLabel": "8291 vs 8291",
+        "textSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+        "layerA": {
+          "marketSummary": "盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。 风险标签：prediction_market_missing、no_primary_snapshot",
+          "signalCandidate": null,
+          "signalCandidates": []
+        },
+        "layerB": {
+          "mappingConfidence": null,
+          "officialSaleStatus": null,
+          "officialStopTime": null,
+          "officialOdds": null,
+          "officialExpectedValue": null,
+          "recommendationLevel": null,
+          "noJingcaiReason": "no_signal_candidate"
+        },
+        "layerC": {
+          "fixtureId": 8291,
+          "jingcaiMatchId": "JC-2026-8291",
+          "competition": "2026 FIFA World Cup",
+          "homeTeam": "澳大利亚",
+          "awayTeam": "土耳其",
+          "kickoffLocal": "2026-06-14T12:00:00+08:00",
+          "matchLabel": null,
+          "noJingcaiReason": "no_signal_candidate",
+          "disclaimers": [
+            "研究建议，非代购",
+            "以终端官方赔率和停售时间为准"
+          ],
+          "overseasContext": null,
+          "primaryRecommendation": null
+        }
+      },
+      "settlement": null,
+      "metrics": null,
+      "reviewText": null,
+      "settlementSourceMode": "pending",
+      "officialSettlementComplete": false
+    }
+  ],
+  "recommendationSettlementSummary": {
+    "snapshotCount": 8,
+    "settledCount": 0,
+    "pendingCount": 0,
+    "noRecommendationCount": 8,
+    "liveDerivedCount": 0,
+    "artifactBackedCount": 0,
+    "liveMatchAlignedCount": 0,
+    "officialMatchAlignedCount": 0,
+    "officialSettlementCompleteCount": 0,
+    "liveCoverageRate": 0,
+    "liveMatchCoverageRate": 0,
+    "officialMatchCoverageRate": 0,
+    "officialSettlementCoverageRate": 0,
+    "totalRealizedReturnOfficial": 0,
+    "meanBrier": null,
+    "meanLogLoss": null,
+    "meanClv": null
+  }
 }
