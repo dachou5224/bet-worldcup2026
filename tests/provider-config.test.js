@@ -14,5 +14,7 @@ test("provider config exposes the odds and football-data window defaults", () =>
   assert.equal(config.jingcaiOfficialFeedUrl, "");
   assert.equal(config.postMatchReviewFile, "./fixtures/snapshots/post-match-review.json");
   assert.equal(config.backtestRunFile, "./fixtures/snapshots/backtest-run.json");
+  assert.equal(config.liveSnapshotReplayEnabled, false);
+  assert.equal(config.liveSnapshotReplayFile, "./fixtures/snapshots/latest/live-data.json");
   assert.equal(config.enableStakeSuggestion, false);
 });

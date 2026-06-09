@@ -11,6 +11,7 @@ import {
   buildBacktestReview,
   buildPortfolioReview,
 } from "../data-hub.js";
+import { buildResearchExecutionPlan } from "../lib/research-execution-plan.js";
 import { sanitizeDashboardBundle } from "../app/data-guard.js";
 import { REFRESH_TIERS, formatRefreshPolicySummary } from "../app/refresh-policy.js";
 import {
@@ -71,6 +72,10 @@ export async function buildApiPayload() {
       readArtifactOrFallback(readRecommendationSnapshotsArtifact, async () => (await getPipelineData()).recommendationSnapshots),
     "/api/data/recommendation-settlements": async () =>
       readArtifactOrFallback(readRecommendationSettlementsArtifact, async () => (await getPipelineData()).recommendationSettlements),
+    "/api/data/research-execution-plan": async () => {
+      const report = await buildDataQualityReport();
+      return buildResearchExecutionPlan(report);
+    },
     "/api/providers/status": async () => {
       const status = await getProviderStatus();
       return {

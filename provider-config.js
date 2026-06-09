@@ -58,6 +58,12 @@ export function getProviderConfig() {
     footballDataDateFrom: process.env.FOOTBALL_DATA_DATE_FROM || "2026-06-11",
     footballDataDateTo: process.env.FOOTBALL_DATA_DATE_TO || "2026-07-19",
     footballDataCacheTtlSeconds: Number(process.env.FOOTBALL_DATA_CACHE_TTL_SECONDS || 300),
+    liveSnapshotReplayEnabled:
+      process.env.LIVE_SNAPSHOT_REPLAY_ENABLED != null
+        ? process.env.LIVE_SNAPSHOT_REPLAY_ENABLED !== "false"
+        : normalizeAppMode(process.env.APP_MODE) === "research",
+    liveSnapshotReplayFile:
+      process.env.LIVE_SNAPSHOT_REPLAY_FILE || "./fixtures/snapshots/latest/live-data.json",
     bzzoiroApiBaseUrl: process.env.BZZOIRO_API_BASE_URL || "https://sports.bzzoiro.com/api",
     bzzoiroApiToken: process.env.BZZOIRO_API_TOKEN || "",
     bzzoiroDateFrom: process.env.BZZOIRO_DATE_FROM || "2026-06-11",
@@ -66,5 +72,6 @@ export function getProviderConfig() {
     bzzoiroTimeZone: process.env.BZZOIRO_TIMEZONE || "UTC",
     bzzoiroOddsEventLimit: Number(process.env.BZZOIRO_ODDS_EVENT_LIMIT || 8),
     bzzoiroCacheTtlSeconds: Number(process.env.BZZOIRO_CACHE_TTL_SECONDS || 1800),
+    oddsProvider: process.env.ODDS_PROVIDER || "auto",
   };
 }

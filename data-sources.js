@@ -11,7 +11,7 @@ import { getBacktestRun as getMockBacktestRun } from "./providers/mock/index.js"
 import { validateLiveMatches } from "./schemas/live-matches.js";
 import { readBacktestRunArtifactMeta } from "./lib/backtest-artifacts.js";
 import { readPostMatchReviewArtifact } from "./lib/post-match-artifacts.js";
-import { isOddsQuotaError, mergeReplayedMarketBundle, tryReplayOddsFromSnapshot } from "./lib/snapshot-replay.js";
+import { isOddsQuotaError, mergeReplayedMarketBundle, tryReplayLiveFromSnapshot, tryReplayOddsFromSnapshot } from "./lib/snapshot-replay.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -61,6 +61,16 @@ async function getRealMarketDataBundle() {
       oddsBoard = await adapters.odds.fetchNormalizedOddsBoard();
       providerHealth.oddsStatus = "ok";
       providerHealth.oddsRows = oddsBoard.length;
+      const oddsMeta = adapters.odds.getLastFetchMeta?.();
+      if (oddsMeta) {
+        providerHealth.oddsProviderMeta = oddsMeta;
+        if (oddsMeta.fallbackFrom) {
+          providerHealth.oddsFallbackFrom = oddsMeta.fallbackFrom;
+          providerHealth.oddsSource = oddsMeta.oddsProvider || "bzzoiro_odds";
+        } else if (oddsMeta.sourceMode === "file_snapshot") {
+          providerHealth.oddsSource = "bzzoiro_snapshot";
+        }
+      }
     } catch (error) {
       providerHealth.oddsStatus = "error";
       providerHealth.oddsError = error.message;
@@ -291,6 +301,23 @@ export async function getStaticPageData() {
     };
   } catch (error) {
     if (!shouldFallbackToMock(config)) {
+      if (config.liveSnapshotReplayEnabled) {
+        const replay = await tryReplayLiveFromSnapshot(config, {
+          reason: error.message,
+        });
+        if (replay?.liveMatches?.length) {
+          return {
+            ...mockData,
+            completedComparisons,
+            liveMatches: replay.liveMatches,
+            liveMode: replay.liveMode,
+            liveSnapshotFile: replay.liveSnapshotFile,
+            liveSnapshotSource: replay.liveSnapshotSource || null,
+            liveReplayReason: replay.liveReplayReason,
+          };
+        }
+      }
+
       throw new Error(`research 模式下 live provider 请求失败: ${error.message}`);
     }
 

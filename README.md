@@ -227,6 +227,15 @@ ENABLE_STAKE_SUGGESTION=true
 
 当前 live provider 会优先使用 `football-data.org`，按赛事 code 和日期窗口请求完整赛程；如果未配置，再退回到 `Sportmonks` 适配器。
 
+如果需要在不连实时 live provider 的情况下跑离线 research，可以显式开启：
+
+```bash
+LIVE_SNAPSHOT_REPLAY_ENABLED=true
+LIVE_SNAPSHOT_REPLAY_FILE=./fixtures/snapshots/latest/live-data.json
+```
+
+这会让 A 侧优先消费 B 侧的 `latest/live-data.json` 回放文件；默认仍然是 fail-fast，不会静默替代真实 live。
+
 ### 竞彩足球官方盘
 
 - `JINGCAI_OFFICIAL_FEED_MODE`
@@ -269,6 +278,7 @@ npm run qa:providers
 | [docs/QUANT_STRATEGY_SPEC.md](docs/QUANT_STRATEGY_SPEC.md) | 算法、体彩收敛、输出契约（WHAT） |
 | [docs/QUANT_IMPLEMENTATION_PLAN.md](docs/QUANT_IMPLEMENTATION_PLAN.md) | 分阶段实施、QA 门禁、**pick-up 状态**（HOW） |
 | [docs/DATA_SOURCE_REALITY_TRACKER.md](docs/DATA_SOURCE_REALITY_TRACKER.md) | 输入数据真实度、mock/fixture 替换进度（REALITY） |
+| [docs/RESEARCH_EXECUTION_PLAN.md](docs/RESEARCH_EXECUTION_PLAN.md) | Agent A/B 分工下的 research 启动执行计划与接口对齐标准 |
 
 接手量化开发时：先读 plan 顶部 **Pick-up 状态**，本实施计划的 Phase 0-7 已全部完成。Phase 0 / Phase 1 / Phase 2 / Phase 3 / Phase 4 / Phase 5 / Phase 6 / Phase 7 都已在代码树中落地并可通过 `npm test` 与 `npm run qa:research-guardrails` 验证；当前主链路已经迁移到 quant baseline + decision layer + Jingcai 收敛输出 + portfolio/backtest review。纯数学模块在 `quant/`，验证用 `npm test`（无需 API）。
 
@@ -293,16 +303,36 @@ npm run qa:providers
 
 ## 推荐的下一步
 
-**量化 / 体彩建议主线**（优先）：见 [docs/QUANT_IMPLEMENTATION_PLAN.md](docs/QUANT_IMPLEMENTATION_PLAN.md) — 当前实施计划已完成；现有实现覆盖 Phase 0/1/2/3/4/5/6/7 的基础数学、研究护栏、市场快照标准化、基础 pricing、决策层、Jingcai 收敛输出、Layer A/B/C 契约与 portfolio/backtest foundation。
+**A/B research 执行计划**（优先）：先读 [docs/RESEARCH_EXECUTION_PLAN.md](docs/RESEARCH_EXECUTION_PLAN.md) 或 `/api/data/research-execution-plan`。这个入口会直接告诉你当前 research 还差什么、Agent A 应做什么、Agent B 应交付什么。
+
+**量化主线**：见 [docs/QUANT_IMPLEMENTATION_PLAN.md](docs/QUANT_IMPLEMENTATION_PLAN.md) — 当前实施计划已完成；现有实现覆盖 Phase 0/1/2/3/4/5/6/7 的基础数学、研究护栏、市场快照标准化、基础 pricing、决策层、Jingcai 收敛输出、Layer A/B/C 契约与 portfolio/backtest foundation。
 
 **Dashboard / Provider 维护**（并行）：
 
-1. 接入真实赛程/比分 API，把 `liveMatches` 替换成实时数据。
-2. 如果要开始接接口，建议优先抽成这 4 个 endpoint：
-   - `/api/live-matches`
-   - `/api/tomorrow-predictions`
-   - `/api/market-sources`
-   - `/api/post-match-review`
-3. 接真实 provider 时，优先先看 `/api/data/quality-report` 和 `/api/data/provider-coverage`，其中 `quality-report` 现在会附带 `researchSafeStatus`、`researchSafeBlockReasons`，以及 `marketSourceMode/liveSourceMode/jingcaiSourceMode`，方便判断为什么还不能进入 research 安全态。
-4. 新接入的市场数据先通过 `schemas/market-board.js` 校验，再进入聚合层。
-5. 真实 provider 联调：`npm run qa:providers`（需 key）；本地重复开发用 `npm run snapshot:providers` 写 `fixtures/snapshots/`。
+1. 接真实 provider 时，优先先看 `/api/data/quality-report` 和 `/api/data/provider-coverage`，其中 `quality-report` 现在会附带 `researchSafeStatus`、`researchSafeBlockReasons`，以及 `marketSourceMode/liveSourceMode/jingcaiSourceMode`，方便判断为什么还不能进入 research 安全态。
+2. 新接入的市场数据先通过 `schemas/market-board.js` 校验，再进入聚合层。
+3. 真实 provider 联调：`npm run qa:providers`（需 key）；本地重复开发用 `npm run snapshot:providers` 写 `fixtures/snapshots/`。
+4. 如果要离线跑 research，显式开启 `LIVE_SNAPSHOT_REPLAY_ENABLED=true`，让 A 侧消费 `fixtures/snapshots/latest/live-data.json`。
+
+### Layer A 输出契约
+
+`/api/data/quality-report` 会把每场比赛的 Layer A readiness 显式暴露出来，供 A/B 两侧共用：
+
+- `canEnterLayerA`：是否可以进入基础胜平负研究
+- `canEnterLayerAFull`：是否可以进入完整比分矩阵 / 让球 / 大小球校准
+- `layerAProfile`：`blocked` / `lite` / `full`
+- `blockReasons`：基础 Layer A 阻断原因
+- `fullBlockReasons`：从 lite 升级到 full 的阻断原因
+
+汇总字段：
+
+- `layerAReadyCount`
+- `layerAProfileCounts.full`
+- `layerAProfileCounts.lite`
+- `layerAProfileCounts.blocked`
+
+默认的消费顺序是：
+
+1. `full` 场次优先进入 Layer A-full
+2. `lite` 场次只进入基础胜平负研究
+3. `blocked` 场次只保留质量信号，不进入主链路
