@@ -1,0 +1,40 @@
+source: Goldman Sachs Global Investment Research
+report_title: "World Cup 2026: Predictions, Probabilities, and Paths to Victory"
+report_date: "2026-05-29"
+source_status: "publicly circulated PDF copy; not a reproducible model package"
+usage_in_project: "external fundamental probability prior"
+model_family:
+  - Elo team rating
+  - Poisson goal regression
+  - Monte Carlo tournament simulation
+reported_data_window:
+  description: "compulsory international matches since 1978"
+  approximate_match_count: 20000
+reported_simulation:
+  monte_carlo_runs: 50000
+reported_inputs:
+  - team Elo ratings
+  - attacking talent
+  - recent momentum
+  - geography
+  - historical or psychological factors
+reported_model_notes:
+  - "Elo is the main team-strength variable, not the whole model."
+  - "Poisson regression maps team and context variables into expected goals."
+  - "Monte Carlo simulation propagates single-match uncertainty through the full World Cup schedule."
+  - "Tournament-stage probabilities are model outputs and should not be inverted to infer raw parameters."
+not_available:
+  - raw historical match database
+  - team-level Elo time series
+  - regression coefficients
+  - full team feature matrix
+  - expected goals for all potential pairings
+  - Monte Carlo draw-level simulation results
+  - complete path joint probabilities
+project_boundary: >-
+  This project cites Goldman Sachs probabilities as an external institutional prior.
+  It does not reproduce the Goldman Sachs Elo-Poisson-Monte-Carlo model and does
+  not infer hidden model parameters from published probabilities.
+core_residual_definition:
+  edge: "P_GS - P_Market"
+  expected_value: "P_GS * decimal_odds - 1"
