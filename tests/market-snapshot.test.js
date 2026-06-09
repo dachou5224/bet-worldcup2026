@@ -6,7 +6,7 @@ import {
   normalizeRawMarketBoard,
   summarizeMarketSnapshots,
 } from "../quant/normalization/market-snapshot.js";
-import { buildDataQualityReport } from "../data-hub.js";
+import { buildDataQualityReport, deriveResearchSafetyState } from "../data-hub.js";
 import { validateMarketSnapshots } from "../schemas/market-snapshot.js";
 
 const rawMarketBoard = [
@@ -164,4 +164,25 @@ test("buildDataQualityReport includes market snapshot checks", async () => {
         typeof match.qualitySignals.officialScheduleAvailable === "boolean",
     ),
   );
+});
+
+test("deriveResearchSafetyState recognizes verified file as partial research safe", () => {
+  const state = deriveResearchSafetyState(
+    {
+      appMode: "research",
+      marketDataMode: "real",
+      jingcaiOfficialFeedMode: "file",
+    },
+    "real",
+  );
+
+  assert.equal(state.researchSafe, false);
+  assert.equal(state.researchSafeStatus, "partial_verified_file");
+  assert.deepEqual(state.fallbackUsed, {
+    market: false,
+    live: false,
+    jingcai: false,
+    any: false,
+  });
+  assert.deepEqual(state.researchSafeBlockReasons, ["jingcai_verified_file_not_full_research"]);
 });

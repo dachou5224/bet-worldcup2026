@@ -108,6 +108,64 @@ function isStaleSourceUpdate(latestSourceUpdate, generatedAt, thresholdHours = 6
   return diffHours > thresholdHours;
 }
 
+export function deriveResearchSafetyState(providerStatus, liveDataMode, fallbackState = {}) {
+  const marketFallbackUsed = fallbackState.market ?? providerStatus.marketDataMode === "real_fallback_mock";
+  const liveFallbackUsed =
+    fallbackState.live ??
+    (liveDataMode === "real_fallback_mock" || liveDataMode === "real_unconfigured_fallback_mock");
+
+  const fallbackUsed = {
+    market: marketFallbackUsed,
+    live: liveFallbackUsed,
+    jingcai: false,
+    any: marketFallbackUsed || liveFallbackUsed,
+  };
+
+  const jingcaiVerifiedFile =
+    providerStatus.jingcaiOfficialFeedMode === "file" &&
+    providerStatus.marketDataMode === "real" &&
+    liveDataMode === "real" &&
+    !fallbackUsed.any;
+  const researchSafe =
+    providerStatus.appMode === "research" &&
+    providerStatus.marketDataMode === "real" &&
+    liveDataMode === "real" &&
+    providerStatus.jingcaiOfficialFeedMode === "real" &&
+    !fallbackUsed.any;
+  const researchSafeStatus = researchSafe
+    ? "full"
+    : jingcaiVerifiedFile
+      ? "partial_verified_file"
+      : "blocked";
+
+  const researchSafeBlockReasons = [];
+  if (providerStatus.appMode !== "research") {
+    researchSafeBlockReasons.push("app_mode_not_research");
+  }
+  if (providerStatus.marketDataMode !== "real") {
+    researchSafeBlockReasons.push("market_not_real");
+  }
+  if (liveDataMode !== "real") {
+    researchSafeBlockReasons.push("live_not_real");
+  }
+  if (providerStatus.jingcaiOfficialFeedMode !== "real") {
+    researchSafeBlockReasons.push(
+      jingcaiVerifiedFile ? "jingcai_verified_file_not_full_research" : "jingcai_not_real",
+    );
+  }
+  if (marketFallbackUsed || liveFallbackUsed) {
+    researchSafeBlockReasons.push("fallback_used");
+  }
+
+  return {
+    researchSafe,
+    researchSafeStatus,
+    researchSafeBlockReasons,
+    fallbackUsed,
+    jingcaiVerifiedFile,
+  };
+}
+
 function hasClosingOrPreCloseSnapshot(marketSnapshots, fixtureId, kickoffLabel) {
   const kickoff = toDate(kickoffLabel);
   if (!kickoff) {
@@ -496,45 +554,12 @@ export async function buildDataQualityReport() {
   const jingcaiLookup = new Map(
     (dashboard.jingcaiRecommendations || []).map((recommendation) => [recommendation.fixtureId, recommendation]),
   );
-  const marketFallbackUsed = providerStatus.marketDataMode === "real_fallback_mock";
-  const liveFallbackUsed =
-    dashboard.liveDataMode === "real_fallback_mock" || dashboard.liveDataMode === "real_unconfigured_fallback_mock";
-  const jingcaiFallbackUsed = providerStatus.jingcaiOfficialFeedMode !== "real";
-  const fallbackUsed = marketFallbackUsed || liveFallbackUsed || jingcaiFallbackUsed;
-  const jingcaiVerifiedFile =
-    providerStatus.jingcaiOfficialFeedMode === "file" &&
-    providerStatus.marketDataMode === "real" &&
-    dashboard.liveDataMode === "real" &&
-    !fallbackUsed;
-  const researchSafe =
-    providerStatus.appMode === "research" &&
-    providerStatus.marketDataMode === "real" &&
-    dashboard.liveDataMode === "real" &&
-    providerStatus.jingcaiOfficialFeedMode === "real" &&
-    !fallbackUsed;
-  const researchSafeStatus = researchSafe
-    ? "full"
-    : jingcaiVerifiedFile
-      ? "partial_verified_file"
-      : "blocked";
-  const researchSafeBlockReasons = [];
-  if (providerStatus.appMode !== "research") {
-    researchSafeBlockReasons.push("app_mode_not_research");
-  }
-  if (providerStatus.marketDataMode !== "real") {
-    researchSafeBlockReasons.push("market_not_real");
-  }
-  if (dashboard.liveDataMode !== "real") {
-    researchSafeBlockReasons.push("live_not_real");
-  }
-  if (providerStatus.jingcaiOfficialFeedMode !== "real") {
-    researchSafeBlockReasons.push(
-      jingcaiVerifiedFile ? "jingcai_verified_file_not_full_research" : "jingcai_not_real",
-    );
-  }
-  if (marketFallbackUsed || liveFallbackUsed || jingcaiFallbackUsed) {
-    researchSafeBlockReasons.push("fallback_used");
-  }
+  const researchSafety = deriveResearchSafetyState(providerStatus, dashboard.liveDataMode);
+  const fallbackUsed = researchSafety.fallbackUsed;
+  const researchSafe = researchSafety.researchSafe;
+  const researchSafeStatus = researchSafety.researchSafeStatus;
+  const researchSafeBlockReasons = researchSafety.researchSafeBlockReasons;
+  const jingcaiVerifiedFile = researchSafety.jingcaiVerifiedFile;
 
   const matches = pipeline.rawMarketBoard.map((match) => {
     const hasOdds = match.oddsProviders.length > 0;
@@ -660,10 +685,10 @@ export async function buildDataQualityReport() {
     liveSourceMode: dashboard.liveDataMode,
     jingcaiSourceMode: providerStatus.jingcaiOfficialFeedMode,
     fallbackUsed: {
-      market: marketFallbackUsed,
-      live: liveFallbackUsed,
-      jingcai: jingcaiFallbackUsed,
-      any: fallbackUsed,
+      market: fallbackUsed.market,
+      live: fallbackUsed.live,
+      jingcai: fallbackUsed.jingcai,
+      any: fallbackUsed.any,
     },
     researchSafe,
     researchSafeStatus,
