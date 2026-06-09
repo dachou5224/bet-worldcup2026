@@ -9,6 +9,10 @@ function round(value, digits = 4) {
   return Math.round(value * factor) / factor;
 }
 
+function isStakeSuggestionEnabled() {
+  return (process.env.ENABLE_STAKE_SUGGESTION || "false") !== "false";
+}
+
 function summarizeSignalCandidate(signalCandidate) {
   if (!signalCandidate) {
     return null;
@@ -48,6 +52,8 @@ function summarizePrimaryRecommendation(primaryRecommendation) {
     return null;
   }
 
+  const showStakeSuggestion = isStakeSuggestionEnabled();
+
   return {
     playType: primaryRecommendation.playType ?? null,
     handicap: primaryRecommendation.handicap ?? null,
@@ -66,6 +72,8 @@ function summarizePrimaryRecommendation(primaryRecommendation) {
     recommendationLevel: primaryRecommendation.recommendationLevel ?? null,
     suggestedStakeUnits: primaryRecommendation.suggestedStakeUnits ?? null,
     suggestedStakeAmountCny: primaryRecommendation.suggestedStakeAmountCny ?? null,
+    displaySuggestedStakeUnits: showStakeSuggestion ? primaryRecommendation.suggestedStakeUnits ?? null : null,
+    displaySuggestedStakeAmountCny: showStakeSuggestion ? primaryRecommendation.suggestedStakeAmountCny ?? null : null,
     maxStakeUnitsByRisk: primaryRecommendation.maxStakeUnitsByRisk ?? null,
     saleStatus: primaryRecommendation.saleStatus ?? null,
     stopSaleTime: primaryRecommendation.stopSaleTime ?? null,
@@ -109,12 +117,18 @@ export function buildRecommendationSnapshot(prediction, options = {}) {
   const capturedAt = options.capturedAt || new Date().toISOString();
   const sourceModes = options.sourceModes || {};
   const fixtureId = layeredOutput.fixtureId ?? null;
+  const marketSourceMode = sourceModes.market || null;
+  const liveSourceMode = sourceModes.live || null;
+  const jingcaiSourceMode = sourceModes.jingcai || null;
 
   return {
     snapshotId: `${fixtureId ?? "unknown"}::${capturedAt}`,
     snapshotVersion: 1,
     capturedAt,
     sourceModes,
+    marketSourceMode,
+    liveSourceMode,
+    jingcaiSourceMode,
     fixtureId,
     fixture: layeredOutput.fixture ?? null,
     kickoff: layeredOutput.kickoff ?? null,

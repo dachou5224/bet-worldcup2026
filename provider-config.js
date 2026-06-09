@@ -22,6 +22,7 @@ export function getProviderConfig() {
       process.env.POST_MATCH_REVIEW_FILE || "./fixtures/snapshots/post-match-review.json",
     backtestRunFile:
       process.env.BACKTEST_RUN_FILE || "./fixtures/snapshots/backtest-run.json",
+    enableStakeSuggestion: (process.env.ENABLE_STAKE_SUGGESTION || "false") !== "false",
     oddsApiBaseUrl: process.env.ODDS_API_BASE_URL || "https://api.the-odds-api.com/v4",
     oddsApiKey: process.env.ODDS_API_KEY || "",
     oddsSportKey: process.env.ODDS_SPORT_KEY || "soccer_fifa_world_cup",

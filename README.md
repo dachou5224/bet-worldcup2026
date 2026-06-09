@@ -204,6 +204,12 @@ POLYMARKET_PUBLIC_ENABLED=true
 
 默认 sport key 是 `soccer_fifa_world_cup`，接口参考 The Odds API v4 文档。
 
+如果要显示金额化建议，再显式开启：
+
+```bash
+ENABLE_STAKE_SUGGESTION=true
+```
+
 ### Sportmonks
 
 - `SPORTMONKS_API_TOKEN`
@@ -297,6 +303,6 @@ npm run qa:providers
    - `/api/tomorrow-predictions`
    - `/api/market-sources`
    - `/api/post-match-review`
-3. 接真实 provider 时，优先先看 `/api/data/quality-report` 和 `/api/data/provider-coverage`，其中 `quality-report` 现在会附带 `researchSafeBlockReasons`，方便判断为什么还不能进入 research 安全态。
+3. 接真实 provider 时，优先先看 `/api/data/quality-report` 和 `/api/data/provider-coverage`，其中 `quality-report` 现在会附带 `researchSafeStatus`、`researchSafeBlockReasons`，以及 `marketSourceMode/liveSourceMode/jingcaiSourceMode`，方便判断为什么还不能进入 research 安全态。
 4. 新接入的市场数据先通过 `schemas/market-board.js` 校验，再进入聚合层。
 5. 真实 provider 联调：`npm run qa:providers`（需 key）；本地重复开发用 `npm run snapshot:providers` 写 `fixtures/snapshots/`。

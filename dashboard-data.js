@@ -10,6 +10,7 @@ import {
   buildSignalCandidatesFromMarket,
   buildTomorrowPredictionsFromMarket,
 } from "./market-pipeline.js";
+import { getProviderConfig } from "./provider-config.js";
 import { buildMarketSnapshotBundle } from "./quant/normalization/market-snapshot.js";
 import { buildLayeredOutputs } from "./quant/output/layered-output.js";
 import { buildRecommendationSnapshotBundle } from "./quant/output/recommendation-snapshot.js";
@@ -95,6 +96,7 @@ export async function getDashboardData(now = new Date()) {
 }
 
 export async function getPipelineData() {
+  const providerConfig = getProviderConfig();
   const { rawMarketBoard, mode, providerHealth } = await getMarketDataBundle();
   const staticData = await getStaticPageData();
   const officialFeed = await getJingcaiOfficialFeed();
@@ -120,6 +122,11 @@ export async function getPipelineData() {
   }));
   const recommendationSnapshots = buildRecommendationSnapshotBundle(enrichedTomorrowPredictions, {
     capturedAt: new Date().toISOString(),
+    sourceModes: {
+      market: mode,
+      live: staticData.liveMode,
+      jingcai: providerConfig.jingcaiOfficialFeedMode,
+    },
   });
   const recommendationSettlements = buildRecommendationSettlementBundle(
     recommendationSnapshots.snapshots,

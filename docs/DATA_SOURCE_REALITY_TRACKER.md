@@ -15,7 +15,7 @@
 - 版本化快照写入 `fixtures/snapshots/YYYY-MM-DD/HHmm/`
 - `npm run qa:providers` 在 `APP_MODE=research` 下检测 silent fallback
 - Polymarket 标记 `sentiment_only=true`、`directEVEligible=false`
-- `quality-report` 额外输出 `researchSafeBlockReasons`，便于定位为什么还没进入 research 安全态
+- `quality-report` 额外输出 `researchSafeStatus` 和 `researchSafeBlockReasons`，便于定位为什么还没进入 research 安全态
 
 ## 快照目录结构
 
@@ -116,6 +116,13 @@ npm run snapshot:providers
 | B-4 Polymarket sentiment | `done` | raw 落盘 + sentiment 标记 |
 | 快照 versioning | `done` | latest + YYYY-MM-DD/HHmm |
 | research QA 护栏 | `done` | qa:providers 检测 fallback |
+
+## 当前 A/B 接口约定
+
+- `Layer A-lite` 只要求真实 `h2h` 赔率链路可用，用于基础胜平负研究。
+- `Layer A-full` 额外要求 `closing snapshot` 与 `spread/total`，用于完整比分矩阵和让球/大小球校准。
+- `Jingcai` `file` 模式只能算 `partial_verified_file`，不应当被标成 `researchSafe=true`。
+- `ENABLE_STAKE_SUGGESTION=false` 是默认值，只有显式开启时才展示金额化建议。
 
 ## 相关文档
 

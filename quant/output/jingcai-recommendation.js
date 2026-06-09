@@ -3,6 +3,10 @@ import { mapSignalCandidateToJingcaiPlay } from "../recommendation/play-mapping.
 import { evaluateJingcaiGates } from "../recommendation/jingcai-gates.js";
 import { pickPrimarySignalCandidate } from "../recommendation/decision-layer.js";
 
+function isStakeSuggestionEnabled() {
+  return (process.env.ENABLE_STAKE_SUGGESTION || "false") !== "false";
+}
+
 function buildOverseasContext(signalCandidate) {
   if (!signalCandidate) {
     return null;
@@ -31,8 +35,12 @@ function buildJingcaiRecommendationText({
   overseasSummary,
 }) {
   const matchPrefix = matchLabel ? `${matchLabel}，` : "";
+  const showStakeSuggestion = isStakeSuggestionEnabled();
+  const stakeText = showStakeSuggestion
+    ? `，建议等级 ${recommendationLevel}，参考仓位 ${Math.max(1, suggestedStakeUnits)} 注×2 元（约 ${(officialFinalStakeFraction * 100).toFixed(2)}% 风险预算）`
+    : `，建议等级 ${recommendationLevel}`;
 
-  return `体彩收敛：${matchPrefix}该海外信号映射为竞彩足球【${playType}】【${officialSelection}】，官方赔率 ${officialOdds.toFixed(2)}，按 P_adj 重算 EV 为 ${(officialExpectedValue * 100).toFixed(1)}%。销售状态【${saleStatus === "on_sale" ? "在售" : saleStatus === "stopped" ? "停售" : "未上架"}】，停售时间 ${stopSaleTime || "n/a"}。建议等级 ${recommendationLevel}，参考仓位 ${Math.max(1, suggestedStakeUnits)} 注×2 元（约 ${(officialFinalStakeFraction * 100).toFixed(2)}% 风险预算）。海外盘与体彩盘存在差异时，以体彩官方数据为准。${overseasSummary ? ` 海外研究：${overseasSummary}` : ""}`;
+  return `体彩收敛：${matchPrefix}该海外信号映射为竞彩足球【${playType}】【${officialSelection}】，官方赔率 ${officialOdds.toFixed(2)}，按 P_adj 重算 EV 为 ${(officialExpectedValue * 100).toFixed(1)}%。销售状态【${saleStatus === "on_sale" ? "在售" : saleStatus === "stopped" ? "停售" : "未上架"}】，停售时间 ${stopSaleTime || "n/a"}${stakeText}。海外盘与体彩盘存在差异时，以体彩官方数据为准。${overseasSummary ? ` 海外研究：${overseasSummary}` : ""}`;
 }
 
 function buildNoJingcaiRecommendation(signalCandidate, officialMatch, reason) {

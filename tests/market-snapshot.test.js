@@ -128,6 +128,10 @@ test("buildDataQualityReport includes market snapshot checks", async () => {
   assert.equal(typeof report.fallbackUsed.any, "boolean");
   assert.equal(typeof report.fallbackUsed.jingcai, "boolean");
   assert.equal(typeof report.researchSafe, "boolean");
+  assert.equal(typeof report.researchSafeStatus, "string");
+  assert.equal(typeof report.marketSourceMode, "string");
+  assert.equal(typeof report.liveSourceMode, "string");
+  assert.equal(typeof report.jingcaiSourceMode, "string");
   assert.ok(Array.isArray(report.researchSafeBlockReasons));
   assert.ok(report.researchSafeBlockReasons.every((reason) => typeof reason === "string"));
   assert.ok(report.matches.every((match) => typeof match.marketSnapshotCount === "number"));
@@ -137,10 +141,17 @@ test("buildDataQualityReport includes market snapshot checks", async () => {
     report.matches.every(
       (match) =>
         typeof match.layerAReadiness.canEnterLayerA === "boolean" &&
+        typeof match.layerAReadiness.canEnterLayerAFull === "boolean" &&
+        typeof match.layerAReadiness.layerAProfile === "string" &&
         Array.isArray(match.layerAReadiness.blockReasons) &&
+        Array.isArray(match.layerAReadiness.fullBlockReasons) &&
         typeof match.layerAReadiness.hasPredictionMarket === "boolean",
     ),
   );
+  assert.ok(report.layerAProfileCounts && typeof report.layerAProfileCounts === "object");
+  assert.ok(typeof report.layerAProfileCounts.full === "number");
+  assert.ok(typeof report.layerAProfileCounts.lite === "number");
+  assert.ok(typeof report.layerAProfileCounts.blocked === "number");
   assert.ok(report.matches.every((match) => match.qualitySignals && typeof match.qualitySignals === "object"));
   assert.ok(
     report.matches.every(

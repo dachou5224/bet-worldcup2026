@@ -141,6 +141,15 @@ function buildLayerAReadiness({
   bookmakerDiversity,
 }) {
   const blockReasons = [];
+  const fullBlockReasons = [];
+  const hasLiteInputs = Boolean(
+    hasOdds &&
+      marketSnapshotCount &&
+      hasTimestampedSnapshots &&
+      !staleOdds &&
+      Number.isFinite(bookmakerDiversity) &&
+      bookmakerDiversity > 0,
+  );
 
   if (!hasOdds) {
     blockReasons.push("missing_odds");
@@ -154,10 +163,6 @@ function buildLayerAReadiness({
     blockReasons.push("missing_timestamped_snapshot");
   }
 
-  if (!hasClosingOrPreCloseSnapshot) {
-    blockReasons.push("missing_closing_snapshot");
-  }
-
   if (staleOdds) {
     blockReasons.push("stale_odds");
   }
@@ -166,13 +171,20 @@ function buildLayerAReadiness({
     blockReasons.push("missing_bookmaker_diversity");
   }
 
-  if (!Number.isFinite(spreadLine) && !Number.isFinite(totalLine)) {
-    blockReasons.push("missing_spread_total");
+  if (hasLiteInputs && !hasClosingOrPreCloseSnapshot) {
+    fullBlockReasons.push("missing_closing_snapshot");
+  }
+
+  if (hasLiteInputs && !Number.isFinite(spreadLine) && !Number.isFinite(totalLine)) {
+    fullBlockReasons.push("missing_spread_total");
   }
 
   return {
     canEnterLayerA: blockReasons.length === 0,
+    canEnterLayerAFull: blockReasons.length === 0 && fullBlockReasons.length === 0,
+    layerAProfile: blockReasons.length > 0 ? "blocked" : fullBlockReasons.length > 0 ? "lite" : "full",
     blockReasons,
+    fullBlockReasons,
     hasPredictionMarket,
   };
 }
@@ -193,7 +205,7 @@ function toProbabilityOutcome(actualOutcome) {
   return null;
 }
 
-function buildBacktestReviewFromRun(backtestRun) {
+function buildBacktestReviewFromRun(backtestRun, options = {}) {
   const reviewed = (backtestRun || []).map((record) => {
     const settlement = settleMarketBet(record, {
       finalScore: record.finalScore,
@@ -261,6 +273,7 @@ function buildBacktestReviewFromRun(backtestRun) {
     generatedAt: new Date().toISOString(),
     recordCount: reviewed.length,
     records: reviewed,
+    warning: options.warning || null,
     ...aggregate,
   };
 }
@@ -302,7 +315,13 @@ export async function buildPortfolioReview() {
 }
 
 export async function buildBacktestReview() {
-  return buildBacktestReviewFromRun(getBacktestRun());
+  const providerStatus = await getProviderStatus();
+  return buildBacktestReviewFromRun(getBacktestRun(), {
+    warning:
+      providerStatus.backtestRunMode === "unavailable"
+        ? "research 模式下没有 backtest artifact，已返回空回顾"
+        : null,
+  });
 }
 
 export async function buildNormalizedMatchBundle() {
@@ -409,7 +428,16 @@ export async function buildDataQualityReport() {
   const snapshotTypeCounts = marketSnapshotBundle.summary.marketTypeCounts;
   const layeredOutputs = dashboard.layeredOutputs || [];
   const portfolioReview = buildPortfolioReviewFromDashboard(dashboard, pipeline);
-  const backtestReview = buildBacktestReviewFromRun(getBacktestRun());
+  const backtestSourceMode = providerStatus.backtestRunMode || "mock";
+  const backtestSourceFile = providerStatus.backtestRunFile || null;
+  const backtestRunSourceMode = providerStatus.backtestRunSourceMode || null;
+  const backtestRunSummary = providerStatus.backtestRunSummary || null;
+  const backtestReview = buildBacktestReviewFromRun(getBacktestRun(), {
+    warning:
+      backtestSourceMode === "unavailable"
+        ? "research 模式下没有 backtest artifact，已返回空回顾"
+        : null,
+  });
   const recommendationSnapshotBundle = buildRecommendationSnapshotBundle(dashboard.tomorrowPredictions, {
     capturedAt: dashboard.lastUpdated,
     sourceModes: {
@@ -418,10 +446,6 @@ export async function buildDataQualityReport() {
       jingcai: providerStatus.jingcaiOfficialFeedMode,
     },
   });
-  const backtestSourceMode = providerStatus.backtestRunMode || "mock";
-  const backtestSourceFile = providerStatus.backtestRunFile || null;
-  const backtestRunSourceMode = providerStatus.backtestRunSourceMode || null;
-  const backtestRunSummary = providerStatus.backtestRunSummary || null;
   const postMatchReviewSourceMode = providerStatus.postMatchReviewMode || "mock";
   const postMatchReviewSourceFile = providerStatus.postMatchReviewFile || null;
   const jingcaiOfficialFeedMode = providerStatus.jingcaiOfficialFeedMode || "fixture";
@@ -477,12 +501,22 @@ export async function buildDataQualityReport() {
     dashboard.liveDataMode === "real_fallback_mock" || dashboard.liveDataMode === "real_unconfigured_fallback_mock";
   const jingcaiFallbackUsed = providerStatus.jingcaiOfficialFeedMode !== "real";
   const fallbackUsed = marketFallbackUsed || liveFallbackUsed || jingcaiFallbackUsed;
+  const jingcaiVerifiedFile =
+    providerStatus.jingcaiOfficialFeedMode === "file" &&
+    providerStatus.marketDataMode === "real" &&
+    dashboard.liveDataMode === "real" &&
+    !fallbackUsed;
   const researchSafe =
     providerStatus.appMode === "research" &&
     providerStatus.marketDataMode === "real" &&
     dashboard.liveDataMode === "real" &&
     providerStatus.jingcaiOfficialFeedMode === "real" &&
     !fallbackUsed;
+  const researchSafeStatus = researchSafe
+    ? "full"
+    : jingcaiVerifiedFile
+      ? "partial_verified_file"
+      : "blocked";
   const researchSafeBlockReasons = [];
   if (providerStatus.appMode !== "research") {
     researchSafeBlockReasons.push("app_mode_not_research");
@@ -494,7 +528,9 @@ export async function buildDataQualityReport() {
     researchSafeBlockReasons.push("live_not_real");
   }
   if (providerStatus.jingcaiOfficialFeedMode !== "real") {
-    researchSafeBlockReasons.push("jingcai_not_real");
+    researchSafeBlockReasons.push(
+      jingcaiVerifiedFile ? "jingcai_verified_file_not_full_research" : "jingcai_not_real",
+    );
   }
   if (marketFallbackUsed || liveFallbackUsed || jingcaiFallbackUsed) {
     researchSafeBlockReasons.push("fallback_used");
@@ -620,6 +656,9 @@ export async function buildDataQualityReport() {
       live: dashboard.liveDataMode,
       jingcai: providerStatus.jingcaiOfficialFeedMode,
     },
+    marketSourceMode: providerStatus.marketDataMode,
+    liveSourceMode: dashboard.liveDataMode,
+    jingcaiSourceMode: providerStatus.jingcaiOfficialFeedMode,
     fallbackUsed: {
       market: marketFallbackUsed,
       live: liveFallbackUsed,
@@ -627,6 +666,7 @@ export async function buildDataQualityReport() {
       any: fallbackUsed,
     },
     researchSafe,
+    researchSafeStatus,
     researchSafeBlockReasons,
     matchCount: matches.length,
     schemaOk: schemaValidation.ok,
@@ -642,8 +682,14 @@ export async function buildDataQualityReport() {
     marketSnapshotSummary: marketSnapshotBundle.summary,
     layerCoverage: {
       layerA: layeredOutputs.filter((output) => Boolean(output.layerA?.signalCandidate)).length,
+      layerAFull: matches.filter((match) => match.layerAReadiness?.layerAProfile === "full").length,
       layerB: layeredOutputs.filter((output) => Boolean(output.layerB?.mappingConfidence)).length,
       layerC: layeredOutputs.filter((output) => Boolean(output.layerC?.primaryRecommendation)).length,
+    },
+    layerAProfileCounts: {
+      full: matches.filter((match) => match.layerAReadiness?.layerAProfile === "full").length,
+      lite: matches.filter((match) => match.layerAReadiness?.layerAProfile === "lite").length,
+      blocked: matches.filter((match) => match.layerAReadiness?.layerAProfile === "blocked").length,
     },
     recommendationSnapshotSummary: recommendationSnapshotBundle.summary,
     recommendationSnapshotCount: recommendationSnapshotBundle.snapshotCount,
@@ -670,6 +716,8 @@ export async function buildDataQualityReport() {
     layerAReadyCount: matches.filter((match) => match.layerAReadiness?.canEnterLayerA).length,
     portfolioReview,
     backtestReview,
+    backtestReviewWarning:
+      backtestSourceMode === "unavailable" ? "research 模式下没有 backtest artifact，已返回空回顾" : null,
     issueCount: issues.length,
     issues,
     matches,
