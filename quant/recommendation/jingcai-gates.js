@@ -56,7 +56,11 @@ export function evaluateJingcaiGates(signalCandidate, mapping, options = {}) {
     });
   }
 
-  if (signalCandidate.recommendationLevel === "WATCH" && signalCandidate.decisionCode !== "candidate_positive_ev") {
+  if (
+    signalCandidate.recommendationLevel === "WATCH" &&
+    signalCandidate.decisionCode !== "candidate_positive_ev" &&
+    options.allowWatchEvaluation !== true
+  ) {
     return buildNoJingcaiResult("watch_overseas_signal_only", {
       mappingConfidence: mapping.mappingConfidence,
     });
@@ -155,10 +159,10 @@ export function evaluateJingcaiGates(signalCandidate, mapping, options = {}) {
   const maxStakeUnitsByRisk = Math.max(0, Math.floor(caps.dayCapRemain / stakeUnitFraction));
 
   return {
-    ok: decisionCode === "jingcai_candidate_ok",
+    ok: !decisionCode.startsWith("skip_"),
     decisionCode,
     recommendationLevel,
-    noJingcaiReason: decisionCode === "jingcai_candidate_ok" ? null : decisionCode,
+    noJingcaiReason: decisionCode.startsWith("skip_") ? decisionCode : null,
     officialExpectedValue,
     officialKelly,
     officialFractionalKelly,

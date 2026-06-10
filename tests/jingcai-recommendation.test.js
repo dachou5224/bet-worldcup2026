@@ -64,6 +64,53 @@ test("buildJingcaiRecommendationsFromMarket maps a qualified spread signal to La
   assert.match(mexico.primaryRecommendation.recommendationText, /墨西哥 vs 南非/);
 });
 
+test("buildJingcaiRecommendationsFromMarket matches fixture ids across string and number forms", async () => {
+  const officialFeed = await getJingcaiOfficialFeed();
+  const targetMatch = officialFeed.find((item) => item.fixtureId === 8287);
+  assert.ok(targetMatch);
+
+  const rawMarketBoard = [
+    {
+      id: String(targetMatch.fixtureId),
+      home: targetMatch.homeTeam,
+      away: targetMatch.awayTeam,
+      kickoff: "2026-06-12 20:00 CST",
+      updatedAtLabel: "4 min ago",
+      oddsProviders: [
+        {
+          provider: "Pinnacle",
+          updatedAt: "2026-06-06T08:30:00+08:00",
+          odds: { home: 1.35, draw: 3.2, away: 4.0 },
+          markets: [
+            {
+              key: "spreads",
+              lastUpdate: "2026-06-06T08:30:00+08:00",
+              outcomes: [
+                { name: targetMatch.homeTeam, price: 1.6, point: -1 },
+                { name: targetMatch.awayTeam, price: 2.6, point: 1 },
+              ],
+            },
+          ],
+        },
+      ],
+      predictionMarkets: [],
+    },
+  ];
+
+  const recommendations = buildJingcaiRecommendationsFromMarket(rawMarketBoard, officialFeed, {
+    now: "2026-06-06T12:00:00+08:00",
+    evThresholdOff: 0,
+    kellyFraction: 1,
+  });
+
+  assert.equal(recommendations.length, 1);
+  const match = recommendations[0];
+  assert.equal(match.fixtureId, String(targetMatch.fixtureId));
+  assert.equal(match.noJingcaiReason, null);
+  assert.ok(match.primaryRecommendation);
+  assert.equal(match.primaryRecommendation.saleStatus, "on_sale");
+});
+
 test("buildJingcaiRecommendationsFromMarket degrades cleanly when the match is not listed", async () => {
   const recommendations = buildJingcaiRecommendationsFromMarket(
     [

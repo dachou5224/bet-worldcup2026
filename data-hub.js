@@ -602,7 +602,11 @@ export async function buildDataQualityReport() {
       jingcaiRecommendation && jingcaiRecommendation.noJingcaiReason !== "skip_not_in_schedule",
     );
     const mappingConfidence = jingcaiRecommendation?.primaryRecommendation?.mappingConfidence || null;
-    const staleOdds = isStaleSourceUpdate(latestSourceUpdate, dashboard.lastUpdated);
+    const replayMode = String(providerStatus.marketDataMode || dashboard.liveDataMode || "").toLowerCase();
+    const staleOdds =
+      ["replay", "real_snapshot_replay"].includes(replayMode)
+        ? false
+        : isStaleSourceUpdate(latestSourceUpdate, dashboard.lastUpdated);
     const providerConflictLevel = summarizeProviderConflictLevel(prediction);
     const hasClosingSnapshot = hasClosingOrPreCloseSnapshot(
       fixtureSnapshots,

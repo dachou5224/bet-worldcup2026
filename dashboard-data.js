@@ -2,7 +2,7 @@ import {
   getMarketDataBundle,
   getBacktestRun,
   getStaticPageData,
-  getJingcaiOfficialFeed,
+  getJingcaiOfficialFeedBundle,
 } from "./data-sources.js";
 import {
   buildMarketSourceSummary,
@@ -39,11 +39,19 @@ function getTournamentPhase(now = new Date()) {
 export async function getDashboardData(now = new Date()) {
   const { rawMarketBoard, mode: marketDataMode, providerHealth } = await getMarketDataBundle();
   const staticData = await getStaticPageData();
-  const officialFeed = await getJingcaiOfficialFeed();
+  const officialFeedBundle = await getJingcaiOfficialFeedBundle();
+  const officialFeed = officialFeedBundle.feed;
+  const officialFeedOptions = {
+    directEVEligible: officialFeedBundle.envelope?.directEVEligible === true,
+  };
   const expertOpinionMap = new Map(
     staticData.expertOpinions.map((entry) => [entry.fixture, entry.opinions]),
   );
-  const jingcaiRecommendations = buildJingcaiRecommendationsFromMarket(rawMarketBoard, officialFeed);
+  const jingcaiRecommendations = buildJingcaiRecommendationsFromMarket(
+    rawMarketBoard,
+    officialFeed,
+    officialFeedOptions,
+  );
   const jingcaiRecommendationMap = new Map(
     jingcaiRecommendations.map((item) => [item.fixtureId, item]),
   );
@@ -99,12 +107,17 @@ export async function getPipelineData() {
   const providerConfig = getProviderConfig();
   const { rawMarketBoard, mode, providerHealth } = await getMarketDataBundle();
   const staticData = await getStaticPageData();
-  const officialFeed = await getJingcaiOfficialFeed();
+  const officialFeedBundle = await getJingcaiOfficialFeedBundle();
+  const officialFeed = officialFeedBundle.feed;
+  const officialFeedOptions = {
+    directEVEligible: officialFeedBundle.envelope?.directEVEligible === true,
+  };
   const marketSnapshotBundle = buildMarketSnapshotBundle(rawMarketBoard);
   const signalCandidates = buildSignalCandidatesFromMarket(rawMarketBoard);
   const jingcaiRecommendations = buildJingcaiRecommendationsFromMarket(
     rawMarketBoard,
     officialFeed,
+    officialFeedOptions,
   );
   const jingcaiRecommendationMap = new Map(
     jingcaiRecommendations.map((item) => [item.fixtureId, item]),

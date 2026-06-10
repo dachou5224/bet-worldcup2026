@@ -69,7 +69,10 @@ export function buildJingcaiRecommendation(signalCandidate, officialMatch, optio
   }
 
   const mapping = mapSignalCandidateToJingcaiPlay(signalCandidate, officialMatch, options);
-  const gate = evaluateJingcaiGates(signalCandidate, mapping, options);
+  const gate = evaluateJingcaiGates(signalCandidate, mapping, {
+    ...options,
+    allowWatchEvaluation: options.directEVEligible === true || officialMatch?.directEVEligible === true,
+  });
 
   if (!mapping.ok) {
     return buildNoJingcaiRecommendation(signalCandidate, officialMatch, mapping.reason || "skip_unmapped_play");
@@ -131,10 +134,12 @@ export function buildJingcaiRecommendation(signalCandidate, officialMatch, optio
 }
 
 export function buildJingcaiRecommendationsByFixture(signalCandidatesByFixture, officialFeed, options = {}) {
-  const feedByFixtureId = new Map((officialFeed || []).map((record) => [record.fixtureId, record]));
+  const feedByFixtureId = new Map(
+    (officialFeed || []).map((record) => [String(record.fixtureId ?? ""), record]),
+  );
 
   return (signalCandidatesByFixture || []).map((entry) => {
-    const officialMatch = feedByFixtureId.get(entry.fixtureId) || null;
+    const officialMatch = feedByFixtureId.get(String(entry.fixtureId ?? "")) || null;
     const eligibleCandidates = (entry.signalCandidates || []).filter(
       (candidate) => candidate.recommendationLevel !== "NO_ACTION",
     );
