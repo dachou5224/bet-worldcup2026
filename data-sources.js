@@ -453,6 +453,7 @@ export async function getProviderStatus() {
 
   return {
     appMode: config.appMode,
+    recommendationRiskProfile: config.recommendationRiskProfile || "strict",
     marketDataMode: bundle.mode,
     requestedMarketDataMode: config.marketDataMode,
     requestedLiveDataMode: config.liveDataMode,
@@ -469,6 +470,7 @@ export async function getProviderStatus() {
     backtestRunSummary: backtestRunArtifactMeta?.summary || null,
     postMatchReviewMode,
     postMatchReviewFile: config.postMatchReviewFile,
+    recommendationRiskProfile: config.recommendationRiskProfile || "strict",
     configuredSourceCatalogFile: config.sourceCatalogFile,
     configuredRawMarketBoardFile: config.rawMarketBoardFile,
     marketMatchCount: bundle.rawMarketBoard.length,

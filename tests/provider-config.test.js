@@ -26,6 +26,7 @@ test("provider config exposes the odds and football-data window defaults", () =>
     assert.equal(config.jingcaiOfficialFeedMode, "webapi");
     assert.equal(config.jingcaiOfficialFeedFile, "./fixtures/snapshots/latest/jingcai-official-feed.json");
     assert.equal(config.jingcaiOfficialFeedUrl, "");
+    assert.equal(config.recommendationRiskProfile, "strict");
     assert.equal(config.polymarketHttpsProxy, "http://127.0.0.1:3213");
     assert.equal(config.postMatchReviewFile, "./fixtures/snapshots/post-match-review.json");
     assert.equal(config.backtestRunFile, "./fixtures/snapshots/backtest-run.json");

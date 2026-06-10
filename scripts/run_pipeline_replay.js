@@ -1,7 +1,18 @@
-import { writeJsonSnapshot, writeSnapshotToTargets, resolveSnapshotDirs } from "../lib/snapshot-store.js";
+import {
+  writeJsonSnapshot,
+  writeSnapshotToTargets,
+  writeTextSnapshotToTargets,
+  resolveSnapshotDirs,
+} from "../lib/snapshot-store.js";
 import { loadProjectEnv } from "../lib/load-env.js";
 import { getProviderConfig } from "../provider-config.js";
 import { generateWatchInterpretation } from "../lib/watch-interpretation.js";
+import {
+  buildReplayAuditCsv,
+  buildReplayAuditRows,
+  buildReplayAuditSummaryMarkdown,
+  summarizeReplayAuditRows,
+} from "../lib/replay-audit-report.js";
 
 function setEnv(overrides) {
   const previous = {};
@@ -72,6 +83,20 @@ async function run() {
     const capturedAt = new Date().toISOString();
     const config = getProviderConfig();
     const dirs = resolveSnapshotDirs(capturedAt, "pipeline-replay");
+    const auditRows = buildReplayAuditRows({
+      tomorrowPredictions: dashboardData.tomorrowPredictions,
+      qualityReport,
+      watchInterpretations,
+      riskProfile: config.recommendationRiskProfile,
+    });
+    const auditCsv = buildReplayAuditCsv(auditRows);
+    const auditSummary = summarizeReplayAuditRows(auditRows);
+    const auditSummaryMarkdown = buildReplayAuditSummaryMarkdown({
+      capturedAt,
+      qualityReport,
+      rows: auditRows,
+      watchInterpretationMode,
+    });
     const result = {
       capturedAt,
       appMode: config.appMode,
@@ -79,6 +104,7 @@ async function run() {
       liveDataMode: config.liveDataMode,
       jingcaiOfficialFeedMode: config.jingcaiOfficialFeedMode,
       qualityReport: {
+        recommendationRiskProfile: qualityReport.recommendationRiskProfile,
         researchSafe: qualityReport.researchSafe,
         researchSafeStatus: qualityReport.researchSafeStatus,
         researchSafeBlockReasons: qualityReport.researchSafeBlockReasons,
@@ -100,7 +126,9 @@ async function run() {
       recommendationSettlementSummary: pipelineData.recommendationSettlementSummary || null,
       postMatchReviewSummary: dashboardData.postMatchReviewSummary || null,
       watchInterpretationMode,
+      recommendationRiskProfile: config.recommendationRiskProfile,
       watchInterpretations,
+      replayAuditSummary: auditSummary,
       pipelineData: {
         marketSnapshots: pipelineData.marketSnapshots,
         signalCandidates: pipelineData.signalCandidates,
@@ -122,6 +150,21 @@ async function run() {
       capturedAt,
       dirs,
     });
+    writeTextSnapshotToTargets({
+      fileName: "replay-8-matches-with-gs.csv",
+      contents: auditCsv,
+      dirs,
+    });
+    writeTextSnapshotToTargets({
+      fileName: "replay-8-matches-audit.csv",
+      contents: auditCsv,
+      dirs,
+    });
+    writeTextSnapshotToTargets({
+      fileName: "replay-8-matches-summary.md",
+      contents: auditSummaryMarkdown,
+      dirs,
+    });
 
     console.log(
       JSON.stringify(
@@ -134,8 +177,14 @@ async function run() {
             flat: dirs.flatDir,
           },
           summary: result.summary,
+          replayAuditSummary: result.replayAuditSummary,
           qualityReport: result.qualityReport,
-          files: ["pipeline-replay-result.json"],
+          files: [
+            "pipeline-replay-result.json",
+            "replay-8-matches-with-gs.csv",
+            "replay-8-matches-audit.csv",
+            "replay-8-matches-summary.md",
+          ],
         },
         null,
         2,

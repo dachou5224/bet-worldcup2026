@@ -31,6 +31,7 @@ export function getProviderConfig() {
     jingcaiWebApiAlignBaselineTeams:
       (process.env.JINGCAI_WEBAPI_ALIGN_BASELINE_TEAMS || "true") !== "false",
     jingcaiWebApiCacheTtlSeconds: Number(process.env.JINGCAI_WEBAPI_CACHE_TTL_SECONDS || 300),
+    recommendationRiskProfile: (process.env.RECOMMENDATION_RISK_PROFILE || "strict").toLowerCase(),
     jingcaiWebApiSnapshotFallbackEnabled:
       process.env.JINGCAI_WEBAPI_SNAPSHOT_FALLBACK_ENABLED != null
         ? process.env.JINGCAI_WEBAPI_SNAPSHOT_FALLBACK_ENABLED !== "false"

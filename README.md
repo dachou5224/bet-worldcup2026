@@ -210,6 +210,15 @@ POLYMARKET_PUBLIC_ENABLED=true
 ENABLE_STAKE_SUGGESTION=true
 ```
 
+如果要切换风险偏好表达层，显式设置：
+
+```bash
+RECOMMENDATION_RISK_PROFILE=strict
+# strict | balanced | aggressive
+```
+
+`strict` 只保留正式推荐门控；`balanced` 会把低正 EV / GS 同向样本标成探索型表达；`aggressive` 会把轻微负 EV 但有叙事或 GS 分歧的样本标成 speculative lean。默认仍是 `strict`。
+
 ### Sportmonks
 
 - `SPORTMONKS_API_TOKEN`

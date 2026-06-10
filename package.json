@@ -10,6 +10,7 @@
     "qa:providers": "node scripts/qa_real_providers.js",
     "qa:research-guardrails": "node scripts/qa_research_guardrails.js",
     "qa:pipeline-replay": "node scripts/qa_pipeline_replay.js",
+    "qa:pipeline-results": "node scripts/qa_pipeline_results.js",
     "qa:frontend": "node scripts/qa_frontend.js",
     "bootstrap:odds-snapshot": "node scripts/bootstrap_odds_snapshot.js",
     "fetch:polymarket-snapshot": "node scripts/fetch_polymarket_snapshot.js",
@@ -21,7 +22,12 @@
     "draft:jingcai-gemini": "node scripts/draft_jingcai_from_gemini.js",
     "fetch:jingcai-webapi": "node scripts/fetch_jingcai_official_webapi.js",
     "qa:jingcai-webapi": "node scripts/qa_jingcai_webapi.js",
+    "audit:replay-8": "node scripts/run_replay_8_audit.js",
     "extract:goldman-sachs-pdf": "node scripts/extract_goldman_sachs_pdf.js",
-    "join:goldman-sachs-fixtures": "node scripts/join_goldman_sachs_fixtures.js"
+    "join:goldman-sachs-fixtures": "node scripts/join_goldman_sachs_fixtures.js",
+    "extract:kimi-pdf": "node scripts/extract_kimi_pdf.js",
+    "join:kimi-fixtures": "node scripts/join_kimi_fixtures.js",
+    "audit:kimi-gs-teams": "node scripts/audit_kimi_gs_teams.js",
+    "qa:kimi-prior": "node scripts/qa_kimi_prior.js"
   }
 }

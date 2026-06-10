@@ -687,6 +687,7 @@ export async function buildDataQualityReport() {
   return {
     generatedAt: new Date().toISOString(),
     appMode: providerStatus.appMode,
+    recommendationRiskProfile: providerStatus.recommendationRiskProfile || "strict",
     providerMode: providerStatus.marketDataMode,
     sourceMode: {
       market: providerStatus.marketDataMode,

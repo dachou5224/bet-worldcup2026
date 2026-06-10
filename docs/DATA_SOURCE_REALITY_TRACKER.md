@@ -2,9 +2,9 @@
 
 > 目的：记录每类输入是 `real / file / fixture / mock`，是否可用于 research、是否 direct EV eligible，以及 Agent B 快照交付进度。
 >
-> 更新时间：2026-06-09
+> 更新时间：2026-06-10
 >
-> Issue：[#4 Agent B：真实数据源获取、快照与 research 模式联调](https://github.com/dachou5224/bet-worldcup2026/issues/4)
+> Issue：[#4 Agent B：真实数据源获取、快照与 research 模式联调](https://github.com/dachou5224/bet-worldcup2026/issues/4) · [#7 Agent B：8 场 replay 数据映射核查](https://github.com/dachou5224/bet-worldcup2026/issues/7)
 
 ## 结论摘要
 
@@ -16,6 +16,40 @@
 - `npm run qa:providers` 在 `APP_MODE=research` 下检测 silent fallback
 - Polymarket 标记 `sentiment_only=true`、`directEVEligible=false`
 - `quality-report` 额外输出 `researchSafeStatus` 和 `researchSafeBlockReasons`，便于定位为什么还没进入 research 安全态
+- **Replay 8 场审计**（Issue #7）：`npm run audit:replay-8` 生成 mapping / jingcai / GS / summary 产物
+
+## Replay 8 场数据真实度（Issue #7）
+
+当前 8 场 WATCH replay 样本：`fixtures/snapshots/latest/replay-8-matches-with-gs.csv`
+
+| 输入 | 当前状态 | direct EV | 备注 |
+|------|----------|-----------|------|
+| market odds | `bzzoiro_odds` · `file_snapshot` · 8 fixtures · 15 bookmakers | 是 | The Odds API 配额耗尽 fallback；详见 [BZZOIRO_ODDS_SNAPSHOT_NOTES.md](./BZZOIRO_ODDS_SNAPSHOT_NOTES.md) |
+| live | `real` / `real_snapshot_replay` | N/A | football-data 赛程；fixtureId 与 odds event id 对齐 |
+| jingcai | `file`（latest 含 5/8 场 official feed） | 是（官方 SP） | 8288/8292/8293 不在当前 official feed |
+| GS prior | modal Exhibit 5 join · 8/8 覆盖 | N/A | `marketLean` = h2h 最高概率 outcome；divergent = GS modal ≠ market lean |
+| Kimi prior | **rejected** | **否** | 2026-06-10 roster 审计失败；见 KIMI_SOURCE_REJECTION.md |
+| Polymarket | **timeout** / error | **否** | `sentiment_only`；**未进入** replay 8 场 direct EV 或主预测概率 |
+| researchSafeStatus | `partial_verified_file` | — | jingcai=file + PM timeout 为已知 non-blocking |
+
+审计产物（Agent B → Agent A）：
+
+```text
+fixtures/snapshots/latest/replay-8-match-mapping-audit.csv
+fixtures/snapshots/latest/replay-8-jingcai-audit.csv
+fixtures/snapshots/latest/replay-8-gs-audit.csv
+fixtures/snapshots/latest/replay-8-audit-summary.json
+```
+
+生成命令：`npm run audit:replay-8`
+
+Polymarket 现状（不阻塞 replay）：
+
+- 状态：`timeout`（本地 Gamma 45s 超时）
+- 用途：`sentiment_only`
+- Replay 8：未进入 direct EV 或主预测概率链
+- 修复不在 Issue #7 范围；可用 VPS snapshot 作 sentiment 补充
+
 
 ## 快照目录结构
 
@@ -129,7 +163,9 @@ GEMINI_API_KEY=... GEMINI_HTTPS_PROXY=127.0.0.1:3213 npm run draft:jingcai-gemin
 | B-1 football-data | `done` | raw + normalized 落盘；live 失败时可回放 `latest/raw/football-data-matches.json` |
 | B-2 The Odds API h2h | `file_replay` | live 配额耗尽时 bootstrap + `real_snapshot_replay`（5 场 / 15 家 bookmaker） |
 | B-3 竞彩官方盘 | `done` | **sporttery_webapi** 覆盖手工快照；`fetch:jingcai-webapi` + latest 落盘 |
-| B-4 Polymarket sentiment | `done` | VPS SSH 抓取 2 个世界杯 events；`sentimentOnly=true` / `directEVEligible=false` |
+| B-4 Polymarket sentiment | `done` | VPS SSH 抓取 2 个世界杯 events；`sentimentOnly=true` / `directEVEligible=false`；**replay 8 本地 timeout = non-blocking** |
+| B-7 replay-8 映射审计 | `done` | `audit:replay-8` → mapping / jingcai / GS / summary CSV+JSON |
+| Kimi fundamental prior | `rejected` | roster 错误；产物归档至 `fixtures/_deprecated/kimi/` |
 | A/B 接口契约 | `done` | `lib/snapshot-ab-contract.js` + qa 校验；竞彩 fixtureId 与 odds 对齐 |
 | 快照 versioning | `done` | latest + YYYY-MM-DD/HHmm |
 | research QA 护栏 | `done` | qa:providers 检测 fallback |
@@ -157,6 +193,7 @@ Agent A 侧待消费（不由 B 修改）：
 - `Layer A-full` 额外要求 `closing snapshot` 与 `spread/total`，用于完整比分矩阵和让球/大小球校准。
 - `Jingcai` `file` 模式只能算 `partial_verified_file`，不应当被标成 `researchSafe=true`。
 - `ENABLE_STAKE_SUGGESTION=false` 是默认值，只有显式开启时才展示金额化建议。
+- `RECOMMENDATION_RISK_PROFILE=strict|balanced|aggressive` 只影响表达层，不改变严格 gate。
 
 ### Layer A readiness contract
 
@@ -174,6 +211,17 @@ Agent A 侧待消费（不由 B 修改）：
   - `layerAProfileCounts.lite`
   - `layerAProfileCounts.blocked`
 
+replay CSV 额外输出：
+
+- `riskProfile`
+- `expressionLevel`
+- `expressionReason`
+- `expressionWarnings`
+- `maxRiskBudgetHint`
+- `strictDecisionCode`
+- `balancedDecisionCode`
+- `aggressiveDecisionCode`
+
 解释口径：
 
 - `full`：可进入完整比分矩阵、让球和大小球校准
@@ -185,4 +233,5 @@ Agent A 侧待消费（不由 B 修改）：
 - 量化主线：[QUANT_IMPLEMENTATION_PLAN.md](./QUANT_IMPLEMENTATION_PLAN.md)
 - 算法规格：[QUANT_STRATEGY_SPEC.md](./QUANT_STRATEGY_SPEC.md)
 - 竞彩数据源说明：[SPORTTERY_JINGCAI_WEBAPI.md](./SPORTTERY_JINGCAI_WEBAPI.md)
+- Bzzoiro odds 快照说明：[BZZOIRO_ODDS_SNAPSHOT_NOTES.md](./BZZOIRO_ODDS_SNAPSHOT_NOTES.md)
 - A/B 启动执行计划：[RESEARCH_EXECUTION_PLAN.md](./RESEARCH_EXECUTION_PLAN.md)
