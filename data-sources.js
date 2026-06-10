@@ -6,12 +6,21 @@ import { allowsProviderFallback } from "./lib/app-mode.js";
 import { mergeMarketSources } from "./services/market-board-service.js";
 import { validateRawMarketBoard } from "./schemas/market-board.js";
 import { getMockProvider, getProviderAdapters } from "./providers/provider-registry.js";
-import { loadJingcaiOfficialFeed } from "./providers/jingcai/official-feed.js";
+import {
+  getLastJingcaiLoadMeta,
+  loadJingcaiOfficialFeedBundle,
+} from "./lib/jingcai-official-feed-service.js";
 import { getBacktestRun as getMockBacktestRun } from "./providers/mock/index.js";
 import { validateLiveMatches } from "./schemas/live-matches.js";
 import { readBacktestRunArtifactMeta } from "./lib/backtest-artifacts.js";
 import { readPostMatchReviewArtifact } from "./lib/post-match-artifacts.js";
-import { isOddsQuotaError, mergeReplayedMarketBundle, tryReplayLiveFromSnapshot, tryReplayOddsFromSnapshot } from "./lib/snapshot-replay.js";
+import {
+  isOddsQuotaError,
+  mergeReplayedMarketBundle,
+  tryReplayLiveFromSnapshot,
+  tryReplayOddsFromSnapshot,
+  tryReplayPredictionMarketsFromSnapshot,
+} from "./lib/snapshot-replay.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -123,6 +132,23 @@ async function getRealMarketDataBundle() {
   };
 }
 
+async function getReplayedMarketDataBundle(config) {
+  const [replay, predictionReplay] = await Promise.all([
+    tryReplayOddsFromSnapshot(config, {
+      reason: "explicit replay mode",
+    }),
+    tryReplayPredictionMarketsFromSnapshot(config, {
+      reason: "explicit replay mode",
+    }),
+  ]);
+
+  if (!replay?.oddsBoard?.length) {
+    throw new Error("market replay snapshot missing or empty");
+  }
+
+  return mergeReplayedMarketBundle(replay, predictionReplay?.predictionBoard || []);
+}
+
 export async function getMarketDataBundle() {
   const config = getProviderConfig();
 
@@ -138,6 +164,14 @@ export async function getMarketDataBundle() {
       providerHealth: {
         source: "file",
       },
+    };
+  }
+
+  if (config.marketDataMode === "replay") {
+    const replayedBundle = await getReplayedMarketDataBundle(config);
+    return {
+      ...replayedBundle,
+      mode: replayedBundle.mode || "real_snapshot_replay",
     };
   }
 
@@ -179,12 +213,13 @@ export function getSourceCatalog() {
 
 export async function getJingcaiOfficialFeed() {
   const config = getProviderConfig();
-  const loaded = await loadJingcaiOfficialFeed({
-    mode: config.jingcaiOfficialFeedMode,
-    feedFile: config.jingcaiOfficialFeedFile,
-    feedUrl: config.jingcaiOfficialFeedUrl,
-  });
+  const loaded = await loadJingcaiOfficialFeedBundle(config);
   return loaded.feed;
+}
+
+export async function getJingcaiOfficialFeedBundle() {
+  const config = getProviderConfig();
+  return loadJingcaiOfficialFeedBundle(config);
 }
 
 export function getBacktestRun() {
@@ -267,16 +302,63 @@ async function getRealLiveMatches() {
   return liveMatches;
 }
 
+async function getReplayedLiveMatches(config) {
+  const replay = await tryReplayLiveFromSnapshot(config, {
+    reason: "explicit replay mode",
+  });
+
+  if (!replay?.liveMatches?.length) {
+    throw new Error("live replay snapshot missing or empty");
+  }
+
+  return replay;
+}
+
+function getDisplayPageFields(config) {
+  if (!allowsProviderFallback(config.appMode)) {
+    return {
+      analysisItems: [],
+      modelingSteps: [],
+      expertOpinions: [],
+    };
+  }
+
+  const mockData = getMockProvider().getStaticPageData();
+  return {
+    analysisItems: mockData.analysisItems,
+    modelingSteps: mockData.modelingSteps,
+    expertOpinions: mockData.expertOpinions,
+  };
+}
+
 export async function getStaticPageData() {
   const config = getProviderConfig();
-  const mockData = getMockProvider().getStaticPageData();
+  const displayFields = getDisplayPageFields(config);
   const completedComparisons = getCompletedComparisons();
 
-  if (config.liveDataMode !== "real") {
+  if (config.liveDataMode === "replay") {
+    const replay = await getReplayedLiveMatches(config);
     return {
-      ...mockData,
+      ...displayFields,
       completedComparisons,
-      liveMode: "mock",
+      liveMatches: replay.liveMatches,
+      liveMode: replay.liveMode,
+      liveSnapshotFile: replay.liveSnapshotFile,
+      liveSnapshotSource: replay.liveSnapshotSource || null,
+      liveReplayReason: replay.liveReplayReason,
+    };
+  }
+
+  if (config.liveDataMode !== "real") {
+    const mockLive = allowsProviderFallback(config.appMode)
+      ? getMockProvider().getStaticPageData().liveMatches
+      : [];
+
+    return {
+      ...displayFields,
+      completedComparisons,
+      liveMatches: mockLive,
+      liveMode: allowsProviderFallback(config.appMode) ? "mock" : "unavailable",
     };
   }
 
@@ -288,13 +370,15 @@ export async function getStaticPageData() {
       }
 
       return {
-        ...mockData,
+        ...displayFields,
+        completedComparisons,
+        liveMatches: getMockProvider().getStaticPageData().liveMatches,
         liveMode: "real_unconfigured_fallback_mock",
       };
     }
 
     return {
-      ...mockData,
+      ...displayFields,
       completedComparisons,
       liveMatches,
       liveMode: "real",
@@ -307,7 +391,7 @@ export async function getStaticPageData() {
         });
         if (replay?.liveMatches?.length) {
           return {
-            ...mockData,
+            ...displayFields,
             completedComparisons,
             liveMatches: replay.liveMatches,
             liveMode: replay.liveMode,
@@ -322,8 +406,9 @@ export async function getStaticPageData() {
     }
 
     return {
-      ...mockData,
+      ...displayFields,
       completedComparisons,
+      liveMatches: getMockProvider().getStaticPageData().liveMatches,
       liveMode: "real_fallback_mock",
       liveFallbackReason: error.message,
     };
@@ -333,6 +418,13 @@ export async function getStaticPageData() {
 export async function getProviderStatus() {
   const config = getProviderConfig();
   const bundle = await getMarketDataBundle();
+
+  try {
+    await loadJingcaiOfficialFeedBundle(config);
+  } catch {
+    // jingcaiLoadMeta 会在 service 层记录失败原因
+  }
+
   const catalog = getSourceCatalog();
   const adapters = getProviderAdapters();
   const backtestRunArtifactMeta = readBacktestRunArtifactMeta(config.backtestRunFile);
@@ -347,12 +439,17 @@ export async function getProviderStatus() {
       : "mock";
   const postMatchReviewMode = readPostMatchReviewArtifact(config.postMatchReviewFile) ? "artifact" : "mock";
   const jingcaiOfficialFeedMode = config.jingcaiOfficialFeedMode;
+  const jingcaiLoadMeta = getLastJingcaiLoadMeta();
   const jingcaiOfficialFeedSource =
-    jingcaiOfficialFeedMode === "real"
-      ? config.jingcaiOfficialFeedUrl
-        ? "url"
-        : "file"
-      : jingcaiOfficialFeedMode;
+    jingcaiLoadMeta?.effectiveMode === "file" && jingcaiLoadMeta?.fallbackUsed
+      ? "file_fallback"
+      : jingcaiOfficialFeedMode === "webapi"
+        ? "webapi"
+        : jingcaiOfficialFeedMode === "real"
+          ? config.jingcaiOfficialFeedUrl
+            ? "url"
+            : "file"
+          : jingcaiOfficialFeedMode;
 
   return {
     appMode: config.appMode,
@@ -361,6 +458,9 @@ export async function getProviderStatus() {
     requestedLiveDataMode: config.liveDataMode,
     jingcaiOfficialFeedMode,
     jingcaiOfficialFeedSource,
+    jingcaiFallbackUsed: Boolean(jingcaiLoadMeta?.fallbackUsed),
+    jingcaiFallbackReason: jingcaiLoadMeta?.fallbackReason || null,
+    jingcaiLoadMeta,
     jingcaiOfficialFeedFile: config.jingcaiOfficialFeedFile,
     jingcaiOfficialFeedUrl: config.jingcaiOfficialFeedUrl || null,
     backtestRunMode,

@@ -1,5 +1,6 @@
 import { getDashboardData, getPipelineData } from "./dashboard-data.js";
 import { getBacktestRun, getProviderStatus } from "./data-sources.js";
+import { isJingcaiRealFeedMode } from "./lib/jingcai-feed-mode.js";
 import { validateExpertOpinions } from "./schemas/expert-opinions.js";
 import { validateLiveMatches } from "./schemas/live-matches.js";
 import { validateRawMarketBoard } from "./schemas/market-board.js";
@@ -109,29 +110,37 @@ function isStaleSourceUpdate(latestSourceUpdate, generatedAt, thresholdHours = 6
 }
 
 export function deriveResearchSafetyState(providerStatus, liveDataMode, fallbackState = {}) {
+  const normalizeMode = (mode) => String(mode || "").toLowerCase();
+  const isRealLikeMode = (mode) =>
+    ["real", "real_snapshot_replay", "replay"].includes(normalizeMode(mode));
+
   const marketFallbackUsed = fallbackState.market ?? providerStatus.marketDataMode === "real_fallback_mock";
   const liveFallbackUsed =
     fallbackState.live ??
     (liveDataMode === "real_fallback_mock" || liveDataMode === "real_unconfigured_fallback_mock");
+  const jingcaiFallbackUsed = fallbackState.jingcai ?? Boolean(providerStatus.jingcaiFallbackUsed);
 
   const fallbackUsed = {
     market: marketFallbackUsed,
     live: liveFallbackUsed,
-    jingcai: false,
-    any: marketFallbackUsed || liveFallbackUsed,
+    jingcai: jingcaiFallbackUsed,
+    any: marketFallbackUsed || liveFallbackUsed || jingcaiFallbackUsed,
   };
 
+  const jingcaiMode = providerStatus.jingcaiOfficialFeedMode;
   const jingcaiVerifiedFile =
-    providerStatus.jingcaiOfficialFeedMode === "file" &&
-    providerStatus.marketDataMode === "real" &&
-    liveDataMode === "real" &&
+    jingcaiMode === "file" &&
+    isRealLikeMode(providerStatus.marketDataMode) &&
+    isRealLikeMode(liveDataMode) &&
     !fallbackUsed.any;
   const researchSafe =
     providerStatus.appMode === "research" &&
-    providerStatus.marketDataMode === "real" &&
-    liveDataMode === "real" &&
-    providerStatus.jingcaiOfficialFeedMode === "real" &&
-    !fallbackUsed.any;
+    normalizeMode(providerStatus.marketDataMode) === "real" &&
+    normalizeMode(liveDataMode) === "real" &&
+    isJingcaiRealFeedMode(jingcaiMode) &&
+    !jingcaiFallbackUsed &&
+    !fallbackUsed.market &&
+    !fallbackUsed.live;
   const researchSafeStatus = researchSafe
     ? "full"
     : jingcaiVerifiedFile
@@ -142,16 +151,19 @@ export function deriveResearchSafetyState(providerStatus, liveDataMode, fallback
   if (providerStatus.appMode !== "research") {
     researchSafeBlockReasons.push("app_mode_not_research");
   }
-  if (providerStatus.marketDataMode !== "real") {
+  if (!isRealLikeMode(providerStatus.marketDataMode)) {
     researchSafeBlockReasons.push("market_not_real");
   }
-  if (liveDataMode !== "real") {
+  if (!isRealLikeMode(liveDataMode)) {
     researchSafeBlockReasons.push("live_not_real");
   }
-  if (providerStatus.jingcaiOfficialFeedMode !== "real") {
+  if (!isJingcaiRealFeedMode(jingcaiMode)) {
     researchSafeBlockReasons.push(
       jingcaiVerifiedFile ? "jingcai_verified_file_not_full_research" : "jingcai_not_real",
     );
+  }
+  if (jingcaiFallbackUsed) {
+    researchSafeBlockReasons.push("jingcai_fallback_used");
   }
   if (marketFallbackUsed || liveFallbackUsed) {
     researchSafeBlockReasons.push("fallback_used");

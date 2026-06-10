@@ -18,6 +18,37 @@ function formatPct(value, digits = 1) {
   return `${(value * 100).toFixed(digits)}%`;
 }
 
+function formatEdgePoint(value, digits = 2) {
+  if (!isFiniteNumber(value)) {
+    return "n/a";
+  }
+
+  const sign = value > 0 ? "+" : "";
+  return `${sign}${(value * 100).toFixed(digits)}个百分点`;
+}
+
+function formatSignedPct(value, digits = 2) {
+  if (!isFiniteNumber(value)) {
+    return "n/a";
+  }
+
+  const sign = value > 0 ? "+" : "";
+  return `${sign}${(value * 100).toFixed(digits)}%`;
+}
+
+function labelOutcome(outcome) {
+  if (outcome === "home") {
+    return "主胜";
+  }
+  if (outcome === "draw") {
+    return "平局";
+  }
+  if (outcome === "away") {
+    return "客胜";
+  }
+  return String(outcome || "未知");
+}
+
 function normalizeCaps(input = {}) {
   return {
     singleCap: isFiniteNumber(input.singleCap) ? input.singleCap : 1,
@@ -40,15 +71,80 @@ function buildRecommendationText({
   cappedStakeFraction,
   recommendationLevel,
   riskTags,
+  watchDetailText = null,
 }) {
   const riskText = riskTags?.length ? riskTags.join("、") : "无显著额外风险标签";
 
-  return [
+  const coreText = [
     `市场定价：该选项当前赔率为 ${isFiniteNumber(offeredOdds) ? offeredOdds.toFixed(2) : "n/a"}，去水后市场隐含概率约为 ${formatPct(marketProbability)}。`,
     `模型判断：模型原始概率为 ${formatPct(modelProbability)}，经过 alpha 收缩后，可用概率为 ${formatPct(adjustedProbability)}。`,
     `决策结果：按 P_adj 计算 EV 为 ${isFiniteNumber(expectedValueValue) ? `${(expectedValueValue * 100).toFixed(1)}%` : "n/a"}，分数 Kelly 风险预算为 ${isFiniteNumber(cappedStakeFraction) ? `${(cappedStakeFraction * 100).toFixed(2)}%` : "n/a"}，当前等级为 ${recommendationLevel}。`,
     `风险说明：${riskText}。`,
   ].join("");
+
+  return watchDetailText ? `${coreText} ${watchDetailText}` : coreText;
+}
+
+function buildWatchEdgeBreakdownText(marketBaseline, selectedOutcome, alpha = 0.4, evThreshold = 0.03) {
+  if (!marketBaseline?.outcomeNames?.length) {
+    return null;
+  }
+
+  const bookmakerMap = marketBaseline.bookmakerConsensus || {};
+  const modelMap = marketBaseline.modelConsensus || {};
+  const outcomes = marketBaseline.outcomeNames.map((outcomeName) => {
+    const marketProbability = normalizeProbability(bookmakerMap[outcomeName]);
+    const modelProbability = normalizeProbability(modelMap[outcomeName]);
+    const adjustedProbability =
+      marketProbability != null && modelProbability != null
+        ? shrinkProbability(modelProbability, marketProbability, alpha)
+        : null;
+    const edgeValue =
+      marketProbability != null && adjustedProbability != null ? adjustedProbability - marketProbability : null;
+    const offeredOdds = marketBaseline.primarySnapshot?.outcomes?.find((item) => item.name === outcomeName)?.price ?? null;
+    const expectedValueValue =
+      isFiniteNumber(offeredOdds) && adjustedProbability != null
+        ? expectedValue(offeredOdds, adjustedProbability)
+        : null;
+
+    return {
+      outcome: outcomeName,
+      label: labelOutcome(outcomeName),
+      marketProbability,
+      modelProbability,
+      adjustedProbability,
+      edge: edgeValue,
+      edgePercentPoint: isFiniteNumber(edgeValue) ? edgeValue * 100 : null,
+      offeredOdds,
+      expectedValue: expectedValueValue,
+    };
+  });
+
+  const selected = outcomes.find((row) => row.outcome === selectedOutcome) || null;
+  const edgeSummary = outcomes
+    .map((row) => `${row.label}${formatEdgePoint(row.edge)}`)
+    .join("，");
+
+  const positiveEdges = outcomes.filter((row) => isFiniteNumber(row.edgePercentPoint) && row.edgePercentPoint > 0);
+  const smallEdges = outcomes.filter((row) => isFiniteNumber(row.edgePercentPoint) && Math.abs(row.edgePercentPoint) < 0.5);
+
+  let interpretation = `盘口拆解：${edgeSummary}。`;
+  if (smallEdges.length === outcomes.length) {
+    interpretation += " 三项边际都不到 0.5 个百分点，说明模型与市场几乎一致，适合继续观察，不宜直接下单。";
+  } else if (selected?.expectedValue != null && selected.expectedValue < evThreshold) {
+    interpretation += ` 当前关注的【${labelOutcome(selectedOutcome)}】虽然有轻微正向偏移，但 EV 仍低于 ${formatSignedPct(evThreshold)} 门槛，适合观察，不宜追单。`;
+  } else if (positiveEdges.length > 0) {
+    interpretation += " 其中正向边际只出现在少数方向，价差仍偏薄，建议等更明确的盘口偏离再考虑行动。";
+  } else {
+    interpretation += " 当前方向没有形成稳定正边际，仍属于观察样本。";
+  }
+
+  return {
+    outcomes,
+    selectedOutcome,
+    selected,
+    interpretation,
+  };
 }
 
 function mapDecisionLevel({ decisionCode, confidence, finalStakeFraction, minActionStake }) {
@@ -214,6 +310,11 @@ export function buildSignalCandidate({
     minActionStake,
   });
 
+  const watchEdgeBreakdown =
+    decisionCode.startsWith("watch") || recommendationLevel === "WATCH"
+      ? buildWatchEdgeBreakdownText(marketBaseline, outcome, alpha, evThreshold)
+      : null;
+
   const recommendationText = buildRecommendationText({
     offeredOdds: normalizedOfferedOdds,
     marketProbability: normalizedMarketProbability,
@@ -223,6 +324,7 @@ export function buildSignalCandidate({
     cappedStakeFraction: finalStakeFraction,
     recommendationLevel,
     riskTags: effectiveRiskTags,
+    watchDetailText: watchEdgeBreakdown?.interpretation || null,
   });
 
   return {
@@ -246,6 +348,7 @@ export function buildSignalCandidate({
     decisionCode,
     recommendationLevel,
     recommendationText,
+    watchEdgeBreakdown,
     playMappable: true,
     kellyFraction,
     marketBaseline,

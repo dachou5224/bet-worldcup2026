@@ -93,6 +93,24 @@
       ]
     },
     {
+      "id": "sporttery_jingcai_webapi",
+      "name": "中国体育彩票竞彩足球 webapi",
+      "category": "official_jingcai_odds",
+      "providerType": "official",
+      "priority": "high",
+      "integrationStatus": "integrated",
+      "access": "public_api",
+      "auth": "none",
+      "recommendedUse": "竞彩足球 SPF/RQSPF 官方在售赔率与场次列表",
+      "docsUrl": "https://www.sporttery.cn/jc/jsq/zqspf/",
+      "apiBaseUrl": "https://webapi.sporttery.cn/gateway/uniform/football/getMatchListV1.qry",
+      "notes": [
+        "官网 JS 实际调用 webapi.sporttery.cn，无需 headless。",
+        "HAD→胜平负，HHAD→让球胜平负；clientCode=3001。",
+        "详见 docs/SPORTTERY_JINGCAI_WEBAPI.md。"
+      ]
+    },
+    {
       "id": "polymarket_gamma_api",
       "name": "Polymarket Gamma API",
       "category": "prediction_market_discovery",

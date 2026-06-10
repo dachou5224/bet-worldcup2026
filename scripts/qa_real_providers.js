@@ -188,12 +188,19 @@ async function run() {
     feedUrl: providerConfig.jingcaiOfficialFeedUrl || null,
   };
 
-  if (providerConfig.jingcaiOfficialFeedMode === "real" && providerConfig.jingcaiOfficialFeedUrl) {
+  if (
+    providerConfig.jingcaiOfficialFeedMode === "webapi" ||
+    (providerConfig.jingcaiOfficialFeedMode === "real" && providerConfig.jingcaiOfficialFeedUrl)
+  ) {
     try {
       const loaded = await loadJingcaiOfficialFeed({
         mode: providerConfig.jingcaiOfficialFeedMode,
         feedFile: providerConfig.jingcaiOfficialFeedFile,
         feedUrl: providerConfig.jingcaiOfficialFeedUrl,
+        clientCode: providerConfig.jingcaiWebApiClientCode,
+        leagueFilter: providerConfig.jingcaiWebApiLeagueFilter,
+        baselineFile: providerConfig.jingcaiWebApiBaselineFile,
+        alignBaselineTeams: providerConfig.jingcaiWebApiAlignBaselineTeams,
       });
       jingcaiFeedCheck.status = "ok";
       jingcaiFeedCheck.sourceType = loaded.sourceType;

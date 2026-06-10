@@ -12,6 +12,7 @@ import { getDashboardData as getDashboardDataBundle } from "../dashboard-data.js
 import { getProviderConfig } from "../provider-config.js";
 import { getProviderAdapters } from "../providers/provider-registry.js";
 import { loadJingcaiOfficialFeed } from "../providers/jingcai/official-feed.js";
+import { loadJingcaiOfficialFeedBundle } from "../lib/jingcai-official-feed-service.js";
 import {
   computePayloadHash,
   resolveSnapshotDirs,
@@ -94,7 +95,27 @@ function maybeBootstrapOddsSnapshot(rawCaptures, config) {
   }
 }
 
-function buildJingcaiSnapshotEnvelope(config, capturedAt) {
+async function buildJingcaiSnapshotEnvelope(config, capturedAt) {
+  if (config.jingcaiOfficialFeedMode === "webapi" || config.jingcaiOfficialFeedMode === "file") {
+    try {
+      const loaded = await loadJingcaiOfficialFeedBundle(config);
+      if (loaded.envelope?.matches?.length) {
+        return {
+          ...loaded.envelope,
+          capturedAt: loaded.envelope.capturedAt || capturedAt,
+          sourceMode: loaded.loadMeta?.effectiveMode || config.jingcaiOfficialFeedMode,
+          manualReviewed: loaded.loadMeta?.fallbackUsed ? true : loaded.envelope.manualReviewed,
+          jingcaiFallbackUsed: loaded.loadMeta?.fallbackUsed || false,
+          jingcaiFallbackReason: loaded.loadMeta?.fallbackReason || null,
+        };
+      }
+    } catch (error) {
+      if (config.jingcaiOfficialFeedMode === "webapi") {
+        throw error;
+      }
+    }
+  }
+
   const feedFile = config.jingcaiOfficialFeedFile;
   const absolutePath = path.isAbsolute(feedFile)
     ? feedFile
@@ -124,7 +145,8 @@ function buildJingcaiSnapshotEnvelope(config, capturedAt) {
 
 async function run() {
   const capturedAt = new Date().toISOString();
-  const dirs = resolveSnapshotDirs(capturedAt);
+  const snapshotVariant = process.env.SNAPSHOT_VARIANT || null;
+  const dirs = resolveSnapshotDirs(capturedAt, snapshotVariant);
   const config = getProviderConfig();
   const adapters = getProviderAdapters();
 
@@ -292,10 +314,14 @@ async function run() {
         sourceMode: "real",
         extra: {
           provider: "polymarket-gamma",
-          sentimentOnly: true,
-          directEVEligible: false,
-          semanticMappingConfidence: rawCaptures.polymarket.meta?.semanticMappingConfidence || "low",
+          sentimentOnly: rawCaptures.polymarket.meta?.sentimentOnly ?? false,
+          directEVEligible: rawCaptures.polymarket.meta?.directEVEligible ?? false,
+          semanticMappingConfidence:
+            rawCaptures.polymarket.meta?.semanticMappingConfidence || "low",
+          marketStructure: rawCaptures.polymarket.meta?.marketStructure || null,
+          seriesId: rawCaptures.polymarket.meta?.seriesId || null,
           eventCount: rawCaptures.polymarket.meta?.eventCount || rawCaptures.polymarket.body.length,
+          rawEventCount: rawCaptures.polymarket.meta?.rawEventCount || null,
           fromCache: rawCaptures.polymarket.meta?.fromCache ?? false,
         },
       }),
@@ -303,27 +329,84 @@ async function run() {
     writeJsonSnapshot(path.join(dirs.rawDir, "polymarket-worldcup.json"), wrapped);
     writeJsonSnapshot(path.join(dirs.versionedDir, "raw", "polymarket-worldcup.json"), wrapped);
   } else if (rawCaptures.errors.polymarket || config.polymarketPublicEnabled) {
-    const wrapped = withAbPolymarketRawEnvelope(
-      wrapSnapshotPayload([], {
-        capturedAt,
-        source: "polymarket-gamma",
-        sourceMode: "unavailable",
-        extra: {
-          provider: "polymarket-gamma",
-          sentimentOnly: true,
-          directEVEligible: false,
-          semanticMappingConfidence: "low",
-          eventCount: 0,
-          fetchError: rawCaptures.errors.polymarket || "polymarket not configured",
-          note: "Gamma API 不可达时写入空 body；Agent A 跳过 sentiment 特征，不进 direct EV。",
-        },
-      }),
-    );
-    writeJsonSnapshot(path.join(dirs.rawDir, "polymarket-worldcup.json"), wrapped);
-    writeJsonSnapshot(path.join(dirs.versionedDir, "raw", "polymarket-worldcup.json"), wrapped);
+    let vpsFallback = null;
+    if (rawCaptures.errors.polymarket && process.env.POLYMARKET_VPS_SSH_HOST) {
+      try {
+        const { buildPolymarketSnapshotFromEvents, fetchEventsFromVps } = await import(
+          "./fetch_polymarket_snapshot.js"
+        );
+        const events = fetchEventsFromVps(process.env.POLYMARKET_VPS_SSH_HOST);
+        vpsFallback = buildPolymarketSnapshotFromEvents(events, {
+          capturedAt,
+          fetchedVia: "vps_ssh_fallback",
+          vpsHost: process.env.POLYMARKET_VPS_SSH_HOST,
+        });
+        rawCaptures.polymarket = {
+          body: vpsFallback.body,
+          meta: {
+            capturedAt,
+            sentimentOnly: vpsFallback.sentimentOnly ?? false,
+            directEVEligible: vpsFallback.directEVEligible ?? false,
+            semanticMappingConfidence: vpsFallback.semanticMappingConfidence || "high",
+            marketStructure: vpsFallback.marketStructure || "split_binary_h2h",
+            seriesId: vpsFallback.seriesId || null,
+            eventCount: vpsFallback.eventCount,
+            rawEventCount: vpsFallback.rawEventCount || null,
+            sourceMode: "real",
+          },
+        };
+      } catch (error) {
+        rawCaptures.errors.polymarketVps = error.message;
+      }
+    }
+
+    if (rawCaptures.polymarket?.body) {
+      const wrapped = withAbPolymarketRawEnvelope(
+        wrapSnapshotPayload(rawCaptures.polymarket.body, {
+          capturedAt: rawCaptures.polymarket.meta?.capturedAt || capturedAt,
+          source: "polymarket-gamma",
+          sourceMode: "real",
+          extra: {
+            provider: "polymarket-gamma",
+            sentimentOnly: rawCaptures.polymarket.meta?.sentimentOnly ?? false,
+            directEVEligible: rawCaptures.polymarket.meta?.directEVEligible ?? false,
+            semanticMappingConfidence:
+              rawCaptures.polymarket.meta?.semanticMappingConfidence || "low",
+            marketStructure: rawCaptures.polymarket.meta?.marketStructure || null,
+            seriesId: rawCaptures.polymarket.meta?.seriesId || null,
+            eventCount: rawCaptures.polymarket.meta?.eventCount || rawCaptures.polymarket.body.length,
+            rawEventCount: rawCaptures.polymarket.meta?.rawEventCount || null,
+            fromCache: rawCaptures.polymarket.meta?.fromCache ?? false,
+            fetchedVia: vpsFallback ? "vps_ssh_fallback" : undefined,
+          },
+        }),
+      );
+      writeJsonSnapshot(path.join(dirs.rawDir, "polymarket-worldcup.json"), wrapped);
+      writeJsonSnapshot(path.join(dirs.versionedDir, "raw", "polymarket-worldcup.json"), wrapped);
+    } else {
+      const wrapped = withAbPolymarketRawEnvelope(
+        wrapSnapshotPayload([], {
+          capturedAt,
+          source: "polymarket-gamma",
+          sourceMode: "unavailable",
+          extra: {
+            provider: "polymarket-gamma",
+            sentimentOnly: true,
+            directEVEligible: false,
+            semanticMappingConfidence: "low",
+            eventCount: 0,
+            fetchError: rawCaptures.errors.polymarket || "polymarket not configured",
+            vpsFetchError: rawCaptures.errors.polymarketVps || null,
+            note: "Gamma API 不可达时写入空 body；可运行 npm run fetch:polymarket-snapshot 从 VPS 拉取。",
+          },
+        }),
+      );
+      writeJsonSnapshot(path.join(dirs.rawDir, "polymarket-worldcup.json"), wrapped);
+      writeJsonSnapshot(path.join(dirs.versionedDir, "raw", "polymarket-worldcup.json"), wrapped);
+    }
   }
 
-  const jingcaiEnvelope = buildJingcaiSnapshotEnvelope(config, capturedAt);
+  const jingcaiEnvelope = await buildJingcaiSnapshotEnvelope(config, capturedAt);
   if (jingcaiEnvelope) {
     const wrapped = {
       ...jingcaiEnvelope,
@@ -500,6 +583,10 @@ async function run() {
       2,
     ),
   );
+
+  if (pipelineError && (process.env.SNAPSHOT_STRICT_PIPELINE || "false") !== "false") {
+    throw new Error(`snapshot pipeline failed: ${pipelineError}`);
+  }
 }
 
 run().catch((error) => {

@@ -1,10 +1,10 @@
 {
-  "capturedAt": "2026-06-09T05:09:55.739Z",
+  "capturedAt": "2026-06-09T05:34:00.720Z",
   "recommendationSnapshots": [
     {
-      "snapshotId": "8287::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8287::2026-06-09T05:34:13.555Z",
       "snapshotVersion": 1,
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "sourceModes": {
         "market": "real",
         "live": "real",
@@ -53,9 +53,9 @@
       }
     },
     {
-      "snapshotId": "8288::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8288::2026-06-09T05:34:13.555Z",
       "snapshotVersion": 1,
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "sourceModes": {
         "market": "real",
         "live": "real",
@@ -89,9 +89,9 @@
       "layerC": null
     },
     {
-      "snapshotId": "8289::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8289::2026-06-09T05:34:13.555Z",
       "snapshotVersion": 1,
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "sourceModes": {
         "market": "real",
         "live": "real",
@@ -140,9 +140,9 @@
       }
     },
     {
-      "snapshotId": "8290::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8290::2026-06-09T05:34:13.555Z",
       "snapshotVersion": 1,
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "sourceModes": {
         "market": "real",
         "live": "real",
@@ -191,9 +191,9 @@
       }
     },
     {
-      "snapshotId": "8292::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8292::2026-06-09T05:34:13.555Z",
       "snapshotVersion": 1,
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "sourceModes": {
         "market": "real",
         "live": "real",
@@ -227,9 +227,9 @@
       "layerC": null
     },
     {
-      "snapshotId": "8293::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8293::2026-06-09T05:34:13.555Z",
       "snapshotVersion": 1,
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "sourceModes": {
         "market": "real",
         "live": "real",
@@ -263,9 +263,9 @@
       "layerC": null
     },
     {
-      "snapshotId": "8294::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8294::2026-06-09T05:34:13.555Z",
       "snapshotVersion": 1,
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "sourceModes": {
         "market": "real",
         "live": "real",
@@ -314,9 +314,9 @@
       }
     },
     {
-      "snapshotId": "8291::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8291::2026-06-09T05:34:13.555Z",
       "snapshotVersion": 1,
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "sourceModes": {
         "market": "real",
         "live": "real",

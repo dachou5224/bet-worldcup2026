@@ -1,0 +1,6109 @@
+{
+  "capturedAt": "2026-06-09T05:08:46.260Z",
+  "source": "the-odds-api",
+  "sourceMode": "file_snapshot",
+  "rawPayloadHash": "3f14f1c33045303153df172015c99e6f1fe2cab93473fb37d0f860a473f6bd97",
+  "parserVersion": "2026.06.08-agent-b",
+  "provider": "the-odds-api",
+  "quota": null,
+  "requestedMarkets": [
+    "h2h"
+  ],
+  "coverage": {
+    "fixtureCount": 8,
+    "bookmakerDiversity": 15,
+    "bookmakers": [
+      "1xbet",
+      "888sport",
+      "bet365",
+      "betano",
+      "betsson",
+      "betway",
+      "bwin",
+      "interwetten",
+      "marathon",
+      "novibet",
+      "oddssafari-consensus",
+      "pinnacle",
+      "sportingbet",
+      "unibet",
+      "william-hill"
+    ],
+    "staleOddsCount": 102,
+    "staleThresholdMinutes": 120
+  },
+  "fromCache": true,
+  "payload": [
+    {
+      "id": "8287",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-11T19:00:00Z",
+      "home_team": "Mexico",
+      "away_team": "South Africa",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-08T14:09:01.024617Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T14:09:01.024617Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.44
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.5
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8.9
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-08T23:05:07.265078Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:07.265078Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.47
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.4
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-09T02:06:00.878404Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:00.878404Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.414
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.61
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-07T11:09:04.644649Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T11:09:04.644649Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.45
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.3
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-09T02:06:01.142639Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:01.142639Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.45
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.25
+                },
+                {
+                  "name": "South Africa",
+                  "price": 7.9
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:05:12.958356Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.958356Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.44
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.33
+                },
+                {
+                  "name": "South Africa",
+                  "price": 7.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:05:13.452189Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:13.452189Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.44
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.33
+                },
+                {
+                  "name": "South Africa",
+                  "price": 7.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-08T14:09:05.535898Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T14:09:05.535898Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.375
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.5
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-08T23:05:09.173352Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:09.173352Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.4
+                },
+                {
+                  "name": "Draw",
+                  "price": 4
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T23:05:09.026610Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:09.026610Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.4
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-09T02:06:01.873737Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:01.873737Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.42
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.5
+                },
+                {
+                  "name": "South Africa",
+                  "price": 7.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-09T05:05:07.463117Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:05:07.463117Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.42
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.4
+                },
+                {
+                  "name": "South Africa",
+                  "price": 9.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-08T14:09:01.288205Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T14:09:01.288205Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.43
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.5
+                },
+                {
+                  "name": "South Africa",
+                  "price": 9.1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T05:05:08.993550Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:05:08.993550Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.43
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.37
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8.28
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8288",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-12T02:00:00Z",
+      "home_team": "South Korea",
+      "away_team": "Czechia",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-08T11:36:41.596327Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T11:36:41.596327Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.67
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.16
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.93
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-08T20:11:25.410872Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T20:11:25.410872Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.7
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.15
+                },
+                {
+                  "name": "Czechia",
+                  "price": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-08T20:11:26.071845Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T20:11:26.071845Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.66
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.14
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.95
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-07T17:34:19.969171Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T17:34:19.969171Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.15
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.85
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-08T23:11:33.815484Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:11:33.815484Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.1
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.9
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:10:58.441434Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:10:58.441434Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.2
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:10:58.582929Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:10:58.582929Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.2
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-09T02:11:10.032274Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:11:10.032274Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.1
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-07T17:34:20.133568Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T17:34:20.133568Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 2.9
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T14:35:34.228881Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T14:35:34.228881Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-09T02:11:08.710934Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:11:08.710934Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.625
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.1
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.875
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T17:10:58.134161Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:10:58.134161Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.25
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.85
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-08T11:36:41.616369Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T11:36:41.616369Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.67
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.16
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.93
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T02:11:10.334138Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:11:10.334138Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.62
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.12
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.85
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8289",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-12T19:00:00Z",
+      "home_team": "Canada",
+      "away_team": "Bosnia & Herzegovina",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-06T14:09:40.460288Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-06T14:09:40.460288Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.85
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.78
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.485
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-09T05:07:04.782391Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:04.782391Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.85
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.7
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.6
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-09T02:06:14.423178Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:14.423178Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.819
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.73
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.59
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-03T23:09:20.912004Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-03T23:09:20.912004Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.85
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.65
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-02T17:09:25.291413Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T17:09:25.291413Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.78
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-08T23:05:08.041468Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:08.041468Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.84
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:05:12.138628Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.138628Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.82
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:05:12.515045Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.515045Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.82
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-05T17:09:30.495469Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-05T17:09:30.495469Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.727
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.333
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-06T02:10:29.072367Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-06T02:10:29.072367Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.75
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T17:05:12.875382Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.875382Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.8
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.33
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-05T14:08:45.706285Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-05T14:08:45.706285Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.8
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.7
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T11:08:45.388870Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T11:08:45.388870Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.85
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.85
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-06T14:09:40.588423Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-06T14:09:40.588423Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.83
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.78
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.55
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-08T23:05:08.957771Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:08.957771Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.82
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.62
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.44
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8290",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-13T01:00:00Z",
+      "home_team": "USA",
+      "away_team": "Paraguay",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-09T05:07:05.459858Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:05.459858Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2.03
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.52
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.965
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-09T05:07:04.926161Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:04.926161Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.55
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 4.05
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-09T05:07:06.027803Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:06.027803Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.99
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.54
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 4.01
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-02T11:02:46.200064Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T11:02:46.200064Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.35
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.9
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-02T17:09:25.026034Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T17:09:25.026034Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.95
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.25
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-09T05:07:06.928213Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:06.928213Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2.02
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:05:12.872986Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.872986Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:05:13.338852Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:13.338852Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-05T20:08:46.126489Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-05T20:08:46.126489Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.909
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.3
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-07T02:09:27.551438Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T02:09:27.551438Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.95
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.2
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T17:05:13.627452Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:13.627452Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.95
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.25
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-02T11:02:46.208253Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T11:02:46.208253Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.95
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-07T14:09:08.376388Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T14:09:08.376388Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 4.1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-09T05:07:05.775087Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:05.775087Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2.01
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.52
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T05:07:08.422553Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:08.422553Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.99
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.9
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8292",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-13T19:00:00Z",
+      "home_team": "Qatar",
+      "away_team": "Switzerland",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-07T20:08:54.515425Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T20:08:54.515425Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 14.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.75
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.23
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-08T23:05:06.664353Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:06.664353Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 19
+                },
+                {
+                  "name": "Draw",
+                  "price": 6
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.24
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-08T05:08:50.166655Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T05:08:50.166655Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 12.3
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.79
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.236
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-08T05:08:49.987636Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T05:08:49.987636Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 12
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.5
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-02T23:08:38.500083Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T23:08:38.500083Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 12
+                },
+                {
+                  "name": "Draw",
+                  "price": 5.5
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-08T23:05:07.845996Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:07.845996Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 14.25
+                },
+                {
+                  "name": "Draw",
+                  "price": 5.9
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.23
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-09T05:07:07.253014Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:07.253014Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 13
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.5
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.22
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-09T05:07:07.516347Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:07.516347Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 13
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.5
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.22
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-05T20:08:51.394508Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-05T20:08:51.394508Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 9
+                },
+                {
+                  "name": "Draw",
+                  "price": 6
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.222
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-07T02:09:29.065592Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T02:09:29.065592Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 12
+                },
+                {
+                  "name": "Draw",
+                  "price": 5.75
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T17:05:13.221595Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:13.221595Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 13
+                },
+                {
+                  "name": "Draw",
+                  "price": 6
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.22
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-07T02:09:28.726625Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T02:09:28.726625Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 12
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.25
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.222
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T20:06:23.689633Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T20:06:23.689633Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 13.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 5.65
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.27
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-07T20:08:54.635728Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T20:08:54.635728Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 15.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.75
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.22
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T05:07:08.491988Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:08.491988Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 13.31
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.26
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.23
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8293",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-13T22:00:00Z",
+      "home_team": "Brazil",
+      "away_team": "Morocco",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-07T23:09:07.646868Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T23:09:07.646868Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.7
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.8
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.6
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-08T17:05:10.046719Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:10.046719Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.7
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.8
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.9
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-08T02:08:57.019124Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T02:08:57.019124Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.684
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.76
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.63
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-07T23:09:08.507928Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T23:09:08.507928Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.8
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-02T17:09:28.141701Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T17:09:28.141701Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.58
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.75
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-08T23:05:07.894437Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:07.894437Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.69
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.65
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.35
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:05:12.404395Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.404395Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.63
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.9
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:05:12.620553Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.620553Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.63
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.9
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-05T20:08:52.577568Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-05T20:08:52.577568Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.615
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.75
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-08T02:08:57.972611Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T02:08:57.972611Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.571
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.9
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T17:05:13.101102Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:13.101102Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.9
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-07T23:09:08.798818Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T23:09:08.798818Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.75
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T11:08:55.630885Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T11:08:55.630885Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.68
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.85
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.45
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-07T23:09:07.952833Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T23:09:07.952833Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.68
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.8
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-08T20:06:26.675321Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T20:06:26.675321Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.81
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.42
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8294",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-14T01:00:00Z",
+      "home_team": "Haiti",
+      "away_team": "Scotland",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-09T02:06:56.163543Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:56.163543Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.15
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.45
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.56
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-09T02:06:56.057506Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:56.057506Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.35
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.55
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-09T02:06:56.498295Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:56.498295Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.3
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.35
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.54
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-04T20:08:44.897477Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-04T20:08:44.897477Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.25
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.4
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-03T11:10:02.997469Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-03T11:10:02.997469Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.45
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-09T05:06:12.641969Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:06:12.641969Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.54
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-09T02:06:57.002068Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:57.002068Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.25
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.4
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-09T02:06:57.338100Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:57.338100Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.25
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.4
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-04T20:08:45.469186Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-04T20:08:45.469186Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.45
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-08T02:09:08.464351Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T02:09:08.464351Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.444
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-04T08:08:35.028524Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-04T08:08:35.028524Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.44
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-09T02:06:56.910450Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:56.910450Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 5.25
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.75
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.533
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T20:06:46.616554Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T20:06:46.616554Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.9
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.35
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.52
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-09T02:06:56.256061Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:56.256061Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.35
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.45
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.54
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T05:06:13.306416Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:06:13.306416Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.18
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.36
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.51
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8291",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-14T04:00:00Z",
+      "home_team": "Australia",
+      "away_team": "Türkiye",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-09T05:07:12.359702Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:12.359702Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5.1
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.84
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.747
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-09T02:07:03.549794Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:03.549794Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5.1
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.9
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-09T02:07:05.035447Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:05.035447Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5.09
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.84
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.724
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-09T02:07:06.281376Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:06.281376Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.9
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.65
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.73
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-02T23:08:45.318724Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T23:08:45.318724Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.35
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.45
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-09T02:07:05.926829Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:05.926829Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.7
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.71
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:09:49.040636Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:09:49.040636Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.75
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.77
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:09:49.206837Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:09:49.206837Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.75
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.77
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-09T02:07:07.263090Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:07.263090Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-09T02:07:06.961140Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:06.961140Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.727
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-09T02:07:06.839031Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:06.839031Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.73
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-09T02:07:06.605786Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:06.605786Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T11:09:06.798542Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T11:09:06.798542Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.95
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-09T05:07:12.466033Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:12.466033Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5.2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.84
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.727
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T02:07:07.383856Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:07.383856Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.89
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.67
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.74
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "body": [
+    {
+      "id": "8287",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-11T19:00:00Z",
+      "home_team": "Mexico",
+      "away_team": "South Africa",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-08T14:09:01.024617Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T14:09:01.024617Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.44
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.5
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8.9
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-08T23:05:07.265078Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:07.265078Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.47
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.4
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-09T02:06:00.878404Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:00.878404Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.414
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.61
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-07T11:09:04.644649Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T11:09:04.644649Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.45
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.3
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-09T02:06:01.142639Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:01.142639Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.45
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.25
+                },
+                {
+                  "name": "South Africa",
+                  "price": 7.9
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:05:12.958356Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.958356Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.44
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.33
+                },
+                {
+                  "name": "South Africa",
+                  "price": 7.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:05:13.452189Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:13.452189Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.44
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.33
+                },
+                {
+                  "name": "South Africa",
+                  "price": 7.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-08T14:09:05.535898Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T14:09:05.535898Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.375
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.5
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-08T23:05:09.173352Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:09.173352Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.4
+                },
+                {
+                  "name": "Draw",
+                  "price": 4
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T23:05:09.026610Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:09.026610Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.4
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-09T02:06:01.873737Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:01.873737Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.42
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.5
+                },
+                {
+                  "name": "South Africa",
+                  "price": 7.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-09T05:05:07.463117Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:05:07.463117Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.42
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.4
+                },
+                {
+                  "name": "South Africa",
+                  "price": 9.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-08T14:09:01.288205Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T14:09:01.288205Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.43
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.5
+                },
+                {
+                  "name": "South Africa",
+                  "price": 9.1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T05:05:08.993550Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:05:08.993550Z",
+              "outcomes": [
+                {
+                  "name": "Mexico",
+                  "price": 1.43
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.37
+                },
+                {
+                  "name": "South Africa",
+                  "price": 8.28
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8288",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-12T02:00:00Z",
+      "home_team": "South Korea",
+      "away_team": "Czechia",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-08T11:36:41.596327Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T11:36:41.596327Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.67
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.16
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.93
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-08T20:11:25.410872Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T20:11:25.410872Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.7
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.15
+                },
+                {
+                  "name": "Czechia",
+                  "price": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-08T20:11:26.071845Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T20:11:26.071845Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.66
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.14
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.95
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-07T17:34:19.969171Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T17:34:19.969171Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.15
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.85
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-08T23:11:33.815484Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:11:33.815484Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.1
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.9
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:10:58.441434Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:10:58.441434Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.2
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:10:58.582929Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:10:58.582929Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.2
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-09T02:11:10.032274Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:11:10.032274Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.1
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-07T17:34:20.133568Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T17:34:20.133568Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 2.9
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T14:35:34.228881Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T14:35:34.228881Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-09T02:11:08.710934Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:11:08.710934Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.625
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.1
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.875
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T17:10:58.134161Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:10:58.134161Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.25
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.85
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-08T11:36:41.616369Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T11:36:41.616369Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.67
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.16
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.93
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T02:11:10.334138Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:11:10.334138Z",
+              "outcomes": [
+                {
+                  "name": "South Korea",
+                  "price": 2.62
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.12
+                },
+                {
+                  "name": "Czechia",
+                  "price": 2.85
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8289",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-12T19:00:00Z",
+      "home_team": "Canada",
+      "away_team": "Bosnia & Herzegovina",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-06T14:09:40.460288Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-06T14:09:40.460288Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.85
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.78
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.485
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-09T05:07:04.782391Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:04.782391Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.85
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.7
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.6
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-09T02:06:14.423178Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:14.423178Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.819
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.73
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.59
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-03T23:09:20.912004Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-03T23:09:20.912004Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.85
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.65
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-02T17:09:25.291413Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T17:09:25.291413Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.78
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-08T23:05:08.041468Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:08.041468Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.84
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:05:12.138628Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.138628Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.82
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:05:12.515045Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.515045Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.82
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-05T17:09:30.495469Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-05T17:09:30.495469Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.727
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.333
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-06T02:10:29.072367Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-06T02:10:29.072367Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.75
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T17:05:12.875382Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.875382Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.8
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.33
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-05T14:08:45.706285Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-05T14:08:45.706285Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.8
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.7
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T11:08:45.388870Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T11:08:45.388870Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.85
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.85
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-06T14:09:40.588423Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-06T14:09:40.588423Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.83
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.78
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.55
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-08T23:05:08.957771Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:08.957771Z",
+              "outcomes": [
+                {
+                  "name": "Canada",
+                  "price": 1.82
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.62
+                },
+                {
+                  "name": "Bosnia & Herzegovina",
+                  "price": 4.44
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8290",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-13T01:00:00Z",
+      "home_team": "USA",
+      "away_team": "Paraguay",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-09T05:07:05.459858Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:05.459858Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2.03
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.52
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.965
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-09T05:07:04.926161Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:04.926161Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.55
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 4.05
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-09T05:07:06.027803Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:06.027803Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.99
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.54
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 4.01
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-02T11:02:46.200064Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T11:02:46.200064Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.35
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.9
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-02T17:09:25.026034Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T17:09:25.026034Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.95
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.25
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-09T05:07:06.928213Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:06.928213Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2.02
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:05:12.872986Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.872986Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:05:13.338852Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:13.338852Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-05T20:08:46.126489Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-05T20:08:46.126489Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.909
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.3
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-07T02:09:27.551438Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T02:09:27.551438Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.95
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.2
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T17:05:13.627452Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:13.627452Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.95
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.25
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-02T11:02:46.208253Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T11:02:46.208253Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.95
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-07T14:09:08.376388Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T14:09:08.376388Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 4.1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-09T05:07:05.775087Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:05.775087Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 2.01
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.52
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T05:07:08.422553Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:08.422553Z",
+              "outcomes": [
+                {
+                  "name": "USA",
+                  "price": 1.99
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.4
+                },
+                {
+                  "name": "Paraguay",
+                  "price": 3.9
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8292",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-13T19:00:00Z",
+      "home_team": "Qatar",
+      "away_team": "Switzerland",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-07T20:08:54.515425Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T20:08:54.515425Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 14.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.75
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.23
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-08T23:05:06.664353Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:06.664353Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 19
+                },
+                {
+                  "name": "Draw",
+                  "price": 6
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.24
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-08T05:08:50.166655Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T05:08:50.166655Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 12.3
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.79
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.236
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-08T05:08:49.987636Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T05:08:49.987636Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 12
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.5
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-02T23:08:38.500083Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T23:08:38.500083Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 12
+                },
+                {
+                  "name": "Draw",
+                  "price": 5.5
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-08T23:05:07.845996Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:07.845996Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 14.25
+                },
+                {
+                  "name": "Draw",
+                  "price": 5.9
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.23
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-09T05:07:07.253014Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:07.253014Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 13
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.5
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.22
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-09T05:07:07.516347Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:07.516347Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 13
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.5
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.22
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-05T20:08:51.394508Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-05T20:08:51.394508Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 9
+                },
+                {
+                  "name": "Draw",
+                  "price": 6
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.222
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-07T02:09:29.065592Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T02:09:29.065592Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 12
+                },
+                {
+                  "name": "Draw",
+                  "price": 5.75
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T17:05:13.221595Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:13.221595Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 13
+                },
+                {
+                  "name": "Draw",
+                  "price": 6
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.22
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-07T02:09:28.726625Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T02:09:28.726625Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 12
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.25
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.222
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T20:06:23.689633Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T20:06:23.689633Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 13.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 5.65
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.27
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-07T20:08:54.635728Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T20:08:54.635728Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 15.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.75
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.22
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T05:07:08.491988Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:08.491988Z",
+              "outcomes": [
+                {
+                  "name": "Qatar",
+                  "price": 13.31
+                },
+                {
+                  "name": "Draw",
+                  "price": 6.26
+                },
+                {
+                  "name": "Switzerland",
+                  "price": 1.23
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8293",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-13T22:00:00Z",
+      "home_team": "Brazil",
+      "away_team": "Morocco",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-07T23:09:07.646868Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T23:09:07.646868Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.7
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.8
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.6
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-08T17:05:10.046719Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:10.046719Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.7
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.8
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.9
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-08T02:08:57.019124Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T02:08:57.019124Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.684
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.76
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.63
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-07T23:09:08.507928Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T23:09:08.507928Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.8
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-02T17:09:28.141701Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T17:09:28.141701Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.58
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.75
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-08T23:05:07.894437Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T23:05:07.894437Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.69
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.65
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.35
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:05:12.404395Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.404395Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.63
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.9
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:05:12.620553Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:12.620553Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.63
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.9
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-05T20:08:52.577568Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-05T20:08:52.577568Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.615
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.75
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-08T02:08:57.972611Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T02:08:57.972611Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.571
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.9
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-08T17:05:13.101102Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:05:13.101102Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.9
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-07T23:09:08.798818Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T23:09:08.798818Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.75
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T11:08:55.630885Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T11:08:55.630885Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.68
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.85
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.45
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-07T23:09:07.952833Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-07T23:09:07.952833Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.68
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.8
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-08T20:06:26.675321Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T20:06:26.675321Z",
+              "outcomes": [
+                {
+                  "name": "Brazil",
+                  "price": 1.65
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.81
+                },
+                {
+                  "name": "Morocco",
+                  "price": 5.42
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8294",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-14T01:00:00Z",
+      "home_team": "Haiti",
+      "away_team": "Scotland",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-09T02:06:56.163543Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:56.163543Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.15
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.45
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.56
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-09T02:06:56.057506Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:56.057506Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.35
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.55
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-09T02:06:56.498295Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:56.498295Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.3
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.35
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.54
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-04T20:08:44.897477Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-04T20:08:44.897477Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.25
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.4
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-03T11:10:02.997469Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-03T11:10:02.997469Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.45
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-09T05:06:12.641969Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:06:12.641969Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.54
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-09T02:06:57.002068Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:57.002068Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.25
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.4
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-09T02:06:57.338100Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:57.338100Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.25
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.4
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.5
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-04T20:08:45.469186Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-04T20:08:45.469186Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.45
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-08T02:09:08.464351Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T02:09:08.464351Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.444
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-04T08:08:35.028524Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-04T08:08:35.028524Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.2
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.44
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-09T02:06:56.910450Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:56.910450Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 5.25
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.75
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.533
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T20:06:46.616554Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T20:06:46.616554Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.9
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.35
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.52
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-09T02:06:56.256061Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:06:56.256061Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.35
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.45
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.54
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T05:06:13.306416Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:06:13.306416Z",
+              "outcomes": [
+                {
+                  "name": "Haiti",
+                  "price": 6.18
+                },
+                {
+                  "name": "Draw",
+                  "price": 4.36
+                },
+                {
+                  "name": "Scotland",
+                  "price": 1.51
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "8291",
+      "sport_key": "soccer_fifa_world_cup",
+      "sport_title": "FIFA World Cup",
+      "commence_time": "2026-06-14T04:00:00Z",
+      "home_team": "Australia",
+      "away_team": "Türkiye",
+      "bookmakers": [
+        {
+          "key": "1xbet",
+          "title": "1xBet",
+          "last_update": "2026-06-09T05:07:12.359702Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:12.359702Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5.1
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.84
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.747
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betano",
+          "title": "Betano",
+          "last_update": "2026-06-09T02:07:03.549794Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:03.549794Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5.1
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.9
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "pinnacle",
+          "title": "Pinnacle",
+          "last_update": "2026-06-09T02:07:05.035447Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:05.035447Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5.09
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.84
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.724
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "interwetten",
+          "title": "Interwetten",
+          "last_update": "2026-06-09T02:07:06.281376Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:06.281376Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.9
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.65
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.73
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "unibet",
+          "title": "Unibet",
+          "last_update": "2026-06-02T23:08:45.318724Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-02T23:08:45.318724Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.35
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.45
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "novibet",
+          "title": "Novibet",
+          "last_update": "2026-06-09T02:07:05.926829Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:05.926829Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.7
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.71
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bwin",
+          "title": "Bwin",
+          "last_update": "2026-06-08T17:09:49.040636Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:09:49.040636Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.75
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.77
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "sportingbet",
+          "title": "SportingBet",
+          "last_update": "2026-06-08T17:09:49.206837Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T17:09:49.206837Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.75
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.77
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betway",
+          "title": "Betway",
+          "last_update": "2026-06-09T02:07:07.263090Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:07.263090Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.5
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "888sport",
+          "title": "888Sport",
+          "last_update": "2026-06-09T02:07:06.961140Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:06.961140Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.727
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "william-hill",
+          "title": "William Hill",
+          "last_update": "2026-06-09T02:07:06.839031Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:06.839031Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.6
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.5
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.73
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "bet365",
+          "title": "Bet365",
+          "last_update": "2026-06-09T02:07:06.605786Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:06.605786Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.7
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betsson",
+          "title": "Betsson",
+          "last_update": "2026-06-08T11:09:06.798542Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-08T11:09:06.798542Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.95
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.6
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.8
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "marathon",
+          "title": "Marathon",
+          "last_update": "2026-06-09T05:07:12.466033Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T05:07:12.466033Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 5.2
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.84
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.727
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "oddssafari-consensus",
+          "title": "OddsSafari Consensus",
+          "last_update": "2026-06-09T02:07:07.383856Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-06-09T02:07:07.383856Z",
+              "outcomes": [
+                {
+                  "name": "Australia",
+                  "price": 4.89
+                },
+                {
+                  "name": "Draw",
+                  "price": 3.67
+                },
+                {
+                  "name": "Türkiye",
+                  "price": 1.74
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "request": {
+    "sportKey": "soccer_fifa_world_cup",
+    "regions": "eu",
+    "markets": [
+      "h2h"
+    ],
+    "commenceTimeFrom": "2026-06-11T00:00:00Z",
+    "commenceTimeTo": "2026-07-19T23:59:59Z"
+  }
+}

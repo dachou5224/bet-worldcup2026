@@ -1,0 +1,355 @@
+{
+  "version": "2026.06.09-goldman-fixture-join",
+  "description": "Canonical English team names for joining Goldman Sachs priors with football-data, odds API, and 竞彩 feeds.",
+  "teams": [
+    {
+      "canonicalEnglish": "Algeria",
+      "displayZh": "阿尔及利亚",
+      "aliases": [
+        "Algeria"
+      ]
+    },
+    {
+      "canonicalEnglish": "Argentina",
+      "displayZh": "阿根廷",
+      "aliases": [
+        "Argentina"
+      ]
+    },
+    {
+      "canonicalEnglish": "Australia",
+      "displayZh": "澳大利亚",
+      "aliases": [
+        "Australia"
+      ]
+    },
+    {
+      "canonicalEnglish": "Austria",
+      "displayZh": "奥地利",
+      "aliases": [
+        "Austria"
+      ]
+    },
+    {
+      "canonicalEnglish": "Belgium",
+      "displayZh": "比利时",
+      "aliases": [
+        "Belgium"
+      ]
+    },
+    {
+      "canonicalEnglish": "Bosnia-Herzegovina",
+      "displayZh": "波黑",
+      "aliases": [
+        "Bosnia & Herzegovina",
+        "Bosnia and H.",
+        "Bosnia and Herz.",
+        "Bosnia-Herzegovina"
+      ]
+    },
+    {
+      "canonicalEnglish": "Brazil",
+      "displayZh": "巴西",
+      "aliases": [
+        "Brazil"
+      ]
+    },
+    {
+      "canonicalEnglish": "Canada",
+      "displayZh": "加拿大",
+      "aliases": [
+        "Canada"
+      ]
+    },
+    {
+      "canonicalEnglish": "Cape Verde Islands",
+      "displayZh": "佛得角",
+      "aliases": [
+        "Cape Verde",
+        "Cape Verde Islands"
+      ]
+    },
+    {
+      "canonicalEnglish": "Colombia",
+      "displayZh": "哥伦比亚",
+      "aliases": [
+        "Colombia"
+      ]
+    },
+    {
+      "canonicalEnglish": "Congo DR",
+      "displayZh": "刚果（金）",
+      "aliases": [
+        "Congo",
+        "Congo DR",
+        "DR Congo"
+      ]
+    },
+    {
+      "canonicalEnglish": "Croatia",
+      "displayZh": "克罗地亚",
+      "aliases": [
+        "Croatia"
+      ]
+    },
+    {
+      "canonicalEnglish": "Curaçao",
+      "displayZh": "库拉索",
+      "aliases": [
+        "Curacao",
+        "Curaçao"
+      ]
+    },
+    {
+      "canonicalEnglish": "Czechia",
+      "displayZh": "捷克",
+      "aliases": [
+        "Czech Republic",
+        "Czechia"
+      ]
+    },
+    {
+      "canonicalEnglish": "Ecuador",
+      "displayZh": "厄瓜多尔",
+      "aliases": [
+        "Ecuador"
+      ]
+    },
+    {
+      "canonicalEnglish": "Egypt",
+      "displayZh": "埃及",
+      "aliases": [
+        "Egypt"
+      ]
+    },
+    {
+      "canonicalEnglish": "England",
+      "displayZh": "英格兰",
+      "aliases": [
+        "England"
+      ]
+    },
+    {
+      "canonicalEnglish": "France",
+      "displayZh": "法国",
+      "aliases": [
+        "France"
+      ]
+    },
+    {
+      "canonicalEnglish": "Germany",
+      "displayZh": "德国",
+      "aliases": [
+        "Germany"
+      ]
+    },
+    {
+      "canonicalEnglish": "Ghana",
+      "displayZh": "加纳",
+      "aliases": [
+        "Ghana"
+      ]
+    },
+    {
+      "canonicalEnglish": "Haiti",
+      "displayZh": "海地",
+      "aliases": [
+        "Haiti"
+      ]
+    },
+    {
+      "canonicalEnglish": "Iran",
+      "displayZh": "伊朗",
+      "aliases": [
+        "Iran"
+      ]
+    },
+    {
+      "canonicalEnglish": "Iraq",
+      "displayZh": "伊拉克",
+      "aliases": [
+        "Iraq"
+      ]
+    },
+    {
+      "canonicalEnglish": "Ivory Coast",
+      "displayZh": "科特迪瓦",
+      "aliases": [
+        "Côte d'Ivoire",
+        "Ivory Coast"
+      ]
+    },
+    {
+      "canonicalEnglish": "Japan",
+      "displayZh": "日本",
+      "aliases": [
+        "Japan"
+      ]
+    },
+    {
+      "canonicalEnglish": "Jordan",
+      "displayZh": "约旦",
+      "aliases": [
+        "Jordan"
+      ]
+    },
+    {
+      "canonicalEnglish": "Mexico",
+      "displayZh": "墨西哥",
+      "aliases": [
+        "Mexico"
+      ]
+    },
+    {
+      "canonicalEnglish": "Morocco",
+      "displayZh": "摩洛哥",
+      "aliases": [
+        "Morocco"
+      ]
+    },
+    {
+      "canonicalEnglish": "Netherlands",
+      "displayZh": "荷兰",
+      "aliases": [
+        "Netherlands"
+      ]
+    },
+    {
+      "canonicalEnglish": "New Zealand",
+      "displayZh": "新西兰",
+      "aliases": [
+        "New Zealand"
+      ]
+    },
+    {
+      "canonicalEnglish": "Norway",
+      "displayZh": "挪威",
+      "aliases": [
+        "Norway"
+      ]
+    },
+    {
+      "canonicalEnglish": "Panama",
+      "displayZh": "巴拿马",
+      "aliases": [
+        "Panama"
+      ]
+    },
+    {
+      "canonicalEnglish": "Paraguay",
+      "displayZh": "巴拉圭",
+      "aliases": [
+        "Paraguay"
+      ]
+    },
+    {
+      "canonicalEnglish": "Portugal",
+      "displayZh": "葡萄牙",
+      "aliases": [
+        "Portugal"
+      ]
+    },
+    {
+      "canonicalEnglish": "Qatar",
+      "displayZh": "卡塔尔",
+      "aliases": [
+        "Qatar"
+      ]
+    },
+    {
+      "canonicalEnglish": "Saudi Arabia",
+      "displayZh": "沙特阿拉伯",
+      "aliases": [
+        "Saudi Arabia"
+      ]
+    },
+    {
+      "canonicalEnglish": "Scotland",
+      "displayZh": "苏格兰",
+      "aliases": [
+        "Scotland"
+      ]
+    },
+    {
+      "canonicalEnglish": "Senegal",
+      "displayZh": "塞内加尔",
+      "aliases": [
+        "Senegal"
+      ]
+    },
+    {
+      "canonicalEnglish": "South Africa",
+      "displayZh": "南非",
+      "aliases": [
+        "South Africa"
+      ]
+    },
+    {
+      "canonicalEnglish": "South Korea",
+      "displayZh": "韩国",
+      "aliases": [
+        "Korea Republic",
+        "South Korea"
+      ]
+    },
+    {
+      "canonicalEnglish": "Spain",
+      "displayZh": "西班牙",
+      "aliases": [
+        "Spain"
+      ]
+    },
+    {
+      "canonicalEnglish": "Sweden",
+      "displayZh": "瑞典",
+      "aliases": [
+        "Sweden"
+      ]
+    },
+    {
+      "canonicalEnglish": "Switzerland",
+      "displayZh": "瑞士",
+      "aliases": [
+        "Switzerland"
+      ]
+    },
+    {
+      "canonicalEnglish": "Tunisia",
+      "displayZh": "突尼斯",
+      "aliases": [
+        "Tunisia"
+      ]
+    },
+    {
+      "canonicalEnglish": "Turkiye",
+      "displayZh": "Turkiye",
+      "aliases": [
+        "Turkey",
+        "Turkiye",
+        "Türkiye"
+      ]
+    },
+    {
+      "canonicalEnglish": "United States",
+      "displayZh": "美国",
+      "aliases": [
+        "USA",
+        "United States"
+      ]
+    },
+    {
+      "canonicalEnglish": "Uruguay",
+      "displayZh": "乌拉圭",
+      "aliases": [
+        "Uruguay"
+      ]
+    },
+    {
+      "canonicalEnglish": "Uzbekistan",
+      "displayZh": "乌兹别克斯坦",
+      "aliases": [
+        "Uzbekistan"
+      ]
+    }
+  ]
+}

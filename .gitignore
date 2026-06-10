@@ -1,8 +1,11 @@
 .env
 .env.local
 .DS_Store
+# 外部报告 PDF 仅本地留存，不提交到 git
+*.pdf
 fixtures/cache/*.json
 !fixtures/cache/.gitkeep
 fixtures/snapshots/*.json
 !fixtures/snapshots/latest/**
 !fixtures/snapshots/.gitkeep
+fixtures/snapshots/**/pipeline-replay-result.json

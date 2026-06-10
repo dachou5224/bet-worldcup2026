@@ -100,6 +100,47 @@ Agent B 负责真实数据源、快照落盘和 provider 状态输出：
 - Agent B：持续输出可回放 snapshot，保证版本化与 `latest/` 目录同步。
 - Agent A：继续消费快照优先的接口，保持 stake suggestion 默认隐藏。
 
+## 最终执行清单
+
+### Agent A
+
+- [x] 维持 `Layer A-lite / Layer A-full / blocked` 语义，不把 fallback 误判成 full research。
+- [x] 继续把 `quality-report` 作为 A 侧研究启动入口。
+- [x] 默认隐藏金额化建议，仅在 `ENABLE_STAKE_SUGGESTION=true` 时展示。
+- [x] 继续优先消费 B 侧 snapshot，而不是直接依赖未验证 live provider。
+- [x] 显式支持 `LIVE_SNAPSHOT_REPLAY_ENABLED=true`，让离线 research 优先消费 `latest/live-data.json`。
+- [x] 保持 `partial_verified_file` 的语义，只允许作为 partial，不允许冒充 full research safe。
+- [ ] 在 `research` 模式下补足更严格的启动检查，若 `market/live/jingcai` 任一项不满足契约，则直接返回 `researchSafeStatus=blocked` 并附带精确 `blockReasons`。
+- [ ] 把 `calibrationMode / calibrationConfidence / homeLambda / awayLambda / repriceError` 在推荐快照与质量报告中的展示口径统一。
+- [ ] 为 `recommendation snapshot / settlement / backtest artifact` 建立稳定版本化策略，避免单文件覆盖式写入导致历史丢失。
+
+### Agent B
+
+- [x] 提供 `fixtures/snapshots/latest/live-data.json`，并确保可被 A 侧 replay。
+- [x] 提供 `fixtures/snapshots/latest/provider-status.json`，并暴露 source / fallback 状态。
+- [x] 提供 `fixtures/snapshots/latest/jingcai-official-feed.json`，并与 odds fixtureId 对齐。
+- [x] 提供 `fixtures/snapshots/latest/raw/the-odds-api-h2h.json`，并满足 A 侧回放字段需求。
+- [ ] 持续生成可验证的真实快照，确保 `latest/` 目录中的文件不是长期静态样本。
+- [ ] 为 live / odds / jingcai 三类快照补充时间戳、来源标记、覆盖率摘要，便于 A 侧做 research safety 判断。
+- [ ] 保证快照与 raw payload 的版本化同步，避免 `latest/` 与历史版本脱节。
+
+### 接口验收标准
+
+- [x] `live-data.json` 兼容 `capturedAt`、`sourceMode`、`liveData.liveMatches[]`、`payload.liveMatches`。
+- [x] `provider-status.json` 兼容 `sourceMode.market/live/jingcai` 与 `fallbackUsed.market/live/jingcai/any`。
+- [x] `jingcai-official-feed.json` 兼容 `capturedAt`、`sourceMode`、`matches[].fixtureId`、`matches[].availablePlays.spf/rqspf`。
+- [x] `raw/the-odds-api-h2h.json` 兼容 `body[]` / `payload[]`、`request.markets[]`、`request.commenceTimeFrom/To`、`quota`。
+- [ ] `researchSafe=true` 仅在 `market=real`、`live=real`、`jingcai=real` 且无 fallback 时成立。
+- [ ] `Layer A-lite` 仅要求真实 `h2h` 链路可用；`Layer A-full` 额外要求 `closing snapshot` 与 `spread/total`。
+- [ ] `Jingcai` `file` 仅算 `partial_verified_file`，不得被前端或 API 误展示为 full research safe。
+- [ ] `research` 模式下若 backtest artifact 缺失，应返回空/警告，而不是 mock 回退。
+
+### 交付顺序建议
+
+1. 先确保 Agent B 的 `latest/` 快照稳定输出并有时间戳。
+2. 再让 Agent A 仅消费快照与 artifact，不直接触碰未验证 live provider。
+3. 最后统一收紧 `researchSafeStatus`、`Layer A-lite/full` 与推荐快照的展示口径。
+
 ## 相关接口
 
 - `GET /api/data/quality-report`

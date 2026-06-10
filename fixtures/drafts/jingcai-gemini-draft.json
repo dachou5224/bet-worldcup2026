@@ -1,0 +1,33 @@
+{
+  "capturedAt": "2026-06-09T06:47:07.562Z",
+  "source": "gemini_search_draft",
+  "sourceUrl": "https://www.sporttery.cn/jc/zqszsc/",
+  "manualReviewed": false,
+  "directEVEligible": false,
+  "sourceMode": "draft",
+  "parserVersion": "2026.06.09-gemini-jingcai-draft",
+  "reviewRequiredReason": "Gemini + Google Search 草稿，赔率/停售时间须对照 sporttery.cn 人工确认后方可写入 latest 快照",
+  "gemini": {
+    "model": "gemini-3.5-flash",
+    "proxy": {
+      "used": true,
+      "via": "https_proxy",
+      "host": "127.0.0.1",
+      "port": "3213"
+    },
+    "grounding": {
+      "webSearchQueries": [],
+      "groundingChunks": []
+    },
+    "sourceMode": "official",
+    "officialDomains": [
+      "sporttery.cn",
+      "www.sporttery.cn"
+    ],
+    "rejectedSources": [],
+    "note": "由于中国体育彩票官网（sporttery.cn）的『竞彩足球 胜平负/让球胜平负』即时赔率与开售信息页面（https://www.sporttery.cn/jc/zqszsc/）采用客户端 JavaScript 动态异步加载技术，其具体的十进制竞彩赔率和停售时间无法通过搜索引擎静态索引或文本浏览器直接提取。虽然官网发布的足彩公告（关于下发足球彩票6月5日-6月11日奖期竞猜场次安排的通知）中确认了传统足彩第26085期包含墨西哥vs南非、加拿大vs波黑、美国vs巴拉圭等世界杯比赛，但由于竞彩足球（Jingcai）的官方具体赔率及停售时间数据无法在官网可检索的静态内容中获取，为了严格遵守『查不到官网官方信息时不要编造』和『若官网当前未展示该场或未开售，不要猜测；该场省略并在 note 说明』的硬性要求，本回答未对任何场次进行编造或猜测，故 matches 数组留空，found 设为 false。",
+    "found": false
+  },
+  "alignmentNote": "fixtureId 与 fixtures/snapshots/latest/raw/the-odds-api-h2h.json 对齐，供 Agent A Layer B 映射",
+  "matches": []
+}

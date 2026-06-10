@@ -28,7 +28,11 @@ function buildFixtureIndex(rawMarketBoard) {
 }
 
 function formatPercentBucket(probability) {
-  return round((probability ?? 0) * 100);
+  if (probability == null || !Number.isFinite(probability)) {
+    return null;
+  }
+
+  return round(probability * 100);
 }
 
 export function buildMarketSourceSummary(rawMarketBoard) {
@@ -110,14 +114,31 @@ export function buildJingcaiRecommendationsFromMarket(rawMarketBoard, officialFe
 function buildPredictionSummaryFromBaseline(baseline, rawMatch, options = {}) {
   const candidates = buildSignalCandidatesFromBaseline(baseline, options);
   const primarySignalCandidate = pickPrimarySignalCandidate(candidates);
-  const marketHome = baseline.bookmakerConsensus.home ?? baseline.predictionConsensus.home ?? 0;
-  const marketDraw = baseline.bookmakerConsensus.draw ?? baseline.predictionConsensus.draw ?? 0;
-  const marketAway = baseline.bookmakerConsensus.away ?? baseline.predictionConsensus.away ?? 0;
-  const modelHome = baseline.modelConsensus.home ?? marketHome;
-  const modelDraw = baseline.modelConsensus.draw ?? marketDraw;
-  const modelAway = baseline.modelConsensus.away ?? marketAway;
+  const marketHome = baseline.bookmakerConsensus.home ?? baseline.predictionConsensus.home ?? null;
+  const marketDraw = baseline.bookmakerConsensus.draw ?? baseline.predictionConsensus.draw ?? null;
+  const marketAway = baseline.bookmakerConsensus.away ?? baseline.predictionConsensus.away ?? null;
+  const hasCalibratedModel = baseline.dataOk && baseline.calibrationMode !== "skipped_no_bookmaker";
+  const modelHome = hasCalibratedModel
+    ? formatPercentBucket(baseline.modelConsensus.home ?? marketHome)
+    : null;
+  const modelDraw = hasCalibratedModel
+    ? formatPercentBucket(baseline.modelConsensus.draw ?? marketDraw)
+    : null;
+  const modelAway = hasCalibratedModel
+    ? formatPercentBucket(baseline.modelConsensus.away ?? marketAway)
+    : null;
   const fixtureLabel = baseline.fixture || `${rawMatch.home} vs ${rawMatch.away}`;
   const riskNotes = baseline.riskTags.length ? baseline.riskTags.join("、") : "市场和模型共识总体稳定";
+  const pmOnly = baseline.riskTags.includes("bookmaker_missing");
+
+  let summary;
+  if (pmOnly) {
+    summary = `仅有预测市场数据，缺少 bookmaker 赔率，无法完成模型校准。${riskNotes ? ` 风险标签：${riskNotes}` : ""}`;
+  } else if (baseline.confidence === "low") {
+    summary = `盘口和预测市场存在明显分歧，适合在前端高亮展示为“需要复盘”的比赛。${riskNotes ? ` 风险标签：${riskNotes}` : ""}`;
+  } else {
+    summary = `盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。${riskNotes ? ` 风险标签：${riskNotes}` : ""}`;
+  }
 
   return {
     id: rawMatch.id,
@@ -126,16 +147,15 @@ function buildPredictionSummaryFromBaseline(baseline, rawMatch, options = {}) {
     marketHome: formatPercentBucket(marketHome),
     marketDraw: formatPercentBucket(marketDraw),
     marketAway: formatPercentBucket(marketAway),
-    modelHome: formatPercentBucket(modelHome),
-    modelDraw: formatPercentBucket(modelDraw),
-    modelAway: formatPercentBucket(modelAway),
+    modelHome,
+    modelDraw,
+    modelAway,
     freshness: rawMatch.updatedAtLabel,
     confidence: baseline.confidence,
-    summary:
-      baseline.confidence === "low"
-        ? `盘口和预测市场存在明显分歧，适合在前端高亮展示为“需要复盘”的比赛。${riskNotes ? ` 风险标签：${riskNotes}` : ""}`
-        : `盘口与预测市场大致同向，这类比赛适合用作 baseline 置信度较高的样本。${riskNotes ? ` 风险标签：${riskNotes}` : ""}`,
-    llm: `LLM 可解释 ${rawMatch.home} vs ${rawMatch.away} 的概率变化来源，例如盘口漂移、交易市场成交变化和赛前新闻。`,
+    summary,
+    llm: pmOnly
+      ? null
+      : `LLM 可解释 ${rawMatch.home} vs ${rawMatch.away} 的概率变化来源，例如盘口漂移、交易市场成交变化和赛前新闻。`,
     signalCandidates: candidates,
     signalCandidate: primarySignalCandidate,
     marketBaseline: baseline,

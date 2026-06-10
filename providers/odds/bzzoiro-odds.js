@@ -14,6 +14,11 @@ function buildHeaders(config) {
   };
 }
 
+function getFetchTimeoutMs(config) {
+  const limit = Number(config.bzzoiroOddsEventLimit || 104);
+  return limit > 20 ? 60000 : 20000;
+}
+
 async function fetchEvents(config) {
   const params = new URLSearchParams({
     date_from: config.bzzoiroDateFrom,
@@ -28,7 +33,7 @@ async function fetchEvents(config) {
   }
 
   const response = await fetchJson(`${config.bzzoiroApiBaseUrl}/events/?${params.toString()}`, {
-    timeoutMs: 20000,
+    timeoutMs: getFetchTimeoutMs(config),
     headers: buildHeaders(config),
   });
 
@@ -37,7 +42,7 @@ async function fetchEvents(config) {
 
 async function fetchEventOdds(config, event) {
   const response = await fetchJson(`${config.bzzoiroApiBaseUrl}/odds/?event=${event.id}`, {
-    timeoutMs: 20000,
+    timeoutMs: getFetchTimeoutMs(config),
     headers: buildHeaders(config),
   });
   const body = response.body || {};
@@ -63,12 +68,15 @@ async function fetchEventOdds(config, event) {
   };
 }
 
-async function fetchLiveBookmakerOddsByEvent(config) {
+export async function fetchLiveBookmakerOddsByEvent(config) {
   const events = await fetchEvents(config);
+  const batchSize = Math.max(1, config.bzzoiroOddsFetchBatchSize || 5);
   const bookmakerOddsByEvent = [];
 
-  for (const event of events) {
-    bookmakerOddsByEvent.push(await fetchEventOdds(config, event));
+  for (let index = 0; index < events.length; index += batchSize) {
+    const batch = events.slice(index, index + batchSize);
+    const results = await Promise.all(batch.map((event) => fetchEventOdds(config, event)));
+    bookmakerOddsByEvent.push(...results);
   }
 
   return bookmakerOddsByEvent;
@@ -120,6 +128,7 @@ export function createBzzoiroOddsProviderAdapter(config) {
           dateTo: config.bzzoiroDateTo,
           league: config.bzzoiroLeague,
           oddsEventLimit: config.bzzoiroOddsEventLimit,
+          oddsFetchBatchSize: config.bzzoiroOddsFetchBatchSize,
         }),
         ttlSeconds: options.bypassCache ? 0 : config.bzzoiroCacheTtlSeconds,
         enabled: options.bypassCache ? false : config.providerCacheEnabled,

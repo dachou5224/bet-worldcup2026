@@ -8,6 +8,9 @@ import {
 } from "../lib/snapshot-store.js";
 import { validateAbSnapshotContract } from "../lib/snapshot-ab-contract.js";
 import { readOddsSnapshotPayload } from "../lib/snapshot-replay.js";
+import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
+import os from "node:os";
+import path from "node:path";
 
 test("wrapSnapshotPayload attaches metadata and hash", () => {
   const payload = [{ id: "evt-1" }];
@@ -52,6 +55,34 @@ test("summarizeOddsCoverage counts fixtures and bookmakers", () => {
 test("readOddsSnapshotPayload reads wrapped snapshot envelope", () => {
   const snapshot = readOddsSnapshotPayload("./fixtures/snapshots/latest/jingcai-official-feed.json");
   assert.equal(snapshot, null);
+});
+
+test("readOddsSnapshotPayload accepts body-only snapshots", () => {
+  const tempDir = mkdtempSync(path.join(os.tmpdir(), "guess-worldcup-odds-body-"));
+  const filePath = path.join(tempDir, "the-odds-api-h2h.json");
+
+  try {
+    writeFileSync(
+      filePath,
+      JSON.stringify(
+        {
+          capturedAt: "2026-06-09T00:00:00.000Z",
+          source: "the-odds-api",
+          sourceMode: "real_snapshot_replay",
+          body: [{ id: "evt-1" }],
+        },
+        null,
+        2,
+      ),
+    );
+
+    const snapshot = readOddsSnapshotPayload(filePath);
+    assert.ok(snapshot);
+    assert.equal(snapshot.payload.length, 1);
+    assert.equal(snapshot.meta.sourceMode, "real_snapshot_replay");
+  } finally {
+    rmSync(tempDir, { recursive: true, force: true });
+  }
 });
 
 test("validateAbSnapshotContract requires jingcai official feed snapshot", () => {

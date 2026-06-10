@@ -64,6 +64,7 @@ function normalizeLineValue(value) {
 function normalizeOutcome(outcome) {
   return {
     name: outcome?.name ?? "outcome",
+    displayName: outcome?.displayName ?? null,
     price: toOptionalNumber(outcome?.price ?? outcome?.decimalOdds ?? outcome?.decimal_odds),
     point: toOptionalNumber(outcome?.point),
     probability: toOptionalNumber(
@@ -255,9 +256,30 @@ function inferLineFromMarket(market) {
   return null;
 }
 
+function normalizeH2HOutcomeName(name, index) {
+  if (index === 0) {
+    return "home";
+  }
+  if (index === 1) {
+    return "draw";
+  }
+  if (index === 2) {
+    return "away";
+  }
+  return typeof name === "string" && name ? name : "outcome";
+}
+
 function buildBookmakerMarketSnapshot(match, oddsRecord, market, fixtureId) {
   const marketType = inferMarketTypeFromKey(market.key);
   const period = toOptionalString(market.period) || DEFAULT_PERIOD;
+  const normalizedOutcomes =
+    marketType === "h2h"
+      ? (market.outcomes || []).map((outcome, index) => ({
+          ...outcome,
+          name: normalizeH2HOutcomeName(outcome.name, index),
+          displayName: outcome.name ?? null,
+        }))
+      : (market.outcomes || []);
 
   return buildMarketSnapshot({
     fixtureId,
@@ -268,8 +290,9 @@ function buildBookmakerMarketSnapshot(match, oddsRecord, market, fixtureId) {
     marketType,
     line: inferLineFromMarket(market),
     period,
-    outcomes: (market.outcomes || []).map((outcome) => ({
+    outcomes: normalizedOutcomes.map((outcome) => ({
       name: outcome.name ?? "outcome",
+      displayName: outcome.displayName ?? null,
       price: outcome.price ?? null,
       point: outcome.point ?? null,
       probability: null,
@@ -312,7 +335,7 @@ function buildPredictionMarketSnapshot(match, predictionRecord, fixtureId) {
       liquidity: predictionRecord.liquidity ?? null,
       volume: predictionRecord.volume ?? null,
       marketNature: "prediction_market",
-      directEVEligible: false,
+      directEVEligible: predictionRecord.directEVEligible ?? false,
     }),
     snapshotKind: "prediction_market",
   });

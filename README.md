@@ -238,19 +238,28 @@ LIVE_SNAPSHOT_REPLAY_FILE=./fixtures/snapshots/latest/live-data.json
 
 ### 竞彩足球官方盘
 
-- `JINGCAI_OFFICIAL_FEED_MODE`
+- `JINGCAI_OFFICIAL_FEED_MODE` — `file`（读 latest 快照）| `webapi`（实时拉体彩网关）| `fixture`
 - `JINGCAI_OFFICIAL_FEED_FILE`
-- `JINGCAI_OFFICIAL_FEED_URL`
+- `SPORTTERY_CLIENT_CODE`（默认 `3001`）
+- `JINGCAI_WEBAPI_LEAGUE_FILTER`（默认 `世界杯`）
 
-当前默认仍是 fixture-backed。若切换到 `file` 模式，可直接读取本地回放文件；若切换到 `real` 模式，可通过 `JINGCAI_OFFICIAL_FEED_URL` 指向合规授权的实时官方源。下游 `JingcaiRecommendation` / `jingcai-gates` / `play-mapping` 接口保持不变。
+**主数据源**：体彩官网 JSON 网关 `webapi.sporttery.cn`（见 [docs/SPORTTERY_JINGCAI_WEBAPI.md](./docs/SPORTTERY_JINGCAI_WEBAPI.md)）。
+
+```bash
+npm run fetch:jingcai-webapi   # 刷新 latest/jingcai-official-feed.json + raw 落盘
+```
+
+`latest/jingcai-official-feed.json` 当前为 `source=sporttery_webapi`、`sourceMode=real`；2026-06-09 已覆盖原人工快照中的过期/错误赔率。
 
 QA 验证：
 
 ```bash
+JINGCAI_OFFICIAL_FEED_MODE=file \
+JINGCAI_OFFICIAL_FEED_FILE=fixtures/snapshots/latest/jingcai-official-feed.json \
 npm run qa:providers
 ```
 
-当 `JINGCAI_OFFICIAL_FEED_MODE=real` 且已配置 `JINGCAI_OFFICIAL_FEED_URL` 时，这个命令会额外加载一次官方盘 URL，并在输出里写出 `status / sourceType / rows`，用于确认 real 模式是否真正生效。
+`webapi` 模式会实时请求官网；research 离线联调推荐 `file` + 上述 latest 快照。
 
 ### Bzzoiro Sports Data（可选补充源）
 
@@ -313,6 +322,7 @@ npm run qa:providers
 2. 新接入的市场数据先通过 `schemas/market-board.js` 校验，再进入聚合层。
 3. 真实 provider 联调：`npm run qa:providers`（需 key）；本地重复开发用 `npm run snapshot:providers` 写 `fixtures/snapshots/`。
 4. 如果要离线跑 research，显式开启 `LIVE_SNAPSHOT_REPLAY_ENABLED=true`，让 A 侧消费 `fixtures/snapshots/latest/live-data.json`。
+5. 如果要跑单场黄金路径 replay，直接把 `MARKET_DATA_MODE=replay`、`LIVE_DATA_MODE=replay`，然后执行 `npm run qa:pipeline-replay` 或 `npm run pipeline:replay`。
 
 ### Layer A 输出契约
 

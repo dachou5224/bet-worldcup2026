@@ -150,12 +150,18 @@ function classifyConfidence(disagreementTotal) {
 }
 
 function selectPrimarySnapshot(bookmakerSnapshots, predictionSnapshots) {
-  const all = [...bookmakerSnapshots, ...predictionSnapshots];
-  if (!all.length) {
-    return null;
+  const bookmakerPrimary = [...bookmakerSnapshots].sort((a, b) =>
+    String(b.capturedAt).localeCompare(String(a.capturedAt)),
+  )[0];
+  if (bookmakerPrimary) {
+    return bookmakerPrimary;
   }
 
-  return [...all].sort((a, b) => String(b.capturedAt).localeCompare(String(a.capturedAt)))[0];
+  const predictionPrimary = [...predictionSnapshots].sort((a, b) =>
+    String(b.capturedAt).localeCompare(String(a.capturedAt)),
+  )[0];
+
+  return predictionPrimary || null;
 }
 
 function buildMarketTypePricing(scoreMatrix, marketType, line) {
@@ -169,6 +175,39 @@ function buildMarketTypePricing(scoreMatrix, marketType, line) {
 
   if (marketType === "total") {
     return priceTotal(scoreMatrix, line ?? 2.5);
+  }
+
+  return null;
+}
+
+function buildModelConsensusFromPricing(pricing, marketType, outcomeNames) {
+  if (!pricing) {
+    return null;
+  }
+
+  if (marketType === "h2h" && Array.isArray(pricing.outcomes) && pricing.outcomes.length) {
+    return normalizeDistributionMap(
+      pricing.outcomes.reduce((acc, outcome) => {
+        acc[outcome.name] = outcome.probability;
+        return acc;
+      }, {}),
+    );
+  }
+
+  if (marketType === "spread" && pricing.home && pricing.away) {
+    const [homeOutcomeName = "home", awayOutcomeName = "away"] = outcomeNames || [];
+    return normalizeDistributionMap({
+      [homeOutcomeName]: pricing.home.fullWin + pricing.home.push,
+      [awayOutcomeName]: pricing.away.fullWin + pricing.away.push,
+    });
+  }
+
+  if (marketType === "total" && pricing.over && pricing.under) {
+    const [overOutcomeName = "over", underOutcomeName = "under"] = outcomeNames || [];
+    return normalizeDistributionMap({
+      [overOutcomeName]: pricing.over.fullWin + pricing.over.push,
+      [underOutcomeName]: pricing.under.fullWin + pricing.under.push,
+    });
   }
 
   return null;
@@ -189,7 +228,7 @@ export function buildMarketBaseline(
   } = {},
 ) {
   const relevantSnapshots = (marketSnapshots || []).filter((snapshot) => {
-    if (fixtureId != null && snapshot.fixtureId !== fixtureId) {
+    if (fixtureId != null && String(snapshot.fixtureId) !== String(fixtureId)) {
       return false;
     }
 
@@ -220,6 +259,49 @@ export function buildMarketBaseline(
   const predictionConsensus = normalizeDistributionMap(averageOutcomeMaps(predictionSnapshots, outcomeNames));
   const hasBookmaker = bookmakerSnapshots.length > 0;
   const hasPredictionMarket = predictionSnapshots.length > 0;
+
+  if (!hasBookmaker) {
+    const pmOnlyRiskTags = ["bookmaker_missing"];
+    if (!hasPredictionMarket) {
+      pmOnlyRiskTags.push("prediction_market_missing");
+    }
+    if (!primarySnapshot) {
+      pmOnlyRiskTags.push("no_primary_snapshot");
+    }
+
+    return {
+      fixtureId: primarySnapshot?.fixtureId ?? fixtureId ?? null,
+      fixture: primarySnapshot?.fixture ?? null,
+      marketType,
+      line,
+      period,
+      primarySnapshot,
+      bookmakerSnapshots,
+      predictionSnapshots,
+      outcomeNames,
+      bookmakerConsensus: normalizeDistributionMap({}),
+      predictionConsensus,
+      modelConsensus: normalizeDistributionMap({}),
+      disagreement: summarizeDisagreement({}, predictionConsensus, outcomeNames),
+      confidence: "low",
+      dataOk: false,
+      playMappable: false,
+      riskTags: pmOnlyRiskTags,
+      pricing: null,
+      scoreMatrix: null,
+      calibration: {
+        mode: "skipped_no_bookmaker",
+        confidence: "low",
+        calibrated: false,
+        fallbackReason: "missing_bookmaker_h2h",
+        score: null,
+        evidence: null,
+      },
+      calibrationMode: "skipped_no_bookmaker",
+      calibrationConfidence: "low",
+    };
+  }
+
   const dataOk = Boolean(primarySnapshot && outcomeNames.length > 0 && hasBookmaker);
 
   const calibration = calibrateScoreModel(
@@ -238,23 +320,8 @@ export function buildMarketBaseline(
   const scoreMatrix = calibration.scoreMatrix || buildDummyScoreMatrix();
   const pricing = buildMarketTypePricing(scoreMatrix, marketType, line);
 
-  let modelConsensus = normalizeDistributionMap(blendProbabilities(bookmakerConsensus, predictionConsensus));
-  if (marketType === "spread" && pricing?.home && outcomeNames.length >= 2) {
-    const [homeOutcomeName, awayOutcomeName] = outcomeNames;
-    const spreadModelMap = normalizeDistributionMap({
-      [homeOutcomeName]: pricing.home.fullWin + pricing.home.push,
-      [awayOutcomeName]: pricing.away.fullWin + pricing.away.push,
-    });
-    modelConsensus = spreadModelMap;
-  }
-  if (marketType === "total" && pricing?.over && outcomeNames.length >= 2) {
-    const [overOutcomeName, underOutcomeName] = outcomeNames;
-    const totalModelMap = normalizeDistributionMap({
-      [overOutcomeName]: pricing.over.fullWin + pricing.over.push,
-      [underOutcomeName]: pricing.under.fullWin + pricing.under.push,
-    });
-    modelConsensus = totalModelMap;
-  }
+  const pricingConsensus = buildModelConsensusFromPricing(pricing, marketType, outcomeNames);
+  const modelConsensus = pricingConsensus || normalizeDistributionMap(blendProbabilities(bookmakerConsensus, predictionConsensus));
 
   const finalDisagreement = summarizeDisagreement(bookmakerConsensus, modelConsensus, outcomeNames);
   const confidence = classifyConfidence(finalDisagreement.total);

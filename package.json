@@ -9,8 +9,19 @@
     "test": "node --test",
     "qa:providers": "node scripts/qa_real_providers.js",
     "qa:research-guardrails": "node scripts/qa_research_guardrails.js",
+    "qa:pipeline-replay": "node scripts/qa_pipeline_replay.js",
     "qa:frontend": "node scripts/qa_frontend.js",
     "bootstrap:odds-snapshot": "node scripts/bootstrap_odds_snapshot.js",
-    "snapshot:providers": "node scripts/refresh_provider_snapshots.js"
+    "fetch:polymarket-snapshot": "node scripts/fetch_polymarket_snapshot.js",
+    "pipeline:replay": "node scripts/run_pipeline_replay.js",
+    "snapshot:providers": "node scripts/refresh_provider_snapshots.js",
+    "snapshot:prematch-24h": "SNAPSHOT_VARIANT=prematch-24h npm run snapshot:providers",
+    "snapshot:prematch-1h": "SNAPSHOT_VARIANT=prematch-1h npm run snapshot:providers",
+    "probe:gemini-backup": "node scripts/probe_gemini_worldcup_backup.js",
+    "draft:jingcai-gemini": "node scripts/draft_jingcai_from_gemini.js",
+    "fetch:jingcai-webapi": "node scripts/fetch_jingcai_official_webapi.js",
+    "qa:jingcai-webapi": "node scripts/qa_jingcai_webapi.js",
+    "extract:goldman-sachs-pdf": "node scripts/extract_goldman_sachs_pdf.js",
+    "join:goldman-sachs-fixtures": "node scripts/join_goldman_sachs_fixtures.js"
   }
 }

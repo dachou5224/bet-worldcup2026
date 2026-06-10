@@ -1,0 +1,647 @@
+{
+  "source": "Goldman Sachs Global Investment Research",
+  "reportTitle": "World Cup 2026: Predictions, Probabilities, and Paths to Victory",
+  "reportDate": "2026-05-29",
+  "pdfRelativePath": "docs/source-reports/goldman_sachs_worldcup2026_report.pdf",
+  "monteCarloRuns": 50000,
+  "probabilitiesAsOf": "2026-05-29",
+  "extractedAt": "2026-06-09T08:23:34.647Z",
+  "extractionMethod": "pdf_text_exhibit_7",
+  "sourceStatus": "publicly circulated PDF copy; structured extraction from Exhibit 7",
+  "usageInProject": "external fundamental probability prior (full tournament stage table)",
+  "validation": {
+    "teamCount": 48,
+    "expectedTeamCount": 48,
+    "winnerProbabilitySum": 1,
+    "stages": [
+      {
+        "stage": "round_of_32",
+        "pdfColumn": "R32",
+        "marketType": "tournament_advancement"
+      },
+      {
+        "stage": "round_of_16",
+        "pdfColumn": "R16",
+        "marketType": "tournament_advancement"
+      },
+      {
+        "stage": "quarter_final",
+        "pdfColumn": "QF",
+        "marketType": "tournament_advancement"
+      },
+      {
+        "stage": "semi_final",
+        "pdfColumn": "SF",
+        "marketType": "tournament_advancement"
+      },
+      {
+        "stage": "final",
+        "pdfColumn": "Final",
+        "marketType": "tournament_advancement"
+      },
+      {
+        "stage": "winner",
+        "pdfColumn": "Winner",
+        "marketType": "outright"
+      }
+    ]
+  },
+  "narrativeSummary": {
+    "topWinnerProbabilities": [
+      {
+        "team": "Spain",
+        "probability": 0.257
+      },
+      {
+        "team": "France",
+        "probability": 0.189
+      },
+      {
+        "team": "Argentina",
+        "probability": 0.143
+      },
+      {
+        "team": "Brazil",
+        "probability": 0.076
+      },
+      {
+        "team": "Netherlands",
+        "probability": 0.052
+      },
+      {
+        "team": "England",
+        "probability": 0.05
+      }
+    ],
+    "modalForecast": {
+      "predictedWinner": "Spain",
+      "predictedFinalists": [
+        "Spain",
+        "Argentina"
+      ],
+      "predictedSemiFinals": [
+        [
+          "France",
+          "Spain"
+        ],
+        [
+          "Brazil",
+          "Argentina"
+        ]
+      ],
+      "notes": [
+        "Spain projected to win second World Cup on 2026-07-19 in New York.",
+        "Germany eliminated by France in round of 16 in modal path.",
+        "England vs Brazil and Argentina vs Portugal projected quarter-finals."
+      ]
+    },
+    "marketComparisonNotes": [
+      "Model overweight Spain and Argentina vs market.",
+      "Model underweight England and Portugal vs market."
+    ],
+    "historicalBenchmark2022": [
+      {
+        "team": "Brazil",
+        "probability": 0.24
+      },
+      {
+        "team": "Argentina",
+        "probability": 0.21
+      },
+      {
+        "team": "France",
+        "probability": 0.19
+      }
+    ]
+  },
+  "teams": [
+    {
+      "team": "Spain",
+      "probabilities": {
+        "round_of_32": 0.991,
+        "round_of_16": 0.806,
+        "quarter_final": 0.651,
+        "semi_final": 0.553,
+        "final": 0.375,
+        "winner": 0.257
+      }
+    },
+    {
+      "team": "Uzbekistan",
+      "probabilities": {
+        "round_of_32": 0.545,
+        "round_of_16": 0.189,
+        "quarter_final": 0.062,
+        "semi_final": 0.02,
+        "final": 0.006,
+        "winner": 0.002
+      }
+    },
+    {
+      "team": "France",
+      "probabilities": {
+        "round_of_32": 0.962,
+        "round_of_16": 0.824,
+        "quarter_final": 0.619,
+        "semi_final": 0.47,
+        "final": 0.289,
+        "winner": 0.189
+      }
+    },
+    {
+      "team": "Australia",
+      "probabilities": {
+        "round_of_32": 0.594,
+        "round_of_16": 0.281,
+        "quarter_final": 0.099,
+        "semi_final": 0.026,
+        "final": 0.008,
+        "winner": 0.002
+      }
+    },
+    {
+      "team": "Argentina",
+      "probabilities": {
+        "round_of_32": 0.965,
+        "round_of_16": 0.7,
+        "quarter_final": 0.573,
+        "semi_final": 0.424,
+        "final": 0.271,
+        "winner": 0.143
+      }
+    },
+    {
+      "team": "Czechia",
+      "probabilities": {
+        "round_of_32": 0.687,
+        "round_of_16": 0.325,
+        "quarter_final": 0.1,
+        "semi_final": 0.023,
+        "final": 0.007,
+        "winner": 0.002
+      }
+    },
+    {
+      "team": "Brazil",
+      "probabilities": {
+        "round_of_32": 0.961,
+        "round_of_16": 0.669,
+        "quarter_final": 0.453,
+        "semi_final": 0.284,
+        "final": 0.159,
+        "winner": 0.076
+      }
+    },
+    {
+      "team": "Scotland",
+      "probabilities": {
+        "round_of_32": 0.643,
+        "round_of_16": 0.186,
+        "quarter_final": 0.072,
+        "semi_final": 0.02,
+        "final": 0.006,
+        "winner": 0.001
+      }
+    },
+    {
+      "team": "Netherlands",
+      "probabilities": {
+        "round_of_32": 0.943,
+        "round_of_16": 0.616,
+        "quarter_final": 0.459,
+        "semi_final": 0.227,
+        "final": 0.11,
+        "winner": 0.052
+      }
+    },
+    {
+      "team": "Algeria",
+      "probabilities": {
+        "round_of_32": 0.503,
+        "round_of_16": 0.137,
+        "quarter_final": 0.05,
+        "semi_final": 0.015,
+        "final": 0.004,
+        "winner": 0.001
+      }
+    },
+    {
+      "team": "England",
+      "probabilities": {
+        "round_of_32": 0.941,
+        "round_of_16": 0.659,
+        "quarter_final": 0.377,
+        "semi_final": 0.222,
+        "final": 0.115,
+        "winner": 0.05
+      }
+    },
+    {
+      "team": "Iran",
+      "probabilities": {
+        "round_of_32": 0.716,
+        "round_of_16": 0.303,
+        "quarter_final": 0.097,
+        "semi_final": 0.022,
+        "final": 0.005,
+        "winner": 0.001
+      }
+    },
+    {
+      "team": "Portugal",
+      "probabilities": {
+        "round_of_32": 0.902,
+        "round_of_16": 0.614,
+        "quarter_final": 0.379,
+        "semi_final": 0.21,
+        "final": 0.11,
+        "winner": 0.048
+      }
+    },
+    {
+      "team": "Panama",
+      "probabilities": {
+        "round_of_32": 0.58,
+        "round_of_16": 0.179,
+        "quarter_final": 0.053,
+        "semi_final": 0.016,
+        "final": 0.004,
+        "winner": 0.001
+      }
+    },
+    {
+      "team": "Germany",
+      "probabilities": {
+        "round_of_32": 0.95,
+        "round_of_16": 0.67,
+        "quarter_final": 0.321,
+        "semi_final": 0.199,
+        "final": 0.095,
+        "winner": 0.045
+      }
+    },
+    {
+      "team": "Jordan",
+      "probabilities": {
+        "round_of_32": 0.479,
+        "round_of_16": 0.137,
+        "quarter_final": 0.052,
+        "semi_final": 0.017,
+        "final": 0.004,
+        "winner": 0.001
+      }
+    },
+    {
+      "team": "Colombia",
+      "probabilities": {
+        "round_of_32": 0.874,
+        "round_of_16": 0.515,
+        "quarter_final": 0.267,
+        "semi_final": 0.132,
+        "final": 0.059,
+        "winner": 0.022
+      }
+    },
+    {
+      "team": "South Korea",
+      "probabilities": {
+        "round_of_32": 0.712,
+        "round_of_16": 0.345,
+        "quarter_final": 0.106,
+        "semi_final": 0.02,
+        "final": 0.005,
+        "winner": 0.001
+      }
+    },
+    {
+      "team": "Croatia",
+      "probabilities": {
+        "round_of_32": 0.874,
+        "round_of_16": 0.491,
+        "quarter_final": 0.225,
+        "semi_final": 0.113,
+        "final": 0.049,
+        "winner": 0.017
+      }
+    },
+    {
+      "team": "Egypt",
+      "probabilities": {
+        "round_of_32": 0.607,
+        "round_of_16": 0.22,
+        "quarter_final": 0.062,
+        "semi_final": 0.014,
+        "final": 0.003,
+        "winner": 0.001
+      }
+    },
+    {
+      "team": "Norway",
+      "probabilities": {
+        "round_of_32": 0.78,
+        "round_of_16": 0.474,
+        "quarter_final": 0.237,
+        "semi_final": 0.118,
+        "final": 0.048,
+        "winner": 0.016
+      }
+    },
+    {
+      "team": "Sweden",
+      "probabilities": {
+        "round_of_32": 0.542,
+        "round_of_16": 0.13,
+        "quarter_final": 0.05,
+        "semi_final": 0.014,
+        "final": 0.004,
+        "winner": 0.001
+      }
+    },
+    {
+      "team": "Mexico",
+      "probabilities": {
+        "round_of_32": 0.956,
+        "round_of_16": 0.68,
+        "quarter_final": 0.333,
+        "semi_final": 0.102,
+        "final": 0.034,
+        "winner": 0.008
+      }
+    },
+    {
+      "team": "Ivory Coast",
+      "probabilities": {
+        "round_of_32": 0.548,
+        "round_of_16": 0.149,
+        "quarter_final": 0.033,
+        "semi_final": 0.009,
+        "final": 0.002,
+        "winner": 0
+      }
+    },
+    {
+      "team": "Senegal",
+      "probabilities": {
+        "round_of_32": 0.704,
+        "round_of_16": 0.375,
+        "quarter_final": 0.168,
+        "semi_final": 0.073,
+        "final": 0.026,
+        "winner": 0.008
+      }
+    },
+    {
+      "team": "DR Congo",
+      "probabilities": {
+        "round_of_32": 0.349,
+        "round_of_16": 0.087,
+        "quarter_final": 0.021,
+        "semi_final": 0.006,
+        "final": 0.001,
+        "winner": 0
+      }
+    },
+    {
+      "team": "Ecuador",
+      "probabilities": {
+        "round_of_32": 0.846,
+        "round_of_16": 0.421,
+        "quarter_final": 0.153,
+        "semi_final": 0.068,
+        "final": 0.023,
+        "winner": 0.008
+      }
+    },
+    {
+      "team": "Bosnia and Herz.",
+      "probabilities": {
+        "round_of_32": 0.632,
+        "round_of_16": 0.227,
+        "quarter_final": 0.062,
+        "semi_final": 0.011,
+        "final": 0.002,
+        "winner": 0
+      }
+    },
+    {
+      "team": "Belgium",
+      "probabilities": {
+        "round_of_32": 0.863,
+        "round_of_16": 0.516,
+        "quarter_final": 0.239,
+        "semi_final": 0.068,
+        "final": 0.023,
+        "winner": 0.007
+      }
+    },
+    {
+      "team": "Cape Verde",
+      "probabilities": {
+        "round_of_32": 0.422,
+        "round_of_16": 0.079,
+        "quarter_final": 0.023,
+        "semi_final": 0.006,
+        "final": 0.001,
+        "winner": 0
+      }
+    },
+    {
+      "team": "Switzerland",
+      "probabilities": {
+        "round_of_32": 0.889,
+        "round_of_16": 0.542,
+        "quarter_final": 0.218,
+        "semi_final": 0.067,
+        "final": 0.022,
+        "winner": 0.007
+      }
+    },
+    {
+      "team": "New Zealand",
+      "probabilities": {
+        "round_of_32": 0.529,
+        "round_of_16": 0.172,
+        "quarter_final": 0.043,
+        "semi_final": 0.008,
+        "final": 0.002,
+        "winner": 0
+      }
+    },
+    {
+      "team": "Turkiye",
+      "probabilities": {
+        "round_of_32": 0.773,
+        "round_of_16": 0.459,
+        "quarter_final": 0.218,
+        "semi_final": 0.068,
+        "final": 0.022,
+        "winner": 0.006
+      }
+    },
+    {
+      "team": "Tunisia",
+      "probabilities": {
+        "round_of_32": 0.39,
+        "round_of_16": 0.074,
+        "quarter_final": 0.023,
+        "semi_final": 0.006,
+        "final": 0.001,
+        "winner": 0
+      }
+    },
+    {
+      "team": "United States",
+      "probabilities": {
+        "round_of_32": 0.695,
+        "round_of_16": 0.389,
+        "quarter_final": 0.171,
+        "semi_final": 0.054,
+        "final": 0.017,
+        "winner": 0.005
+      }
+    },
+    {
+      "team": "Haiti",
+      "probabilities": {
+        "round_of_32": 0.294,
+        "round_of_16": 0.054,
+        "quarter_final": 0.013,
+        "semi_final": 0.003,
+        "final": 0.001,
+        "winner": 0
+      }
+    },
+    {
+      "team": "Japan",
+      "probabilities": {
+        "round_of_32": 0.789,
+        "round_of_16": 0.307,
+        "quarter_final": 0.16,
+        "semi_final": 0.056,
+        "final": 0.018,
+        "winner": 0.005
+      }
+    },
+    {
+      "team": "Iraq",
+      "probabilities": {
+        "round_of_32": 0.22,
+        "round_of_16": 0.057,
+        "quarter_final": 0.014,
+        "semi_final": 0.003,
+        "final": 0.001,
+        "winner": 0
+      }
+    },
+    {
+      "team": "Austria",
+      "probabilities": {
+        "round_of_32": 0.694,
+        "round_of_16": 0.239,
+        "quarter_final": 0.112,
+        "semi_final": 0.047,
+        "final": 0.016,
+        "winner": 0.004
+      }
+    },
+    {
+      "team": "Saudi Arabia",
+      "probabilities": {
+        "round_of_32": 0.35,
+        "round_of_16": 0.055,
+        "quarter_final": 0.014,
+        "semi_final": 0.002,
+        "final": 0,
+        "winner": 0
+      }
+    },
+    {
+      "team": "Uruguay",
+      "probabilities": {
+        "round_of_32": 0.799,
+        "round_of_16": 0.265,
+        "quarter_final": 0.129,
+        "semi_final": 0.053,
+        "final": 0.017,
+        "winner": 0.004
+      }
+    },
+    {
+      "team": "South Africa",
+      "probabilities": {
+        "round_of_32": 0.318,
+        "round_of_16": 0.087,
+        "quarter_final": 0.016,
+        "semi_final": 0.002,
+        "final": 0,
+        "winner": 0
+      }
+    },
+    {
+      "team": "Paraguay",
+      "probabilities": {
+        "round_of_32": 0.67,
+        "round_of_16": 0.354,
+        "quarter_final": 0.139,
+        "semi_final": 0.041,
+        "final": 0.012,
+        "winner": 0.003
+      }
+    },
+    {
+      "team": "Curacao",
+      "probabilities": {
+        "round_of_32": 0.315,
+        "round_of_16": 0.061,
+        "quarter_final": 0.01,
+        "semi_final": 0.002,
+        "final": 0,
+        "winner": 0
+      }
+    },
+    {
+      "team": "Morocco",
+      "probabilities": {
+        "round_of_32": 0.761,
+        "round_of_16": 0.269,
+        "quarter_final": 0.119,
+        "semi_final": 0.037,
+        "final": 0.011,
+        "winner": 0.003
+      }
+    },
+    {
+      "team": "Ghana",
+      "probabilities": {
+        "round_of_32": 0.264,
+        "round_of_16": 0.051,
+        "quarter_final": 0.01,
+        "semi_final": 0.002,
+        "final": 0,
+        "winner": 0
+      }
+    },
+    {
+      "team": "Canada",
+      "probabilities": {
+        "round_of_32": 0.907,
+        "round_of_16": 0.504,
+        "quarter_final": 0.184,
+        "semi_final": 0.047,
+        "final": 0.012,
+        "winner": 0.003
+      }
+    },
+    {
+      "team": "Qatar",
+      "probabilities": {
+        "round_of_32": 0.275,
+        "round_of_16": 0.055,
+        "quarter_final": 0.009,
+        "semi_final": 0.001,
+        "final": 0,
+        "winner": 0
+      }
+    }
+  ]
+}

@@ -1,16 +1,16 @@
 {
-  "capturedAt": "2026-06-09T05:09:55.739Z",
+  "capturedAt": "2026-06-09T05:34:00.720Z",
   "recommendationSettlements": [
     {
-      "snapshotId": "8287::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8287::2026-06-09T05:34:13.555Z",
       "fixtureId": 8287,
       "fixture": "8287 vs 8287",
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "settlementStatus": "no_recommendation",
       "preMatchSnapshot": {
-        "snapshotId": "8287::2026-06-09T05:10:01.989Z",
+        "snapshotId": "8287::2026-06-09T05:34:13.555Z",
         "snapshotVersion": 1,
-        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "capturedAt": "2026-06-09T05:34:13.555Z",
         "sourceModes": {
           "market": "real",
           "live": "real",
@@ -65,15 +65,15 @@
       "officialSettlementComplete": false
     },
     {
-      "snapshotId": "8288::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8288::2026-06-09T05:34:13.555Z",
       "fixtureId": 8288,
       "fixture": "8288 vs 8288",
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "settlementStatus": "no_recommendation",
       "preMatchSnapshot": {
-        "snapshotId": "8288::2026-06-09T05:10:01.989Z",
+        "snapshotId": "8288::2026-06-09T05:34:13.555Z",
         "snapshotVersion": 1,
-        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "capturedAt": "2026-06-09T05:34:13.555Z",
         "sourceModes": {
           "market": "real",
           "live": "real",
@@ -113,15 +113,15 @@
       "officialSettlementComplete": false
     },
     {
-      "snapshotId": "8289::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8289::2026-06-09T05:34:13.555Z",
       "fixtureId": 8289,
       "fixture": "8289 vs 8289",
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "settlementStatus": "no_recommendation",
       "preMatchSnapshot": {
-        "snapshotId": "8289::2026-06-09T05:10:01.989Z",
+        "snapshotId": "8289::2026-06-09T05:34:13.555Z",
         "snapshotVersion": 1,
-        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "capturedAt": "2026-06-09T05:34:13.555Z",
         "sourceModes": {
           "market": "real",
           "live": "real",
@@ -176,15 +176,15 @@
       "officialSettlementComplete": false
     },
     {
-      "snapshotId": "8290::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8290::2026-06-09T05:34:13.555Z",
       "fixtureId": 8290,
       "fixture": "8290 vs 8290",
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "settlementStatus": "no_recommendation",
       "preMatchSnapshot": {
-        "snapshotId": "8290::2026-06-09T05:10:01.989Z",
+        "snapshotId": "8290::2026-06-09T05:34:13.555Z",
         "snapshotVersion": 1,
-        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "capturedAt": "2026-06-09T05:34:13.555Z",
         "sourceModes": {
           "market": "real",
           "live": "real",
@@ -239,15 +239,15 @@
       "officialSettlementComplete": false
     },
     {
-      "snapshotId": "8292::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8292::2026-06-09T05:34:13.555Z",
       "fixtureId": 8292,
       "fixture": "8292 vs 8292",
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "settlementStatus": "no_recommendation",
       "preMatchSnapshot": {
-        "snapshotId": "8292::2026-06-09T05:10:01.989Z",
+        "snapshotId": "8292::2026-06-09T05:34:13.555Z",
         "snapshotVersion": 1,
-        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "capturedAt": "2026-06-09T05:34:13.555Z",
         "sourceModes": {
           "market": "real",
           "live": "real",
@@ -287,15 +287,15 @@
       "officialSettlementComplete": false
     },
     {
-      "snapshotId": "8293::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8293::2026-06-09T05:34:13.555Z",
       "fixtureId": 8293,
       "fixture": "8293 vs 8293",
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "settlementStatus": "no_recommendation",
       "preMatchSnapshot": {
-        "snapshotId": "8293::2026-06-09T05:10:01.989Z",
+        "snapshotId": "8293::2026-06-09T05:34:13.555Z",
         "snapshotVersion": 1,
-        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "capturedAt": "2026-06-09T05:34:13.555Z",
         "sourceModes": {
           "market": "real",
           "live": "real",
@@ -335,15 +335,15 @@
       "officialSettlementComplete": false
     },
     {
-      "snapshotId": "8294::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8294::2026-06-09T05:34:13.555Z",
       "fixtureId": 8294,
       "fixture": "8294 vs 8294",
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "settlementStatus": "no_recommendation",
       "preMatchSnapshot": {
-        "snapshotId": "8294::2026-06-09T05:10:01.989Z",
+        "snapshotId": "8294::2026-06-09T05:34:13.555Z",
         "snapshotVersion": 1,
-        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "capturedAt": "2026-06-09T05:34:13.555Z",
         "sourceModes": {
           "market": "real",
           "live": "real",
@@ -398,15 +398,15 @@
       "officialSettlementComplete": false
     },
     {
-      "snapshotId": "8291::2026-06-09T05:10:01.989Z",
+      "snapshotId": "8291::2026-06-09T05:34:13.555Z",
       "fixtureId": 8291,
       "fixture": "8291 vs 8291",
-      "capturedAt": "2026-06-09T05:10:01.989Z",
+      "capturedAt": "2026-06-09T05:34:13.555Z",
       "settlementStatus": "no_recommendation",
       "preMatchSnapshot": {
-        "snapshotId": "8291::2026-06-09T05:10:01.989Z",
+        "snapshotId": "8291::2026-06-09T05:34:13.555Z",
         "snapshotVersion": 1,
-        "capturedAt": "2026-06-09T05:10:01.989Z",
+        "capturedAt": "2026-06-09T05:34:13.555Z",
         "sourceModes": {
           "market": "real",
           "live": "real",

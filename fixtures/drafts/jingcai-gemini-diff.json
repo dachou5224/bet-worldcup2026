@@ -1,0 +1,45 @@
+{
+  "baselineCapturedAt": "2026-06-09T03:00:00+08:00",
+  "draftCapturedAt": "2026-06-09T06:47:07.562Z",
+  "changedCount": 0,
+  "missingCount": 5,
+  "newCount": 0,
+  "unchangedCount": 0,
+  "items": [
+    {
+      "homeTeam": "墨西哥",
+      "awayTeam": "南非",
+      "fixtureId": 8287,
+      "status": "missing_in_draft",
+      "changes": []
+    },
+    {
+      "homeTeam": "加拿大",
+      "awayTeam": "波黑",
+      "fixtureId": 8289,
+      "status": "missing_in_draft",
+      "changes": []
+    },
+    {
+      "homeTeam": "美国",
+      "awayTeam": "巴拉圭",
+      "fixtureId": 8290,
+      "status": "missing_in_draft",
+      "changes": []
+    },
+    {
+      "homeTeam": "海地",
+      "awayTeam": "苏格兰",
+      "fixtureId": 8294,
+      "status": "missing_in_draft",
+      "changes": []
+    },
+    {
+      "homeTeam": "澳大利亚",
+      "awayTeam": "土耳其",
+      "fixtureId": 8291,
+      "status": "missing_in_draft",
+      "changes": []
+    }
+  ]
+}

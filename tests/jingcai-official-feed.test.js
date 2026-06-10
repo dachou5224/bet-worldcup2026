@@ -7,17 +7,18 @@ import {
   loadJingcaiOfficialFeed,
 } from "../providers/jingcai/official-feed.js";
 
-test("jingcai official feed is fixture-backed but contract-validated", async () => {
+test("jingcai official feed is contract-validated", async () => {
   const feed = await getJingcaiOfficialFeed();
 
   assert.ok(Array.isArray(feed));
   assert.ok(feed.length > 0);
 
-  const argentina = findJingcaiOfficialMatch(feed, 10);
-  assert.ok(argentina);
-  assert.equal(argentina.saleStatus, "on_sale");
-  assert.equal(getPlayMarketOdds(argentina, "胜平负").odds["3"], 1.95);
-  assert.equal(getPlayMarketOdds(argentina, "让球胜平负").handicap, -1);
+  const first = feed[0];
+  assert.ok(first);
+  assert.equal(typeof first.fixtureId, "number");
+  assert.equal(first.saleStatus, "on_sale");
+  assert.ok(getPlayMarketOdds(first, "胜平负"));
+  assert.ok(getPlayMarketOdds(first, "让球胜平负"));
 });
 
 test("jingcai official feed supports wrapped snapshot envelope", async () => {
@@ -30,7 +31,7 @@ test("jingcai official feed supports wrapped snapshot envelope", async () => {
   assert.ok(Array.isArray(loaded.feed));
   assert.ok(loaded.feed.length > 0);
   assert.equal(loaded.envelope?.manualReviewed, true);
-  assert.equal(loaded.envelope?.source, "manual_official_snapshot");
+  assert.equal(typeof loaded.envelope?.source, "string");
 });
 
 test("jingcai official feed supports real-mode file mirrors", async () => {

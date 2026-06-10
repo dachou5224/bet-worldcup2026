@@ -1,4 +1,8 @@
 import { buildLayeredOutput } from "./layered-output.js";
+import {
+  buildDirectionalAlignmentForPrediction,
+  summarizeDirectionalAlignmentBlock,
+} from "../../lib/goldman-sachs-directional-alignment.js";
 
 function isFiniteNumber(value) {
   return typeof value === "number" && Number.isFinite(value);
@@ -44,6 +48,31 @@ function summarizeSignalCandidate(signalCandidate) {
     dataOk: Boolean(signalCandidate.dataOk),
     calibrationMode: signalCandidate.marketBaseline?.calibrationMode ?? null,
     calibrationConfidence: signalCandidate.marketBaseline?.calibrationConfidence ?? null,
+    watchEdgeBreakdown: signalCandidate.watchEdgeBreakdown
+      ? {
+          selectedOutcome: signalCandidate.watchEdgeBreakdown.selectedOutcome ?? null,
+          interpretation: signalCandidate.watchEdgeBreakdown.interpretation ?? null,
+          outcomes: Array.isArray(signalCandidate.watchEdgeBreakdown.outcomes)
+            ? signalCandidate.watchEdgeBreakdown.outcomes.map((outcome) => ({
+                outcome: outcome.outcome ?? null,
+                label: outcome.label ?? null,
+                marketProbability: isFiniteNumber(outcome.marketProbability)
+                  ? round(outcome.marketProbability)
+                  : null,
+                modelProbability: isFiniteNumber(outcome.modelProbability)
+                  ? round(outcome.modelProbability)
+                  : null,
+                adjustedProbability: isFiniteNumber(outcome.adjustedProbability)
+                  ? round(outcome.adjustedProbability)
+                  : null,
+                edgePercentPoint: isFiniteNumber(outcome.edgePercentPoint)
+                  ? round(outcome.edgePercentPoint, 2)
+                  : null,
+                expectedValue: isFiniteNumber(outcome.expectedValue) ? round(outcome.expectedValue) : null,
+              }))
+            : [],
+        }
+      : null,
   };
 }
 
@@ -154,6 +183,9 @@ export function buildRecommendationSnapshot(prediction, options = {}) {
       noJingcaiReason: layeredOutput.layerB?.noJingcaiReason ?? null,
     },
     layerC: summarizeJingcaiRecommendation(layeredOutput.layerC),
+    fundamentalDirectionalAlignment: summarizeDirectionalAlignmentBlock(
+      buildDirectionalAlignmentForPrediction(prediction, options.directionalAlignment || {}),
+    ),
   };
 }
 

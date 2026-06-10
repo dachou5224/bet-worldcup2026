@@ -1,3 +1,8 @@
+import {
+  buildDirectionalAlignmentForPrediction,
+  summarizeDirectionalAlignmentBlock,
+} from "../../lib/goldman-sachs-directional-alignment.js";
+
 function isFiniteNumber(value) {
   return typeof value === "number" && Number.isFinite(value);
 }
@@ -68,6 +73,9 @@ export function buildLayeredOutput(prediction) {
           noJingcaiReason: prediction?.jingcaiRecommendation?.noJingcaiReason || null,
         },
     layerC: prediction?.jingcaiRecommendation || null,
+    fundamentalDirectionalAlignment: summarizeDirectionalAlignmentBlock(
+      buildDirectionalAlignmentForPrediction(prediction),
+    ),
     textSummary: buildLayeredTextSummary(prediction),
     defaultDisplayLayer: primaryRecommendation ? "C" : "A",
     displayLabel: prediction?.fixture ?? null,

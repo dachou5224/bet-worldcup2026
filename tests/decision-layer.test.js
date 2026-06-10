@@ -63,6 +63,34 @@ test("decision-layer follows the documented gate ordering", () => {
   assert.equal(watchEv.decisionCode, "watch_ev_too_low");
   assert.equal(watchEv.recommendationLevel, "WATCH");
 
+  const watchDetail = buildSignalCandidate({
+    fixtureId: 1,
+    marketType: "h2h",
+    outcome: "home",
+    offeredOdds: 2.1,
+    marketProbability: 0.45,
+    modelProbability: 0.5,
+    alpha: 0.4,
+    evThreshold: 0.02,
+    marketBaseline: {
+      outcomeNames: ["home", "draw", "away"],
+      bookmakerConsensus: { home: 0.45, draw: 0.28, away: 0.27 },
+      modelConsensus: { home: 0.5, draw: 0.27, away: 0.23 },
+      primarySnapshot: {
+        outcomes: [
+          { name: "home", price: 2.1 },
+          { name: "draw", price: 3.6 },
+          { name: "away", price: 4.0 },
+        ],
+      },
+    },
+  });
+  assert.equal(watchDetail.decisionCode, "watch_ev_too_low");
+  assert.equal(watchDetail.recommendationLevel, "WATCH");
+  assert.ok(watchDetail.watchEdgeBreakdown);
+  assert.match(watchDetail.recommendationText, /盘口拆解/);
+  assert.match(watchDetail.recommendationText, /个百分点/);
+
   const negativeKelly = buildSignalCandidate({
     fixtureId: 1,
     marketType: "h2h",

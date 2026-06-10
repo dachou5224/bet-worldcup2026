@@ -3,6 +3,15 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { fetchJson } from "../../lib/fetch-json.js";
 import { validateJingcaiOfficialFeed } from "../../schemas/jingcai-official-feed.js";
+import {
+  fetchSportteryFootballMatchList,
+  flattenSportteryMatchList,
+} from "../../lib/sporttery-webapi.js";
+import {
+  filterSportteryMatches,
+  normalizeSportteryPayloadToFeedEnvelope,
+} from "../../lib/sporttery-webapi-normalize.js";
+import { buildMatchKey } from "../../lib/jingcai-gemini-draft.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -56,6 +65,10 @@ async function readJsonFeedFromUrl(feedUrl) {
 }
 
 function resolveSourceType(mode, feedFile, feedUrl) {
+  if (mode === "webapi") {
+    return "webapi";
+  }
+
   if (mode === "real") {
     return feedUrl ? "url" : "file";
   }
@@ -65,6 +78,40 @@ function resolveSourceType(mode, feedFile, feedUrl) {
   }
 
   return "fixture";
+}
+
+async function readJsonFeedFromWebapi(options = {}) {
+  const fetched = await fetchSportteryFootballMatchList({
+    clientCode: options.clientCode,
+    timeoutMs: options.timeoutMs,
+  });
+  const allMatches = flattenSportteryMatchList(fetched.body);
+  const baselineEnvelope = options.baselineFile ? readJsonFeed(options.baselineFile) : null;
+  const baselineMatches = baselineEnvelope?.matches || [];
+  const filteredMatches = filterSportteryMatches(allMatches, {
+    leagueName: options.leagueFilter,
+    teamNames: options.teamFilter || [],
+  });
+
+  if (options.alignBaselineTeams && baselineMatches.length) {
+    const baselineKeys = new Set(
+      baselineMatches.map((match) => buildMatchKey(match.homeTeam, match.awayTeam)),
+    );
+    const narrowed = filteredMatches.filter((match) =>
+      baselineKeys.has(buildMatchKey(match.homeTeamAllName, match.awayTeamAllName)),
+    );
+    if (narrowed.length) {
+      filteredMatches.length = 0;
+      filteredMatches.push(...narrowed);
+    }
+  }
+
+  return normalizeSportteryPayloadToFeedEnvelope(fetched.body, {
+    capturedAt: fetched.capturedAt,
+    matches: filteredMatches,
+    baselineMatches,
+    clientCode: options.clientCode,
+  });
 }
 
 export async function getMockJingcaiOfficialFeed() {
@@ -84,10 +131,22 @@ export async function loadJingcaiOfficialFeed(source, options = {}) {
   const feedUrl = normalizedSource.feedUrl || "";
   const sourceType = resolveSourceType(mode, feedFile, feedUrl);
   const feed =
-    mode === "real" && feedUrl
-      ? await readJsonFeedFromUrl(feedUrl)
-      : readJsonFeed(feedFile);
-  const feedEnvelope = extractFeedEnvelope(feed);
+    mode === "webapi"
+      ? await readJsonFeedFromWebapi({
+          clientCode: normalizedSource.clientCode,
+          leagueFilter: normalizedSource.leagueFilter,
+          teamFilter: normalizedSource.teamFilter,
+          baselineFile: normalizedSource.baselineFile,
+          alignBaselineTeams: normalizedSource.alignBaselineTeams,
+          timeoutMs: normalizedSource.timeoutMs,
+        })
+      : mode === "real" && feedUrl
+        ? await readJsonFeedFromUrl(feedUrl)
+        : readJsonFeed(feedFile);
+  const feedEnvelope =
+    feed && typeof feed === "object" && !Array.isArray(feed) && Array.isArray(feed.matches)
+      ? feed
+      : extractFeedEnvelope(feed);
   const records = normalizeFeedRecords(feed);
   const validation = validateJingcaiOfficialFeed(records);
 
